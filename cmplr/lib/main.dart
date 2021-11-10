@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'views/android_views/signup_age.dart';
 
 void main() {
   runApp(const CMPLR());
@@ -10,15 +11,6 @@ class CMPLR extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-            child: Text(
-          'CMPLR',
-          style: TextStyle(fontSize: 25),
-        )),
-      ),
-    );
+    return SignupAge();
   }
 }
