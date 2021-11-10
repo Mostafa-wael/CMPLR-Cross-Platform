@@ -64,6 +64,7 @@ class SignupAge extends StatelessWidget {
                   ),
                   TextFormField(
                     controller: controller.ageController,
+                    focusNode: controller.focusNode,
                     maxLength: 3,
                     autofocus: true,
                     cursorColor: Colors.grey,
@@ -100,8 +101,8 @@ class SignupAge extends StatelessWidget {
                               color: Colors.white, fontSize: 19, height: 1.4),
                           children: <TextSpan>[
                         TextSpan(
-                            text:
-                                'You\'re almost done. Enter your age, then tap the '),
+                            text: 'You\'re almost done.'
+                                ' Enter your age, then tap the '),
                         TextSpan(
                             text: 'Next ',
                             style: TextStyle(fontStyle: FontStyle.italic)),
