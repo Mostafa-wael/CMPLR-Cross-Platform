@@ -9,34 +9,11 @@ class SignupPreferencesController extends GetxController {
   bool _isLoading = false;
   List _availablePreferenceCards = [];
   List _selectedPreferenceCards = [];
-
-  final _preferencesColorList = [
-    0xFF00B8FF,
-    0xFF7C5CFF,
-    0xFFFF61CF,
-    0xFFFE492E,
-    0xFFFF8A00,
-    0xFFE7D73A,
-    0xFF00CF36
-  ];
-
-  final _test = [
-    'Trendingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxx',
-    'Art',
-    'Writing',
-    'Streaming',
-    'XXS'
-  ];
+  SignupPreferencesModel preferencesModel = SignupPreferencesModel();
 
   @override
   void onInit() {
-    for (var i = 0; i < _test.length; i++) {
-      final card = PreferenceCard(
-          color: _preferencesColorList[i],
-          preferenceName: _test[i],
-          isChosen: false);
-      _availablePreferenceCards.add(card);
-    }
+    _availablePreferenceCards = preferencesModel.getInitialPreferences();
     super.onInit();
   }
 
@@ -104,6 +81,24 @@ class SignupPreferencesController extends GetxController {
   }
 
   void chooseNewPreference() {
-    Get.toNamed('/signup_preferences_search');
+    Get.toNamed('/signup_preferences_search', arguments: this);
+  }
+
+  bool preferenceChosen(String preferenceName) {
+    for (var i = 0; i < _availablePreferenceCards.length; i++) {
+      if (_availablePreferenceCards[i].preferenceName == preferenceName) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void addPreference(String preferenceName) {
+    if (!preferenceChosen(preferenceName)) {
+      _availablePreferenceCards.insert(
+          0, preferencesModel.createNewPreference(preferenceName));
+      tapPreferenceCard(0);
+      update();
+    }
   }
 }

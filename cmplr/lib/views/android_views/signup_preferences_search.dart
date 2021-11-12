@@ -60,8 +60,8 @@ class SignupPreferencesSearch extends StatelessWidget {
                           },
                           controller: controller.searchBarController,
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (value) {
-                            // print(value);
+                          onSubmitted: (topicName) {
+                            controller.addSearchedTopic(topicName);
                           },
                           cursorColor: Colors.black,
                           style: TextStyle(fontSize: 16, color: Colors.black),
@@ -100,7 +100,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                       child: Container(
                     color: const Color(0xFF001A35),
                     child: ListView.builder(
-                        itemCount: controller.mock.length,
+                        itemCount: controller.currentlyShownTopics.length,
                         itemBuilder: (context, index) {
                           return buildSearchResultTile(controller, index);
                         }),
@@ -116,7 +116,7 @@ class SignupPreferencesSearch extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(30, 0, 10, 0),
       child: InkWell(
         onTap: () {
-          print('yes');
+          controller.addSearchedTopic(controller.currentlyShownTopics[index]);
         },
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
@@ -133,7 +133,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                controller.mock[index],
+                controller.currentlyShownTopics[index],
                 style: TextStyle(color: Colors.white, fontSize: 18),
               )
             ],
