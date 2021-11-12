@@ -24,7 +24,8 @@ class SignupPreferences extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Text(
-                          'Aw. If you leave now, you\'ll lose all your progress.',
+                          'Aw. If you leave now,'
+                          ' you\'ll lose all your progress.',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w400,
