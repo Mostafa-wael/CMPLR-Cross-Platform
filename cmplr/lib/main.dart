@@ -1,7 +1,8 @@
 import 'package:cmplr/cmplr_theme.dart';
 import 'package:cmplr/views/android_views/email_password_name_after_signup.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
+import 'views/android_views/android_views.dart';
 
 void main() {
   runApp(const CMPLR());
@@ -14,19 +15,14 @@ class CMPLR extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        // home: const Scaffold(
-        //   body: Center(
-        //       child: Text(
-        //     'CMPLR',
-        //     style: TextStyle(fontSize: 25),
-        //   )),
-        // ),
-        home: CheckView(),
-        theme: CMPLRTheme.dark());
-  }
-
-  Widget CheckView() {
-    return EmailPasswordNameAfterSignup();
+      debugShowCheckedModeBanner: false,
+      home: SignupAge(),
+      getPages: [
+        GetPage(name: '/signup_preferences', page: () => SignupPreferences()),
+        GetPage(
+            name: '/signup_preferences_search',
+            page: () => SignupPreferencesSearch()),
+      ],
+    );
   }
 }
