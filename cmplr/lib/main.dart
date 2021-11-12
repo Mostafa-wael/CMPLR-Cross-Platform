@@ -1,5 +1,7 @@
+import 'package:cmplr/views/android_views/signup_preferences.dart';
 import 'package:flutter/material.dart';
-import 'views/android_views/signup_age.dart';
+import 'package:get/get.dart';
+import 'views/android_views/android_views.dart';
 
 void main() {
   runApp(const CMPLR());
@@ -11,6 +13,15 @@ class CMPLR extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return SignupAge();
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SignupAge(),
+      getPages: [
+        GetPage(name: '/signup_preferences', page: () => SignupPreferences()),
+        GetPage(
+            name: '/signup_preferences_search',
+            page: () => SignupPreferencesSearch()),
+      ],
+    );
   }
 }

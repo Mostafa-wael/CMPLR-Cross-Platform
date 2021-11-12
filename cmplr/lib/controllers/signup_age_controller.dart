@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class SignupController extends GetxController {
+class SignupAgeController extends GetxController {
   final _ageController = TextEditingController();
   final _focusNode = FocusNode();
   int _nextButtonColor = 0xFF015887;
@@ -61,14 +61,13 @@ class SignupController extends GetxController {
       update();
 
       await Future.delayed(const Duration(seconds: 1));
-
+      _isLoading = false;
+      update();
       if (int.parse(ageController.text) < 13) {
         _showToast('Too young!');
       } else {
-        _showToast('Success');
+        Get.offNamed('/signup_preferences');
       }
-      _isLoading = false;
-      update();
     }
   }
 
