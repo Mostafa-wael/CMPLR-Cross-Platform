@@ -44,6 +44,7 @@ dependencies:
 
 
 dev_dependencies:
+  flutter_native_splash: 
   flutter_test:
     sdk: flutter
 
@@ -66,8 +67,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - cmplr\lib\utilities\assets\intro_screen\*
+  # assets:
+  #   - lib\utilities\assets\intro_screen\*
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -96,3 +97,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash: # flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
+  color: "#001935"
+  image: lib\utilities\assets\trans_logo.png
+  android: true
+  ios: true
+  web: true
+
+
+

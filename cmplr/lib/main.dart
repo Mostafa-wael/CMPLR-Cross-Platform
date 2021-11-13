@@ -16,6 +16,7 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: CMPLRTheme.dark(),
       home: EmailPasswordNameAfterSignup(),
       getPages: [
         GetPage(name: '/signup_preferences', page: () => SignupPreferences()),
@@ -23,7 +24,6 @@ class CMPLR extends StatelessWidget {
             name: '/signup_preferences_search',
             page: () => SignupPreferencesSearch()),
       ],
-      theme: CMPLRTheme.dark(),
     );
   }
 }
