@@ -24,6 +24,7 @@ class CMPLR extends StatelessWidget {
             page: () => const EmailPasswordNameAfterSignup()),
         GetPage(
             name: '/signup_preferences', page: () => const SignupPreferences()),
+        GetPage(name: '/signup_age', page: () => const SignupAge()),
         GetPage(
             name: '/signup_preferences_search',
             page: () => const SignupPreferencesSearch()),
