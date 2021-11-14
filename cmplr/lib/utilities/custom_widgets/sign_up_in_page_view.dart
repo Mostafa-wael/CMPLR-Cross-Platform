@@ -1,45 +1,51 @@
 import 'package:flutter/material.dart';
 
-
 class SignUpInPageView extends StatelessWidget {
   List<String> texts;
-  final children = <Widget>[];
+  List<String> imagePathes;
+  final imageChildren = <Widget>[];
 
-  SignUpInPageView({
-    Key? key,
-    required this.texts,
-}) : super(key: key);
+  SignUpInPageView({Key? key, required this.texts, required this.imagePathes})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    children.add(const SizedBox(height: 220));
-    for (String text in texts) {
-      children.add(
-        Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 36,
-          ),
-        )
+    final controller = PageController(initialPage: 0);
+    var listLength =
+        texts.length < imagePathes.length ? texts.length : imagePathes.length;
+    for (var i = 0; i < listLength; i++) {
+      imageChildren.add(
+        Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Center(
+              child: Image(
+                image: AssetImage(imagePathes[i]),
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+                alignment: Alignment.center,
+              ),
+            ),
+            Center(
+              child: Text(
+                texts[i],
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 36,
+                ),
+              ),
+            )
+          ],
+        ),
       );
-      children.add(const SizedBox(height: 10));
     }
-    children.add(const SizedBox(height: 320));
 
-    return Stack(
-      children: [
-        Expanded(
-          // TODO: Add Picture Here
-          child: Container(),
-        ),
-        Center(
-          child: Column(
-          children: children,
-          ),
-        ),
-      ],
+    return PageView(
+      scrollDirection: Axis.horizontal,
+      controller: controller,
+      children: imageChildren,
     );
   }
-
 }
