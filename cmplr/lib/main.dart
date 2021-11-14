@@ -17,12 +17,21 @@ class CMPLR extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: Login(),
+      theme: CMPLRTheme.dark(),
       getPages: [
         GetPage(name: '/signup_preferences', page: () => SignupPreferences()),
         GetPage(name: '/signup_preferences_search', page: () => SignupPreferencesSearch()),
+        GetPage(
+            name: '/EmailPasswordNameAfterSignup',
+            page: () => const EmailPasswordNameAfterSignup()),
+        GetPage(
+            name: '/signup_preferences', page: () => const SignupPreferences()),
+        GetPage(name: '/signup_age', page: () => const SignupAge()),
+        GetPage(
+            name: '/signup_preferences_search',
+            page: () => const SignupPreferencesSearch()),
 
       ],
-      theme: CMPLRTheme.dark(),
     );
   }
 }
