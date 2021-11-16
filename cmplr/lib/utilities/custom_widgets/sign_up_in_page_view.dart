@@ -18,14 +18,17 @@ class SignUpInPageView extends StatelessWidget {
         Stack(
           alignment: AlignmentDirectional.center,
           children: [
-            Center(
-              child: Image(
-                image: AssetImage(imagePathes[i]),
-                fit: BoxFit.cover,
-                height: double.infinity,
-                width: double.infinity,
-                alignment: Alignment.center,
+            Opacity(
+              child: Center(
+                child: Image(
+                  image: AssetImage(imagePathes[i]),
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                ),
               ),
+              opacity: 0.5,
             ),
             Center(
               child: Text(

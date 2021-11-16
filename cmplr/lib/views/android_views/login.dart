@@ -15,62 +15,57 @@ class Login extends StatelessWidget {
     return GetBuilder<LoginManager>(
       init: LoginManager(),
       builder: (controller) => Scaffold(
-        body: _getBody(context),
+        body: Stack(
+          children: [
+            Center(
+              child: SignUpInPageView(texts: [
+                'Explore mind-blowing stuff.',
+                'Follow Tumblrs that spark your interests.',
+                'Customize how you look, be who you want.',
+                'post anything: Text, GIFs, music, whatever.',
+                'Welcome to Tumblr. Now push the button.',
+              ], imagePathes: [
+                'lib/utilities/assets/intro_screen/intro_1.gif',
+                'lib/utilities/assets/intro_screen/intro_2.gif',
+                'lib/utilities/assets/intro_screen/intro_3.jpg',
+                'lib/utilities/assets/intro_screen/intro_4.jpg',
+                'lib/utilities/assets/intro_screen/intro_5.gif',
+              ]),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 120),
+                  const Text(
+                    'tumblr',
+                    style: TextStyle(
+                        fontSize: 56,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(height: 320),
+                  SignUpInButton(
+                    text: 'Log in with Email',
+                    onTap: () {
+                      controller.useEmail();
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  SignUpInButton(
+                    text: 'log in with Google',
+                    onTap: () {
+                      controller.useGoogle();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  static Widget _getBody(context) => Stack(
-        children: [
-          Center(
-            child: SignUpInPageView(texts: [
-              'Explore mind-blowing stuff.',
-              'Follow Tumblrs that spark your interests.',
-              'Customize how you look, be who you want.',
-              'post anything: Text, GIFs, music, whatever.',
-              'Welcome to Tumblr. Now push the button.',
-            ], imagePathes: [
-              'lib/utilities/assets/intro_screen/intro_1.gif',
-              'lib/utilities/assets/intro_screen/intro_2.gif',
-              'lib/utilities/assets/intro_screen/intro_3.jpg',
-              'lib/utilities/assets/intro_screen/intro_4.jpg',
-              'lib/utilities/assets/intro_screen/intro_5.gif',
-            ]),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 120),
-                const Text(
-                  'tumblr',
-                  style: TextStyle(
-                      fontSize: 56,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900),
-                ),
-                const SizedBox(height: 320),
-                InkWell(
-                  child: SignUpInButton(
-                    text: 'Log in with Email',
-                    onTap: (context) {
-                      //Get.to();
-                    },
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  onTap: () {},
-                ),
-                const SizedBox(height: 15),
-                SignUpInButton(
-                  text: 'log in with Google',
-                  onTap: () {
-                    //Get.to();
-                  },
-                )
-              ],
-            ),
-          ),
-        ],
-      );
 }
