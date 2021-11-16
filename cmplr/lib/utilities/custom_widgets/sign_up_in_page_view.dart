@@ -29,10 +29,6 @@ class SignUpInPageView extends StatelessWidget {
 
     return Stack(
       children: [
-        Expanded(
-          // TODO: Add Picture Here
-          child: Container(),
-        ),
         Center(
           child: Column(
           children: children,

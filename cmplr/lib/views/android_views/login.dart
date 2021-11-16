@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:cmplr/controllers/login_manager.dart';
+import 'package:cmplr/views/android_views/android_views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -10,12 +12,15 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _getBody(context),
+    return GetBuilder<LoginManager>(
+      init: LoginManager(),
+      builder: (controller) => Scaffold(
+        body: _getBody(context, controller),
+      ),
     );
   }
 
-  static Widget _getBody(context) => Stack(
+  static Widget _getBody(context, controller) => Stack(
     children: [
       Center(
         child: Column(
@@ -31,36 +36,13 @@ class Login extends StatelessWidget {
                 fontWeight: FontWeight.w900
               ),
             ),
-            const SizedBox(height: 100),
-            /*const Text(
-              'Explore',
-              style: TextStyle(
-                  fontSize: 36,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'mind-blowing stuff.',
-              style: TextStyle(
-                  fontSize: 36,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600
-              ),
-            ),*/
-            const SizedBox(height: 120),
-            InkWell(
-              child: SignUpInButton(
-                text: 'Log in with Email',
-                onTap: (context) {
-                 //Get.to();
-                },
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+            const SizedBox(height: 220),
+            SignUpInButton(
+              text: 'Log in with Email',
               onTap: () {
-
-              },
+                controller.UseEmail();
+                print('here');
+              }
             ),
             const SizedBox(height: 15),
             SignUpInButton(

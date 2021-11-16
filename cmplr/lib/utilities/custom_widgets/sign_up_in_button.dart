@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-
 class SignUpInButton extends StatelessWidget {
   final text;
   final onTap;
+
   const SignUpInButton({
     Key? key,
     required this.text,
@@ -30,6 +30,8 @@ class SignUpInButton extends StatelessWidget {
           borderRadius:  BorderRadius.all(Radius.circular(20)),
         ),
       ),
+      onTap: () => onTap,
+      borderRadius: BorderRadius.all(Radius.circular(20)),
     );
   }
 }
