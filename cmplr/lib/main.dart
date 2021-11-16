@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'views/android_views/android_views.dart';
+import 'views/android_views/intro_screen.dart';
 
 Future<void> main() async {
   runApp(const CMPLR());
@@ -16,13 +17,25 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
-      getPages: [
-        GetPage(name: '/signup_preferences', page: () => SignupPreferences()),
-        GetPage(name: '/signup_preferences_search', page: () => SignupPreferencesSearch()),
-
-      ],
+      home: IntroScreen(),
       theme: CMPLRTheme.dark(),
+      getPages: [
+        GetPage(
+            name: '/signup_preferences_search',
+            page: () => SignupPreferencesSearch()),
+        GetPage(name: '/login', page: () => Login()),
+        GetPage(name: '/intro_screen', page: () => IntroScreen()),
+        GetPage(
+            name: '/EmailPasswordNameAfterSignup',
+            page: () => const EmailPasswordNameAfterSignup()),
+        GetPage(
+            name: '/signup_preferences', page: () => const SignupPreferences()),
+        GetPage(name: '/signup_age', page: () => const SignupAge()),
+        GetPage(
+            name: '/signup_preferences_search',
+            page: () => const SignupPreferencesSearch()),
+        GetPage(name: '/login', page: () => const Login()),
+      ],
     );
   }
 }

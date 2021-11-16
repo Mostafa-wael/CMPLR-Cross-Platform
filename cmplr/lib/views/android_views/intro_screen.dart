@@ -1,22 +1,17 @@
 import 'dart:ui';
 
-import 'package:cmplr/controllers/login_manager.dart';
-import 'package:cmplr/views/android_views/android_views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class IntroScreen extends StatelessWidget {
+  const IntroScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginManager>(
-      init: LoginManager(),
-      builder: (controller) => Scaffold(
-        body: _getBody(context),
-      ),
+    return Scaffold(
+      body: _getBody(context),
     );
   }
 
@@ -53,7 +48,7 @@ class Login extends StatelessWidget {
                 const SizedBox(height: 320),
                 InkWell(
                   child: SignUpInButton(
-                    text: 'Log in with Email',
+                    text: 'Sign Up',
                     onTap: (context) {
                       //Get.to();
                     },
@@ -63,7 +58,7 @@ class Login extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 SignUpInButton(
-                  text: 'log in with Google',
+                  text: 'Log in',
                   onTap: () {
                     //Get.to();
                   },
