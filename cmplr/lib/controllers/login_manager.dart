@@ -53,7 +53,6 @@ class LoginManager extends GetxController {
 
   Future<void> useGoogle() async {
     final googleSignInAccount = await _googleSignIn.signIn();
-
     update();
   }
 }
