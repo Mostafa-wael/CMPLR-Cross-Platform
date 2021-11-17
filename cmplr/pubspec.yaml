@@ -36,15 +36,17 @@ dependencies:
   cupertino_icons: ^1.0.2
   
   get: ^4.3.8
-  google_fonts: ^2.1.0
-  fluttertoast: ^8.0.8
-  progress_indicators: ^1.0.0
-  url_launcher: ^6.0.12
-  get_storage: ^2.0.3
+  google_fonts: 
+  fluttertoast: 
+  progress_indicators:
+  google_sign_in: 
+  url_launcher:
+  get_storage:
 
 
 
 dev_dependencies:
+  flutter_native_splash: 
   flutter_test:
     sdk: flutter
 
@@ -67,7 +69,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - lib/utilities/assets/
+    - lib/utilities/assets/intro_screen/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -96,3 +100,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash: # flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
+  color: "#001935"
+  image: lib\utilities\assets\trans_logo.png
+  android: true
+  ios: true
+  web: true
+
+
+
