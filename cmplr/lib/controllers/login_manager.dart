@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class LoginManager extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> useEmail() async {
     Get.to(
@@ -22,6 +22,7 @@ class LoginManager extends GetxController {
       );
     });
   }
+
   Future<void> emailFieldChanged() async {
     update();
   }
@@ -32,8 +33,7 @@ class LoginManager extends GetxController {
         const LoginEmail2(),
         transition: Transition.noTransition,
       );
-    }
-    else if (emailController.text.isEmpty)
+    } else if (emailController.text.isEmpty)
       _showToast('Oops! You forgot to enter your email address!');
     else {
       // Message Below Text field
@@ -45,11 +45,9 @@ class LoginManager extends GetxController {
   Future<void> enterPassword() async {
     Get.to(const LoginPassword());
     update();
-}
-
-  Future<void> validatePassword() async {
-
   }
+
+  Future<void> validatePassword() async {}
 
   Future<void> useGoogle() async {
     final googleSignInAccount = await _googleSignIn.signIn();
@@ -58,10 +56,10 @@ class LoginManager extends GetxController {
 }
 
 void _showToast(String message) => Fluttertoast.showToast(
-    msg: message,
-    fontSize: 16,
-    gravity: ToastGravity.BOTTOM,
-    textColor: Colors.white,
-    backgroundColor: Color(0xFF4E4F53),
-    timeInSecForIosWeb: 1,
-);
+      msg: message,
+      fontSize: 16,
+      gravity: ToastGravity.BOTTOM,
+      textColor: Colors.white,
+      backgroundColor: const Color(0xFF4E4F53),
+      timeInSecForIosWeb: 1,
+    );

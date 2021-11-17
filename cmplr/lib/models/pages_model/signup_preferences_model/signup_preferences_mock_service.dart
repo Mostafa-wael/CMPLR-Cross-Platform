@@ -29,8 +29,8 @@ class SignupPreferencesMockService {
   ];
 
   List getInitialPreferences() {
-    List initialPreferences = [];
-    for (int i = 0; i < _preferenceNames.length; i++) {
+    final initialPreferences = [];
+    for (var i = 0; i < _preferenceNames.length; i++) {
       final card = PreferenceCard(
           color: preferenceColors[i % preferenceColors.length],
           preferenceName: _preferenceNames[i]);

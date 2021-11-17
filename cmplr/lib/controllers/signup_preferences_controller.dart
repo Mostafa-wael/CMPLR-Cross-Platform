@@ -1,3 +1,4 @@
+import '../views/android_views/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/models.dart';
@@ -67,6 +68,7 @@ class SignupPreferencesController extends GetxController {
       await Future.delayed(const Duration(seconds: 3));
       _isLoading = false;
       update();
+      Get.offAll(const MasterPage());
     } else {
       // if a Snackbar is already open, then close it to show another one
       if (Get.isSnackbarOpen! == true) {

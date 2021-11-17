@@ -4,81 +4,121 @@ analyzer:
     - lib/**.chopper.dart
     - lib/**.g.dart
   errors:
-    missing_return: error
-    dead_code: error
-    always_declare_return_types: error
-    avoid_web_libraries_in_flutter: error
-    missing_required_param: error
-    file_names: error
-    camel_case_types: error
-    empty_statements: error
-    iterable_contains_unrelated_type: error
-    list_remove_unrelated_type: error
-    no_duplicate_case_values: error
-    unrelated_type_equality_checks: error
-
-    #This is added as an error to make viewing code on the web easier
-    lines_longer_than_80_chars: error
+    missing_return : error
+    dead_code : error
+    always_declare_return_types : error
+    avoid_web_libraries_in_flutter : error
+    missing_required_param : error
+    file_names : error
+    camel_case_types : error
+    empty_statements : error
+    iterable_contains_unrelated_type : error
+    list_remove_unrelated_type : error
+    no_duplicate_case_values : error
+    unrelated_type_equality_checks : error
+    prefer_const_constructors : error
+    prefer_const_constructors_in_immutables : error
+    prefer_const_declarations : error
+    lines_longer_than_80_chars : error
     prefer_single_quotes: error
-
+    always_require_non_null_named_parameters: error
+    annotate_overrides: error
+    avoid_annotating_with_dynamic: error
+    avoid_bool_literals_in_conditional_expressions: error
+    avoid_empty_else: error
+    avoid_unnecessary_containers: error
+    await_only_futures: error
+    cancel_subscriptions: error
+    close_sinks: error
+    hash_and_equals: error
+    no_logic_in_create_state: error
+    omit_local_variable_types: error
+    only_throw_errors: error
+    prefer_final_fields: error
+    prefer_final_in_for_each: error
+    prefer_final_locals: error
+    prefer_if_null_operators: error
+    prefer_null_aware_operators: error
+    prefer_relative_imports: error
+    prefer_void_to_null: error
+    sized_box_for_whitespace: error
+    unnecessary_await_in_return: error
+    unnecessary_const: error
+    unnecessary_new: error
+    unnecessary_statements: error
+    unnecessary_this: error
+    use_key_in_widget_constructors: error
+    use_is_even_rather_than_modulo: error
+    use_raw_strings: error
+    use_string_buffers: error
+    prefer_adjacent_string_concatenation: error
+    prefer_conditional_assignment: error
+    prefer_contains: error
+    prefer_equal_for_default_values: error
+    constant_identifier_names: error
+    non_constant_identifier_names: error
+    unnecessary_string_escapes: error
+    empty_catches: error
+    
 linter:
   rules:
-    # From Flutter Apprentice
-    - always_declare_return_types
-    - always_require_non_null_named_parameters
-    - annotate_overrides
-    - avoid_annotating_with_dynamic
-    - avoid_bool_literals_in_conditional_expressions
-    - avoid_empty_else
-    - avoid_unnecessary_containers
-    - avoid_web_libraries_in_flutter
-    - await_only_futures
-    - camel_case_types
-    - cancel_subscriptions
-    - close_sinks
-    - empty_statements
-    - file_names
-    - hash_and_equals
-    - iterable_contains_unrelated_type
-    - lines_longer_than_80_chars
-    - list_remove_unrelated_type
-    - no_duplicate_case_values
-    - no_logic_in_create_state
-    - omit_local_variable_types
-    - only_throw_errors
-    - prefer_const_constructors
-    - prefer_const_constructors_in_immutables
-    - prefer_const_declarations
-    - prefer_final_fields
-    - prefer_final_in_for_each
-    - prefer_final_locals
-    - prefer_if_null_operators
-    - prefer_null_aware_operators
-    - prefer_relative_imports
-    - prefer_single_quotes
-    - prefer_void_to_null
-    - sized_box_for_whitespace
-    - unnecessary_await_in_return
-    - unnecessary_const
-    - unnecessary_new
-    - unnecessary_statements
-    - unnecessary_this
-    - unrelated_type_equality_checks
-    - use_key_in_widget_constructors
-  # From our document
-    - use_is_even_rather_than_modulo
-    - use_raw_strings
-    - use_string_buffers
-    - prefer_adjacent_string_concatenation
-    - prefer_conditional_assignment
-    - prefer_contains
-    - prefer_equal_for_default_values
-    - constant_identifier_names
-    - non_constant_identifier_names
-    - unnecessary_string_escapes
-    - empty_catches
+    missing_return : true
+    dead_code : true
+    always_declare_return_types : true
+    avoid_web_libraries_in_flutter : true
+    missing_required_param : true
+    file_names : true
+    camel_case_types : true
+    empty_statements : true
+    iterable_contains_unrelated_type : true
+    list_remove_unrelated_type : true
+    no_duplicate_case_values : true
+    unrelated_type_equality_checks : true
+    prefer_const_constructors : true
+    prefer_const_constructors_in_immutables : true
+    prefer_const_declarations : true
+    lines_longer_than_80_chars : true
+    prefer_single_quotes: true
+    always_require_non_null_named_parameters: true
+    annotate_overrides: true
+    avoid_annotating_with_dynamic: true
+    avoid_bool_literals_in_conditional_expressions: true
+    avoid_empty_else: true
+    avoid_unnecessary_containers: true
+    await_only_futures: true
+    cancel_subscriptions: true
+    close_sinks: true
+    hash_and_equals: true
+    no_logic_in_create_state: true
+    omit_local_variable_types: true
+    only_throw_errors: true
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
+    prefer_if_null_operators: true
+    prefer_null_aware_operators: true
+    prefer_relative_imports: true
+    prefer_void_to_null: true
+    sized_box_for_whitespace: true
+    unnecessary_await_in_return: true
+    unnecessary_const: true
+    unnecessary_new: true
+    unnecessary_statements: true
+    unnecessary_this: true
+    use_key_in_widget_constructors: true
+    use_is_even_rather_than_modulo: true
+    use_raw_strings: true
+    use_string_buffers: true
+    prefer_adjacent_string_concatenation: true
+    prefer_conditional_assignment: true
+    prefer_contains: true
+    prefer_equal_for_default_values: true
+    constant_identifier_names: true
+    non_constant_identifier_names: true
+    unnecessary_string_escapes: true
+    empty_catches: true
 
-  # Things not available in linter 
-  # Prefer += over ++
-  # Place dart: imports before other imports
-  # No nullable named arguments. Not sure if this the same as always_require_non_null_named_parameters
+# Things not available in linter 
+# Prefer += over ++
+# Place dart: imports before other imports
+# No nullable named arguments. Not sure if this the same as always_require_non_null_named_parameters

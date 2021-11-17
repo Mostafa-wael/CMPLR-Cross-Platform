@@ -1,5 +1,5 @@
 class SignupPreferencesSearchMockService {
-  List _popularSearchedTopics = [
+  final List _popularSearchedTopics = [
     'Barcelona',
     'PSG',
     'Real Madrid',

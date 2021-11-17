@@ -1,8 +1,7 @@
-import 'package:cmplr/controllers/login_manager.dart';
+import '../../controllers/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import '../../controllers/controllers.dart';
 
 class LoginEmail2 extends StatelessWidget {
   const LoginEmail2({Key? key}) : super(key: key);

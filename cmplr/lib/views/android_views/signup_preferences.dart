@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import '../../controllers/controllers.dart';
+import 'master_page.dart';
 
 class SignupPreferences extends StatelessWidget {
   const SignupPreferences({Key? key}) : super(key: key);
@@ -51,6 +51,7 @@ class SignupPreferences extends StatelessWidget {
                         TextButton(
                             onPressed: () {
                               // go to main screen here
+                              Get.to(const MasterPage());
                             },
                             child: const Text('LEAVE',
                                 style: TextStyle(fontSize: 16)))

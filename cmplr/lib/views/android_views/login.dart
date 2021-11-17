@@ -1,11 +1,9 @@
 import 'dart:ui';
 
-import 'package:cmplr/controllers/login_manager.dart';
-import 'package:cmplr/views/android_views/android_views.dart';
+import '../../controllers/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import '../../controllers/controllers.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);

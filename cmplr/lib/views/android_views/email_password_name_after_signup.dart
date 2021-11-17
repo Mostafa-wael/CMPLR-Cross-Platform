@@ -104,6 +104,47 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
         ],
       );
 
+  static Widget _getLoginPopup(
+          EmailPasswordNameAfterSignupController controller) =>
+      Popup(
+        Padding(
+          padding:
+              const EdgeInsets.only(left: 4, right: 4, top: 16, bottom: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                _nevermindText,
+                style: TextStyle(fontSize: 16),
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                GestureDetector(
+                  child: const Text(
+                    'Nevermind',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  onTap: () {
+                    Get.back();
+                  },
+                ),
+                const SizedBox(width: 16),
+                GestureDetector(
+                    child: Text(
+                      'I\'m sure',
+                      style: TextStyle(color: Colors.blue[400]),
+                    ),
+                    onTap: () {
+                      controller.toLogin();
+                    })
+              ])
+            ],
+          ),
+        ),
+        backgroundColor: Colors.grey[900] ?? Colors.grey,
+        maxHeight: 120,
+      );
+
   static Widget _getBottomColumn(
           context, EmailPasswordNameAfterSignupController controller) =>
       Column(
@@ -127,47 +168,7 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return Popup(
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 4, right: 4, top: 16, bottom: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                _nevermindText,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    GestureDetector(
-                                      child: const Text(
-                                        'Nevermind',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      onTap: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                    const SizedBox(width: 16),
-                                    GestureDetector(
-                                        child: Text(
-                                          'I\'m sure',
-                                          style: TextStyle(
-                                              color: Colors.blue[400]),
-                                        ),
-                                        onTap: () {
-                                          controller.toLogin();
-                                        })
-                                  ])
-                            ],
-                          ),
-                        ),
-                        backgroundColor: Colors.grey[900] ?? Colors.grey,
-                        maxHeight: 120,
-                      );
+                      return _getLoginPopup(controller);
                     });
               }),
           GestureDetector(

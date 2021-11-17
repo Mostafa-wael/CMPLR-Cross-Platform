@@ -45,7 +45,7 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
     // (Tarek) TODO:
     // Go to login page
-    // Get.offNamed(_loginURL);
+    Get.offNamed(_loginURL);
   }
 
   void toProfile() {

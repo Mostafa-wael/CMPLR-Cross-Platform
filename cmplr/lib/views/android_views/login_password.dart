@@ -1,8 +1,7 @@
-import 'package:cmplr/controllers/login_manager.dart';
+import '../../controllers/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import '../../controllers/controllers.dart';
 
 class LoginPassword extends StatelessWidget {
   const LoginPassword({Key? key}) : super(key: key);
@@ -31,10 +30,14 @@ class LoginPassword extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              LoginTextField(textController: controller.emailController,
-                  manager: controller, text: 'email'),
-              LoginTextField(textController: controller.passwordController
-                  , manager: controller, text: 'password'),
+              LoginTextField(
+                  textController: controller.emailController,
+                  manager: controller,
+                  text: 'email'),
+              LoginTextField(
+                  textController: controller.passwordController,
+                  manager: controller,
+                  text: 'password'),
             ],
             mainAxisAlignment: MainAxisAlignment.center,
           ),
