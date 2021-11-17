@@ -17,23 +17,22 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: IntroScreen(),
       theme: CMPLRTheme.dark(),
       getPages: [
         GetPage(
             name: '/signup_preferences_search',
-            page: () => SignupPreferencesSearch()),
-        GetPage(name: '/login', page: () => Login()),
-        GetPage(name: '/intro_screen', page: () => IntroScreen()),
+            page: () => const SignupPreferencesSearch()),
         GetPage(
             name: '/EmailPasswordNameAfterSignup',
             page: () => const EmailPasswordNameAfterSignup()),
         GetPage(
             name: '/signup_preferences', page: () => const SignupPreferences()),
-        GetPage(name: '/signup_age', page: () => const SignupAge()),
         GetPage(
             name: '/signup_preferences_search',
             page: () => const SignupPreferencesSearch()),
+        GetPage(name: '/signup_age', page: () => const SignupAge()),
+        GetPage(name: '/intro_screen', page: () => const IntroScreen()),
         GetPage(name: '/login', page: () => const Login()),
       ],
     );

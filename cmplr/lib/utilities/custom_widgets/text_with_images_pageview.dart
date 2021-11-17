@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SignUpInPageView extends StatelessWidget {
-  List<String> texts;
-  List<String> imagePathes;
-  final imageChildren = <Widget>[];
+// This widget is used to generate page view with images and text on it
+// ignore: must_be_immutable
+class TextWithImagesPageView extends StatelessWidget {
+  List<String> texts; // text to show
+  List<String> imagePathes; // image paths
 
-  SignUpInPageView({Key? key, required this.texts, required this.imagePathes})
+  TextWithImagesPageView(
+      {Key? key, required this.texts, required this.imagePathes})
       : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = PageController(initialPage: 0);
-    var listLength =
-        texts.length < imagePathes.length ? texts.length : imagePathes.length;
+  List<Widget> getImageWithTextChildren(listLength, texts, imagePathes) {
+    final imageWithText = <Widget>[];
     for (var i = 0; i < listLength; i++) {
-      imageChildren.add(
+      imageWithText.add(
         Stack(
           alignment: AlignmentDirectional.center,
           children: [
@@ -44,10 +42,19 @@ class SignUpInPageView extends StatelessWidget {
         ),
       );
     }
+    return imageWithText;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final listLength =
+        texts.length < imagePathes.length ? texts.length : imagePathes.length;
+    // controller to manage the page view
+    final controller = PageController(initialPage: 0);
     return PageView(
       scrollDirection: Axis.horizontal,
       controller: controller,
-      children: imageChildren,
+      children: getImageWithTextChildren(listLength, texts, imagePathes),
     );
   }
 }

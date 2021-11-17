@@ -16,7 +16,7 @@ class LoginEmail2 extends StatelessWidget {
         body: Stack(
           children: [
             Center(
-              child: SignUpInPageView(texts: [
+              child: TextWithImagesPageView(texts: [
                 'Explore mind-blowing stuff.',
                 'Follow Tumblrs that spark your interests.',
                 'Customize how you look, be who you want.',
@@ -40,19 +40,19 @@ class LoginEmail2 extends StatelessWidget {
                       : const SizedBox(height: 60),
                   visibleKeyboard
                       ? const Text(
-                    't',
-                    style: TextStyle(
-                        fontSize: 75,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900),
-                  )
+                          't',
+                          style: TextStyle(
+                              fontSize: 75,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900),
+                        )
                       : const Text(
-                    't',
-                    style: TextStyle(
-                        fontSize: 150,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900),
-                  ),
+                          't',
+                          style: TextStyle(
+                              fontSize: 150,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900),
+                        ),
                   visibleKeyboard
                       ? const SizedBox(height: 60)
                       : const SizedBox(height: 325),
@@ -66,31 +66,31 @@ class LoginEmail2 extends StatelessWidget {
                       : const SizedBox(height: 0),
                   visibleKeyboard
                       ? InkWell(
-                    child: SizedBox(
-                      child: Material(
-                        child: InkWell(
-                          child: const Center(
-                            child: Text(
-                              'Enter Password',
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300),
+                          child: SizedBox(
+                            child: Material(
+                              child: InkWell(
+                                child: const Center(
+                                  child: Text(
+                                    'Enter Password',
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                ),
+                                onTap: () {
+                                  controller.enterPassword();
+                                },
+                              ),
+                              color: Colors.grey,
                             ),
+                            height: 40,
+                            width: 340,
                           ),
-                          onTap: () {
-                            controller.enterPassword();
-                          },
-                        ),
-                        color: Colors.grey,
-                      ),
-                      height: 40,
-                      width: 340,
-                    ),
-                  )
+                        )
                       : Container(
-                    color: Colors.transparent,
-                  ),
+                          color: Colors.transparent,
+                        ),
                 ],
               ),
             ),

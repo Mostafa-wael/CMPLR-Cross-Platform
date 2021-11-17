@@ -18,7 +18,7 @@ class Login extends StatelessWidget {
         body: Stack(
           children: [
             Center(
-              child: SignUpInPageView(texts: [
+              child: TextWithImagesPageView(texts: [
                 'Explore mind-blowing stuff.',
                 'Follow Tumblrs that spark your interests.',
                 'Customize how you look, be who you want.',
@@ -67,5 +67,4 @@ class Login extends StatelessWidget {
       ),
     );
   }
-
 }
