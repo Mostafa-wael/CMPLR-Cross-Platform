@@ -22,8 +22,8 @@ class SignupPreferencesSearch extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 190,
-                    color: Color(0xFF001A35),
-                    padding: EdgeInsets.fromLTRB(18, 0, 5, 0),
+                    color: const Color(0xFF001A35),
+                    padding: const EdgeInsets.fromLTRB(18, 0, 5, 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,19 +31,19 @@ class SignupPreferencesSearch extends StatelessWidget {
                         Row(
                           // mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Pick your own topics',
                               style:
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
-                            SizedBox(width: 60),
+                            const SizedBox(width: 60),
                             IconButton(
                               splashColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onPressed: () {
                                 controller.closeSearchPage();
                               },
-                              icon: Icon(Icons.close),
+                              icon: const Icon(Icons.close),
                               color: Colors.blue,
                             )
                           ],
@@ -64,11 +64,12 @@ class SignupPreferencesSearch extends StatelessWidget {
                             controller.addSearchedTopic(topicName);
                           },
                           cursorColor: Colors.black,
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black),
                           decoration: InputDecoration(
-                              prefixIconConstraints:
-                                  BoxConstraints(minHeight: 20, minWidth: 35),
-                              prefixIcon: Icon(
+                              prefixIconConstraints: const BoxConstraints(
+                                  minHeight: 20, minWidth: 35),
+                              prefixIcon: const Icon(
                                 Icons.add,
                                 color: Colors.black,
                                 size: 15,
@@ -87,9 +88,9 @@ class SignupPreferencesSearch extends StatelessWidget {
                               hintText: 'Add topic',
                               fillColor: Colors.white),
                         ),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         Text(controller.searchIndicatorString,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500)),
@@ -120,21 +121,21 @@ class SignupPreferencesSearch extends StatelessWidget {
         },
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        child: Container(
+        child: SizedBox(
           height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
+              const Icon(
                 Icons.add,
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(
                 controller.currentlyShownTopics[index],
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               )
             ],
           ),

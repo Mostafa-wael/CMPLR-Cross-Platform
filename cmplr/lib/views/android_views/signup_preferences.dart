@@ -18,11 +18,11 @@ class SignupPreferences extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 145,
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Text(
                           'Aw. If you leave now,'
                           ' you\'ll lose all your progress.',
@@ -31,29 +31,29 @@ class SignupPreferences extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               fontSize: 21)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       children: [
-                        SizedBox(width: 200),
+                        const SizedBox(width: 200),
                         TextButton(
                             onPressed: () {
                               Get.back();
                             },
-                            child: Text(
+                            child: const Text(
                               'CONTINUE',
                               style: TextStyle(fontSize: 16),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         TextButton(
                             onPressed: () {
                               // go to main screen here
                             },
-                            child:
-                                Text('LEAVE', style: TextStyle(fontSize: 16)))
+                            child: const Text('LEAVE',
+                                style: TextStyle(fontSize: 16)))
                       ],
                     )
                   ],
@@ -73,16 +73,16 @@ class SignupPreferences extends StatelessWidget {
                 (controller.isLoading)
                     ? CollectionScaleTransition(
                         children: [
-                          Icon(Icons.crop_square_outlined),
-                          Icon(Icons.crop_square_outlined),
-                          Icon(Icons.crop_square_outlined),
+                          const Icon(Icons.crop_square_outlined),
+                          const Icon(Icons.crop_square_outlined),
+                          const Icon(Icons.crop_square_outlined),
                         ],
                       )
                     : Material(
                         color: Colors.transparent,
                         child: InkWell(
                           highlightColor: Colors.transparent,
-                          splashColor: Color(0x33f2f2f2),
+                          splashColor: const Color(0x33f2f2f2),
                           onTap: () {
                             controller.nextButtonPressed();
                           },
@@ -102,19 +102,19 @@ class SignupPreferences extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 115,
-                color: Color(0xFF001A35),
-                padding: EdgeInsets.fromLTRB(15, 4, 15, 0),
+                color: const Color(0xFF001A35),
+                padding: const EdgeInsets.fromLTRB(15, 4, 15, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'What do you like?',
                       style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       'Whatever you\'re into, you\'ll find it here. '
                       'Follow some of the tags below to start filling '
                       'your dashboard with the things you love.',
@@ -152,22 +152,22 @@ class SignupPreferences extends StatelessWidget {
 
   Widget buildCustomCard(SignupPreferencesController controller) {
     return Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
         child: Material(
-          color: Color(0xFF001A35),
+          color: const Color(0xFF001A35),
           child: InkWell(
-            splashColor: Color(0xaa00689b),
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            splashColor: const Color(0xaa00689b),
+            borderRadius: const BorderRadius.all(Radius.circular(20.0)),
             onTap: () {
               controller.chooseNewPreference();
             },
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                   border: Border.all(color: Colors.white, width: 1.5)),
               child: Stack(
                 children: [
-                  Positioned(
+                  const Positioned(
                     child: Icon(
                       Icons.add,
                       color: Colors.white,
@@ -178,8 +178,8 @@ class SignupPreferences extends StatelessWidget {
                   Positioned(
                     child: Container(
                       width: 125,
-                      padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
-                      child: Text(
+                      padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+                      child: const Text(
                         'Choose your own',
                         maxLines: 2,
                         style: TextStyle(fontSize: 20, color: Colors.white),
@@ -206,7 +206,7 @@ class SignupPreferences extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderRadius: const BorderRadius.all(Radius.circular(20.0)),
               color: Color(controller.availablePreferenceCards[index].color)),
           child: Stack(
             children: [
@@ -214,7 +214,7 @@ class SignupPreferences extends StatelessWidget {
                 child: Visibility(
                   visible: controller.availablePreferenceCards[index].isChosen,
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.verified,
                       size: 22,
                     ),
@@ -227,10 +227,10 @@ class SignupPreferences extends StatelessWidget {
               Positioned(
                 child: Container(
                   width: 125,
-                  padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+                  padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
                   child: Text(
                     controller.availablePreferenceCards[index].preferenceName,
-                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    style: const TextStyle(fontSize: 20, color: Colors.black),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
