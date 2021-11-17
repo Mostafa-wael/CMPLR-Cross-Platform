@@ -17,7 +17,9 @@ class SignupAge extends StatelessWidget {
           backgroundColor: const Color(0xFF001A35),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
-            onPressed: () {},
+            onPressed: () {
+              controller.closeAgeScreen();
+            },
             splashRadius: 40,
           ),
           toolbarHeight: 80,

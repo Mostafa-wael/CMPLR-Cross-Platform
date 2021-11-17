@@ -75,6 +75,10 @@ class SignupAgeController extends GetxController {
     }
   }
 
+  void closeAgeScreen() {
+    Get.back();
+  }
+
   // this shows toast if the age is inappropriate
   void _showToast(String message) => Fluttertoast.showToast(
       msg: message,
