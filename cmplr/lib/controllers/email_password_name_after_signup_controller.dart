@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/models.dart';
@@ -54,6 +55,8 @@ class EmailPasswordNameAfterSignupController extends GetxController {
     if (validInfo) {
       Get.snackbar('GO TO PROFILE', '');
       Get.offNamed(_profileURL);
+
+      GetStorage().write('logged_in', true);
     }
   }
 }

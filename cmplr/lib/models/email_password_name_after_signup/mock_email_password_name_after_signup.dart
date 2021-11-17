@@ -30,13 +30,13 @@ class MockEmailPasswordNameAfterSignupModel
   bool checkEmailPasswordName(String email, String password, String name) {
     if (email.isEmpty || password.isEmpty || name.isEmpty) return false;
 
+    // Regex borrowed from https://stackoverflow.com/questions/16800540/validate-email-address-in-dart
     final validEmail = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email);
     final existingEmail = registeredEmails.contains(email);
     final existingName = registeredNames.contains(name);
 
-    // Regex borrowed from https://stackoverflow.com/questions/16800540/validate-email-address-in-dart
     if (!validEmail || existingEmail || existingName) return false;
 
     registeredNames.add(name);

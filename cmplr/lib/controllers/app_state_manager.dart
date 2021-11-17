@@ -31,9 +31,10 @@ class MasterPageManager extends GetxController {
   }
 
   Widget _firstPage() {
-    if (storage?.read('logged_in') ?? true)
+    final logged = storage?.read('logged_in');
+    if (!(logged ?? false)) {
       return const IntroScreen();
-    else
+    } else
       return const MasterPage();
   }
 }

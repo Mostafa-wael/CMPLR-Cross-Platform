@@ -49,7 +49,9 @@ class SignupPreferences extends StatelessWidget {
                               width: 10,
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offAllNamed('/intro_screen');
+                                },
                                 child: const Text('LEAVE',
                                     style: TextStyle(fontSize: 16)))
                           ],
