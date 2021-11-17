@@ -3,3 +3,7 @@ export 'signup_preferences.dart';
 export 'signup_preferences_search.dart';
 export 'email_password_name_after_signup.dart';
 export 'login.dart';
+export 'login_email_1.dart';
+export 'login_email_splash.dart';
+export 'login_email_2.dart';
+export 'login_password.dart';

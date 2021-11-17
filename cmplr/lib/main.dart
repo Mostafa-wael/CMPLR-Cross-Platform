@@ -17,7 +17,7 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: IntroScreen(),
+      home: Login(),
       theme: CMPLRTheme.dark(),
       getPages: [
         GetPage(

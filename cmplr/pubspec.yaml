@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^2.1.0
   fluttertoast: ^8.0.8
   progress_indicators: ^1.0.0
+  google_sign_in: ^5.2.1
   url_launcher:
 
 
