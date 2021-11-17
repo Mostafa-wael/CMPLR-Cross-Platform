@@ -27,6 +27,7 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
       ' everything you just followed.';
 
   static const _maxWidth = 400.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

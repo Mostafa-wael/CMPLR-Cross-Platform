@@ -1,3 +1,5 @@
+import 'package:cmplr/views/android_views/master_page.dart';
+
 import 'cmplr_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

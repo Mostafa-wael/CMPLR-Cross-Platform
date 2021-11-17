@@ -41,6 +41,7 @@ dependencies:
   progress_indicators:
   google_sign_in: 
   url_launcher:
+  get_storage:
 
 
 
