@@ -10,56 +10,54 @@ class SignupPreferences extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<bool> _onBackPressed() async {
       return await showDialog(
-          context: context,
-          builder: (context) => Dialog(
-              insetPadding: EdgeInsets.zero,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              backgroundColor: Colors.white,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 145,
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                child: Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Text(
-                          'Aw. If you leave now,'
-                          ' you\'ll lose all your progress.',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 21)),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
+              context: context,
+              builder: (context) => Dialog(
+                  insetPadding: EdgeInsets.zero,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  backgroundColor: Colors.white,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 145,
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                    child: Column(
                       children: [
-                        const SizedBox(width: 200),
-                        TextButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text(
-                              'CONTINUE',
-                              style: TextStyle(fontSize: 16),
-                            )),
-                        const SizedBox(
-                          width: 10,
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Text(
+                              'Aw. If you leave now,'
+                              ' you\'ll lose all your progress.',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 21)),
                         ),
-                        TextButton(
-                            onPressed: () {
-                              // go to main screen here
-                              Get.to(const MasterPage());
-                            },
-                            child: const Text('LEAVE',
-                                style: TextStyle(fontSize: 16)))
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(width: 200),
+                            TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: const Text(
+                                  'CONTINUE',
+                                  style: TextStyle(fontSize: 16),
+                                )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TextButton(
+                                onPressed: () {},
+                                child: const Text('LEAVE',
+                                    style: TextStyle(fontSize: 16)))
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              )));
+                    ),
+                  ))) ??
+          false;
     }
 
     return WillPopScope(

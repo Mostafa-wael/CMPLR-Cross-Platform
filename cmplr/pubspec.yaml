@@ -102,7 +102,7 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_native_splash: # flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
   color: "#001935"
-  image: lib\utilities\assets\trans_logo.png
+  image: lib/utilities/assets/trans_logo.png
   android: true
   ios: true
   web: true
