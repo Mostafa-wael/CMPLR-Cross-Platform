@@ -1,82 +1,126 @@
-analyzer:
-  exclude:
-    - build/**
-    - lib/**.chopper.dart
-    - lib/**.g.dart
-  errors:
-    missing_return: error
-    dead_code: error
-    always_declare_return_types: error
-    avoid_web_libraries_in_flutter: error
-    missing_required_param: error
-    file_names: error
-    camel_case_types: error
-    empty_statements: error
-    iterable_contains_unrelated_type: error
-    list_remove_unrelated_type: error
-    no_duplicate_case_values: error
-    unrelated_type_equality_checks: error
+  analyzer:
+    exclude:
+      - build/**
+      - lib/**.chopper.dart
+      - lib/**.g.dart
 
-    #This is added as an error to make viewing code on the web easier
-    lines_longer_than_80_chars: error
-    prefer_single_quotes: error
+    errors:
+      missing_return : warning
+      dead_code : warning
+      always_declare_return_types : warning
+      avoid_web_libraries_in_flutter : warning
+      missing_required_param : warning
+      file_names : warning
+      camel_case_types : warning
+      empty_statements : warning
+      iterable_contains_unrelated_type : warning
+      list_remove_unrelated_type : warning
+      no_duplicate_case_values : warning
+      unrelated_type_equality_checks : warning
+      prefer_const_constructors : warning
+      prefer_const_constructors_in_immutables : warning
+      prefer_const_declarations : warning
+      lines_longer_than_80_chars : warning
 
-linter:
-  rules:
-    # From Flutter Apprentice
-    - always_declare_return_types
-    - always_require_non_null_named_parameters
-    - annotate_overrides
-    - avoid_annotating_with_dynamic
-    - avoid_bool_literals_in_conditional_expressions
-    - avoid_empty_else
-    - avoid_unnecessary_containers
-    - avoid_web_libraries_in_flutter
-    - await_only_futures
-    - camel_case_types
-    - cancel_subscriptions
-    - close_sinks
-    - empty_statements
-    - file_names
-    - hash_and_equals
-    - iterable_contains_unrelated_type
-    - lines_longer_than_80_chars
-    - list_remove_unrelated_type
-    - no_duplicate_case_values
-    - no_logic_in_create_state
-    - omit_local_variable_types
-    - only_throw_errors
-    - prefer_const_constructors
-    - prefer_const_constructors_in_immutables
-    - prefer_const_declarations
-    - prefer_final_fields
-    - prefer_final_in_for_each
-    - prefer_final_locals
-    - prefer_if_null_operators
-    - prefer_null_aware_operators
-    - prefer_relative_imports
-    - prefer_single_quotes
-    - prefer_void_to_null
-    - sized_box_for_whitespace
-    - unnecessary_await_in_return
-    - unnecessary_const
-    - unnecessary_new
-    - unnecessary_statements
-    - unnecessary_this
-    - unrelated_type_equality_checks
-    - use_key_in_widget_constructors
-  # From our document
-    - use_is_even_rather_than_modulo
-    - use_raw_strings
-    - use_string_buffers
-    - prefer_adjacent_string_concatenation
-    - prefer_conditional_assignment
-    - prefer_contains
-    - prefer_equal_for_default_values
-    - constant_identifier_names
-    - non_constant_identifier_names
-    - unnecessary_string_escapes
-    - empty_catches
+      #This is added as an warning to make viewing code on the web easier
+      prefer_single_quotes: warning
+      always_require_non_null_named_parameters: warning
+      annotate_overrides: warning
+      avoid_annotating_with_dynamic: warning
+      avoid_bool_literals_in_conditional_expressions: warning
+      avoid_empty_else: warning
+      avoid_unnecessary_containers: warning
+      await_only_futures: warning
+      cancel_subscriptions: warning
+      close_sinks: warning
+      hash_and_equals: warning
+      no_logic_in_create_state: warning
+      omit_local_variable_types: warning
+      only_throw_errors: warning
+      prefer_final_fields: warning
+      prefer_final_in_for_each: warning
+      prefer_final_locals: warning
+      prefer_if_null_operators: warning
+      prefer_null_aware_operators: warning
+      prefer_relative_imports: warning
+      prefer_void_to_null: warning
+      sized_box_for_whitespace: warning
+      unnecessary_await_in_return: warning
+      unnecessary_const: warning
+      unnecessary_new: warning
+      unnecessary_statements: warning
+      unnecessary_this: warning
+      use_key_in_widget_constructors: warning
+      use_is_even_rather_than_modulo: warning
+      use_raw_strings: warning
+      use_string_buffers: warning
+      prefer_adjacent_string_concatenation: warning
+      prefer_conditional_assignment: warning
+      prefer_contains: warning
+      prefer_equal_for_default_values: warning
+      constant_identifier_names: warning
+      non_constant_identifier_names: warning
+      unnecessary_string_escapes: warning
+      empty_catches: warning
+    
+  linter:
+    rules:
+      missing_return : true
+      dead_code : true
+      always_declare_return_types : true
+      avoid_web_libraries_in_flutter : true
+      missing_required_param : true
+      file_names : true
+      camel_case_types : true
+      empty_statements : true
+      iterable_contains_unrelated_type : true
+      list_remove_unrelated_type : true
+      no_duplicate_case_values : true
+      unrelated_type_equality_checks : true
+      prefer_const_constructors : true
+      prefer_const_constructors_in_immutables : true
+      prefer_const_declarations : true
+      lines_longer_than_80_chars : true
+      #This is added as an warning to make viewing code on the web true
+      prefer_single_quotes: true
+      always_require_non_null_named_parameters: true
+      annotate_overrides: true
+      avoid_annotating_with_dynamic: true
+      avoid_bool_literals_in_conditional_expressions: true
+      avoid_empty_else: true
+      avoid_unnecessary_containers: true
+      await_only_futures: true
+      cancel_subscriptions: true
+      close_sinks: true
+      hash_and_equals: true
+      no_logic_in_create_state: true
+      omit_local_variable_types: true
+      only_throw_errors: true
+      prefer_final_fields: true
+      prefer_final_in_for_each: true
+      prefer_final_locals: true
+      prefer_if_null_operators: true
+      prefer_null_aware_operators: true
+      prefer_relative_imports: true
+      prefer_void_to_null: true
+      sized_box_for_whitespace: true
+      unnecessary_await_in_return: true
+      unnecessary_const: true
+      unnecessary_new: true
+      unnecessary_statements: true
+      unnecessary_this: true
+      use_key_in_widget_constructors: true
+      use_is_even_rather_than_modulo: true
+      use_raw_strings: true
+      use_string_buffers: true
+      prefer_adjacent_string_concatenation: true
+      prefer_conditional_assignment: true
+      prefer_contains: true
+      prefer_equal_for_default_values: true
+      constant_identifier_names: true
+      non_constant_identifier_names: true
+      unnecessary_string_escapes: true
+      empty_catches: true
 
   # Things not available in linter 
   # Prefer += over ++

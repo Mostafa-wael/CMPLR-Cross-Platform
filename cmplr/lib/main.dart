@@ -1,3 +1,5 @@
+import 'package:cmplr/views/android_views/master_page.dart';
+
 import 'cmplr_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,7 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: EmailPasswordNameAfterSignup(),
+      home: const MasterPage(),
       getPages: [
         GetPage(name: '/signup_preferences', page: () => SignupPreferences()),
         GetPage(
