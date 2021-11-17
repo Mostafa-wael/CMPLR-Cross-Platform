@@ -28,25 +28,16 @@ class SignupPreferencesController extends GetxController {
     super.onInit();
   }
 
-  String get buttonText {
-    return _buttonText;
-  }
+  // getters for class attributes
+  String get buttonText => _buttonText;
 
-  int get buttonTextColor {
-    return _buttonTextColor;
-  }
+  int get buttonTextColor => _buttonTextColor;
 
-  bool get isLoading {
-    return _isLoading;
-  }
+  bool get isLoading => _isLoading;
 
-  List get availablePreferenceCards {
-    return _availablePreferenceCards;
-  }
+  List get availablePreferenceCards => _availablePreferenceCards;
 
-  int get selectedPreferencesCount {
-    return _selectedPreferencesCount;
-  }
+  int get selectedPreferencesCount => _selectedPreferencesCount;
 
   // this handles different scenarios when selecting or unselecting a preference
   void tapPreferenceCard(int index) {
@@ -77,7 +68,7 @@ class SignupPreferencesController extends GetxController {
       _isLoading = false;
       update();
     } else {
-      // if a snackbar is already open, then close it to show another one
+      // if a Snackbar is already open, then close it to show another one
       if (Get.isSnackbarOpen! == true) {
         Get.back();
       }
