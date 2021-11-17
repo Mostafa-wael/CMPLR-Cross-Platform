@@ -1,3 +1,4 @@
+import 'package:cmplr/controllers/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -8,7 +9,8 @@ class LoginEmailSplash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<LoginManager>(
+        builder: (controller) => Scaffold(
       body: Stack(
         children: [
           Center(
@@ -25,11 +27,16 @@ class LoginEmailSplash extends StatelessWidget {
                       fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(height: 235),
+                LoginTextField(
+                  textController: controller.emailController,
+                  manager: controller,
+                  text: 'email',
+                ),
               ],
             ),
           ),
         ],
       ),
-    );
+    ));
   }
 }
