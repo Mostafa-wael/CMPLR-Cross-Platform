@@ -1,5 +1,7 @@
 import 'package:cmplr/controllers/controllers.dart';
+import 'package:cmplr/controllers/master_page_controller.dart';
 import 'package:cmplr/flags.dart';
+import 'package:cmplr/views/android_views/master_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -8,6 +10,7 @@ void main() {
     Flags.mock = true;
 
     // passwordHidden = true, validInfo = true
+    final masterPageCont = MasterPageController();
     final controller = EmailPasswordNameAfterSignupController();
 
     // passwordHidden = false

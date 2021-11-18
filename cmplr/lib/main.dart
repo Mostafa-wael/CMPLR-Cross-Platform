@@ -1,3 +1,7 @@
+import 'flags.dart';
+import 'views/android_views/master_page.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'cmplr_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +10,13 @@ import 'views/android_views/android_views.dart';
 import 'views/android_views/intro_screen.dart';
 
 Future<void> main() async {
+  await GetStorage.init();
+
+  // Clears all persistent data based on a flag
+  // USE CAREFULLY
+  if (Flags.cleanSlate) {
+    GetStorage().erase();
+  }
   runApp(const CMPLR());
 }
 
@@ -17,7 +28,10 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const IntroScreen(),
+      // (Tarek) TODO: Does this count as 'logic'?
+      home: GetStorage().read('logged_in') ?? false
+          ? const MasterPage()
+          : const IntroScreen(),
       theme: CMPLRTheme.dark(),
       getPages: [
         GetPage(

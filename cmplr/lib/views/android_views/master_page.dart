@@ -1,4 +1,4 @@
-import '../../controllers/app_state_manager.dart';
+import '../../controllers/master_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,20 +7,11 @@ import 'package:get/get.dart';
 class MasterPage extends StatelessWidget {
   const MasterPage({Key? key}) : super(key: key);
 
-  static List<Widget> _getPages() {
-    return [
-      const Center(child: Text('Home')),
-      const Center(child: Text('Search')),
-      const Center(child: Text('Activity')),
-      const Center(child: Text('Profile')),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-        init: MasterPageManager(pages: _getPages()),
-        builder: (MasterPageManager controller) {
+        init: MasterPageController(),
+        builder: (MasterPageController controller) {
           return Scaffold(
               appBar: AppBar(
                 title: Text(

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import '../../controllers/master_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -32,20 +33,27 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: _getAppBar(),
-        body: _getBody(context),
+        body: GetBuilder<MasterPageController>(
+          builder: (MasterPageController controller) {
+            return _getBody(context, controller);
+          },
+        ),
         resizeToAvoidBottomInset: false);
   }
 
+  /// Only one button that should route to the page the user was intending on.
+  ///
+  /// If the user isn't logged in, an extra signup page shows up.
+  /// When the user fills their data properly and presses 'done', this should
+  /// route them to the page they intended on originally. (activity/profile)/
   static AppBar _getAppBar() => AppBar(
         actions: [
           GetBuilder<EmailPasswordNameAfterSignupController>(
               builder: (controller) {
             return TextButton(
               onPressed: () {
-                // (Tarek) TODO: Wire this up correctly
-                // Replace this page by the new profile if the data is valid
                 controller.validateInfo();
-                controller.toProfile();
+                controller.toActivityOrProfile();
               },
               child: const Text('Done'),
             );
@@ -54,6 +62,7 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
         elevation: 0,
       );
 
+  /// Top column containing 2 Text, 3 TextField for email, password, name.
   static Widget _getTopColumn(context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -105,6 +114,7 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
         ],
       );
 
+  /// Login popup to confirm with the user.
   static Widget _getLoginPopup(
           EmailPasswordNameAfterSignupController controller) =>
       Popup(
@@ -146,6 +156,7 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
         maxHeight: 120,
       );
 
+  /// Bottom column containing 1 Text, 2 Pressable texts (to login/ privacy policy)
   static Widget _getBottomColumn(
           context, EmailPasswordNameAfterSignupController controller) =>
       Column(
@@ -186,7 +197,8 @@ class EmailPasswordNameAfterSignup extends StatelessWidget {
         ],
       );
 
-  static Widget _getBody(context) => Center(
+  /// The body contains the top and bottom columns, centered.
+  static Widget _getBody(context, masterPageController) => Center(
           child: GetBuilder<EmailPasswordNameAfterSignupController>(
         init: EmailPasswordNameAfterSignupController(),
         builder: (controller) {
