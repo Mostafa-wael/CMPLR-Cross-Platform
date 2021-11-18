@@ -1,5 +1,3 @@
-import 'package:get_storage/get_storage.dart';
-
 import '../views/android_views/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,13 +22,6 @@ class SignupPreferencesController extends GetxController {
   // data model for preferences
   SignupPreferencesModel preferencesModel = SignupPreferencesModel();
 
-  @override
-  void onInit() {
-    // get the initial preferences
-    _availablePreferenceCards = preferencesModel.getInitialPreferences();
-    super.onInit();
-  }
-
   // getters for class attributes
   String get buttonText => _buttonText;
 
@@ -42,16 +33,28 @@ class SignupPreferencesController extends GetxController {
 
   int get selectedPreferencesCount => _selectedPreferencesCount;
 
-  // this handles different scenarios when selecting or unselecting a preference
+  @override
+  void onInit() {
+    // get the initial preferences
+    _availablePreferenceCards = preferencesModel.getInitialPreferences();
+    super.onInit();
+  }
+
+  /// This method handles different scenarios when tapping (selecting or
+  /// unselecting) a preference card
   void tapPreferenceCard(int index) {
+    // this checks if the preference card was already choosen
     if (_availablePreferenceCards[index].isChosen) {
       _selectedPreferencesCount--;
     } else {
       _selectedPreferencesCount++;
     }
 
+    // change the state of the tapped preference card
     _availablePreferenceCards[index].isChosen =
         !(_availablePreferenceCards[index].isChosen);
+
+    // if the selected preferences is more than 5, the page can navigate now
     if (_selectedPreferencesCount >= 5) {
       _buttonText = 'Next';
       _buttonTextColor = 0xFF3498eb;
@@ -63,20 +66,24 @@ class SignupPreferencesController extends GetxController {
     update();
   }
 
+  /// This method is called when the upper right button is pressed,
+  /// If the number of selected preferences count is less than 5, an error
+  /// snackbar is shown. Otherwise, navigation to the master page is done.
   void nextButtonPressed() async {
     if (_selectedPreferencesCount >= 5) {
       _isLoading = true;
       update();
-      await Future.delayed(const Duration(seconds: 3));
-      _isLoading = false;
-      update();
+
+      //TODO: communicate with the API instead of delay
+      await Future.delayed(const Duration(seconds: 2));
+
       Get.offAll(const MasterPage());
     } else {
-      // if a Snackbar is already open, then close it to show another one
+      // if a SnackBar is already open, then close it to show another one
       if (Get.isSnackbarOpen! == true) {
         Get.back();
       }
-      // error Snackbar
+      // Show error SnackBar
       Get.rawSnackbar(
         backgroundColor: Colors.red,
         messageText: Text(
@@ -90,11 +97,11 @@ class SignupPreferencesController extends GetxController {
   }
 
   void chooseNewPreference() {
-    // go to search preference page
+    // navigate to search preference page
     Get.toNamed('/signup_preferences_search', arguments: this);
   }
 
-  // check if the preference is already chosen before
+  // check if the preference card is already chosen before
   bool preferenceChosen(String preferenceName) {
     for (var i = 0; i < _availablePreferenceCards.length; i++) {
       if (_availablePreferenceCards[i].preferenceName == preferenceName) {

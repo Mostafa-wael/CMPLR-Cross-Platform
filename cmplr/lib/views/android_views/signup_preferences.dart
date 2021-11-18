@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import '../../controllers/controllers.dart';
-import 'master_page.dart';
 
 class SignupPreferences extends StatelessWidget {
   const SignupPreferences({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    /// This method handles the user click of the system back button
     Future<bool> _onBackPressed() async {
       return await showDialog(
               context: context,
@@ -68,6 +68,7 @@ class SignupPreferences extends StatelessWidget {
         init: SignupPreferencesController(),
         builder: (controller) => Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               shadowColor: Colors.transparent,
               backgroundColor: const Color(0xFF001A35),
               actions: [
@@ -151,6 +152,8 @@ class SignupPreferences extends StatelessWidget {
     );
   }
 
+  /// This method builds the 'Choose your own' widget,
+  /// (it navigates to the preferences search page)
   Widget buildCustomCard(SignupPreferencesController controller) {
     return Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -195,6 +198,7 @@ class SignupPreferences extends StatelessWidget {
         ));
   }
 
+  /// This method build all the preference card in the grid view
   Widget buildPreferencesCard(
       SignupPreferencesController controller, int index) {
     return InkWell(
@@ -216,8 +220,9 @@ class SignupPreferences extends StatelessWidget {
                   visible: controller.availablePreferenceCards[index].isChosen,
                   child: IconButton(
                     icon: const Icon(
-                      Icons.verified,
+                      Icons.verified_rounded,
                       size: 22,
+                      color: Colors.black,
                     ),
                     onPressed: () {},
                   ),

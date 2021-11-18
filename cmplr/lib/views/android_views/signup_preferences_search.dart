@@ -111,6 +111,8 @@ class SignupPreferencesSearch extends StatelessWidget {
             ));
   }
 
+  /// This builds the search list view tile widget (a tile is used to show one
+  /// search result)
   Widget buildSearchResultTile(
       SignupPreferencesSearchController controller, int index) {
     return Padding(

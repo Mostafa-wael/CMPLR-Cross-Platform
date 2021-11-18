@@ -1,3 +1,4 @@
+/// This model holds the data for a preference
 class PreferenceCard {
   final color;
   final preferenceName;
