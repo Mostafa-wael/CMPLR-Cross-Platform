@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,11 @@ import '../../controllers/controllers.dart';
 
 class SignupAge extends StatelessWidget {
   const SignupAge({Key? key}) : super(key: key);
+
+  static const _privacyPolicyURL = 'https://www.tumblr.com/privacy';
+
+  static const _termsOfServiceURL = 'https://www.tumblr.com'
+      '/policy/en/terms-of-service';
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +82,7 @@ class SignupAge extends StatelessWidget {
                     controller.ageFieldChanged();
                   },
                   decoration: InputDecoration(
+                      counterText: '',
                       suffixIcon: Visibility(
                         visible: controller.showClearButton,
                         child: IconButton(
@@ -95,28 +102,37 @@ class SignupAge extends StatelessWidget {
                       focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white))),
                 ),
+                const SizedBox(height: 15),
                 RichText(
-                    text: const TextSpan(
-                        style: TextStyle(
+                    text: TextSpan(
+                        style: const TextStyle(
                             color: Colors.white, fontSize: 19, height: 1.4),
                         children: <TextSpan>[
-                      TextSpan(
+                      const TextSpan(
                           text: 'You\'re almost done.'
                               ' Enter your age, then tap the '),
-                      TextSpan(
+                      const TextSpan(
                           text: 'Next ',
                           style: TextStyle(fontStyle: FontStyle.italic)),
-                      TextSpan(
+                      const TextSpan(
                           text: 'button to indicate that you\'ve read the '),
                       TextSpan(
                           text: 'Privacy Policy',
-                          style: TextStyle(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              controller.launchURL(_privacyPolicyURL);
+                            },
+                          style: const TextStyle(
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.w600)),
-                      TextSpan(text: ' and agree to the '),
+                      const TextSpan(text: ' and agree to the '),
                       TextSpan(
                         text: 'Terms of Service',
-                        style: TextStyle(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            controller.launchURL(_termsOfServiceURL);
+                          },
+                        style: const TextStyle(
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.w600),
                       )

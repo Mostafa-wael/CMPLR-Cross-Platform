@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignupAgeController extends GetxController {
   // controller for the age text field
@@ -35,10 +36,11 @@ class SignupAgeController extends GetxController {
 
   FocusNode get focusNode => _focusNode;
 
-  // this handles the change of the age text field
+  /// This function is called whenever the age changes,
+  /// It handles the different scenarios of the age text field
   void ageFieldChanged() {
+    // empty text field
     if (_ageController.text == '') {
-      // empty text field
       _showClearButton = false;
       _nextButtonColor = 0xFF015887;
       _nextButtonActivated = false;
@@ -58,20 +60,25 @@ class SignupAgeController extends GetxController {
     update();
   }
 
+  /// This is called when the user presses on 'next' button, it sets the screen
+  /// status to be 'loading' so that the progress indicator appears and if the
+  /// entered age is appropriate, it redirects the user to the next screen
   void nextButtonPressed() async {
     if (_nextButtonActivated) {
       _isLoading = true;
       _focusNode.unfocus();
       update();
 
+      //TODO: communicate with the API instead of delay
       await Future.delayed(const Duration(seconds: 1));
-      _isLoading = false;
-      update();
+
       if (int.parse(ageController.text) < 13) {
-        _showToast('Too young!');
+        _isLoading = false;
+        _showToast('Minor hiccup. Try again.');
       } else {
         Get.offNamed('/signup_preferences');
       }
+      update();
     }
   }
 
@@ -79,7 +86,16 @@ class SignupAgeController extends GetxController {
     Get.back();
   }
 
-  // this shows toast if the age is inappropriate
+  /// This redirects to the privacy policy and terms of service URLs
+  void launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw Error();
+    }
+  }
+
+  /// This function shows toast if the age entered by the user is inappropriate
   void _showToast(String message) => Fluttertoast.showToast(
       msg: message,
       fontSize: 16,
