@@ -13,26 +13,70 @@ class LoginEmailSplash extends StatelessWidget {
               body: Stack(
                 children: [
                   Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 60),
-                        const Text(
-                          't',
+
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+
+                mainAxisAlignment: MainAxisAlignment.start,
+
+                crossAxisAlignment: CrossAxisAlignment.center,
+
+                children: [
+
+                  const SizedBox(height: 60),
+
+                  const Text(
+
+                    't',
+
+                    style: TextStyle(
+
+                        fontSize: 150,
+
+                        color: Colors.white,
+
+                        fontWeight: FontWeight.w900),
+
+                  ),
+
+                  const SizedBox(height: 290),
+
+                  LoginTextField(
+
+                    controller: controller,
+
+                    text: 'email',
+
+                    focus: false,
+                    enabled: false,
+                    underlineColor: Colors.grey,
+                    isEmail: true,
+                    iconColor: Colors.grey,
+                  ),
+
+                   const SizedBox(height: 10),
+                   Opacity(
+                     child: Container(
+                      child: const Center(
+                        child: Text(
+                          'Continue',
                           style: TextStyle(
-                              fontSize: 150,
+                              fontSize: 16,
                               color: Colors.white,
-                              fontWeight: FontWeight.w900),
+                              fontWeight: FontWeight.w300),
                         ),
-                        const SizedBox(height: 235),
-                        LoginTextField(
-                          textController: controller.emailController,
-                          manager: controller,
-                          text: 'email',
-                        ),
-                      ],
-                    ),
+                      ),
+                      width: 340,
+                      height: 40,
+                       color: Colors.blueAccent,
+                  ),
+                     opacity: 0.4,
+                   ),
+                ],
+
+              ),
+            ),
                   ),
                 ],
               ),

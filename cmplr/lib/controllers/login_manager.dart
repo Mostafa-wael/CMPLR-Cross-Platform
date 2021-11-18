@@ -8,19 +8,45 @@ import 'package:google_sign_in/google_sign_in.dart';
 class LoginManager extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  bool hidePassword = true;
 
   Future<void> useEmail() async {
     Get.to(
       const LoginEmailSplash(),
       transition: Transition.rightToLeft,
+      routeName: '/LoginEmailSplash',
     );
     update();
     Future.delayed(const Duration(milliseconds: 500), () {
       Get.off(
         const LoginEmail1(),
+        arguments: true,
+        routeName: 'LoginEmail1',
       );
     });
+  }
+
+  Future<void> loginEmail2to3() async {
+    Get.off(
+      const LoginEmail3(),
+      transition: Transition.downToUp,
+      routeName: '/LoginEmail3',
+    );
+    update();
+  }
+
+  Future<void> loginEmail2to1() async {
+    Get.off(
+      const LoginEmail1(),
+      transition: Transition.noTransition,
+      routeName: '/LoginEmail1',
+    );
+    update();
+  }
+
+  bool isCurrentPage(String page) {
+     return Get.rawRoute!.settings.name == page;
   }
 
   Future<void> emailFieldChanged() async {
@@ -42,8 +68,9 @@ class LoginManager extends GetxController {
     update();
   }
 
+
   Future<void> enterPassword() async {
-    Get.to(const LoginPassword());
+    //Get.to(const LoginPassword());
     update();
   }
 
@@ -54,9 +81,11 @@ class LoginManager extends GetxController {
     update();
   }
 
-  void forgotPassword() {
-    Get.toNamed('/forgot_password', arguments: emailController.text);
+  Future<void> viewHidePassword() async {
+    hidePassword = !hidePassword;
+    update();
   }
+
 }
 
 void _showToast(String message) => Fluttertoast.showToast(
