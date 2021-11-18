@@ -10,6 +10,7 @@ class LoginEmail1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+
     return GetBuilder<LoginManager>(
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -55,42 +56,39 @@ class LoginEmail1 extends StatelessWidget {
                         ),
                   visibleKeyboard
                       ? const SizedBox(height: 60)
-                      : const SizedBox(height: 325),
+                      : const SizedBox(height: 290),
                   LoginTextField(
-                    textController: controller.emailController,
-                    manager: controller,
+                    controller: controller,
                     text: 'email',
+                    focus: true,
+                    enabled: true,
+                    underlineColor: Colors.blueAccent,
+                    isEmail: true,
+                    iconColor: Colors.white,
                   ),
-                  visibleKeyboard
-                      ? const SizedBox(height: 10)
-                      : const SizedBox(height: 0),
-                  visibleKeyboard
-                      ? InkWell(
-                          child: SizedBox(
-                            child: Material(
-                              child: InkWell(
-                                child: const Center(
-                                  child: Text(
-                                    'Continue',
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.validateEmail();
-                                },
-                              ),
-                              color: Colors.blue,
-                            ),
-                            height: 40,
-                            width: 340,
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    child: Material(
+                      child: InkWell(
+                        child: const Center(
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300),
                           ),
-                        )
-                      : Container(
-                          color: Colors.transparent,
                         ),
+                        onTap: () {
+                          controller.validateEmail();
+                        },
+                        splashFactory: NoSplash.splashFactory,
+                      ),
+                      color: Colors.blueAccent,
+                    ),
+                    width: 340,
+                    height: 40,
+                  ),
                 ],
               ),
             ),
