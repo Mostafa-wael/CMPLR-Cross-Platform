@@ -1,7 +1,7 @@
 export 'signup_age_view.dart';
 export 'signup_preferences_view.dart';
 export 'signup_preferences_search_view.dart';
-export 'email_password_name_after_signup.dart';
+export 'signup_mail_name_view.dart';
 export 'login.dart';
 export 'login_email_splash.dart';
 export 'login_email_1.dart';
