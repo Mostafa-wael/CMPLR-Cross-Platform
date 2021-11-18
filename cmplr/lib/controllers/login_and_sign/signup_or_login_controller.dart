@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../views/login_and_sign/android_views.dart';
+import '../../views/views.dart';
 
 class IntroController extends GetxController {
   Future<void> signIn() async {

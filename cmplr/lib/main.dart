@@ -1,12 +1,11 @@
 import 'flags.dart';
-import 'views/master_page.dart';
-import 'package:get_storage/get_storage.dart';
-
 import 'cmplr_theme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-import 'views/login_and_sign/android_views.dart';
+import 'views/views.dart';
 
 Future<void> main() async {
   await GetStorage.init();
