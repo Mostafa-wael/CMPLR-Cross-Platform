@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class LoginManager extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool hidePassword = true;
 
   Future<void> useEmail() async {
@@ -46,7 +46,7 @@ class LoginManager extends GetxController {
   }
 
   bool isCurrentPage(String page) {
-     return Get.rawRoute!.settings.name == page;
+    return Get.rawRoute!.settings.name == page;
   }
 
   Future<void> emailFieldChanged() async {
@@ -68,7 +68,6 @@ class LoginManager extends GetxController {
     update();
   }
 
-
   Future<void> enterPassword() async {
     //Get.to(const LoginPassword());
     update();
@@ -85,7 +84,6 @@ class LoginManager extends GetxController {
     hidePassword = !hidePassword;
     update();
   }
-
 }
 
 void _showToast(String message) => Fluttertoast.showToast(

@@ -1,4 +1,4 @@
-import 'package:cmplr/controllers/login_manager.dart';
+import '../../controllers/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -48,36 +48,36 @@ class LoginEmail3 extends StatelessWidget {
         ),
         body: visibleKeyboard
             ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 150),
-                Center(
-                  child: Column(
-                    children: [
-                      LoginTextField(
-                        controller: controller,
-                        text: 'email',
-                        focus: false,
-                        enabled: true,
-                        underlineColor: Colors.grey,
-                        isEmail: true,
-                        iconColor: Colors.grey,
-                      ),
-                      const SizedBox(height: 10),
-                      LoginTextField(
-                        controller: controller,
-                        text: 'password',
-                        focus: true,
-                        enabled: true,
-                        underlineColor: Colors.grey,
-                        isEmail: false,
-                        iconColor: Colors.grey,
-                      ),
-                    ],
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 150),
+                  Center(
+                    child: Column(
+                      children: [
+                        LoginTextField(
+                          controller: controller,
+                          text: 'email',
+                          focus: false,
+                          enabled: true,
+                          underlineColor: Colors.grey,
+                          isEmail: true,
+                          iconColor: Colors.grey,
+                        ),
+                        const SizedBox(height: 10),
+                        LoginTextField(
+                          controller: controller,
+                          text: 'password',
+                          focus: true,
+                          enabled: true,
+                          underlineColor: Colors.grey,
+                          isEmail: false,
+                          iconColor: Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )
+                ],
+              )
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
