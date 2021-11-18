@@ -7,3 +7,4 @@ export 'login_email_1.dart';
 export 'login_email_splash.dart';
 export 'login_email_2.dart';
 export 'login_password.dart';
+export 'forgot_password.dart';

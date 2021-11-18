@@ -27,21 +27,36 @@ class LoginPassword extends StatelessWidget {
             ],
           ),
         ),
-        body: Center(
-          child: Column(
-            children: [
-              LoginTextField(
-                  textController: controller.emailController,
-                  manager: controller,
-                  text: 'email'),
-              LoginTextField(
-                  textController: controller.passwordController,
-                  manager: controller,
-                  text: 'password'),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
+        body: Stack(children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoginTextField(
+                    textController: controller.emailController,
+                    manager: controller,
+                    text: 'email'),
+                LoginTextField(
+                    textController: controller.passwordController,
+                    manager: controller,
+                    text: 'password'),
+              ],
+            ),
           ),
-        ),
+          Positioned(
+            child: TextButton(
+              onPressed: () {
+                controller.forgotPassword();
+              },
+              child: const Text('Forgot your password?'),
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+            ),
+            bottom: 5,
+            left: 125,
+          )
+        ]),
       ),
     );
   }
