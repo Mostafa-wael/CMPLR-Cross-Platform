@@ -92,9 +92,10 @@ flutter_native_splash: # flutter clean && flutter pub get && flutter pub run flu
   ios: true
   web: true
 
-flutter_icons:
+flutter_icons: # flutter clean && flutter pub get && flutter pub run flutter_launcher_icons:main
   android: "launcher_icon"
   ios: true
-  image_path: lib/utilities/assets/trans_logo.png
+  image_path: lib/utilities/assets/logo_icon.png
+  adaptive_icon_background: "#000000"
 
 
