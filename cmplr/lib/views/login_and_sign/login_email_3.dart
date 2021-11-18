@@ -1,4 +1,3 @@
-import '../../controllers/login_and_sign/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
