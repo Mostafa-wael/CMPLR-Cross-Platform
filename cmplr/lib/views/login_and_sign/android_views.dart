@@ -7,4 +7,4 @@ export 'login_email_splash.dart';
 export 'login_email_1.dart';
 export 'login_email_2.dart';
 export 'login_email_3.dart';
-export 'intro_screen.dart';
+export 'signup_or_login_view.dart';
