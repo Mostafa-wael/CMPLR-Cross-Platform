@@ -1,4 +1,4 @@
-import '../views/android_views/email_password_name_after_signup.dart';
+import '../views/login_and_sign/email_password_name_after_signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

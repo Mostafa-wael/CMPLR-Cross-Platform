@@ -1,10 +1,10 @@
-import '../../controllers/login_manager.dart';
+import '../../controllers/login_and_sign/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 
-class LoginEmail2 extends StatelessWidget {
-  const LoginEmail2({Key? key}) : super(key: key);
+class LoginEmail1 extends StatelessWidget {
+  const LoginEmail1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,49 +65,29 @@ class LoginEmail2 extends StatelessWidget {
                     isEmail: true,
                     iconColor: Colors.white,
                   ),
-
                   const SizedBox(height: 10),
                   SizedBox(
-
                     child: Material(
-
                       child: InkWell(
-
                         child: const Center(
-
                           child: Text(
-
-                            'Enter Password',
-
+                            'Continue',
                             style: TextStyle(
-
                                 fontSize: 16,
-
                                 color: Colors.white,
-
                                 fontWeight: FontWeight.w300),
-
                           ),
-
                         ),
-
                         onTap: () {
-
-                          controller.loginEmail2to3();
-
+                          controller.validateEmail();
                         },
-
                         splashFactory: NoSplash.splashFactory,
                       ),
-
-                      color: Colors.grey,
-
+                      color: Colors.blueAccent,
                     ),
-
                     width: 340,
                     height: 40,
-
-                        ),
+                  ),
                 ],
               ),
             ),

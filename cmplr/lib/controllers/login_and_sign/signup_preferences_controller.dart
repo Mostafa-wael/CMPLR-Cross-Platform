@@ -1,7 +1,7 @@
-import '../views/android_views/master_page.dart';
+import '../../views/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/models.dart';
+import '../../models/models.dart';
 
 class SignupPreferencesController extends GetxController {
   // number of preferences selected by the user

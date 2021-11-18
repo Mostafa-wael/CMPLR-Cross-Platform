@@ -1,10 +1,10 @@
-import '../../controllers/login_manager.dart';
+import '../../controllers/login_and_sign/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 
-class LoginEmail1 extends StatelessWidget {
-  const LoginEmail1({Key? key}) : super(key: key);
+class LoginEmail2 extends StatelessWidget {
+  const LoginEmail2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class LoginEmail1 extends StatelessWidget {
                       child: InkWell(
                         child: const Center(
                           child: Text(
-                            'Continue',
+                            'Enter Password',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -79,11 +79,11 @@ class LoginEmail1 extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          controller.validateEmail();
+                          controller.loginEmail2to3();
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),
-                      color: Colors.blueAccent,
+                      color: Colors.grey,
                     ),
                     width: 340,
                     height: 40,

@@ -1,13 +1,12 @@
 import 'flags.dart';
-import 'views/android_views/master_page.dart';
+import 'views/master_page.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'cmplr_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'views/android_views/android_views.dart';
-import 'views/android_views/intro_screen.dart';
+import 'views/login_and_sign/android_views.dart';
 
 Future<void> main() async {
   await GetStorage.init();
@@ -49,7 +48,7 @@ class CMPLR extends StatelessWidget {
             name: '/signup_preferences_search',
             page: () => const SignupPreferencesSearch()),
         GetPage(name: '/login', page: () => const Login()),
-        GetPage(name: '/forgot_password', page: () => const ForgotPassword()),
+        // GetPage(name: '/forgot_password', page: () => const ForgotPassword()),
         GetPage(
             name: '/profile', page: () => const Center(child: Text('Profile'))),
       ],

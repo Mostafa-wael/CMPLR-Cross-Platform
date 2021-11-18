@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/models.dart';
-import 'master_page_controller.dart';
+import '../../models/models.dart';
+import '../master_page_controller.dart';
 
 // (Tarek) TODO: maybe rename this to ExtraSignup?
 

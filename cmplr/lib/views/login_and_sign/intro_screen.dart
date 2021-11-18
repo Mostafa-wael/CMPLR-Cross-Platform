@@ -1,17 +1,17 @@
 import 'dart:ui';
 
-import '../../controllers/login_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../controllers/controllers.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class IntroScreen extends StatelessWidget {
+  const IntroScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginManager>(
-      init: LoginManager(),
+    return GetBuilder<IntroController>(
+      init: IntroController(),
       builder: (controller) => Scaffold(
         body: Stack(
           children: [
@@ -45,16 +45,16 @@ class Login extends StatelessWidget {
                   ),
                   const SizedBox(height: 320),
                   SignUpInButton(
-                    text: 'Log in with Email',
+                    text: 'Sign Up',
                     onTap: () {
-                      controller.useEmail();
+                      controller.signUp();
                     },
                   ),
                   const SizedBox(height: 15),
                   SignUpInButton(
-                    text: 'log in with Google',
+                    text: 'Log in',
                     onTap: () {
-                      controller.useGoogle();
+                      controller.signIn();
                     },
                   ),
                 ],

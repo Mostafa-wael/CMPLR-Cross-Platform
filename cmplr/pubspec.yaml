@@ -47,6 +47,7 @@ dependencies:
 
 dev_dependencies:
   flutter_native_splash: 
+  flutter_launcher_icons:
   flutter_test:
     sdk: flutter
 
@@ -91,5 +92,9 @@ flutter_native_splash: # flutter clean && flutter pub get && flutter pub run flu
   ios: true
   web: true
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: lib/utilities/assets/trans_logo.png
 
 

@@ -1,7 +1,7 @@
 import 'package:cmplr/controllers/controllers.dart';
 import 'package:cmplr/controllers/master_page_controller.dart';
 import 'package:cmplr/flags.dart';
-import 'package:cmplr/views/android_views/master_page.dart';
+import 'package:cmplr/views//master_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
