@@ -53,6 +53,10 @@ class LoginManager extends GetxController {
     final googleSignInAccount = await _googleSignIn.signIn();
     update();
   }
+
+  void forgotPassword() {
+    Get.toNamed('/forgot_password', arguments: emailController.text);
+  }
 }
 
 void _showToast(String message) => Fluttertoast.showToast(
