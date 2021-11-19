@@ -16,3 +16,4 @@ export 'login_and_sign/signup_email_or_google_view.dart';
 // Master
 export 'master_page.dart';
 export 'home_tab/home_view';
+export 'home_tab/notes_view.dart';

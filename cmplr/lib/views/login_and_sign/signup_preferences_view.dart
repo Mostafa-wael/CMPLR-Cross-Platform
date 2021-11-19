@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/custom_icons/custom_icons.dart';
 
 class SignupPreferences extends StatelessWidget {
   const SignupPreferences({Key? key}) : super(key: key);
@@ -220,7 +221,7 @@ class SignupPreferences extends StatelessWidget {
                   visible: controller.availablePreferenceCards[index].isChosen,
                   child: IconButton(
                     icon: const Icon(
-                      Icons.verified_rounded,
+                      CustomIcons.check,
                       size: 22,
                       color: Colors.black,
                     ),
