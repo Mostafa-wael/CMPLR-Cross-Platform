@@ -4,17 +4,17 @@ import 'package:get/get.dart';
 import '../../models/models.dart';
 
 class NotesController extends GetxController with SingleGetTickerProviderMixin {
-  RxBool _postSubscribed = false.obs;
+  final RxBool _postSubscribed = false.obs;
 
   late TabController _tabController;
 
-  RxInt _tabBarIndex = 0.obs;
+  final RxInt _tabBarIndex = 0.obs;
 
   RxBool get postSubscribed => _postSubscribed;
 
   final NotesModel _notesModel = NotesModel();
 
-  Rx<MaterialColor> _tabBarIndicatorColor = Colors.lightBlue.obs;
+  final Rx<MaterialColor> _tabBarIndicatorColor = Colors.lightBlue.obs;
 
   RxInt get tabBarIndex => _tabBarIndex;
 

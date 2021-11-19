@@ -46,7 +46,7 @@ class Notes extends StatelessWidget {
             splashRadius: 40,
           ),
           // centerTitle: true,
-          title: Text(
+          title: const Text(
             'X notes',
             style: TextStyle(color: Colors.white),
           ),
@@ -219,7 +219,7 @@ class Notes extends StatelessWidget {
                     child: Container(
                         height: 45,
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           'Follow',
                           style: TextStyle(
