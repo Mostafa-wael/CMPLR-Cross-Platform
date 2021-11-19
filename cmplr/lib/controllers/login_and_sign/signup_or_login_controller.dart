@@ -5,7 +5,7 @@ import '../../views/views.dart';
 class IntroController extends GetxController {
   Future<void> signIn() async {
     Get.to(
-      const Login(),
+      const LoginEmailOrGoogle(),
       transition: Transition.downToUp,
     );
     update();
@@ -13,7 +13,7 @@ class IntroController extends GetxController {
 
   Future<void> signUp() async {
     Get.to(
-      const SignupAge(),
+      const SignupEmailOrGoogle(),
       transition: Transition.downToUp,
     );
     update();

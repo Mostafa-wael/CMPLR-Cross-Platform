@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 
-class LoginEmail3 extends StatelessWidget {
-  const LoginEmail3({Key? key}) : super(key: key);
+class LoginEmailPassword extends StatelessWidget {
+  const LoginEmailPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-    return GetBuilder<LoginManager>(
+    return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -27,7 +27,7 @@ class LoginEmail3 extends StatelessWidget {
                     fontWeight: FontWeight.w900),
               ),
               const SizedBox(width: 115),
-              (controller.emailController.text.isEmpty &&
+              (controller.emailController.text.isEmpty ||
                       controller.passwordController.text.isEmpty)
                   ? const Text(
                       'Log in',
@@ -39,7 +39,7 @@ class LoginEmail3 extends StatelessWidget {
                         style: TextStyle(color: Colors.blueAccent),
                       ),
                       onTap: () {
-                        // TODO: go to home
+                        controller.enterPassword();
                       },
                     ),
             ],
@@ -112,7 +112,9 @@ class LoginEmail3 extends StatelessWidget {
                               color: Colors.grey,
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            controller.forgotPassword();
+                          },
                         ),
                       ],
                     ),

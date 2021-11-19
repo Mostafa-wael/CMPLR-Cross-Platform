@@ -20,6 +20,7 @@ Future<void> main() async {
 
 class CMPLR extends StatelessWidget {
   const CMPLR({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,9 @@ List<GetPage<dynamic>> get getLoginAndSignPages {
     GetPage(
         name: '/signup_or_login_screen',
         page: () => const SignupOrLoginScreen()),
+    GetPage(
+        name: '/signup_email_or_google',
+        page: () => const SignupEmailOrGoogle()),
     GetPage(name: '/signup_age_screen', page: () => const SignupAge()),
     GetPage(
         name: '/signup_preferences_search_screen',
@@ -58,7 +62,19 @@ List<GetPage<dynamic>> get getLoginAndSignPages {
         page: () => const SignupPreferencesSearch()),
     GetPage(
         name: '/signup_mail_name_screen', page: () => const SignupMailName()),
-    GetPage(name: '/login', page: () => const Login()),
-    // GetPage(name: '/forgot_password', page: () => const ForgotPassword()),
+    GetPage(
+        name: '/login_email_or_google', page: () => const LoginEmailOrGoogle()),
+    GetPage(
+        name: '/login_email_splash', page: () => const LoginEmailSplash()),
+    GetPage(
+        name: '/login_email', page: () => const LoginEmail()),
+    GetPage(
+        name: '/login_email_continue', page: () => const LoginEmailContinue()),
+    GetPage(
+        name: '/login_email_password', page: () => const LoginEmailPassword()),
+    GetPage(
+        name: '/forgot_password', page: () => const ForgotPassword()),
+    GetPage(
+        name: '/post_forgot_password', page: () => const PostForgotPassword()),
   ];
 }
