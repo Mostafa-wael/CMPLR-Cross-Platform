@@ -9,3 +9,4 @@ export 'login_and_sign/login_manager.dart';
 import 'login_and_sign/login_manager.dart';
 // Master
 export 'master_page_controller.dart';
+export 'home_tab/notes_controller.dart';

@@ -13,3 +13,4 @@ export 'login_and_sign/signup_or_login_view.dart';
 // Master
 export 'master_page.dart';
 export 'home_tab/home_view';
+export 'home_tab/notes_view.dart';
