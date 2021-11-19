@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class SignupEmailOrGoogle extends StatelessWidget {
+  const SignupEmailOrGoogle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginManager>(
-      init: LoginManager(),
+    return GetBuilder<SignupController>(
+      init: SignupController(),
       builder: (controller) => Scaffold(
         body: Stack(
           children: [
@@ -45,16 +45,16 @@ class Login extends StatelessWidget {
                   ),
                   const SizedBox(height: 320),
                   SignUpInButton(
-                    text: 'Log in with Email',
+                    text: 'Sign up with Email',
                     onTap: () {
-                      controller.useEmail();
+                      controller.signUpEmail();
                     },
                   ),
                   const SizedBox(height: 15),
                   SignUpInButton(
-                    text: 'log in with Google',
+                    text: 'Sign up with Google',
                     onTap: () {
-                      controller.useGoogle();
+                      controller.signUpGoogle();
                     },
                   ),
                 ],

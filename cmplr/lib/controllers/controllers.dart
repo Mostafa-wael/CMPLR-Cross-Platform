@@ -4,8 +4,8 @@ export 'login_and_sign/signup_age_controller.dart';
 export 'login_and_sign/signup_preferences_controller.dart';
 export 'login_and_sign/signup_preferences_search_controller.dart';
 export 'login_and_sign/signup_mail_name_controller.dart';
-export 'login_and_sign/forgot_password_controller.dart';
-export 'login_and_sign/login_manager.dart';
-import 'login_and_sign/login_manager.dart';
+export 'login_and_sign/login_controller.dart';
+export 'login_and_sign/signup_controller.dart';
+
 // Master
 export 'master_page_controller.dart';

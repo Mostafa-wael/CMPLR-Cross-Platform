@@ -83,7 +83,7 @@ class LoginTextField extends StatelessWidget {
           onChanged: (text) {
             controller.emailFieldChanged();
             if (controller.isCurrentPage('/LoginEmail2')) {
-              controller.loginEmail2to1();
+              controller.returnFromContinueLoginEmail();
             }
           },
           enabled: enabled,

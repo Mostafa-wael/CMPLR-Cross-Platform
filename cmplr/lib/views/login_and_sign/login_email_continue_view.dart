@@ -1,16 +1,16 @@
-import '../../controllers/login_and_sign/login_manager.dart';
+import '../../controllers/login_and_sign/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 
-class LoginEmail2 extends StatelessWidget {
-  const LoginEmail2({Key? key}) : super(key: key);
+class LoginEmailContinue extends StatelessWidget {
+  const LoginEmailContinue({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
 
-    return GetBuilder<LoginManager>(
+    return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -79,7 +79,7 @@ class LoginEmail2 extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          controller.loginEmail2to3();
+                          controller.enterPasswordLoginEmail();
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),

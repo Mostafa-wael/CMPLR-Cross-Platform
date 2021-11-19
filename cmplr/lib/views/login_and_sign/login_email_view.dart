@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 
-class LoginEmail1 extends StatelessWidget {
-  const LoginEmail1({Key? key}) : super(key: key);
+class LoginEmail extends StatelessWidget {
+  const LoginEmail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
 
-    return GetBuilder<LoginManager>(
+    return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -80,7 +80,7 @@ class LoginEmail1 extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          controller.validateEmail();
+                          controller.continueLoginEmail();
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),

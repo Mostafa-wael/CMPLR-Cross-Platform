@@ -9,7 +9,7 @@ class LoginEmailSplash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginManager>(
+    return GetBuilder<LoginController>(
         builder: (controller) => Scaffold(
               body: Stack(
                 children: [
