@@ -1,4 +1,4 @@
-import '../views/login_and_sign/signup_mail_name_view.dart';
+import '../views/views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,7 +12,7 @@ class MasterPageController extends GetxController {
 
   /// List of pages to view, corresponds to the bottom buttons.
   List<Widget> pages = [
-    const Center(child: Text('Home')),
+    const HomeScreen(),
     const Center(child: Text('Search')),
     const SignupMailName(),
     const SignupMailName(),

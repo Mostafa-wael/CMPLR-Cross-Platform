@@ -20,7 +20,6 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
   bool _passwordHidden = true;
   bool _validInfo = true;
-  // static const _profileURL = '/profile';
   static const _loginURL = '/login';
 
   /// Gets a reference to the master page controller
