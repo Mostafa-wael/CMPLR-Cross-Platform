@@ -7,8 +7,8 @@ import '../../controllers/controllers.dart';
 
 /// The screen that shows when you choose to sign up with email
 /// then go to your profile.
-class EmailPasswordNameAfterSignup extends StatelessWidget {
-  const EmailPasswordNameAfterSignup({Key? key}) : super(key: key);
+class SignupMailName extends StatelessWidget {
+  const SignupMailName({Key? key}) : super(key: key);
 
   static const _title = 'What should we call you?';
   static const _subtitle = 'You\'ll need a name to make your own posts,'

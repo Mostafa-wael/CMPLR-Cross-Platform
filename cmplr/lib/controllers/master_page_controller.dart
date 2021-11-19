@@ -14,8 +14,8 @@ class MasterPageController extends GetxController {
   List<Widget> pages = [
     const Center(child: Text('Home')),
     const Center(child: Text('Search')),
-    const EmailPasswordNameAfterSignup(),
-    const EmailPasswordNameAfterSignup(),
+    const SignupMailName(),
+    const SignupMailName(),
   ];
 
   MasterPageController() {

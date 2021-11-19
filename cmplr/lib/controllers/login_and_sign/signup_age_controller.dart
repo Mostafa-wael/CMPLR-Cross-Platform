@@ -76,7 +76,7 @@ class SignupAgeController extends GetxController {
         _isLoading = false;
         _showToast('Minor hiccup. Try again.');
       } else {
-        Get.offNamed('/signup_preferences');
+        Get.offNamed('/signup_preferences_screen');
       }
       update();
     }

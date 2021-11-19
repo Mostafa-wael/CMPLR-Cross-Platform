@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 
-class IntroScreen extends StatelessWidget {
-  const IntroScreen({Key? key}) : super(key: key);
+/// Intor screen taht allows the user to choose between sign up or login
+class SignupOrLoginScreen extends StatelessWidget {
+  const SignupOrLoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -98,7 +98,7 @@ class SignupPreferencesController extends GetxController {
 
   void chooseNewPreference() {
     // navigate to search preference page
-    Get.toNamed('/signup_preferences_search', arguments: this);
+    Get.toNamed('/signup_preferences_search_screen', arguments: this);
   }
 
   // check if the preference card is already chosen before
