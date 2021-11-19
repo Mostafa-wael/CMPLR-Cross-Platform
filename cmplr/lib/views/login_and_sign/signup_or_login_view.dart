@@ -11,8 +11,8 @@ class SignupOrLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<IntroController>(
-      init: IntroController(),
+    return GetBuilder<SignupLoginController>(
+      init: SignupLoginController(),
       builder: (controller) => Scaffold(
         body: Stack(
           children: [

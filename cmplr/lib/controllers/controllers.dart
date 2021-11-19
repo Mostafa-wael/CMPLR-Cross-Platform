@@ -9,3 +9,4 @@ export 'login_and_sign/signup_controller.dart';
 
 // Master
 export 'master_page_controller.dart';
+export 'home_tab/home_controller.dart';
