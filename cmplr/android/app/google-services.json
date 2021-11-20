@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "197648128008",
+    "project_id": "cmplr-jimmy",
+    "storage_bucket": "cmplr-jimmy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197648128008:android:98ccdda7a53653d9d819bd",
+        "android_client_info": {
+          "package_name": "com.example.cmplr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197648128008-3amijn480jdpun8oguvimfdtoifdr6ug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cmplr",
+            "certificate_hash": "e6869da9691b1e0c7f755d38dd6503234d6bb261"
+          }
+        },
+        {
+          "client_id": "197648128008-7gefbjeb9ivh5stptuan2cs8nof9u89g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxbzVLSOjqb3X7O-pJfCX158PotA5ExYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197648128008-7gefbjeb9ivh5stptuan2cs8nof9u89g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

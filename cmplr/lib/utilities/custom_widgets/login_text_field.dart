@@ -35,7 +35,7 @@ class LoginTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: text,
             suffixIcon: isEmail
-                ? textController.text.isNotEmpty
+                ? controller.showClearIcon
                     ? InkWell(
                         child: Icon(
                           Icons.clear,
@@ -44,9 +44,6 @@ class LoginTextField extends StatelessWidget {
                         onTap: () {
                           textController.clear();
                           controller.emailFieldChanged();
-                          if (controller.isCurrentPage('/LoginEmail2')) {
-                            controller.loginEmail2to1();
-                          }
                         },
                       )
                     : const Icon(
@@ -80,11 +77,10 @@ class LoginTextField extends StatelessWidget {
                 : InputBorder.none,
           ),
           controller: textController,
-          onChanged: (text) {
+          onChanged: isEmail ? (text) {
             controller.emailFieldChanged();
-            if (controller.isCurrentPage('/LoginEmail2')) {
-              controller.returnFromContinueLoginEmail();
-            }
+          } : (text) {
+            controller.passwordFieldChanged();
           },
           enabled: enabled,
           obscureText: isEmail ? false : controller.hidePassword,

@@ -27,13 +27,8 @@ class LoginEmailPassword extends StatelessWidget {
                     fontWeight: FontWeight.w900),
               ),
               const SizedBox(width: 115),
-              (controller.emailController.text.isEmpty ||
-                      controller.passwordController.text.isEmpty)
-                  ? const Text(
-                      'Log in',
-                      style: TextStyle(color: Color(0x448AFFFF)),
-                    )
-                  : InkWell(
+              controller.activateLoginButton
+                  ? InkWell(
                       child: const Text(
                         'Log in',
                         style: TextStyle(color: Colors.blueAccent),
@@ -41,7 +36,11 @@ class LoginEmailPassword extends StatelessWidget {
                       onTap: () {
                         controller.enterPassword();
                       },
-                    ),
+                    )
+                  : const Text(
+                      'Log in',
+                      style: TextStyle(color: Color(0x448AFFFF)),
+                    )
             ],
           ),
         ),
