@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
-import '../../utilities/custom_widgets/post_item.dart';
 
+import '../../utilities/custom_widgets/custom_widgets.dart';
+
+/// The home screen, it has 2 tabs: Following and stuff for you
 class HomeScreen extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -20,9 +21,7 @@ class _HomeState extends State<HomeScreen> {
                 fit: StackFit.expand,
                 children: <Widget>[
                   //  Icon(Icons.home), 
-                 getTabBar(context),
-            ]
-            )
+                 getTabBar(context),])
             ) 
           ),  
           body: TabBarView(  
@@ -43,7 +42,7 @@ TabBar getTabBar(context)
               unselectedLabelColor: Colors.grey,
               indicatorPadding: const EdgeInsets.all(0),
               tabs: _tabs,
-               onTap: (int index) {
+              onTap: (int index) {
                   print('Tab $index is tapped');
                 },
             );
@@ -53,7 +52,40 @@ const List<Tab> _tabs = [
     const Tab(text: "Following"),  
     const Tab(text: "Stuff for you")  
 ];
-const List<Widget> _views = [
-    const Center(child: Text('Following')),  
-    const Center(child: Text('Stuff for you')),  
+
+Widget getPosts()
+{
+  final entries = <Widget>[];
+  for (var i = 0; i <1; i++) {
+  entries.add(PostItem(
+            name: "Mostafa",
+            profilePhoto:  "lib/utilities/assets/intro_screen/intro_4.jpg",
+            postData:  "lib/utilities/assets/intro_screen/intro_3.jpg",
+            numNotes: 100,
+            hashtags: ["Gamadan", "Roaan", "Hiiii" ,"3azmaaaaaaaaaaaaaaaaaa", "Hyhyhy","NNNAAANNNAAAA"],
+          ));
+  }
+
+
+return ListView.separated(
+  padding: const EdgeInsets.all(8),
+  itemCount: entries.length,
+  itemBuilder: (BuildContext context, int index) {
+    return Container(
+      height: 50,
+      child: entries[index],
+    );
+  },
+  separatorBuilder: (BuildContext context, int index) => const Divider(),
+);
+}
+List<Widget> _views = [
+    PostItem(
+            name: "Mostafa",
+            profilePhoto:  "lib/utilities/assets/intro_screen/intro_4.jpg",
+            postData:  "lib/utilities/assets/intro_screen/intro_3.jpg",
+            numNotes: 100,
+            hashtags: ["Gamadan", "Roaan", "Hiiii" ,"3azmaaaaaaaaaaaaaaaaaa", "Hyhyhy","NNNAAANNNAAAA"],
+          ),  
+    getPosts(),  
 ];

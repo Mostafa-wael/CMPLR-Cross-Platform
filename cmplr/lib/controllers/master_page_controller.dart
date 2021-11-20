@@ -36,7 +36,7 @@ class MasterPageController extends GetxController {
       currPage = nextIndex;
     } else {
       // Redirect user to extra signup info
-      Get.to(pages.last);
+      Get.to(() => pages.last);
     }
     update();
   }
