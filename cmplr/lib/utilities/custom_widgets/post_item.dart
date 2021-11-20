@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
 
+/// This widget represents the post item with all its data
 class PostItem extends StatefulWidget {
   final String postData;
   final String name;
