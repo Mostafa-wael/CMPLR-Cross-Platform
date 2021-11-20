@@ -41,6 +41,7 @@ class CMPLR extends StatelessWidget {
       GetPage(
           name: '/profile', page: () => const Center(child: Text('Profile'))),
       GetPage(name: '/home_tab', page: () => const HomeScreen()),
+      GetPage(name: '/write_post', page: () => const WritePost()),
       GetPage(name: '/notes', page: () => Notes()),
       GetPage(
           name: '/home_following_tab', page: () => const HomeFollowingScreen()),
