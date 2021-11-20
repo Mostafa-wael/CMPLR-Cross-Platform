@@ -9,7 +9,7 @@ class PostController extends GetxController with SingleGetTickerProviderMixin {
   }
 
   void reblog() {
-    // Get.toNamed('/reblog');
+    Get.toNamed('/reblog');
   }
 
   void openMoreOptions() {

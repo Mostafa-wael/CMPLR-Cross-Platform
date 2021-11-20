@@ -12,5 +12,5 @@ export 'master_page_controller.dart';
 export 'home_tab/notes_controller.dart';
 export 'home_tab/home_controller.dart';
 export 'home_tab/post_item_controller.dart';
-export 'reblog_controller.dart';
+export 'home_tab/reblog_controller.dart';
 export 'home_tab/write_post_controller.dart';
