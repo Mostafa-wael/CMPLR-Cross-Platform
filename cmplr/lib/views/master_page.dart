@@ -1,4 +1,4 @@
-import 'package:cmplr/views/views.dart';
+import '../views/views.dart';
 
 import '../../controllers/master_page_controller.dart';
 import 'package:flutter/material.dart';
