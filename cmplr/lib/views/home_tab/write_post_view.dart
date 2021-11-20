@@ -9,6 +9,7 @@ class WritePost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return GetBuilder<WritePostController>(
       init: WritePostController(),
       builder: (controller) => Scaffold(
@@ -93,6 +94,7 @@ class WritePost extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                visibleKeyboard ?
                 Padding(
                   padding: const EdgeInsets.only(left: 12),
                   child: Align(
@@ -114,6 +116,30 @@ class WritePost extends StatelessWidget {
                               Colors.grey[900] ?? Colors.red),
                           shape:
                               MaterialStateProperty.all(const StadiumBorder())),
+                      onPressed: () {},
+                    ),
+                  ),
+                ) : Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton.icon(
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      label: const Text(
+                        'Add tags to help people find your post',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.grey[900] ?? Colors.red),
+                          shape:
+                          MaterialStateProperty.all(const StadiumBorder())),
                       onPressed: () {},
                     ),
                   ),
