@@ -2,8 +2,7 @@ import 'notes_abs.dart';
 import 'user_note.dart';
 
 class NotesMockService implements NotesAbstract {
-  final likesCount = 10;
-  final notesCount = 100;
+  final countList = [10, 15, 10]; //comments count, reblogs count,likes count
 
   var postLikes = [];
   var avatarURLs = [];
@@ -33,11 +32,11 @@ class NotesMockService implements NotesAbstract {
   ];
 
   NotesMockService() {
-    for (var i = 0; i < likesCount; i++) {
+    for (var i = 0; i < countList[2]; i++) {
       avatarURLs.add(
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png');
     }
-    for (var i = 0; i < likesCount; i++) {
+    for (var i = 0; i < countList[2]; i++) {
       postLikes.add(UserNote(
           avatarURL: avatarURLs[i],
           profileTitle: profileTitles[i],
@@ -49,5 +48,11 @@ class NotesMockService implements NotesAbstract {
   Future<List> getPostLikes() async {
     await Future.delayed(const Duration(milliseconds: 2000));
     return postLikes;
+  }
+
+  @override
+  Future<List> getNotesCount() async {
+    await Future.delayed(const Duration(milliseconds: 2000));
+    return countList;
   }
 }
