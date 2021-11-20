@@ -63,108 +63,125 @@ class Notes extends StatelessWidget {
             ),
           ],
         ),
-        body: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              child: Material(
-                child: InkWell(
-                  onTap: () {},
-                  child: TabBar(
-                    controller: controller.tabController,
-                    onTap: (index) {
-                      controller.handleTabSelection();
-                    },
-                    indicatorColor: controller.tabBarIndicatorColor,
-                    tabs: <Widget>[
-                      Tab(
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              CustomIcons.comment,
-                              color: Colors.black,
-                            ),
-                            const SizedBox(width: 15),
-                            const Text(
-                              'XXXXXXX',
-                              style: TextStyle(color: Colors.black),
-                            )
-                          ],
-                        ),
+        body: FutureBuilder(
+            future: controller.notesModel.getNotesCount(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                final notesCount = snapshot.data ?? [];
+                return Column(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      child: Material(
+                        child: InkWell(
+                            onTap: () {},
+                            child: TabBar(
+                              controller: controller.tabController,
+                              onTap: (index) {
+                                // controller.handleTabSelection();
+                              },
+                              indicatorColor: controller.tabBarIndicatorColor,
+                              tabs: <Widget>[
+                                Tab(
+                                  height: 50,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        CustomIcons.comment,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(width: 15),
+                                      Text(
+                                        '${notesCount[0]}',
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Tab(
+                                  height: 50,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        CustomIcons.reblog,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(width: 15),
+                                      Text('${notesCount[1]}',
+                                          style: const TextStyle(
+                                              color: Colors.black))
+                                    ],
+                                  ),
+                                ),
+                                Tab(
+                                  height: 50,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        CustomIcons.heart,
+                                        size: 22,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(width: 15),
+                                      Text('${notesCount[2]}',
+                                          style: const TextStyle(
+                                              color: Colors.black))
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )),
                       ),
-                      Tab(
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              CustomIcons.reblog,
-                              color: Colors.black,
-                            ),
-                            const SizedBox(width: 15),
-                            const Text('X',
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        ),
-                      ),
-                      Tab(
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              CustomIcons.heart,
-                              size: 22,
-                              color: Colors.black,
-                            ),
-                            const SizedBox(width: 15),
-                            const Text('X',
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: controller.tabController,
-                children: <Widget>[
-                  const Center(child: Text('Comments')),
-                  const Center(
-                    child: Text('Reblogs'),
-                  ),
-                  KeepAliveWrapper(
-                    child: FutureBuilder(
-                      future: controller.notesModel.getPostLikes(),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          final postLikes = snapshot.data ?? [];
-                          return ListView.builder(
-                            itemCount: postLikes.length,
-                            itemBuilder: (context, index) {
-                              return buildLikesListTile(postLikes[index]);
-                            },
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.purple,
-                            ),
-                          );
-                        }
-                      },
                     ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ));
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller.tabController,
+                        children: <Widget>[
+                          const Center(child: Text('Comments')),
+                          const Center(
+                            child: Text('Reblogs'),
+                          ),
+                          KeepAliveWrapper(
+                            child: FutureBuilder(
+                              future: controller.notesModel.getPostLikes(),
+                              builder: (context, AsyncSnapshot snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  final postLikes = snapshot.data ?? [];
+                                  return ListView.builder(
+                                    itemCount: postLikes.length,
+                                    itemBuilder: (context, index) {
+                                      return buildLikesListTile(
+                                          postLikes[index]);
+                                    },
+                                  );
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.purple,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.purple,
+                  ),
+                );
+              }
+            }));
   }
 
   Widget buildLikesListTile(var userData) {

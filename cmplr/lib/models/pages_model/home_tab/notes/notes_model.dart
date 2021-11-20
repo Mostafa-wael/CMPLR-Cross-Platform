@@ -10,4 +10,8 @@ class NotesModel {
   Future<List> getPostLikes() {
     return interface.getPostLikes();
   }
+
+  Future<List> getNotesCount() {
+    return interface.getNotesCount();
+  }
 }

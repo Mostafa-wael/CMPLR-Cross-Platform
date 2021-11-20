@@ -7,4 +7,11 @@ class NotesAPIService implements NotesAbstract {
     final dummy = [];
     return dummy;
   }
+
+  @override
+  Future<List> getNotesCount() async {
+    //TODO: get real list here
+    final dummy = [];
+    return dummy;
+  }
 }

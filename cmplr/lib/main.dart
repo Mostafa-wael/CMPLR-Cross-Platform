@@ -64,16 +64,13 @@ List<GetPage<dynamic>> get getLoginAndSignPages {
         name: '/signup_mail_name_screen', page: () => const SignupMailName()),
     GetPage(
         name: '/login_email_or_google', page: () => const LoginEmailOrGoogle()),
-    GetPage(
-        name: '/login_email_splash', page: () => const LoginEmailSplash()),
-    GetPage(
-        name: '/login_email', page: () => const LoginEmail()),
+    GetPage(name: '/login_email_splash', page: () => const LoginEmailSplash()),
+    GetPage(name: '/login_email', page: () => const LoginEmail()),
     GetPage(
         name: '/login_email_continue', page: () => const LoginEmailContinue()),
     GetPage(
         name: '/login_email_password', page: () => const LoginEmailPassword()),
-    GetPage(
-        name: '/forgot_password', page: () => const ForgotPassword()),
+    GetPage(name: '/forgot_password', page: () => const ForgotPassword()),
     GetPage(
         name: '/post_forgot_password', page: () => const PostForgotPassword()),
   ];
