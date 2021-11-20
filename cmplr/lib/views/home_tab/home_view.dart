@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../views.dart';
 
 /// The home screen, it has 2 tabs: Following and stuff for you
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -46,19 +45,6 @@ TabBar getTabBar(context) {
 
 const List<Tab> _tabs = [Tab(text: 'Following'), Tab(text: 'Stuff for you')];
 List<Widget> _views = [
-  const PostItem(
-    name: 'Mostafa',
-    profilePhoto: 'lib/utilities/assets/intro_screen/intro_4.jpg',
-    postData: 'lib/utilities/assets/intro_screen/intro_3.jpg',
-    numNotes: 100,
-    hashtags: [
-      'Gamadan',
-      'Roaan',
-      'Hiiii',
-      '3azmaaaaaaaaaaaaaaaaaa',
-      'Hyhyhy',
-      'NNNAAANNNAAAA'
-    ],
-  ),
+  const HomeFollowingScreen(),
   const Tab(text: 'Stuff for you'),
 ];
