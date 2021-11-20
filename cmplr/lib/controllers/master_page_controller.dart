@@ -12,7 +12,7 @@ class MasterPageController extends GetxController {
 
   /// List of pages to view, corresponds to the bottom buttons.
   List<Widget> pages = [
-    HomeScreen(),
+    const HomeScreen(),
     const Center(child: Text('Search')),
     const SignupMailName(),
     const SignupMailName(),
