@@ -13,13 +13,6 @@ class MasterPage extends StatelessWidget {
         init: MasterPageController(),
         builder: (MasterPageController controller) {
           return Scaffold(
-              appBar: AppBar(
-                title: Text(
-                  'CMPLR',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                actions: [],
-              ),
               body: IndexedStack(
                   index: controller.currPage, children: controller.pages),
               bottomNavigationBar: BottomNavigationBar(

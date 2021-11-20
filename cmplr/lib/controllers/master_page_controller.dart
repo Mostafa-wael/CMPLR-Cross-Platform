@@ -12,7 +12,7 @@ class MasterPageController extends GetxController {
 
   /// List of pages to view, corresponds to the bottom buttons.
   List<Widget> pages = [
-    const HomeScreen(),
+    HomeScreen(),
     const Center(child: Text('Search')),
     const SignupMailName(),
     const SignupMailName(),
@@ -36,7 +36,7 @@ class MasterPageController extends GetxController {
       currPage = nextIndex;
     } else {
       // Redirect user to extra signup info
-      Get.to(pages.last);
+      Get.to(() => pages.last);
     }
     update();
   }

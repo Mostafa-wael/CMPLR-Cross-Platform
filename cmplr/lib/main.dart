@@ -12,7 +12,7 @@ Future<void> main() async {
 
   // Clears all persistent data based on a flag
   // USE CAREFULLY
-  if (Flags.cleanSlate) {
+  if (Flags.cleanState) {
     GetStorage().erase();
   }
   runApp(const CMPLR());
