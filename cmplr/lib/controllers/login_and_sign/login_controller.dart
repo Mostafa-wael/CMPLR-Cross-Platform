@@ -121,7 +121,7 @@ class LoginController extends GetxController {
       _showClearIcon = true;
     else
       _showClearIcon = false;
-    if (isCurrentPage('/LoginEmailContinue')) {
+    if (Get.rawRoute != null && isCurrentPage('/LoginEmailContinue')) {
       returnFromContinueLoginEmail();
     }
     _activateLoginButton =
