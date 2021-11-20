@@ -1,5 +1,6 @@
 library focused_menu;
 
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import './modals.dart';
@@ -86,7 +87,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
             transitionDuration:
                 widget.duration ?? const Duration(milliseconds: 100),
             pageBuilder: (context, animation, secondaryAnimation) {
-              animation = Tween(begin: 0.0, end: 1.0).animate(animation);
+              animation = Tween(begin: 0.001, end: 1.0).animate(animation);
               return FadeTransition(
                   opacity: animation,
                   child: FocusedMenuDetails(
@@ -96,7 +97,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     childOffset: childOffset,
                     childSize: childSize,
                     menuItems: widget.menuItems,
-                    blurSize: widget.blurSize,
+                    blurSize: max(widget.blurSize ?? 0, 0.001),
                     menuWidth: widget.menuWidth,
                     blurBackgroundColor: widget.blurBackgroundColor,
                     animateMenu: widget.animateMenuItems ?? true,
@@ -186,7 +187,7 @@ class FocusedMenuDetails extends StatelessWidget {
                   child: child,
                 );
               },
-              tween: Tween(begin: 0.0, end: 1.0),
+              tween: Tween(begin: 0.001, end: 1.0),
               child: Container(
                 width: maxMenuWidth,
                 height: menuHeight,
