@@ -57,25 +57,25 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
     super.onInit();
   }
 
-  void handleTabSelection() {
-    switch (_tabController.index) {
-      case 0:
-        {
-          _tabBarIndicatorColor.value = Colors.lightBlue;
-        }
-        break;
-      case 1:
-        {
-          _tabBarIndicatorColor.value = Colors.green;
-        }
-        break;
-      case 2:
-        {
-          _tabBarIndicatorColor.value = Colors.red;
-        }
-        break;
-    }
-  }
+  // void handleTabSelection() {
+  //   switch (_tabController.index) {
+  //     case 0:
+  //       {
+  //         _tabBarIndicatorColor.value = Colors.lightBlue;
+  //       }
+  //       break;
+  //     case 1:
+  //       {
+  //         _tabBarIndicatorColor.value = Colors.green;
+  //       }
+  //       break;
+  //     case 2:
+  //       {
+  //         _tabBarIndicatorColor.value = Colors.red;
+  //       }
+  //       break;
+  //   }
+  // }
 
   void closeNotesScreen() {
     Get.back();
