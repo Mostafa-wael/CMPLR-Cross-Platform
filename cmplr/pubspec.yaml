@@ -24,6 +24,9 @@ dependencies:
   firebase_core:
   firebase_auth:
 
+  file_picker:
+  flutter_html:
+  # focused_menu: Since we have our own modified version
 
 dev_dependencies:
   flutter_native_splash: 
@@ -43,6 +46,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/utilities/assets/
+    - lib/utilities/assets/logo/
     - lib/utilities/assets/intro_screen/
     - lib/utilities/assets/logo/
 

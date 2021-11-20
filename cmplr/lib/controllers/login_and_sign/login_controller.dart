@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/models.dart';
@@ -120,7 +121,7 @@ class LoginController extends GetxController {
       _showClearIcon = true;
     else
       _showClearIcon = false;
-    if (isCurrentPage('/LoginEmailContinue')) {
+    if (Get.rawRoute != null && isCurrentPage('/LoginEmailContinue')) {
       returnFromContinueLoginEmail();
     }
     _activateLoginButton =
@@ -198,7 +199,7 @@ class LoginController extends GetxController {
         arguments: user,
       );
     } else {
-      _showToast('Failed to Sign up, please try again');
+      _showToast('Failed to Login, please try again');
     }
   }
 

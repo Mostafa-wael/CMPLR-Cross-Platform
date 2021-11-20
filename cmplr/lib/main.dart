@@ -7,6 +7,8 @@ import 'package:get_storage/get_storage.dart';
 
 import 'views/views.dart';
 
+// void main() => runApp(const FilePickerDemo());
+
 Future<void> main() async {
   await GetStorage.init();
 
@@ -27,8 +29,8 @@ class CMPLR extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: GetStorage().read('logged_in') ?? false
-          ? const MasterPage()
-          : const SignupOrLoginScreen(),
+          ? const MasterPage() /*const MasterPage()*/
+          : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
       theme: CMPLRTheme.dark(),
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
@@ -48,6 +50,7 @@ class CMPLR extends StatelessWidget {
 
 List<GetPage<dynamic>> get getLoginAndSignPages {
   return [
+    GetPage(name: '/reblog', page: () => const ReblogView()),
     GetPage(
         name: '/signup_or_login_screen',
         page: () => const SignupOrLoginScreen()),

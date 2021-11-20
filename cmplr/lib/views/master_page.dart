@@ -1,3 +1,5 @@
+import '../views/views.dart';
+
 import '../../controllers/master_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +42,18 @@ class MasterPage extends StatelessWidget {
                     label: 'Profile',
                   ),
                 ],
-              ));
+              ),
+            floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.pin),
+              onPressed: () {
+                Get.to(
+                  const WritePost(),
+                  transition: Transition.downToUp,
+                );
+              },
+              backgroundColor: Colors.blue,
+            ),
+          );
         });
   }
 }
