@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../models/models.dart';
 
 class PostController extends GetxController with SingleGetTickerProviderMixin {
-  void openNotes() {
-    Get.toNamed('/notes');
+  void openNotes(int numNotes) {
+    Get.toNamed('/notes', arguments: numNotes);
   }
 
   void reblog() {

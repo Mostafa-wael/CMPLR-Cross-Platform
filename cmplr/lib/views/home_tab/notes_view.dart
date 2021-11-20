@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 
@@ -46,9 +47,9 @@ class Notes extends StatelessWidget {
             splashRadius: 40,
           ),
           // centerTitle: true,
-          title: const Text(
-            'X notes',
-            style: TextStyle(color: Colors.white),
+          title: Text(
+            '${Get.arguments} notes',
+            style: const TextStyle(color: Colors.white),
           ),
           actions: [
             IconButton(
@@ -89,13 +90,14 @@ class Notes extends StatelessWidget {
                                     children: [
                                       const Icon(
                                         CustomIcons.comment,
-                                        color: Colors.black,
+                                        // color: Colors.black,
                                       ),
                                       const SizedBox(width: 15),
                                       Text(
                                         '${notesCount[0]}',
                                         style: const TextStyle(
-                                            color: Colors.black),
+                                            // color: Colors.black
+                                            ),
                                       )
                                     ],
                                   ),
@@ -107,12 +109,13 @@ class Notes extends StatelessWidget {
                                     children: [
                                       const Icon(
                                         CustomIcons.reblog,
-                                        color: Colors.black,
+                                        // color: Colors.black,
                                       ),
                                       const SizedBox(width: 15),
                                       Text('${notesCount[1]}',
                                           style: const TextStyle(
-                                              color: Colors.black))
+                                              // color: Colors.black
+                                              ))
                                     ],
                                   ),
                                 ),
@@ -124,12 +127,13 @@ class Notes extends StatelessWidget {
                                       const Icon(
                                         CustomIcons.heart,
                                         size: 22,
-                                        color: Colors.black,
+                                        // color: Colors.black,
                                       ),
                                       const SizedBox(width: 15),
                                       Text('${notesCount[2]}',
                                           style: const TextStyle(
-                                              color: Colors.black))
+                                              // color: Colors.black
+                                              ))
                                     ],
                                   ),
                                 ),
@@ -218,9 +222,10 @@ class Notes extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black54),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          // color: Colors.black54
+                        ),
                       ),
                     ],
                   ),

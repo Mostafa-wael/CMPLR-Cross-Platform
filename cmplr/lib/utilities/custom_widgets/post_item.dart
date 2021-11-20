@@ -119,7 +119,7 @@ class _PostItemState extends State<PostItem> {
             textStyle: const TextStyle(fontSize: 15),
           ),
           onPressed: () {
-            controller.openNotes();
+            controller.openNotes(widget.numNotes);
             print('Notes clicked');
           },
           child: Text('${widget.numNotes} notes'),
@@ -129,7 +129,7 @@ class _PostItemState extends State<PostItem> {
             IconButton(
               icon: const Icon(Icons.chat_bubble_outline),
               onPressed: () {
-                controller.openNotes();
+                controller.openNotes(widget.numNotes);
                 print('Notes clicked');
               },
             ),
