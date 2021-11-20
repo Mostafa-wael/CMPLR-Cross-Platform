@@ -54,7 +54,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   SignUpInButton(
                     text: 'log in with Google',
                     onTap: () {
-                      controller.loginGoogle();
+                      controller.loginGoogle(context);
                     },
                   ),
                 ],

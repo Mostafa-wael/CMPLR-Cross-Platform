@@ -42,7 +42,8 @@ dependencies:
   google_sign_in: 
   url_launcher:
   get_storage:
-
+  firebase_core:
+  firebase_auth:
 
 
 dev_dependencies:

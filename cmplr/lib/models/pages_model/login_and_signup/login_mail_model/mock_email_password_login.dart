@@ -11,7 +11,10 @@ class MockEmailPasswordLoginModel implements AbstractEmailPasswordLogin {
   // ["EMAIL","USERNAME"]
   var enteredEmailsPasswords = HashMap<String, String>();
   // TODO: Test using my info
-  var googleAccount = '';
+  // email:cmplr.mock@gmail.com
+  // password: cmplr_mock_flutter
+  var googleAccount = ['cmplr.mock@gmail.com', ''];
+
 
   MockEmailPasswordLoginModel() {
     enteredEmailsPasswords['tarek@cmplr.org'] = '12345678';
