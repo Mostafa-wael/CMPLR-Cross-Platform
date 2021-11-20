@@ -52,33 +52,6 @@ const List<Tab> _tabs = [
     const Tab(text: "Following"),  
     const Tab(text: "Stuff for you")  
 ];
-
-Widget getPosts()
-{
-  final entries = <Widget>[];
-  for (var i = 0; i <1; i++) {
-  entries.add(PostItem(
-            name: "Mostafa",
-            profilePhoto:  "lib/utilities/assets/intro_screen/intro_4.jpg",
-            postData:  "lib/utilities/assets/intro_screen/intro_3.jpg",
-            numNotes: 100,
-            hashtags: ["Gamadan", "Roaan", "Hiiii" ,"3azmaaaaaaaaaaaaaaaaaa", "Hyhyhy","NNNAAANNNAAAA"],
-          ));
-  }
-
-
-return ListView.separated(
-  padding: const EdgeInsets.all(8),
-  itemCount: entries.length,
-  itemBuilder: (BuildContext context, int index) {
-    return Container(
-      height: 50,
-      child: entries[index],
-    );
-  },
-  separatorBuilder: (BuildContext context, int index) => const Divider(),
-);
-}
 List<Widget> _views = [
     PostItem(
             name: "Mostafa",
@@ -87,5 +60,5 @@ List<Widget> _views = [
             numNotes: 100,
             hashtags: ["Gamadan", "Roaan", "Hiiii" ,"3azmaaaaaaaaaaaaaaaaaa", "Hyhyhy","NNNAAANNNAAAA"],
           ),  
-    getPosts(),  
+    const Tab(text: "Stuff for you"),  
 ];
