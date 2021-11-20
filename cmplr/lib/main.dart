@@ -29,8 +29,8 @@ class CMPLR extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: GetStorage().read('logged_in') ?? false
-          ? const ReblogView() /*const MasterPage()*/
-          : const ReblogView() /*SignupOrLoginScreen()*/,
+          ? const WritePost() /*const MasterPage()*/
+          : const WritePost() /*SignupOrLoginScreen()*/,
       theme: CMPLRTheme.dark(),
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );

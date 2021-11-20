@@ -18,4 +18,5 @@ export 'master_page.dart';
 export 'home_tab/home_view.dart';
 export 'home_tab/notes_view.dart';
 export 'home_tab/reblog_screen.dart';
+export 'home_tab/write_post_view.dart';
 

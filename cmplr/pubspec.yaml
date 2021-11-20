@@ -43,6 +43,7 @@ dependencies:
   url_launcher:
   get_storage:
   firebase_core:
+  firebase_auth:
 
   file_picker:
   flutter_html:

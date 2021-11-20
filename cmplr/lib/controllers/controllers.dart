@@ -11,3 +11,4 @@ export 'login_and_sign/signup_controller.dart';
 export 'master_page_controller.dart';
 export 'home_tab/notes_controller.dart';
 export 'reblog_controller.dart';
+export 'home_tab/write_post_controller.dart';
