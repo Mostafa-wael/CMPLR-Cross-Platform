@@ -9,11 +9,10 @@ import '../../views/views.dart';
 import '../../utilities/authentication/authentication.dart';
 
 class SignupController extends GetxController {
-
   /// Navigates to the page where the user can enter their age
   /// and continue the signup process
   Future<void> signUpEmail() async {
-    GetStorage().write('logged_in', true);
+    // GetStorage().write('logged_in', true);
     Get.to(
       const SignupAge(),
       transition: Transition.rightToLeft,
@@ -36,8 +35,7 @@ class SignupController extends GetxController {
         arguments: user,
       );
       GetStorage().write('logged_in', true);
-    }
-    else {
+    } else {
       _showToast('Failed to Sign up, please try again');
     }
     update();
