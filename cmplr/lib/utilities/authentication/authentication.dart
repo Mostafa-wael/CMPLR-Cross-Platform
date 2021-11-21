@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-
 class Authentication {
   static Future<FirebaseApp> initializeFirebase() async {
     FirebaseApp firebaseApp;
@@ -14,6 +13,7 @@ class Authentication {
 
     return firebaseApp;
   }
+
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth;
     auth = FirebaseAuth.instance;
@@ -57,15 +57,14 @@ class Authentication {
             ScaffoldMessenger.of(context).showSnackBar(
               Authentication.customSnackBar(
                 content:
-                'The account already exists with a different credential.',
+                    'The account already exists with a different credential.',
               ),
             );
-          }
-          else if (e.code == 'invalid-credential') {
+          } else if (e.code == 'invalid-credential') {
             ScaffoldMessenger.of(context).showSnackBar(
               Authentication.customSnackBar(
                 content:
-                'Error occurred while accessing credentials. Try again.',
+                    'Error occurred while accessing credentials. Try again.',
               ),
             );
           }
@@ -81,6 +80,7 @@ class Authentication {
 
     return user;
   }
+
   static Future<void> signOut({required BuildContext context}) async {
     final GoogleSignIn googleSignIn;
     googleSignIn = GoogleSignIn();
@@ -109,4 +109,3 @@ class Authentication {
     );
   }
 }
-
