@@ -1,8 +1,12 @@
 import 'package:cmplr/controllers/controllers.dart';
 import 'package:cmplr/flags.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() {
+  final s = GetStorage();
+  s.write('logged_in', false);
+
   testWidgets('email password name after signup controller ...',
       (tester) async {
     Flags.mock = true;
