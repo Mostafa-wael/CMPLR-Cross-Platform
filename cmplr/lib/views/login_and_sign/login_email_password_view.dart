@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class LoginEmailPassword extends StatelessWidget {
   const LoginEmailPassword({Key? key}) : super(key: key);
@@ -13,20 +14,20 @@ class LoginEmailPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          toolbarHeight: 70,
+          toolbarHeight: Sizing.blockSizeVertical * 10.5,
           elevation: 0.0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(width: 115),
-              const Text(
+              SizedBox(width: Sizing.blockSize * 28.5),
+              Text(
                 't',
                 style: TextStyle(
-                    fontSize: 70,
+                    fontSize: Sizing.blockSize * 16.25,
                     color: Colors.white,
                     fontWeight: FontWeight.w900),
               ),
-              const SizedBox(width: 115),
+              SizedBox(width: Sizing.blockSize * 28.5),
               controller.activateLoginButton
                   ? InkWell(
                       child: const Text(
@@ -48,7 +49,7 @@ class LoginEmailPassword extends StatelessWidget {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 150),
+                  SizedBox(height: Sizing.blockSizeVertical * 22.5),
                   Center(
                     child: Column(
                       children: [
@@ -61,7 +62,7 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: true,
                           iconColor: Colors.grey,
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
                           controller: controller,
                           text: 'password',
@@ -79,7 +80,7 @@ class LoginEmailPassword extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 240),
+                  SizedBox(height: Sizing.blockSizeVertical * 34),
                   Center(
                     child: Column(
                       children: [
@@ -92,7 +93,7 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: true,
                           iconColor: Colors.grey,
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
                           controller: controller,
                           text: 'password',
@@ -102,12 +103,12 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: false,
                           iconColor: Colors.grey,
                         ),
-                        const SizedBox(height: 200),
+                        SizedBox(height: Sizing.blockSizeVertical * 30),
                         GestureDetector(
-                          child: const Text(
+                          child: Text(
                             'Forgot Your Password?',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: Sizing.blockSize * 3.715,
                               color: Colors.grey,
                             ),
                           ),
