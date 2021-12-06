@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/external/external.dart';
+import '../../utilities/sizing/sizing.dart';
 
 // TODO: DRAFTS
 class ReblogView extends StatelessWidget {
@@ -13,7 +14,7 @@ class ReblogView extends StatelessWidget {
       init: ReblogController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: Sizing.blockSizeVertical * 12,
           leading: IconButton(
             icon: const Icon(Icons.close),
             onPressed: () {
@@ -22,16 +23,19 @@ class ReblogView extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(top: 12, bottom: 12),
+              padding: EdgeInsets.only(
+                  top: Sizing.blockSizeVertical * 1.8,
+                  bottom: Sizing.blockSizeVertical * 1.8),
               child: TextButton(
                 onPressed: () {},
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 8, right: 8),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: Sizing.blockSize * 2, right: Sizing.blockSize * 2),
                   child: Text(
                     'Reblog',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: Sizing.blockSize * 4.2,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -48,9 +52,9 @@ class ReblogView extends StatelessWidget {
                 icon: const Icon(Icons.more_vert))
           ],
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(40),
+            preferredSize: Size.fromHeight(Sizing.blockSizeVertical * 6),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(Sizing.blockSize * 2),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -60,10 +64,11 @@ class ReblogView extends StatelessWidget {
                   const CircleAvatar(
                       backgroundImage: AssetImage(
                           'lib/utilities/assets/logo/logo_icon.png')),
-                  const SizedBox(width: 8),
-                  const Text('Username',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                  SizedBox(width: Sizing.blockSize * 2),
+                  Text('Username',
+                      style: TextStyle(
+                          fontSize: Sizing.blockSize * 4.2,
+                          fontWeight: FontWeight.bold))
                 ],
               ),
             ),
@@ -76,20 +81,21 @@ class ReblogView extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(12),
+                      padding: EdgeInsets.all(Sizing.blockSize * 3),
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 600,
+                            height: Sizing.blockSizeVertical * 90,
                             child: Container(
                               child: const Center(child: Text('Post')),
                               decoration: BoxDecoration(
                                   color: Colors.red,
                                   border: Border.all(
-                                      color: Colors.grey.shade900, width: 2)),
+                                      color: Colors.grey.shade900,
+                                      width: Sizing.blockSize * 0.5)),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: Sizing.blockSizeVertical * 1.2),
                           TextField(
                             focusNode: controller.textFocus,
                             decoration: const InputDecoration(
@@ -107,7 +113,7 @@ class ReblogView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 12),
+                  padding: EdgeInsets.only(left: Sizing.blockSize * 3),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton.icon(
@@ -115,12 +121,12 @@ class ReblogView extends StatelessWidget {
                         Icons.add,
                         color: Colors.white,
                       ),
-                      label: const Text(
+                      label: Text(
                         'Add tags to help people find your post',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                            fontSize: Sizing.blockSize * 3.715),
                       ),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -132,14 +138,14 @@ class ReblogView extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
+                  padding: EdgeInsets.only(left: Sizing.blockSize * 3),
                   child: Row(
                     children: [
                       FocusedMenuHolder(
-                          menuOffset: 10,
-                          menuItemExtent: 40,
+                          menuOffset: Sizing.blockSize * 2.5,
+                          menuItemExtent: Sizing.blockSize * 10,
                           duration: const Duration(milliseconds: 200),
-                          menuWidth: 120,
+                          menuWidth: Sizing.blockSize * 30,
                           blurSize: 0,
                           maxMenuHeightPercentage: 0.9,
                           animateMenuItems: false,

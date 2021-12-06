@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -13,61 +14,64 @@ class ForgotPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            toolbarHeight: 70,
+            toolbarHeight: Sizing.blockSizeVertical * 10.5,
             elevation: 0.0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(width: 115),
-                const Text(
-                  't',
-                  style: TextStyle(
-                      fontSize: 70,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900),
-                ),
-                const SizedBox(width: 100),
-                controller.activateSubmitButton
-                    ? InkWell(
-                        child: const Text(
+            title: Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, Sizing.blockSize, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: Sizing.blockSize * 28.5),
+                  Text(
+                    't',
+                    style: TextStyle(
+                        fontSize: Sizing.blockSize * 16.25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(width: Sizing.blockSize * 22.5),
+                  controller.activateSubmitButton
+                      ? InkWell(
+                          child: const Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
+                          onTap: () {
+                            controller.sendResetEmail();
+                          },
+                        )
+                      : const Text(
                           'Submit',
-                          style: TextStyle(color: Colors.blueAccent),
+                          style: TextStyle(color: Color(0x448AFFFF)),
                         ),
-                        onTap: () {
-                          controller.sendResetEmail();
-                        },
-                      )
-                    : const Text(
-                        'Submit',
-                        style: TextStyle(color: Color(0x448AFFFF)),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
           body: visibleKeyboard
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 120),
+                    SizedBox(height: Sizing.blockSizeVertical * 18),
                     Center(
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             'Forgot your password? It happens.',
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: Sizing.blockSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
-                          const SizedBox(height: 10),
-                          const Text(
+                          SizedBox(height: Sizing.blockSizeVertical * 1.5),
+                          Text(
                             'We\'ll send you a link to reset it.',
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: Sizing.blockSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: Sizing.blockSizeVertical * 3),
                           LoginTextField(
                             controller: controller,
                             text: 'email',
@@ -85,26 +89,26 @@ class ForgotPassword extends StatelessWidget {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 200),
+                    SizedBox(height: Sizing.blockSizeVertical * 30),
                     Center(
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             'Forgot your password? It happens.',
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: Sizing.blockSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
-                          const SizedBox(height: 10),
-                          const Text(
+                          SizedBox(height: Sizing.blockSizeVertical * 1.5),
+                          Text(
                             'We\'ll send you a link to reset it.',
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: Sizing.blockSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: Sizing.blockSizeVertical * 3),
                           LoginTextField(
                             controller: controller,
                             text: 'email',
