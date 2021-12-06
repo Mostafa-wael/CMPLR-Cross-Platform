@@ -13,7 +13,7 @@ class SignupPreferencesSearch extends StatelessWidget {
         builder: (controller) => Scaffold(
               appBar: AppBar(
                 shadowColor: Colors.transparent,
-                backgroundColor: const Color(0xFF001A35),
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 toolbarHeight: 40,
                 automaticallyImplyLeading: false,
               ),
@@ -22,7 +22,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 190,
-                    color: const Color(0xFF001A35),
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     padding: const EdgeInsets.fromLTRB(18, 0, 5, 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -99,7 +99,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                   ),
                   Expanded(
                       child: Container(
-                    color: const Color(0xFF001A35),
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     child: ListView.builder(
                         itemCount: controller.currentlyShownTopics.length,
                         itemBuilder: (context, index) {

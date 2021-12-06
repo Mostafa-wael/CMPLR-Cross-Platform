@@ -71,7 +71,7 @@ class SignupPreferences extends StatelessWidget {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               shadowColor: Colors.transparent,
-              backgroundColor: const Color(0xFF001A35),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               actions: [
                 (controller.isLoading)
                     ? CollectionScaleTransition(

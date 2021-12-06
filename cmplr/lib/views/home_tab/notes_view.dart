@@ -38,7 +38,7 @@ class Notes extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           shadowColor: Colors.transparent,
-          backgroundColor: const Color(0xFF001A35),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
             onPressed: () {
@@ -49,14 +49,14 @@ class Notes extends StatelessWidget {
           // centerTitle: true,
           title: Text(
             '${Get.arguments} notes',
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           actions: [
             IconButton(
               icon: Icon(controller.postSubscribed.value
                   ? Icons.notifications
                   : Icons.notifications_off_outlined),
-              color: Colors.white,
+              color: Theme.of(context).primaryColor,
               iconSize: 30,
               onPressed: () {
                 controller.subscriptionButtonPressed();
@@ -72,7 +72,7 @@ class Notes extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                       child: Material(
                         child: InkWell(
                             onTap: () {},
