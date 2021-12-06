@@ -16,33 +16,36 @@ class ForgotPassword extends StatelessWidget {
           appBar: AppBar(
             toolbarHeight: Sizing.blockSizeVertical * 10.5,
             elevation: 0.0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: Sizing.blockSize * 28.5),
-                Text(
-                  't',
-                  style: TextStyle(
-                      fontSize: Sizing.blockSize * 16.25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900),
-                ),
-                SizedBox(width: Sizing.blockSize * 24.7),
-                controller.activateSubmitButton
-                    ? InkWell(
-                        child: const Text(
+            title: Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, Sizing.blockSize, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: Sizing.blockSize * 28.5),
+                  Text(
+                    't',
+                    style: TextStyle(
+                        fontSize: Sizing.blockSize * 16.25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(width: Sizing.blockSize * 22.5),
+                  controller.activateSubmitButton
+                      ? InkWell(
+                          child: const Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
+                          onTap: () {
+                            controller.sendResetEmail();
+                          },
+                        )
+                      : const Text(
                           'Submit',
-                          style: TextStyle(color: Colors.blueAccent),
+                          style: TextStyle(color: Color(0x448AFFFF)),
                         ),
-                        onTap: () {
-                          controller.sendResetEmail();
-                        },
-                      )
-                    : const Text(
-                        'Submit',
-                        style: TextStyle(color: Color(0x448AFFFF)),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
           body: visibleKeyboard
