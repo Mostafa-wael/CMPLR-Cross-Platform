@@ -1,6 +1,7 @@
 import 'package:cmplr/controllers/controllers.dart';
 import 'package:cmplr/flags.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() {
@@ -13,6 +14,7 @@ void main() {
 
     // passwordHidden = true, validInfo = true
     final masterPageCont = MasterPageController();
+    Get.put(masterPageCont, permanent: true);
     final controller = EmailPasswordNameAfterSignupController();
 
     // passwordHidden = false
