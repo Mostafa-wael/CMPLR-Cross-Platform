@@ -1,5 +1,5 @@
-import 'package:cmplr/controllers/controllers.dart';
-import 'package:cmplr/flags.dart';
+import '../../lib/controllers/controllers.dart';
+import '../../lib/flags.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -73,6 +73,5 @@ void main() {
     expect(controller.activateLoginButton, true);
     expect(controller.validCombination, true);
     expect(controller.validLoginEmail, true);
-
   });
 }

@@ -33,15 +33,16 @@ class EmailPasswordNameAfterSignupController extends GetxController {
   }
 
   /// Checks whether the email AND username don't already exist.
-  void validateInfo() {
-    model
+  Future<bool> validateInfo() {
+    return model
         .checkEmailPasswordName(
             emailController.text, passwordController.text, nameController.text)
         .then((response) {
       _validInfo = response;
       if (_validInfo) toActivityOrProfile();
+      update();
+      return response;
     });
-    update();
   }
 
   bool get passwordHidden => _passwordHidden;
@@ -69,13 +70,11 @@ class EmailPasswordNameAfterSignupController extends GetxController {
   void toActivityOrProfile() {
     // (Tarek) TODO:
     // Go to profile
-    if (_validInfo) {
-      // Get.snackbar('GO TO PROFILE/ACTIVITY', '');
+    // Get.snackbar('GO TO PROFILE/ACTIVITY', '');
 
-      masterPageController?.logIn();
-      masterPageController?.showActivityOrProfileAfterExtraSignup();
+    masterPageController?.logIn();
+    masterPageController?.showActivityOrProfileAfterExtraSignup();
 
-      GetStorage().write('logged_in', true);
-    }
+    GetStorage().write('logged_in', true);
   }
 }
