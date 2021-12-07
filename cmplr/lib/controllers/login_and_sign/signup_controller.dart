@@ -1,5 +1,4 @@
 import 'package:get_storage/get_storage.dart';
-import '../../models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,11 +8,9 @@ import '../../views/views.dart';
 import '../../utilities/authentication/authentication.dart';
 
 class SignupController extends GetxController {
-
   /// Navigates to the page where the user can enter their age
   /// and continue the signup process
   Future<void> signUpEmail() async {
-    GetStorage().write('logged_in', true);
     Get.to(
       const SignupAge(),
       transition: Transition.rightToLeft,
@@ -36,8 +33,7 @@ class SignupController extends GetxController {
         arguments: user,
       );
       GetStorage().write('logged_in', true);
-    }
-    else {
+    } else {
       _showToast('Failed to Sign up, please try again');
     }
     update();

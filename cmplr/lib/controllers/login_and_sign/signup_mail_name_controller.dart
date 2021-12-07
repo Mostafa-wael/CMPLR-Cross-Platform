@@ -34,8 +34,13 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
   /// Checks whether the email AND username don't already exist.
   void validateInfo() {
-    _validInfo = model.checkEmailPasswordName(
-        emailController.text, passwordController.text, nameController.text);
+    model
+        .checkEmailPasswordName(
+            emailController.text, passwordController.text, nameController.text)
+        .then((response) {
+      _validInfo = response;
+      if (_validInfo) toActivityOrProfile();
+    });
     update();
   }
 
@@ -64,7 +69,7 @@ class EmailPasswordNameAfterSignupController extends GetxController {
   void toActivityOrProfile() {
     // (Tarek) TODO:
     // Go to profile
-    if (validInfo) {
+    if (_validInfo) {
       // Get.snackbar('GO TO PROFILE/ACTIVITY', '');
 
       masterPageController?.logIn();

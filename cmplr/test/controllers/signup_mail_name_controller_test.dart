@@ -1,6 +1,7 @@
-import 'package:cmplr/controllers/controllers.dart';
-import 'package:cmplr/flags.dart';
+import '../../lib/controllers/controllers.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../../lib/flags.dart';
+import 'package:get/get.dart';
 
 void main() {
   testWidgets('email password name after signup controller ...',
@@ -9,6 +10,7 @@ void main() {
 
     // passwordHidden = true, validInfo = true
     final masterPageCont = MasterPageController();
+    Get.put(masterPageCont);
     final controller = EmailPasswordNameAfterSignupController();
 
     // passwordHidden = false

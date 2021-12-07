@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
@@ -27,9 +28,14 @@ class SignupMailName extends StatelessWidget {
       ' everything you just followed.';
 
   static const _maxWidth = 400.0;
+  static double screenWidth = 1920, screenHeight = 1080;
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+    screenWidth = mq.size.width;
+    screenHeight = mq.size.height;
+
     return Scaffold(
         appBar: _getAppBar(),
         body: GetBuilder<MasterPageController>(
@@ -37,7 +43,7 @@ class SignupMailName extends StatelessWidget {
             return _getBody(context, controller);
           },
         ),
-        resizeToAvoidBottomInset: false);
+        resizeToAvoidBottomInset: true);
   }
 
   /// Only one button that should route to the page the user was intending on.
@@ -52,7 +58,6 @@ class SignupMailName extends StatelessWidget {
             return TextButton(
               onPressed: () {
                 controller.validateInfo();
-                controller.toActivityOrProfile();
               },
               child: const Text('Done'),
             );
@@ -63,8 +68,8 @@ class SignupMailName extends StatelessWidget {
 
   /// Top column containing 2 Text, 3 TextField for email, password, name.
   static Widget _getTopColumn(context, controller) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             _title,
@@ -160,7 +165,6 @@ class SignupMailName extends StatelessWidget {
           context, EmailPasswordNameAfterSignupController controller) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const Text(
             'Already have an account?',
@@ -203,13 +207,20 @@ class SignupMailName extends StatelessWidget {
         builder: (controller) {
           return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 16),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: _maxWidth),
+              child: SizedBox(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.9,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _getTopColumn(context, controller),
+                    Expanded(
+                        child: ListView(children: [
+                      _getTopColumn(context, controller),
+                    ])),
+                    const SizedBox(
+                      height: 32,
+                    ),
                     _getBottomColumn(context, controller)
                   ],
                 ),

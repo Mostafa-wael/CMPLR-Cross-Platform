@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/models.dart';
 
 class PostController extends GetxController with SingleGetTickerProviderMixin {
   void openNotes(int numNotes) {
