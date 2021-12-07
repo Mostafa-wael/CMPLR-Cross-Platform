@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 /// The screen that shows when you choose to sign up with email
 /// then go to your profile.
@@ -27,15 +28,10 @@ class SignupMailName extends StatelessWidget {
       ' account? It would stink to lose'
       ' everything you just followed.';
 
-  static const _maxWidth = 400.0;
-  static double screenWidth = 1920, screenHeight = 1080;
+  static final _maxWidth = Sizing.blockSize * 98.85;
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
-    screenWidth = mq.size.width;
-    screenHeight = mq.size.height;
-
     return Scaffold(
         appBar: _getAppBar(),
         body: GetBuilder<MasterPageController>(
@@ -76,14 +72,14 @@ class SignupMailName extends StatelessWidget {
             style: Theme.of(context).textTheme.headline4,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: Sizing.blockSizeVertical * 2.4),
           Text(
             _subtitle,
             style: Theme.of(context).textTheme.headline3,
             textAlign: TextAlign.center,
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
             child: Text(
               controller.validInfo ? '' : 'Invalid information',
               style: const TextStyle(color: Colors.red),
@@ -92,7 +88,7 @@ class SignupMailName extends StatelessWidget {
           TextField(
               controller: controller.emailController,
               decoration: const InputDecoration(hintText: 'email')),
-          const SizedBox(height: 8),
+          SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
             controller: controller.passwordController,
             decoration: InputDecoration(
@@ -111,7 +107,7 @@ class SignupMailName extends StatelessWidget {
             enableSuggestions: false,
             autocorrect: false,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
               controller: controller.nameController,
               decoration: const InputDecoration(hintText: 'name')),
@@ -123,15 +119,19 @@ class SignupMailName extends StatelessWidget {
           EmailPasswordNameAfterSignupController controller) =>
       Popup(
         Padding(
-          padding:
-              const EdgeInsets.only(left: 4, right: 4, top: 16, bottom: 16),
+          padding: EdgeInsets.only(
+            left: Sizing.blockSize,
+            right: Sizing.blockSize,
+            top: Sizing.blockSizeVertical * 2.4,
+            bottom: Sizing.blockSizeVertical * 2.4,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 _nevermindText,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: Sizing.blockSize * 3.715),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 GestureDetector(
@@ -143,7 +143,7 @@ class SignupMailName extends StatelessWidget {
                     Get.back();
                   },
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: Sizing.blockSize * 4),
                 GestureDetector(
                     child: Text(
                       'I\'m sure',
@@ -157,7 +157,7 @@ class SignupMailName extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.grey[900] ?? Colors.grey,
-        maxHeight: 120,
+        maxHeight: Sizing.blockSizeVertical * 18,
       );
 
   /// Bottom column containing 1 Text, 2 Pressable texts (to login/ privacy policy)
@@ -166,18 +166,20 @@ class SignupMailName extends StatelessWidget {
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             'Already have an account?',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: Sizing.blockSize * 4.65),
           ),
           GestureDetector(
               child: CustomUnderline(
                 text: Text(
                   'Login',
-                  style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                  style: TextStyle(
+                      fontSize: Sizing.blockSize * 4.65,
+                      color: Colors.blue[600]),
                 ),
-                underlineDistance: 1,
-                underlineWidth: 1,
+                underlineDistance: Sizing.blockSizeVertical * 0.15,
+                underlineWidth: Sizing.blockSize * 0.25,
               ),
               onTap: () {
                 showDialog(
@@ -190,7 +192,8 @@ class SignupMailName extends StatelessWidget {
             child: CustomUnderline(
               text: Text(
                 'Privacy dashboard',
-                style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                style: TextStyle(
+                    fontSize: Sizing.blockSize * 4.65, color: Colors.blue[600]),
               ),
             ),
             onTap: () {
@@ -206,25 +209,24 @@ class SignupMailName extends StatelessWidget {
         init: EmailPasswordNameAfterSignupController(),
         builder: (controller) {
           return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 16),
-              child: SizedBox(
-                width: screenWidth * 0.9,
-                height: screenHeight * 0.9,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: ListView(children: [
-                      _getTopColumn(context, controller),
-                    ])),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    _getBottomColumn(context, controller)
-                  ],
+            padding: EdgeInsets.symmetric(
+                horizontal: Sizing.blockSize * 15.85,
+                vertical: Sizing.blockSizeVertical * 2.4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: ListView(children: [
+                  _getTopColumn(context, controller),
+                ])),
+                const SizedBox(
+                  height: 32,
                 ),
-              ));
+                _getBottomColumn(context, controller)
+              ],
+            ),
+          );
         },
       ));
 }

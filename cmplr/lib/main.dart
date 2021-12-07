@@ -6,8 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'views/views.dart';
-
-// void main() => runApp(const FilePickerDemo());
+import '../../utilities/sizing/sizing.dart';
 
 Future<void> main() async {
   await GetStorage.init();
@@ -42,6 +41,7 @@ class CMPLR extends StatelessWidget {
           name: '/profile', page: () => const Center(child: Text('Profile'))),
       GetPage(name: '/home_tab', page: () => const HomeScreen()),
       GetPage(name: '/write_post', page: () => const WritePost()),
+      GetPage(name: '/reblog', page: () => const ReblogView()),
       GetPage(name: '/notes', page: () => Notes()),
       GetPage(
           name: '/home_following_tab', page: () => const HomeFollowingScreen()),
