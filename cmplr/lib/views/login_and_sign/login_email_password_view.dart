@@ -37,7 +37,7 @@ class LoginEmailPassword extends StatelessWidget {
                           style: TextStyle(color: Colors.blueAccent),
                         ),
                         onTap: () {
-                          controller.enterPassword();
+                          controller.tryLogin();
                         },
                       )
                     : const Text(

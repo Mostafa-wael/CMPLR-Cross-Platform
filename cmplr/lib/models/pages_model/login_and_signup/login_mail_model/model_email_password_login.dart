@@ -1,21 +1,23 @@
-import '../../../../flags.dart';
-import 'abs_email_password_login.dart';
-import 'api_email_password_login.dart';
-import 'mock_email_password_login.dart';
+import '../../../../routes.dart';
+import '../../../cmplr_service.dart';
+import '../../../../utilities/functions.dart';
 
 class ModelEmailPasswordLogin {
-  // Whether we're using the API or mock services
-  final AbstractEmailPasswordLogin interface = Flags.mock
-      ? MockEmailPasswordLoginModel()
-      : APIEmailPasswordLogin();
+  Future<bool> checkEmailPasswordCombination(
+      String email, String password) async {
+    final validEmail = validateEmail(email);
+    if (!validEmail || password.isEmpty) return Future.value(false);
 
-  bool checkEmailPasswordCombination(String email, String password) {
-    return interface.checkEmailPasswordCombination(email, password);
-  }
-  bool validateEmail(String email) {
-    return interface.validateEmail(email);
-  }
-  bool validateGoogleAccount(account) {
-    return interface.validateGoogleAccount(account);
+    if (!validEmail) return Future.value(false);
+
+    final response = await CMPLRService.post(
+      Routes.loginEmailPassword,
+      {
+        'Email': email,
+        'Password': password,
+      },
+    );
+
+    return response.statusCode == CMPLRService.requestSuccess;
   }
 }

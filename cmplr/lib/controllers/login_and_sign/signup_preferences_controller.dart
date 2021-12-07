@@ -1,3 +1,4 @@
+import '../../routes.dart';
 import '../../views/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,7 +81,7 @@ class SignupPreferencesController extends GetxController {
       Get.offAll(const MasterPage());
     } else {
       // if a SnackBar is already open, then close it to show another one
-      if (Get.isSnackbarOpen! == true) {
+      if (Get.isSnackbarOpen == true) {
         Get.back();
       }
       // Show error SnackBar
@@ -98,7 +99,7 @@ class SignupPreferencesController extends GetxController {
 
   void chooseNewPreference() {
     // navigate to search preference page
-    Get.toNamed('/signup_preferences_search_screen', arguments: this);
+    Get.toNamed(Routes.signupPreferencesSearchScreen, arguments: this);
   }
 
   // check if the preference card is already chosen before

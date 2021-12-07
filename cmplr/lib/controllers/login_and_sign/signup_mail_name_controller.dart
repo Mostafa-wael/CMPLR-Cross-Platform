@@ -1,9 +1,11 @@
+import '../../models/persistent_storage_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/models.dart';
+import '../../routes.dart';
 import '../master_page_controller.dart';
 
 // (Tarek) TODO: maybe rename this to ExtraSignup?
@@ -20,7 +22,7 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
   bool _passwordHidden = true;
   bool _validInfo = true;
-  static const _loginURL = '/login';
+  static const _loginURL = Routes.login;
 
   /// Gets a reference to the master page controller
   EmailPasswordNameAfterSignupController() {
@@ -75,6 +77,6 @@ class EmailPasswordNameAfterSignupController extends GetxController {
     masterPageController?.logIn();
     masterPageController?.showActivityOrProfileAfterExtraSignup();
 
-    GetStorage().write('logged_in', true);
+    PersistentStorage.changeLoggedIn(true);
   }
 }

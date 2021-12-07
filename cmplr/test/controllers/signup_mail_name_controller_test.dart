@@ -1,20 +1,22 @@
 import 'package:cmplr/flags.dart';
+import 'package:cmplr/models/persistent_storage_api.dart';
 
 import '../../lib/controllers/controllers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 void main() {
-  final s = GetStorage();
-  s.write('logged_in', false);
+  setUpAll(() {
+    PersistentStorage.initStorage();
+    Get.testMode = true;
+    Flags.mock = true;
+    PersistentStorage.changeLoggedIn(false);
+  });
+
   testWidgets('email password name after signup controller ...',
       (tester) async {
-    Flags.mock = true;
-
     // passwordHidden = true, validInfo = true
     final masterPageCont = MasterPageController();
-    Get.testMode = true;
     Get.put(masterPageCont, permanent: true);
     final controller = EmailPasswordNameAfterSignupController();
 

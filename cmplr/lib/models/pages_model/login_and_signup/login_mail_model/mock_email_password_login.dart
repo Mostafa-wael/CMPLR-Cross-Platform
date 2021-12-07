@@ -15,7 +15,6 @@ class MockEmailPasswordLoginModel implements AbstractEmailPasswordLogin {
   // password: cmplr_mock_flutter
   var googleAccount = ['cmplr.mock@gmail.com', ''];
 
-
   MockEmailPasswordLoginModel() {
     enteredEmailsPasswords['tarek@cmplr.org'] = '12345678';
     enteredEmailsPasswords['gendy@cmplr.eg'] = 'hey12345';
@@ -37,12 +36,15 @@ class MockEmailPasswordLoginModel implements AbstractEmailPasswordLogin {
     return true;
   }
 
+  // (Tarek) TODO: Something similar is used for verifying signup
+  // Need to refactor this.
   @override
   bool validateEmail(String email) {
     print(enteredEmailsPasswords[email]);
     return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email) && enteredEmailsPasswords[email] != null;
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(email) &&
+        enteredEmailsPasswords[email] != null;
   }
 
   @override
@@ -50,5 +52,3 @@ class MockEmailPasswordLoginModel implements AbstractEmailPasswordLogin {
     return account == googleAccount;
   }
 }
-
-

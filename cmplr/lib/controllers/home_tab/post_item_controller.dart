@@ -1,21 +1,24 @@
+import '../../routes.dart';
 import 'package:get/get.dart';
 
 class PostController extends GetxController with SingleGetTickerProviderMixin {
   void openNotes(int numNotes) {
-    Get.toNamed('/notes', arguments: numNotes);
+    Get.toNamed(Routes.notes, arguments: numNotes);
   }
 
   void reblog() {
-    Get.toNamed('/reblog');
+    Get.toNamed(Routes.reblog);
   }
 
   void openMoreOptions() {
-    // Get.toNamed('/more_options');
+    // Get.toNamed(Routes.moreOptions);
   }
 
   void share() {
-    // Get.toNamed('/share');
+    // Get.toNamed(Routes.share);
   }
 
-  void lovePost() {}
+  void lovePost() {
+    // TODO: send post request to '/user/like/ with post_id and reblog_key
+  }
 }
