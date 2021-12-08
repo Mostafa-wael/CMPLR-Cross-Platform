@@ -58,8 +58,18 @@ class WritePost extends StatelessWidget {
                                   // TODO: Add the bar at the very top
                                   //(don't know which icon)
                                   SizedBox(
-                                    height: Sizing.blockSizeVertical * 5,
+                                      height: Sizing.blockSizeVertical * 3),
+                                  Container(
+                                    width: Sizing.blockSize * 12,
+                                    height: Sizing.blockSize * 1,
+                                    //TODO: Link this to theme
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(Sizing.blockSize))),
                                   ),
+                                  SizedBox(
+                                      height: Sizing.blockSizeVertical * 3),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
