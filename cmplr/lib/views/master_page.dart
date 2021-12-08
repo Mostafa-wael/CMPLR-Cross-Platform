@@ -50,7 +50,7 @@ class MasterPage extends StatelessWidget {
               ],
             ),
             floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.pin),
+              child: const Icon(Icons.edit),
               onPressed: () {
                 Get.to(
                   const WritePost(),

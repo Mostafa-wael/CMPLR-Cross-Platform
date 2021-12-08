@@ -26,6 +26,7 @@ dependencies:
 
   file_picker:
   flutter_html:
+  intl:
   # focused_menu: Since we have our own modified version
 
 dev_dependencies:
