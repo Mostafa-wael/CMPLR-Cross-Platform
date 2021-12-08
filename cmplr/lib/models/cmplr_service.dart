@@ -62,6 +62,50 @@ class CMPLRService {
       },
       'users': getEmailPassMap(),
     },
+    Routes.signupPreferencesScreen: {
+      'preference_names': [
+        'Trendingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxx',
+        'Art',
+        'Writing',
+        'Books & Libraries',
+        'Streaming',
+        'Positivity',
+        'Aesthetic',
+        'Television',
+        'Funny',
+        'Gaming',
+        'Movies',
+        'Music',
+        'Comics',
+        'Fashion'
+      ]
+    },
+    Routes.signupPreferencesSearchScreen: {
+      'popular_searched_topics': [
+        'Barcelona',
+        'PSG',
+        'Real Madrid',
+        'Atletico Madrid',
+        'Manchester City',
+        'Manchester United',
+        'Chelsea',
+        'Liverpool',
+        'Arsenal',
+        'Borussia Dortmund',
+        'Inter Milan',
+        'Ac Milan',
+        'Juventus'
+      ],
+      'searched_topics': [
+        'Atletico Madrid',
+        'Manchester City',
+        'Manchester United',
+        'Chelsea',
+        'Borussia Dortmund',
+        'Inter Milan',
+        'Ac Milan',
+      ]
+    },
   };
 
   static const requestSuccess = 200;
@@ -137,5 +181,15 @@ class CMPLRService {
         body: jsonEncode(params),
       );
     }
+  }
+
+  // This functionality is not implemeted in the back-end
+  static List initialPreferences(String route) {
+    return _mockData[route]['preference_names'];
+  }
+
+  // This functionality is not implemeted in the back-end
+  static List searchedTopics(String route, String topics) {
+    return _mockData[route][topics];
   }
 }

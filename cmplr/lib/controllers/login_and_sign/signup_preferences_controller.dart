@@ -21,7 +21,7 @@ class SignupPreferencesController extends GetxController {
   List _availablePreferenceCards = [];
 
   // data model for preferences
-  SignupPreferencesModel preferencesModel = SignupPreferencesModel();
+  final SignupPreferencesModel _preferencesModel = SignupPreferencesModel();
 
   // getters for class attributes
   String get buttonText => _buttonText;
@@ -37,7 +37,7 @@ class SignupPreferencesController extends GetxController {
   @override
   void onInit() {
     // get the initial preferences
-    _availablePreferenceCards = preferencesModel.getInitialPreferences();
+    _availablePreferenceCards = _preferencesModel.getInitialPreferences();
     super.onInit();
   }
 
@@ -116,7 +116,7 @@ class SignupPreferencesController extends GetxController {
   void addPreference(String preferenceName) {
     if (!preferenceChosen(preferenceName)) {
       _availablePreferenceCards.insert(
-          0, preferencesModel.createNewPreference(preferenceName));
+          0, _preferencesModel.createNewPreference(preferenceName));
       tapPreferenceCard(0);
       update();
     }
