@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
 
