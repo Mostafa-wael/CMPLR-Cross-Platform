@@ -1,7 +1,8 @@
 import '../../routes.dart';
 import 'package:get/get.dart';
 
-class PostController extends GetxController with SingleGetTickerProviderMixin {
+class PostItemController extends GetxController
+    with SingleGetTickerProviderMixin {
   void openNotes(int numNotes) {
     Get.toNamed(Routes.notes, arguments: numNotes);
   }
@@ -16,6 +17,10 @@ class PostController extends GetxController with SingleGetTickerProviderMixin {
 
   void share() {
     // Get.toNamed(Routes.share);
+  }
+
+  void openProfile() {
+    // Get.toNamed(Routes.openProfile);
   }
 
   void lovePost() {

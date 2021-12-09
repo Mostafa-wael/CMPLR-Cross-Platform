@@ -24,7 +24,7 @@ class PostItem extends StatefulWidget {
 }
 
 class _PostItemState extends State<PostItem> {
-  var controller = Get.put(PostController());
+  var controller = Get.put(PostItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +49,26 @@ class _PostItemState extends State<PostItem> {
   Widget getUpperBar() {
     return ListTile(
       contentPadding: const EdgeInsets.all(0),
-      leading: CircleAvatar(
-        backgroundImage: AssetImage(
-          '${widget.postData}',
+      leading: InkWell(
+        onTap: () {
+          print('Profile clicked');
+        },
+        child: CircleAvatar(
+          backgroundImage: AssetImage(
+            '${widget.postData}',
+          ),
         ),
       ),
-      title: Text(
-        '${widget.name}',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+      title: InkWell(
+        onTap: () {
+          print('Profile clicked');
+        },
+        child: Text(
+          '${widget.name}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
       ),
       trailing: IconButton(

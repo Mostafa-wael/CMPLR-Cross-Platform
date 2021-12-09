@@ -32,7 +32,7 @@ class CMPLR extends StatelessWidget {
       home: PersistentStorage.isLoggedIn
           ? const MasterPage() /*const MasterPage()*/
           : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
-      theme: themes[1],
+      theme: themes[0],
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
   }
