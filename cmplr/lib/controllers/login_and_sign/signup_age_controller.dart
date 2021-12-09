@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../routes.dart';
+
 class SignupAgeController extends GetxController {
   // controller for the age text field
   final _ageController = TextEditingController();
@@ -76,7 +78,7 @@ class SignupAgeController extends GetxController {
         _isLoading = false;
         _showToast('Minor hiccup. Try again.');
       } else {
-        Get.offNamed('/signup_preferences_screen');
+        Get.offNamed(Routes.signupPreferencesScreen);
       }
       update();
     }

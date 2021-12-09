@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import '../../controllers/controllers.dart';
+import '../../routes.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
 
@@ -59,7 +60,7 @@ class SignupPreferences extends StatelessWidget {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Get.offAllNamed('/signup_or_login_screen');
+                                  Get.offAllNamed(Routes.signupOrLoginScreen);
                                 },
                                 child: Text('LEAVE',
                                     style: TextStyle(
@@ -80,7 +81,7 @@ class SignupPreferences extends StatelessWidget {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               shadowColor: Colors.transparent,
-              backgroundColor: const Color(0xFF001A35),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               actions: [
                 (controller.isLoading)
                     ? CollectionScaleTransition(
