@@ -57,13 +57,8 @@ class Notes extends StatelessWidget {
               icon: Icon(controller.postSubscribed.value
                   ? Icons.notifications
                   : Icons.notifications_off_outlined),
-<<<<<<< HEAD
               color: Theme.of(context).primaryColor,
-              iconSize: 30,
-=======
-              color: Colors.white,
               iconSize: Sizing.blockSize * 7.415,
->>>>>>> 774efb8b030d60e184ad05effe3c4db057de336f
               onPressed: () {
                 controller.subscriptionButtonPressed();
               },

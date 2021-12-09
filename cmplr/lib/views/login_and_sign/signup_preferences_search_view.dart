@@ -14,29 +14,17 @@ class SignupPreferencesSearch extends StatelessWidget {
         builder: (controller) => Scaffold(
               appBar: AppBar(
                 shadowColor: Colors.transparent,
-<<<<<<< HEAD
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                toolbarHeight: 40,
-=======
-                backgroundColor: const Color(0xFF001A35),
                 toolbarHeight: Sizing.blockSizeVertical * 1.5,
->>>>>>> 774efb8b030d60e184ad05effe3c4db057de336f
                 automaticallyImplyLeading: false,
               ),
               body: Column(
                 children: [
                   Container(
                     width: double.infinity,
-<<<<<<< HEAD
-                    height: 190,
                     color: Theme.of(context).scaffoldBackgroundColor,
                     padding: const EdgeInsets.fromLTRB(18, 0, 5, 0),
-=======
                     height: Sizing.blockSizeVertical * 28.5,
-                    color: const Color(0xFF001A35),
-                    padding: EdgeInsets.fromLTRB(
-                        Sizing.blockSize * 4.45, 0, Sizing.blockSize * 1.24, 0),
->>>>>>> 774efb8b030d60e184ad05effe3c4db057de336f
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
