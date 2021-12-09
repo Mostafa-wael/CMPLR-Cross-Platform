@@ -1,3 +1,4 @@
+import '../sizing/sizing.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -89,7 +90,9 @@ class _PostItemState extends State<PostItem> {
       hashtagsWidget.add(
         TextSpan(
             text: '#' + hashtag,
-            style: TextStyle(color: Colors.grey.withOpacity(0.8), fontSize: 20),
+            style: TextStyle(
+                color: Colors.grey.withOpacity(0.8),
+                fontSize: Sizing.fontSize * 5),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 print(hashtag);
@@ -118,7 +121,7 @@ class _PostItemState extends State<PostItem> {
       children: [
         TextButton(
           style: TextButton.styleFrom(
-            textStyle: const TextStyle(fontSize: 15),
+            textStyle: TextStyle(fontSize: Sizing.fontSize * 3.8),
           ),
           onPressed: () {
             controller.openNotes(widget.numNotes);

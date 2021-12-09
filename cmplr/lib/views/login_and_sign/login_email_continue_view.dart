@@ -43,14 +43,14 @@ class LoginEmailContinue extends StatelessWidget {
                       ? Text(
                           't',
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 17.5,
+                              fontSize: Sizing.fontSize * 17.5,
                               color: Colors.white,
                               fontWeight: FontWeight.w900),
                         )
                       : Text(
                           't',
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 35,
+                              fontSize: Sizing.fontSize * 35,
                               color: Colors.white,
                               fontWeight: FontWeight.w900),
                         ),
@@ -74,7 +74,7 @@ class LoginEmailContinue extends StatelessWidget {
                           child: Text(
                             'Enter Password',
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 3.715,
+                                fontSize: Sizing.fontSize * 3.715,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300),
                           ),

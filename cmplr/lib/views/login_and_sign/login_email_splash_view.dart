@@ -25,7 +25,7 @@ class LoginEmailSplash extends StatelessWidget {
                           Text(
                             't',
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 35,
+                                fontSize: Sizing.fontSize * 35,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900),
                           ),
@@ -46,7 +46,7 @@ class LoginEmailSplash extends StatelessWidget {
                                 child: Text(
                                   'Continue',
                                   style: TextStyle(
-                                      fontSize: Sizing.blockSize * 3.715,
+                                      fontSize: Sizing.fontSize * 3.715,
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300),
                                 ),

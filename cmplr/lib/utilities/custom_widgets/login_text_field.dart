@@ -1,3 +1,4 @@
+import '../sizing/sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -77,18 +78,22 @@ class LoginTextField extends StatelessWidget {
                 : InputBorder.none,
           ),
           controller: textController,
-          onChanged: isEmail ? (text) {
-            controller.emailFieldChanged();
-          } : (text) {
-            controller.passwordFieldChanged();
-          },
+          onChanged: isEmail
+              ? (text) {
+                  controller.emailFieldChanged();
+                }
+              : (text) {
+                  controller.passwordFieldChanged();
+                },
           enabled: enabled,
           obscureText: isEmail ? false : controller.hidePassword,
-          style: const TextStyle(
-              fontSize: 24, color: Colors.white, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontSize: Sizing.fontSize * 5.6,
+              color: Colors.white,
+              fontWeight: FontWeight.w600),
         ),
       ),
-      width: 340,
+      width: Sizing.blockSize * 80,
     );
   }
 }
