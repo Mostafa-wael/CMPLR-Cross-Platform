@@ -22,7 +22,7 @@ class PostForgotPassword extends StatelessWidget {
               Text(
                 't',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 16.25,
+                    fontSize: Sizing.fontSize * 16.25,
                     color: Colors.white,
                     fontWeight: FontWeight.w900),
               ),
@@ -46,7 +46,7 @@ class PostForgotPassword extends StatelessWidget {
               child: Text(
                 'Okay, we just send you a password reset',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 5,
+                    fontSize: Sizing.fontSize * 5,
                     color: Colors.white,
                     fontWeight: FontWeight.w400),
               ),
@@ -56,7 +56,7 @@ class PostForgotPassword extends StatelessWidget {
               child: Text(
                 'email',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 5,
+                    fontSize: Sizing.fontSize * 5,
                     color: Colors.white,
                     fontWeight: FontWeight.w400),
               ),
@@ -66,7 +66,7 @@ class PostForgotPassword extends StatelessWidget {
               child: Text(
                 'Didn\'t get it? Check your spam folder if it\'s not',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 4.25,
+                    fontSize: Sizing.fontSize * 4.25,
                     color: Colors.grey,
                     fontWeight: FontWeight.w300),
               ),
@@ -78,7 +78,7 @@ class PostForgotPassword extends StatelessWidget {
                 // & white text
                 'there, follow the tips in our help docs.',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 4.25,
+                    fontSize: Sizing.fontSize * 4.25,
                     color: Colors.grey,
                     fontWeight: FontWeight.w300),
               ),

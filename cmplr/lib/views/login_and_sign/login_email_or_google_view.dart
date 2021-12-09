@@ -40,7 +40,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   Text(
                     'tumblr',
                     style: TextStyle(
-                        fontSize: Sizing.blockSize * 13,
+                        fontSize: Sizing.fontSize * 13,
                         color: Colors.white,
                         fontWeight: FontWeight.w900),
                   ),

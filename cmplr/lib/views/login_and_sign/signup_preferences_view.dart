@@ -37,7 +37,7 @@ class SignupPreferences extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: Sizing.blockSize * 4.9),
+                                  fontSize: Sizing.fontSize * 4.9),
                             )),
                         SizedBox(
                           height: Sizing.blockSizeVertical * 3,
@@ -52,7 +52,7 @@ class SignupPreferences extends StatelessWidget {
                                 child: Text(
                                   'CONTINUE',
                                   style: TextStyle(
-                                      fontSize: Sizing.blockSize * 3.715),
+                                      fontSize: Sizing.fontSize * 3.715),
                                 )),
                             SizedBox(
                               width: Sizing.blockSize * 2.5,
@@ -63,7 +63,7 @@ class SignupPreferences extends StatelessWidget {
                                 },
                                 child: Text('LEAVE',
                                     style: TextStyle(
-                                        fontSize: Sizing.blockSize * 3.715)))
+                                        fontSize: Sizing.fontSize * 3.715)))
                           ],
                         )
                       ],
@@ -103,7 +103,7 @@ class SignupPreferences extends StatelessWidget {
                               '  ${controller.buttonText}  ',
                               style: TextStyle(
                                   color: Color(controller.buttonTextColor),
-                                  fontSize: Sizing.blockSize * 4.65,
+                                  fontSize: Sizing.fontSize * 4.65,
                                   fontWeight: FontWeight.w800),
                             ),
                           ),
@@ -123,7 +123,7 @@ class SignupPreferences extends StatelessWidget {
                     Text(
                       'What do you like?',
                       style: TextStyle(
-                          color: Colors.white, fontSize: Sizing.blockSize * 7),
+                          color: Colors.white, fontSize: Sizing.fontSize * 7),
                     ),
                     SizedBox(
                       height: Sizing.blockSizeVertical * 1.5,
@@ -134,7 +134,7 @@ class SignupPreferences extends StatelessWidget {
                       'your dashboard with the things you love.',
                       style: TextStyle(
                           color: const Color(0xFF7F8D9C),
-                          fontSize: Sizing.blockSize * 4.55),
+                          fontSize: Sizing.fontSize * 4.55),
                     ),
                   ],
                 ),
@@ -212,7 +212,7 @@ class SignupPreferences extends StatelessWidget {
                         maxLines: 2,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: Sizing.blockSize * 4.65,
+                          fontSize: Sizing.fontSize * 4.65,
                         ),
                       ),
                     ),
@@ -271,7 +271,7 @@ class SignupPreferences extends StatelessWidget {
                   child: Text(
                     controller.availablePreferenceCards[index].preferenceName,
                     style: TextStyle(
-                        fontSize: Sizing.blockSize * 4.65, color: Colors.black),
+                        fontSize: Sizing.fontSize * 4.65, color: Colors.black),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),

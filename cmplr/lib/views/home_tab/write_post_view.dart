@@ -32,7 +32,7 @@ class WritePost extends StatelessWidget {
                 label: Text(
                   'Post',
                   style: TextStyle(
-                    fontSize: Sizing.blockSize * 4.2,
+                    fontSize: Sizing.fontSize * 4.2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -79,7 +79,7 @@ class WritePost extends StatelessWidget {
                                       Text(
                                         'Post options',
                                         style: TextStyle(
-                                          fontSize: Sizing.blockSize * 4.5,
+                                          fontSize: Sizing.fontSize * 4.5,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
@@ -90,7 +90,7 @@ class WritePost extends StatelessWidget {
                                         child: Text(
                                           'Done',
                                           style: TextStyle(
-                                            fontSize: Sizing.blockSize * 4,
+                                            fontSize: Sizing.fontSize * 4,
                                             fontWeight: FontWeight.w400,
                                             color: Colors.blue,
                                           ),
@@ -172,7 +172,7 @@ class WritePost extends StatelessWidget {
                   SizedBox(width: Sizing.blockSize * 2),
                   Text(controller.userName,
                       style: TextStyle(
-                          fontSize: Sizing.blockSize * 4.2,
+                          fontSize: Sizing.fontSize * 4.2,
                           fontWeight: FontWeight.bold))
                 ],
               ),
@@ -233,7 +233,7 @@ class WritePost extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: Sizing.blockSize * 3.715),
+                                  fontSize: Sizing.fontSize * 3.715),
                             ),
                             style: ButtonStyle(
                                 backgroundColor:
@@ -332,7 +332,7 @@ Widget postOption(String optionText, IconData icon, bool activated, onTap) {
                 Text(
                   optionText,
                   style: TextStyle(
-                    fontSize: Sizing.blockSize * 4,
+                    fontSize: Sizing.fontSize * 4,
                     fontWeight: FontWeight.w400,
                   ),
                 )
@@ -395,14 +395,14 @@ Widget scheduleOption(bool activated, controller, context) {
                                 Text(
                                   'Schedule',
                                   style: TextStyle(
-                                    fontSize: Sizing.blockSize * 4,
+                                    fontSize: Sizing.fontSize * 4,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Text(
                                   controller.date,
                                   style: TextStyle(
-                                      fontSize: Sizing.blockSize * 3,
+                                      fontSize: Sizing.fontSize * 3,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.grey),
                                 ),
@@ -447,7 +447,7 @@ Widget scheduleOption(bool activated, controller, context) {
                         Text(
                           controller.date.split('at')[0],
                           style: TextStyle(
-                            fontSize: Sizing.blockSize * 3.75,
+                            fontSize: Sizing.fontSize * 3.75,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -471,7 +471,7 @@ Widget scheduleOption(bool activated, controller, context) {
                         Text(
                           controller.date.split('at')[1],
                           style: TextStyle(
-                            fontSize: Sizing.blockSize * 3.75,
+                            fontSize: Sizing.fontSize * 3.75,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -510,14 +510,14 @@ Widget scheduleOption(bool activated, controller, context) {
                           Text(
                             'Schedule',
                             style: TextStyle(
-                              fontSize: Sizing.blockSize * 4,
+                              fontSize: Sizing.fontSize * 4,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           Text(
                             controller.date,
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 3,
+                                fontSize: Sizing.fontSize * 3,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.grey),
                           ),
@@ -556,7 +556,7 @@ Widget shareToTwitter(bool activated, controller) {
                 Text(
                   'Share to Twitter',
                   style: TextStyle(
-                    fontSize: Sizing.blockSize * 4,
+                    fontSize: Sizing.fontSize * 4,
                     fontWeight: FontWeight.w400,
                   ),
                 )

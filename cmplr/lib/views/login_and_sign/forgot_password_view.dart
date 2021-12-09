@@ -25,7 +25,7 @@ class ForgotPassword extends StatelessWidget {
                   Text(
                     't',
                     style: TextStyle(
-                        fontSize: Sizing.blockSize * 16.25,
+                        fontSize: Sizing.fontSize * 16.25,
                         color: Colors.white,
                         fontWeight: FontWeight.w900),
                   ),
@@ -59,7 +59,7 @@ class ForgotPassword extends StatelessWidget {
                           Text(
                             'Forgot your password? It happens.',
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 5.6,
+                                fontSize: Sizing.fontSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -67,7 +67,7 @@ class ForgotPassword extends StatelessWidget {
                           Text(
                             'We\'ll send you a link to reset it.',
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 5.6,
+                                fontSize: Sizing.fontSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -96,7 +96,7 @@ class ForgotPassword extends StatelessWidget {
                           Text(
                             'Forgot your password? It happens.',
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 5.6,
+                                fontSize: Sizing.fontSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -104,7 +104,7 @@ class ForgotPassword extends StatelessWidget {
                           Text(
                             'We\'ll send you a link to reset it.',
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 5.6,
+                                fontSize: Sizing.fontSize * 5.6,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
                           ),

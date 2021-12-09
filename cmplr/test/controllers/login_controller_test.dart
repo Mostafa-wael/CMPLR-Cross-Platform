@@ -73,6 +73,5 @@ void main() {
     expect(controller.activateLoginButton, true);
     expect(controller.validCombination, true);
     expect(controller.validLoginEmail, true);
-
   });
 }

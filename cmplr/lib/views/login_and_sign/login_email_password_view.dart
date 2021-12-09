@@ -19,17 +19,18 @@ class LoginEmailPassword extends StatelessWidget {
           title: Padding(
             padding: EdgeInsets.fromLTRB(0, 0, Sizing.blockSize, 0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: Sizing.blockSize * 28.5),
+                SizedBox(
+                  width: Sizing.blockSize,
+                ),
                 Text(
                   't',
                   style: TextStyle(
-                      fontSize: Sizing.blockSize * 16.25,
+                      fontSize: Sizing.fontSize * 16.25,
                       color: Colors.white,
                       fontWeight: FontWeight.w900),
                 ),
-                SizedBox(width: Sizing.blockSize * 24.5),
                 controller.activateLoginButton
                     ? InkWell(
                         child: const Text(
@@ -111,7 +112,7 @@ class LoginEmailPassword extends StatelessWidget {
                           child: Text(
                             'Forgot Your Password?',
                             style: TextStyle(
-                              fontSize: Sizing.blockSize * 3.715,
+                              fontSize: Sizing.fontSize * 3.715,
                               color: Colors.grey,
                             ),
                           ),
