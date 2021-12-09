@@ -26,12 +26,13 @@ class CMPLR extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: PersistentStorage.isLoggedIn
           ? const MasterPage() /*const MasterPage()*/
           : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
-      theme: CMPLRTheme.dark(),
+      theme: themes[1],
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
   }

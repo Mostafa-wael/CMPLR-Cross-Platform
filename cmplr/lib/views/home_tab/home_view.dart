@@ -32,7 +32,8 @@ TabBar getTabBar(context) {
   return TabBar(
     indicatorWeight: 1,
     indicatorColor: Theme.of(context).textSelectionTheme.selectionColor,
-    labelColor: Theme.of(context).textSelectionTheme.selectionColor,
+    labelColor: Colors.lightBlue[800],
+    labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
     indicatorSize: TabBarIndicatorSize.label,
     unselectedLabelColor: Colors.grey,
     indicatorPadding: const EdgeInsets.all(0),
@@ -46,5 +47,6 @@ TabBar getTabBar(context) {
 const List<Tab> _tabs = [Tab(text: 'Following'), Tab(text: 'Stuff for you')];
 List<Widget> _views = [
   const HomeFollowingScreen(),
-  const Tab(text: 'Stuff for you'),
+  const Text('Stuff for you',
+      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
 ];

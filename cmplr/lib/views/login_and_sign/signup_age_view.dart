@@ -21,7 +21,7 @@ class SignupAge extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           shadowColor: Colors.transparent,
-          backgroundColor: const Color(0xFF001A35),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
               onPressed: () {
@@ -57,7 +57,7 @@ class SignupAge extends StatelessWidget {
           ],
         ),
         body: Container(
-          color: const Color(0xFF001A35),
+          color: Theme.of(context).scaffoldBackgroundColor,
           width: double.infinity,
           height: double.infinity,
           child: Padding(
