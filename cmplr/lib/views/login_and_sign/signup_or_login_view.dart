@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 /// Intor screen taht allows the user to choose between sign up or login
 class SignupOrLoginScreen extends StatelessWidget {
@@ -11,6 +12,11 @@ class SignupOrLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Sizing.width = MediaQuery.of(context).size.width;
+    Sizing.height = MediaQuery.of(context).size.height;
+    Sizing.blockSize = Sizing.width / 100;
+    Sizing.blockSizeVertical = Sizing.height / 100;
+
     return GetBuilder<SignupLoginController>(
       init: SignupLoginController(),
       builder: (controller) => Scaffold(
@@ -36,22 +42,22 @@ class SignupOrLoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 120),
-                  const Text(
+                  SizedBox(height: Sizing.blockSizeVertical * 18),
+                  Text(
                     'tumblr',
                     style: TextStyle(
-                        fontSize: 56,
+                        fontSize: Sizing.blockSize * 13,
                         color: Colors.white,
                         fontWeight: FontWeight.w900),
                   ),
-                  const SizedBox(height: 320),
+                  SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
                     text: 'Sign Up',
                     onTap: () {
                       controller.signUp();
                     },
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
                     text: 'Log in',
                     onTap: () {

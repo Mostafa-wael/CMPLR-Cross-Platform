@@ -4,6 +4,7 @@ import '../../controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class LoginEmailOrGoogle extends StatelessWidget {
   const LoginEmailOrGoogle({Key? key}) : super(key: key);
@@ -35,22 +36,22 @@ class LoginEmailOrGoogle extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 120),
-                  const Text(
+                  SizedBox(height: Sizing.blockSizeVertical * 18),
+                  Text(
                     'tumblr',
                     style: TextStyle(
-                        fontSize: 56,
+                        fontSize: Sizing.blockSize * 13,
                         color: Colors.white,
                         fontWeight: FontWeight.w900),
                   ),
-                  const SizedBox(height: 320),
+                  SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
                     text: 'Log in with Email',
                     onTap: () {
                       controller.loginEmail();
                     },
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
                     text: 'log in with Google',
                     onTap: () {

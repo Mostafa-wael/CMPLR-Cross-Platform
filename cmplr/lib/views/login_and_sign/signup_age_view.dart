@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class SignupAge extends StatelessWidget {
   const SignupAge({Key? key}) : super(key: key);
@@ -22,13 +23,12 @@ class SignupAge extends StatelessWidget {
           shadowColor: Colors.transparent,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
-            onPressed: () {
-              controller.closeAgeScreen();
-            },
-            splashRadius: 40,
-          ),
-          toolbarHeight: 80,
+              icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
+              onPressed: () {
+                controller.closeAgeScreen();
+              },
+              splashRadius: Sizing.blockSize * 10),
+          toolbarHeight: Sizing.blockSizeVertical * 12,
           actions: [
             Stack(children: [
               TextButton(
@@ -41,15 +41,15 @@ class SignupAge extends StatelessWidget {
                   child: Text('Next',
                       style: TextStyle(
                           color: Color(controller.nextButtonColor),
-                          fontSize: 20,
+                          fontSize: Sizing.blockSize * 4.65,
                           fontWeight: FontWeight.w800))),
               Positioned(
-                left: 15,
-                top: 7,
+                left: Sizing.blockSize * 3.5,
+                top: Sizing.blockSizeVertical,
                 child: (controller.isLoading)
-                    ? const CircularProgressIndicator(
-                        color: Color(0xFF00CF36),
-                        strokeWidth: 4.5,
+                    ? CircularProgressIndicator(
+                        color: const Color(0xFF00CF36),
+                        strokeWidth: Sizing.blockSize * 1.2,
                       )
                     : Container(color: Colors.transparent),
               )
@@ -61,11 +61,16 @@ class SignupAge extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
+            padding: EdgeInsets.fromLTRB(
+              Sizing.blockSize * 6,
+              Sizing.blockSizeVertical * 0.75,
+              Sizing.blockSize * 6,
+              Sizing.blockSizeVertical * 0.75,
+            ),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: Sizing.blockSizeVertical * 7.5,
                 ),
                 TextFormField(
                   controller: controller.ageController,
@@ -95,18 +100,21 @@ class SignupAge extends StatelessWidget {
                         ),
                       ),
                       hintText: 'How old are you?',
-                      hintStyle:
-                          const TextStyle(color: Colors.grey, fontSize: 20),
+                      hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: Sizing.blockSize * 4.65),
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white))),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: Sizing.blockSizeVertical * 2.25),
                 RichText(
                     text: TextSpan(
-                        style: const TextStyle(
-                            color: Colors.white, fontSize: 19, height: 1.4),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Sizing.blockSize * 4.45,
+                            height: Sizing.blockSizeVertical * 0.2),
                         children: <TextSpan>[
                       const TextSpan(
                           text: 'You\'re almost done.'

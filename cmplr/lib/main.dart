@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'views/views.dart';
+import '../../utilities/sizing/sizing.dart';
 
 Future<void> main() async {
   await GetStorage.init();

@@ -3,6 +3,7 @@ import '../../controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class LoginEmailSplash extends StatelessWidget {
   const LoginEmailSplash({Key? key}) : super(key: key);
@@ -20,15 +21,15 @@ class LoginEmailSplash extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 60),
-                          const Text(
+                          SizedBox(height: Sizing.blockSizeVertical * 9),
+                          Text(
                             't',
                             style: TextStyle(
-                                fontSize: 150,
+                                fontSize: Sizing.blockSize * 35,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900),
                           ),
-                          const SizedBox(height: 290),
+                          SizedBox(height: Sizing.blockSizeVertical * 43.5),
                           LoginTextField(
                             controller: controller,
                             text: 'email',
@@ -38,20 +39,20 @@ class LoginEmailSplash extends StatelessWidget {
                             isEmail: true,
                             iconColor: Colors.grey,
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: Sizing.blockSizeVertical * 1.5),
                           Opacity(
                             child: Container(
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   'Continue',
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: Sizing.blockSize * 3.715,
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300),
                                 ),
                               ),
-                              width: 340,
-                              height: 40,
+                              width: Sizing.blockSize * 84,
+                              height: Sizing.blockSizeVertical * 6,
                               color: Colors.blueAccent,
                             ),
                             opacity: 0.4,
