@@ -49,22 +49,23 @@ class CMPLRService {
     // and they want to open their activity or profile screen.
     // each set is used to check whether a given email or username
     // is inside it or not.
-    Routes.signupMailNameScreen: {
+    PostURIs.signup: {
       // set of registered emails
       'emails': users['emails'],
       // set of used usernames
       'names': users['names']
     },
-    Routes.loginEmailPassword: {
+    PostURIs.login: {
       'google_acount': {
         'email': 'cmplr.mock@gmail.com',
         'password': 'cmplr_mock_flutter'
       },
       'users': getEmailPassMap(),
     },
+    // Doesn't use post()
     Routes.signupPreferencesScreen: {
       'preference_names': [
-        'Trendingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxx',
+        'Trending',
         'Art',
         'Writing',
         'Books & Libraries',
@@ -80,6 +81,7 @@ class CMPLRService {
         'Fashion'
       ]
     },
+    // Doesn't use post()
     Routes.signupPreferencesSearchScreen: {
       'popular_searched_topics': [
         'Barcelona',
@@ -194,7 +196,7 @@ class CMPLRService {
             'Content-Type': 'application/json; charset=UTF-8',
             // TODO add authorization header
           },
-          body: jsonEncode(param));
+          body: jsonEncode(param)); /* e */
     }
   }
 
