@@ -1,6 +1,5 @@
-import '../../../../routes.dart';
+import '../../../../backend_uris.dart';
 import '../../../../utilities/functions.dart';
-
 import '../../../cmplr_service.dart';
 
 class ModelEmailPasswordNameAfterSignup {
@@ -19,7 +18,7 @@ class ModelEmailPasswordNameAfterSignup {
     // Check with the backend
     var validEmailAndName = Future.value(false);
     await CMPLRService.post(
-      Routes.signupMailNameScreen,
+      PostURIs.signup,
       {
         'Email': email,
         'Password': password,

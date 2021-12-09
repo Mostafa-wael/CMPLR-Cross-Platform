@@ -1,4 +1,4 @@
-import '../../../../routes.dart';
+import '../../../../backend_uris.dart';
 import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
 
@@ -11,7 +11,7 @@ class ModelEmailPasswordLogin {
     if (!validEmail) return Future.value(false);
 
     final response = await CMPLRService.post(
-      Routes.loginEmailPassword,
+      PostURIs.login,
       {
         'Email': email,
         'Password': password,

@@ -18,12 +18,15 @@ class SignupPreferencesModel {
     final preferenceNames =
         CMPLRService.initialPreferences(Routes.signupPreferencesScreen)
             as List<String>;
+
     final preferences = [];
+
     for (var i = 0; i < preferenceNames.length; i++) {
       preferences.add(PreferenceCard(
           color: _preferenceColors[i % _preferenceColors.length],
           preferenceName: preferenceNames[i]));
     }
+
     return preferences;
   }
 

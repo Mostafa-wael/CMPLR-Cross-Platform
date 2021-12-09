@@ -117,10 +117,12 @@ class CMPLRService {
     // content types
 
     switch (route) {
-      case Routes.signupMailNameScreen:
+      case PostURIs.signup:
         return signupMailNameVerification(route, params);
-      case Routes.loginEmailPassword:
+      case PostURIs.login:
         return login(route, params);
+      case PostURIs.askBlog:
+        return askBlog(route, params);
 
       default:
         throw Exception('Invalid request route');
@@ -180,6 +182,19 @@ class CMPLRService {
         },
         body: jsonEncode(params),
       );
+    }
+  }
+
+  static Future<http.Response> askBlog(String route, Map param) {
+    if (Flags.mock) {
+      throw Exception();
+    } else {
+      return http.post(Uri(path: PostURIs.getAskBlog(param['BlogId'])),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            // TODO add authorization header
+          },
+          body: jsonEncode(param));
     }
   }
 
