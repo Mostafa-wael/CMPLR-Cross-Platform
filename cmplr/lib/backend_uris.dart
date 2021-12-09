@@ -18,6 +18,7 @@ class PostURIs {
   static const String submitPost = '/blog/submit';
   static const String subscribeBlog = '/blog/subscribe';
   static const String addTagsToPost = '/add_tags_to_posts';
+  static const String posts = '/posts';
 
   // Helper functions
   static String getAskBlog(String blogId) => '/blog' + blogId + '/ask';

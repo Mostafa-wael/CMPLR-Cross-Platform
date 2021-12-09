@@ -10,8 +10,6 @@ class HomeFollowingScreen extends StatefulWidget {
   _HomeFollowingScreenState createState() => _HomeFollowingScreenState();
 }
 
-// TODO: Make it a list
-// TODO: get the data from the model
 class _HomeFollowingScreenState extends State<HomeFollowingScreen> {
   @override
   Widget build(BuildContext context) {

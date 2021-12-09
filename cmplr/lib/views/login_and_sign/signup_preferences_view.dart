@@ -17,7 +17,7 @@ class SignupPreferences extends StatelessWidget {
               builder: (context) => Dialog(
                   insetPadding: EdgeInsets.zero,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: Sizing.blockSizeVertical * 21.75,
@@ -81,7 +81,7 @@ class SignupPreferences extends StatelessWidget {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               shadowColor: Colors.transparent,
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: const Color(0xFF001A35),
               actions: [
                 (controller.isLoading)
                     ? CollectionScaleTransition(
@@ -92,7 +92,7 @@ class SignupPreferences extends StatelessWidget {
                         ],
                       )
                     : Material(
-                        color: Colors.transparent,
+                        color: const Color(0xFF001A35),
                         child: InkWell(
                           highlightColor: Colors.transparent,
                           splashColor: const Color(0x33f2f2f2),
@@ -134,7 +134,7 @@ class SignupPreferences extends StatelessWidget {
                       'Follow some of the tags below to start filling '
                       'your dashboard with the things you love.',
                       style: TextStyle(
-                          color: const Color(0xFF7F8D9C),
+                          color: Theme.of(context).primaryColor,
                           fontSize: Sizing.blockSize * 4.55),
                     ),
                   ],

@@ -23,7 +23,8 @@ class SignupAge extends StatelessWidget {
           shadowColor: Colors.transparent,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
+              icon:
+                  Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.closeAgeScreen();
               },
@@ -48,7 +49,7 @@ class SignupAge extends StatelessWidget {
                 top: Sizing.blockSizeVertical,
                 child: (controller.isLoading)
                     ? CircularProgressIndicator(
-                        color: const Color(0xFF00CF36),
+                        color: Theme.of(context).primaryColor,
                         strokeWidth: Sizing.blockSize * 1.2,
                       )
                     : Container(color: Colors.transparent),
@@ -78,7 +79,7 @@ class SignupAge extends StatelessWidget {
                   maxLength: 3,
                   autofocus: true,
                   cursorColor: Colors.grey,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -92,7 +93,7 @@ class SignupAge extends StatelessWidget {
                         visible: controller.showClearButton,
                         child: IconButton(
                           icon: const Icon(Icons.close),
-                          color: Colors.white,
+                          color: Theme.of(context).primaryColor,
                           onPressed: () {
                             controller.ageController.clear();
                             controller.ageFieldChanged();
@@ -103,16 +104,18 @@ class SignupAge extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: Sizing.blockSize * 4.65),
-                      enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor))),
                 ),
                 SizedBox(height: Sizing.blockSizeVertical * 2.25),
                 RichText(
                     text: TextSpan(
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).primaryColor,
                             fontSize: Sizing.blockSize * 4.45,
                             height: Sizing.blockSizeVertical * 0.2),
                         children: <TextSpan>[
