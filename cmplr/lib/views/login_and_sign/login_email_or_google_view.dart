@@ -48,7 +48,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   SignUpInButton(
                     text: 'Log in with Email',
                     onTap: () {
-                      controller.enterPasswordLoginEmail();
+                      controller.loginEmail();
                     },
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),

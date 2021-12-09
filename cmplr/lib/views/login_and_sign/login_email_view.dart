@@ -81,7 +81,7 @@ class LoginEmail extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          controller.tryLogin();
+                          controller.continueLoginEmail();
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),
