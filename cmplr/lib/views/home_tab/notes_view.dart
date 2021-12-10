@@ -5,6 +5,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
+import '../../utilities/sizing/sizing.dart';
 
 // This preserves the scroll state of the list view,
 // It is used due to this issue in Getx: https://github.com/jonataslaw/getx/issues/822
@@ -38,26 +39,26 @@ class Notes extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           shadowColor: Colors.transparent,
-          backgroundColor: const Color(0xFF001A35),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
             onPressed: () {
               controller.closeNotesScreen();
             },
-            splashRadius: 40,
+            splashRadius: Sizing.blockSize * 4.95,
           ),
           // centerTitle: true,
           title: Text(
             '${Get.arguments} notes',
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           actions: [
             IconButton(
               icon: Icon(controller.postSubscribed.value
                   ? Icons.notifications
                   : Icons.notifications_off_outlined),
-              color: Colors.white,
-              iconSize: 30,
+              color: Theme.of(context).primaryColor,
+              iconSize: Sizing.blockSize * 7.415,
               onPressed: () {
                 controller.subscriptionButtonPressed();
               },
@@ -72,7 +73,7 @@ class Notes extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                       child: Material(
                         child: InkWell(
                             onTap: () {},
@@ -84,7 +85,7 @@ class Notes extends StatelessWidget {
                               indicatorColor: controller.tabBarIndicatorColor,
                               tabs: <Widget>[
                                 Tab(
-                                  height: 50,
+                                  height: Sizing.blockSizeVertical * 7.5,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -92,7 +93,7 @@ class Notes extends StatelessWidget {
                                         CustomIcons.comment,
                                         // color: Colors.black,
                                       ),
-                                      const SizedBox(width: 15),
+                                      SizedBox(width: Sizing.blockSize * 3.71),
                                       Text(
                                         '${notesCount[0]}',
                                         style: const TextStyle(
@@ -103,7 +104,7 @@ class Notes extends StatelessWidget {
                                   ),
                                 ),
                                 Tab(
-                                  height: 50,
+                                  height: Sizing.blockSizeVertical * 7.5,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -111,7 +112,7 @@ class Notes extends StatelessWidget {
                                         CustomIcons.reblog,
                                         // color: Colors.black,
                                       ),
-                                      const SizedBox(width: 15),
+                                      SizedBox(width: Sizing.blockSize * 3.71),
                                       Text('${notesCount[1]}',
                                           style: const TextStyle(
                                               // color: Colors.black
@@ -120,16 +121,16 @@ class Notes extends StatelessWidget {
                                   ),
                                 ),
                                 Tab(
-                                  height: 50,
+                                  height: Sizing.blockSizeVertical * 7.5,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         CustomIcons.heart,
-                                        size: 22,
+                                        size: Sizing.blockSize * 5.44,
                                         // color: Colors.black,
                                       ),
-                                      const SizedBox(width: 15),
+                                      SizedBox(width: Sizing.blockSize * 3.71),
                                       Text('${notesCount[2]}',
                                           style: const TextStyle(
                                               // color: Colors.black
@@ -194,18 +195,22 @@ class Notes extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: Container(
-          height: 65,
-          padding: const EdgeInsets.fromLTRB(15, 10, 5, 10),
+          height: Sizing.blockSizeVertical * 9.75,
+          padding: EdgeInsets.fromLTRB(
+              Sizing.blockSize * 3.71,
+              Sizing.blockSizeVertical * 1.5,
+              Sizing.blockSize * 1.24,
+              Sizing.blockSizeVertical * 1.5),
           child: Stack(children: [
             Row(
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(userData.avatarURL),
-                  radius: 18,
+                  radius: Sizing.blockSize * 4.45,
                 ),
-                const SizedBox(width: 15),
+                SizedBox(width: Sizing.blockSize * 3.71),
                 SizedBox(
-                  width: 225,
+                  width: Sizing.blockSize * 55.6,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,15 +219,16 @@ class Notes extends StatelessWidget {
                         userData.tumblrName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: Sizing.blockSize * 4.2,
+                            fontWeight: FontWeight.w500),
                       ),
                       Text(
                         userData.profileTitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 18,
+                        style: TextStyle(
+                          fontSize: Sizing.blockSize * 4.2,
                           fontWeight: FontWeight.w400,
                           // color: Colors.black54
                         ),
@@ -230,7 +236,7 @@ class Notes extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 25),
+                SizedBox(width: Sizing.blockSize * 6.2),
               ],
             ),
             Positioned(
@@ -239,13 +245,14 @@ class Notes extends StatelessWidget {
                   child: InkWell(
                     onTap: () {},
                     child: Container(
-                        height: 45,
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: const Center(
+                        height: Sizing.blockSizeVertical * 6.75,
+                        padding: EdgeInsets.fromLTRB(Sizing.blockSize * 2.5, 0,
+                            Sizing.blockSize * 2.5, 0),
+                        child: Center(
                             child: Text(
                           'Follow',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: Sizing.blockSize * 4.65,
                               fontWeight: FontWeight.w500,
                               color: Colors.lightBlue),
                         ))),

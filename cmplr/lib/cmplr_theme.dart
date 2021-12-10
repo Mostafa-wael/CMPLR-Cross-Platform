@@ -58,29 +58,8 @@ class CMPLRTheme {
     ),
   );
 
-  static ThemeData light() {
+  static ThemeData trueBlue() {
     return ThemeData(
-<<<<<<< Updated upstream
-      brightness: Brightness.light,
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateColor.resolveWith((states) {
-          return Colors.black;
-        }),
-      ),
-      appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
-      ),
-      textTheme: lightTextTheme,
-    );
-=======
         primaryColor: Colors.black,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
@@ -99,46 +78,26 @@ class CMPLRTheme {
         textTheme: darkTextTheme,
         scaffoldBackgroundColor: Colors.white,
         secondaryHeaderColor: Colors.blue[700]);
->>>>>>> Stashed changes
   }
 
-  static ThemeData dark() {
+  static ThemeData darkTheme() {
     return ThemeData(
-<<<<<<< Updated upstream
+        primaryColor: Colors.white,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.white,
-          backgroundColor: Color.fromARGB(0xFF, 0, 26, 53),
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.black,
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
           backgroundColor: Colors.green,
         ),
+        canvasColor: Colors.black,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Colors.green,
+          selectedItemColor: Colors.white,
+          backgroundColor: Colors.white,
         ),
         textTheme: darkTextTheme,
         scaffoldBackgroundColor: const Color.fromARGB(0xFF, 0, 26, 53));
-=======
-      primaryColor: Colors.white,
-      brightness: Brightness.dark,
-      appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.black,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.green,
-      ),
-      canvasColor: Colors.black,
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.white,
-        backgroundColor: Colors.white,
-      ),
-      textTheme: darkTextTheme,
-      scaffoldBackgroundColor: const Color.fromARGB(0xFF, 34, 34, 34),
-      secondaryHeaderColor: Colors.cyan[500],
-    );
->>>>>>> Stashed changes
   }
 }

@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 /// The screen that shows when you choose to sign up with email
 /// then go to your profile.
@@ -26,7 +28,7 @@ class SignupMailName extends StatelessWidget {
       ' account? It would stink to lose'
       ' everything you just followed.';
 
-  static const _maxWidth = 400.0;
+  static final _maxWidth = Sizing.blockSize * 98.85;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class SignupMailName extends StatelessWidget {
             return _getBody(context, controller);
           },
         ),
-        resizeToAvoidBottomInset: false);
+        resizeToAvoidBottomInset: true);
   }
 
   /// Only one button that should route to the page the user was intending on.
@@ -52,7 +54,6 @@ class SignupMailName extends StatelessWidget {
             return TextButton(
               onPressed: () {
                 controller.validateInfo();
-                controller.toActivityOrProfile();
               },
               child: controller.getDoneButton(context),
             );
@@ -62,47 +63,36 @@ class SignupMailName extends StatelessWidget {
       );
 
   /// Top column containing 2 Text, 3 TextField for email, password, name.
-<<<<<<< Updated upstream
-  static Widget _getTopColumn(context, controller) => Column(
-=======
   static Widget _getTopColumn(
           context, EmailPasswordNameAfterSignupController controller) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
->>>>>>> Stashed changes
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             _title,
             style: Theme.of(context).textTheme.headline4,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: Sizing.blockSizeVertical * 2.4),
           Text(
             _subtitle,
             style: Theme.of(context).textTheme.headline3,
             textAlign: TextAlign.center,
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
             child: Text(
               controller.validInfo ? '' : controller.getErrors(),
               style: const TextStyle(color: Colors.red),
             ),
           ),
           TextField(
-<<<<<<< Updated upstream
-              controller: controller.emailController,
-              decoration: const InputDecoration(hintText: 'email')),
-          const SizedBox(height: 8),
-=======
             controller: controller.emailController,
             decoration: const InputDecoration(hintText: 'email'),
             onChanged: controller.fieldChanged,
           ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
->>>>>>> Stashed changes
           TextField(
             controller: controller.passwordController,
             decoration: InputDecoration(
@@ -122,7 +112,7 @@ class SignupMailName extends StatelessWidget {
             autocorrect: false,
             onChanged: controller.fieldChanged,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
             controller: controller.nameController,
             decoration: const InputDecoration(hintText: 'name'),
@@ -136,15 +126,19 @@ class SignupMailName extends StatelessWidget {
           EmailPasswordNameAfterSignupController controller) =>
       Popup(
         Padding(
-          padding:
-              const EdgeInsets.only(left: 4, right: 4, top: 16, bottom: 16),
+          padding: EdgeInsets.only(
+            left: Sizing.blockSize,
+            right: Sizing.blockSize,
+            top: Sizing.blockSizeVertical * 2.4,
+            bottom: Sizing.blockSizeVertical * 2.4,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 _nevermindText,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: Sizing.blockSize * 3.715),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 GestureDetector(
@@ -156,7 +150,7 @@ class SignupMailName extends StatelessWidget {
                     Get.back();
                   },
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: Sizing.blockSize * 4),
                 GestureDetector(
                     child: Text(
                       'I\'m sure',
@@ -170,7 +164,7 @@ class SignupMailName extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.grey[900] ?? Colors.grey,
-        maxHeight: 120,
+        maxHeight: Sizing.blockSizeVertical * 18,
       );
 
   /// Bottom column containing 1 Text, 2 Pressable texts (to login/ privacy policy)
@@ -178,20 +172,21 @@ class SignupMailName extends StatelessWidget {
           context, EmailPasswordNameAfterSignupController controller) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
+          Text(
             'Already have an account?',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: Sizing.blockSize * 4.65),
           ),
           GestureDetector(
               child: CustomUnderline(
                 text: Text(
                   'Login',
-                  style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                  style: TextStyle(
+                      fontSize: Sizing.blockSize * 4.65,
+                      color: Colors.blue[600]),
                 ),
-                underlineDistance: 1,
-                underlineWidth: 1,
+                underlineDistance: Sizing.blockSizeVertical * 0.15,
+                underlineWidth: Sizing.blockSize * 0.25,
               ),
               onTap: () {
                 showDialog(
@@ -204,7 +199,8 @@ class SignupMailName extends StatelessWidget {
             child: CustomUnderline(
               text: Text(
                 'Privacy dashboard',
-                style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                style: TextStyle(
+                    fontSize: Sizing.blockSize * 4.65, color: Colors.blue[600]),
               ),
             ),
             onTap: () {
@@ -220,18 +216,24 @@ class SignupMailName extends StatelessWidget {
         init: EmailPasswordNameAfterSignupController(),
         builder: (controller) {
           return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 16),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: _maxWidth),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _getTopColumn(context, controller),
-                    _getBottomColumn(context, controller)
-                  ],
+            padding: EdgeInsets.symmetric(
+                horizontal: Sizing.blockSize * 15.85,
+                vertical: Sizing.blockSizeVertical * 2.4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: ListView(children: [
+                  _getTopColumn(context, controller),
+                ])),
+                const SizedBox(
+                  height: 32,
                 ),
-              ));
+                _getBottomColumn(context, controller)
+              ],
+            ),
+          );
         },
       ));
 }

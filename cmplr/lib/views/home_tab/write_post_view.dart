@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/external/external.dart';
+import '../../utilities/sizing/sizing.dart';
 
 // TODO: DRAFTS
 class WritePost extends StatelessWidget {
@@ -22,21 +23,23 @@ class WritePost extends StatelessWidget {
       init: WritePostController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: Sizing.blockSizeVertical * 12,
           leading: IconButton(
-            icon: const Icon(Icons.close, size: 25),
+            icon: Icon(Icons.close, size: Sizing.blockSize * 6.2),
             onPressed: () {
               Get.back();
             },
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(top: 12, bottom: 12),
+              padding: EdgeInsets.only(
+                  top: Sizing.blockSizeVertical * 1.8,
+                  bottom: Sizing.blockSizeVertical * 1.8),
               child: ActionChip(
-                label: const Text(
+                label: Text(
                   'Post',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: Sizing.blockSize * 4.2,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -48,12 +51,12 @@ class WritePost extends StatelessWidget {
                 onPressed: () {
                   // https://api.flutter.dev/flutter/material/showModalBottomSheet.html
                 },
-                icon: const Icon(Icons.more_vert, size: 30)),
+                icon: Icon(Icons.more_vert, size: Sizing.blockSize * 7.5)),
           ],
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(40),
+            preferredSize: Size.fromHeight(Sizing.blockSizeVertical * 6),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(Sizing.blockSize * 2),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -63,10 +66,11 @@ class WritePost extends StatelessWidget {
                   const CircleAvatar(
                       backgroundImage: AssetImage(
                           'lib/utilities/assets/logo/logo_icon.png')),
-                  const SizedBox(width: 8),
-                  const Text('Username',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                  SizedBox(width: Sizing.blockSize * 2),
+                  Text('Username',
+                      style: TextStyle(
+                          fontSize: Sizing.blockSize * 4.2,
+                          fontWeight: FontWeight.bold))
                 ],
               ),
             ),
@@ -80,11 +84,10 @@ class WritePost extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(12),
+                      padding: EdgeInsets.all(Sizing.blockSize * 3),
                       child: Column(
                         children: [
-
-                          const SizedBox(height: 8),
+                          SizedBox(height: Sizing.blockSize * 1.2),
                           TextField(
                             focusNode: controller.textFocus,
                             decoration: const InputDecoration(
@@ -102,65 +105,69 @@ class WritePost extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                visibleKeyboard ?
+                visibleKeyboard
+                    ? Padding(
+                        padding: EdgeInsets.only(left: Sizing.blockSize * 3),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextButton.icon(
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                            label: Text(
+                              'Add tags to help people find your post',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizing.blockSize * 3.715),
+                            ),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.grey[900] ?? Colors.red),
+                                shape: MaterialStateProperty.all(
+                                    const StadiumBorder())),
+                            onPressed: () {},
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(left: Sizing.blockSize * 3),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextButton.icon(
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                            label: Text(
+                              'Add tags to help people find your post',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizing.blockSize * 3.715),
+                            ),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.grey[900] ?? Colors.red),
+                                shape: MaterialStateProperty.all(
+                                    const StadiumBorder())),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton.icon(
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      label: const Text(
-                        'Add tags to help people find your post',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey[900] ?? Colors.red),
-                          shape:
-                              MaterialStateProperty.all(const StadiumBorder())),
-                      onPressed: () {},
-                    ),
-                  ),
-                ) : Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton.icon(
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      label: const Text(
-                        'Add tags to help people find your post',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey[900] ?? Colors.red),
-                          shape:
-                          MaterialStateProperty.all(const StadiumBorder())),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
+                  padding: EdgeInsets.only(
+                      left: Sizing.blockSize * 3, right: Sizing.blockSize * 3),
                   child: Row(
                     children: [
                       FocusedMenuHolder(
-                          menuOffset: 10,
-                          menuItemExtent: 40,
+                          menuOffset: Sizing.blockSize * 2.5,
+                          menuItemExtent: Sizing.blockSize * 10,
                           duration: const Duration(milliseconds: 200),
-                          menuWidth: 120,
+                          menuWidth: Sizing.blockSize * 30,
                           blurSize: 0,
                           maxMenuHeightPercentage: 0.9,
                           animateMenuItems: false,

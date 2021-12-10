@@ -126,6 +126,8 @@ class CMPLRService {
         return login(route, params);
       case PostURIs.askBlog:
         return askBlog(route, params);
+      case PostURIs.posts:
+        return getPosts(route, params);
 
       default:
         throw Exception('Invalid request route');
@@ -216,5 +218,21 @@ class CMPLRService {
   // This functionality is not implemeted in the back-end
   static List searchedTopics(String route, String topics) {
     return _mockData[route][topics];
+  }
+
+// TODO: add mock data, get them from the controller
+  static Future<http.Response> getPosts(String route, Map params) async {
+    if (Flags.mock) {
+      return http.Response('', 200);
+    } else {
+      return http.post(
+        Uri(path: PostURIs.signup),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          // TODO add authorization header
+        },
+        body: jsonEncode(params),
+      );
+    }
   }
 }

@@ -3,6 +3,7 @@ import '../../controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class LoginEmail extends StatelessWidget {
   const LoginEmail({Key? key}) : super(key: key);
@@ -37,26 +38,26 @@ class LoginEmail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   visibleKeyboard
-                      ? const SizedBox(height: 20)
-                      : const SizedBox(height: 60),
+                      ? SizedBox(height: Sizing.blockSizeVertical * 3)
+                      : SizedBox(height: Sizing.blockSizeVertical * 9),
                   visibleKeyboard
-                      ? const Text(
+                      ? Text(
                           't',
                           style: TextStyle(
-                              fontSize: 75,
+                              fontSize: Sizing.blockSize * 17.5,
                               color: Colors.white,
                               fontWeight: FontWeight.w900),
                         )
-                      : const Text(
+                      : Text(
                           't',
                           style: TextStyle(
-                              fontSize: 150,
+                              fontSize: Sizing.blockSize * 35,
                               color: Colors.white,
                               fontWeight: FontWeight.w900),
                         ),
                   visibleKeyboard
-                      ? const SizedBox(height: 60)
-                      : const SizedBox(height: 290),
+                      ? SizedBox(height: Sizing.blockSizeVertical * 9)
+                      : SizedBox(height: Sizing.blockSizeVertical * 43.5),
                   LoginTextField(
                     controller: controller,
                     text: 'email',
@@ -66,28 +67,28 @@ class LoginEmail extends StatelessWidget {
                     isEmail: true,
                     iconColor: Colors.white,
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: Sizing.blockSizeVertical * 1.5),
                   SizedBox(
                     child: Material(
                       child: InkWell(
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             'Continue',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: Sizing.blockSize * 3.715,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300),
                           ),
                         ),
                         onTap: () {
-                          controller.continueLoginEmail();
+                          controller.tryLogin();
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),
                       color: Colors.blueAccent,
                     ),
-                    width: 340,
-                    height: 40,
+                    width: Sizing.blockSize * 84,
+                    height: Sizing.blockSizeVertical * 6,
                   ),
                 ],
               ),

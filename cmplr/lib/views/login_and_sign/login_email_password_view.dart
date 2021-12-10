@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class LoginEmailPassword extends StatelessWidget {
   const LoginEmailPassword({Key? key}) : super(key: key);
@@ -13,42 +14,45 @@ class LoginEmailPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          toolbarHeight: 70,
+          toolbarHeight: Sizing.blockSizeVertical * 10.5,
           elevation: 0.0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 115),
-              const Text(
-                't',
-                style: TextStyle(
-                    fontSize: 70,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(width: 115),
-              controller.activateLoginButton
-                  ? InkWell(
-                      child: const Text(
+          title: Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, Sizing.blockSize, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: Sizing.blockSize * 28.5),
+                Text(
+                  't',
+                  style: TextStyle(
+                      fontSize: Sizing.blockSize * 16.25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900),
+                ),
+                SizedBox(width: Sizing.blockSize * 24.5),
+                controller.activateLoginButton
+                    ? InkWell(
+                        child: const Text(
+                          'Log in',
+                          style: TextStyle(color: Colors.blueAccent),
+                        ),
+                        onTap: () {
+                          controller.tryLogin();
+                        },
+                      )
+                    : const Text(
                         'Log in',
-                        style: TextStyle(color: Colors.blueAccent),
-                      ),
-                      onTap: () {
-                        controller.enterPassword();
-                      },
-                    )
-                  : const Text(
-                      'Log in',
-                      style: TextStyle(color: Color(0x448AFFFF)),
-                    )
-            ],
+                        style: TextStyle(color: Color(0x448AFFFF)),
+                      )
+              ],
+            ),
           ),
         ),
         body: visibleKeyboard
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 150),
+                  SizedBox(height: Sizing.blockSizeVertical * 22.5),
                   Center(
                     child: Column(
                       children: [
@@ -61,7 +65,7 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: true,
                           iconColor: Colors.grey,
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
                           controller: controller,
                           text: 'password',
@@ -79,7 +83,7 @@ class LoginEmailPassword extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 240),
+                  SizedBox(height: Sizing.blockSizeVertical * 34),
                   Center(
                     child: Column(
                       children: [
@@ -92,7 +96,7 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: true,
                           iconColor: Colors.grey,
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
                           controller: controller,
                           text: 'password',
@@ -102,12 +106,12 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: false,
                           iconColor: Colors.grey,
                         ),
-                        const SizedBox(height: 200),
+                        SizedBox(height: Sizing.blockSizeVertical * 30),
                         GestureDetector(
-                          child: const Text(
+                          child: Text(
                             'Forgot Your Password?',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: Sizing.blockSize * 3.715,
                               color: Colors.grey,
                             ),
                           ),

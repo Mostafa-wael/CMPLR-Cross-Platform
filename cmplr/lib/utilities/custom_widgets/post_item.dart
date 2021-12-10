@@ -26,7 +26,7 @@ class PostItem extends StatefulWidget {
 }
 
 class _PostItemState extends State<PostItem> {
-  var controller = Get.put(PostController());
+  var controller = Get.put(PostItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +56,20 @@ class _PostItemState extends State<PostItem> {
           '${widget.postData}',
         ),
       ),
-      title: Text(
-        '${widget.name}',
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
+      title: InkWell(
+        onTap: () {
+          print('Profile clicked');
+        },
+        child: Text(
+          '${widget.name}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
       ),
       trailing: IconButton(
-        icon: const Icon(Icons.more_horiz),
+        icon: const Icon(Icons.more_horiz, color: Colors.grey),
         onPressed: () {
           controller.openMoreOptions();
           print('More Options clicked');
@@ -128,19 +134,22 @@ class _PostItemState extends State<PostItem> {
             controller.openNotes(widget.numNotes);
             print('Notes clicked');
           },
-          child: Text('${widget.numNotes} notes'),
+          child: Text('${widget.numNotes} notes',
+              style: const TextStyle(
+                  color: Colors.grey, fontWeight: FontWeight.bold)),
         ),
         Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.chat_bubble_outline),
+              icon: Icon(Icons.chat_bubble_outline,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.openNotes(widget.numNotes);
                 print('Notes clicked');
               },
             ),
             IconButton(
-              icon: const Icon(Icons.share),
+              icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.share();
 
@@ -148,14 +157,15 @@ class _PostItemState extends State<PostItem> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.loop_rounded),
+              icon: Icon(Icons.loop_rounded,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.reblog(widget);
                 print('reblog clicked');
               },
             ),
             IconButton(
-              icon: const Icon(Icons.favorite),
+              icon: Icon(Icons.favorite, color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.lovePost();
                 print('Love clicked');

@@ -1,8 +1,10 @@
+import '../../models/persistent_storage_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/models.dart';
+import '../../routes.dart';
 import '../master_page_controller.dart';
 
 // (Tarek) TODO: maybe rename this to ExtraSignup?
@@ -19,12 +21,8 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
   bool _passwordHidden = true;
   bool _validInfo = true;
-<<<<<<< Updated upstream
-  static const _loginURL = '/login';
-=======
   bool _fieldsFilled = false;
   static const _loginURL = Routes.login;
->>>>>>> Stashed changes
 
   List? errors;
 
@@ -60,12 +58,6 @@ class EmailPasswordNameAfterSignupController extends GetxController {
   }
 
   /// Checks whether the email AND username don't already exist.
-<<<<<<< Updated upstream
-  void validateInfo() {
-    _validInfo = model.checkEmailPasswordName(
-        emailController.text, passwordController.text, nameController.text);
-    update();
-=======
   Future<bool> validateInfo() {
     if (_fieldsFilled)
       return model
@@ -83,7 +75,6 @@ class EmailPasswordNameAfterSignupController extends GetxController {
       update();
       return Future.value(false);
     }
->>>>>>> Stashed changes
   }
 
   bool get passwordHidden => _passwordHidden;
@@ -111,14 +102,12 @@ class EmailPasswordNameAfterSignupController extends GetxController {
   void toActivityOrProfile() {
     // (Tarek) TODO:
     // Go to profile
-    if (validInfo) {
-      // Get.snackbar('GO TO PROFILE/ACTIVITY', '');
+    // Get.snackbar('GO TO PROFILE/ACTIVITY', '');
 
-      masterPageController?.logIn();
-      masterPageController?.showActivityOrProfileAfterExtraSignup();
+    masterPageController?.logIn();
+    masterPageController?.showActivityOrProfileAfterExtraSignup();
 
-      GetStorage().write('logged_in', true);
-    }
+    PersistentStorage.changeLoggedIn(true);
   }
 
   // Called whenever the email, password, or name fields change in

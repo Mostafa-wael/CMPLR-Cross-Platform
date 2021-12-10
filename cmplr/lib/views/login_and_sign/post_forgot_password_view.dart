@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
+import '../../utilities/sizing/sizing.dart';
 
 class PostForgotPassword extends StatelessWidget {
   const PostForgotPassword({Key? key}) : super(key: key);
@@ -12,78 +12,72 @@ class PostForgotPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          toolbarHeight: 70,
+          toolbarHeight: Sizing.blockSizeVertical * 10.5,
           elevation: 0.0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(width: 115),
-              const Text(
+              SizedBox(width: Sizing.blockSize * 28.5),
+              Text(
                 't',
                 style: TextStyle(
-                    fontSize: 70,
+                    fontSize: Sizing.blockSize * 16.25,
                     color: Colors.white,
                     fontWeight: FontWeight.w900),
               ),
-              const SizedBox(width: 115),
-              (controller.emailController.text.isEmpty &&
-                      controller.passwordController.text.isEmpty)
-                  ? const Text(
-                      'Log in',
-                      style: TextStyle(color: Color(0x448AFFFF)),
-                    )
-                  : InkWell(
-                      child: const Text(
-                        'Log in',
-                        style: TextStyle(color: Colors.blueAccent),
-                      ),
-                      onTap: () {
-                        controller.returnFromSendResetEmail();
-                      },
-                    ),
+              SizedBox(width: Sizing.blockSize * 28.5),
+              InkWell(
+                child: const Text(
+                  'Log in',
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+                onTap: () {
+                  controller.returnFromSendResetEmail();
+                },
+              ),
             ],
           ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(
+            Center(
               child: Text(
                 'Okay, we just send you a password reset',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: Sizing.blockSize * 5,
                     color: Colors.white,
                     fontWeight: FontWeight.w400),
               ),
             ),
-            const SizedBox(height: 5),
-            const Center(
+            SizedBox(height: Sizing.blockSizeVertical * 0.5),
+            Center(
               child: Text(
                 'email',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: Sizing.blockSize * 5,
                     color: Colors.white,
                     fontWeight: FontWeight.w400),
               ),
             ),
-            const SizedBox(height: 10),
-            const Center(
+            SizedBox(height: Sizing.blockSizeVertical * 1.5),
+            Center(
               child: Text(
                 'Didn\'t get it? Check your spam folder if it\'s not',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: Sizing.blockSize * 4.25,
                     color: Colors.grey,
                     fontWeight: FontWeight.w300),
               ),
             ),
-            const SizedBox(height: 5),
-            const Center(
+            SizedBox(height: Sizing.blockSizeVertical * 0.5),
+            Center(
               child: Text(
                 // TODO: Change "our help docs" to hyper link & bold
                 // & white text
                 'there, follow the tips in our help docs.',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: Sizing.blockSize * 4.25,
                     color: Colors.grey,
                     fontWeight: FontWeight.w300),
               ),

@@ -4,7 +4,7 @@ import '../../models/models.dart';
 
 class SignupPreferencesSearchController extends GetxController {
   // data model for search preferences
-  SignupPreferencesSearchModel preferencesSearchModel =
+  final SignupPreferencesSearchModel _preferencesSearchModel =
       SignupPreferencesSearchModel();
 
   // the header text of the scroll view (it changes after search)
@@ -26,7 +26,8 @@ class SignupPreferencesSearchController extends GetxController {
   @override
   void onInit() {
     // initially, get the popular searched topics
-    _currentlyShownTopics = preferencesSearchModel.getPopularSearchedTopics();
+    _currentlyShownTopics =
+        _preferencesSearchModel.searchedTopics('popular_searched_topics');
     super.onInit();
   }
 
@@ -35,11 +36,12 @@ class SignupPreferencesSearchController extends GetxController {
   void searchQueryChanged() {
     if (_searchBarController.text == '') {
       _searchIndicatorString = 'Popular searched topics';
-      _currentlyShownTopics = preferencesSearchModel.getPopularSearchedTopics();
+      _currentlyShownTopics =
+          _preferencesSearchModel.searchedTopics('popular_searched_topics');
     } else {
       _searchIndicatorString = 'Search results';
       _currentlyShownTopics =
-          preferencesSearchModel.getPopularSearchedTopics().sublist(5, 8);
+          _preferencesSearchModel.searchedTopics('searched_topics');
     }
     update();
   }

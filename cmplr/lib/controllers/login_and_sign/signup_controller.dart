@@ -1,10 +1,11 @@
+import '../../models/persistent_storage_api.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import '../../routes.dart';
 import '../../views/views.dart';
 import '../../utilities/authentication/authentication.dart';
 
@@ -12,7 +13,6 @@ class SignupController extends GetxController {
   /// Navigates to the page where the user can enter their age
   /// and continue the signup process
   Future<void> signUpEmail() async {
-    // GetStorage().write('logged_in', true);
     Get.to(
       const SignupAge(),
       transition: Transition.rightToLeft,
@@ -31,10 +31,10 @@ class SignupController extends GetxController {
       Get.offAll(
         const MasterPage(),
         transition: Transition.rightToLeft,
-        routeName: '/MasterPage',
+        routeName: Routes.masterPage,
         arguments: user,
       );
-      GetStorage().write('logged_in', true);
+      PersistentStorage.changeLoggedIn(true);
     } else {
       _showToast('Failed to Sign up, please try again');
     }
