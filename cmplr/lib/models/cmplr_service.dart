@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import '../backend_uris.dart';
 
 import '../flags.dart';
 import 'package:http/http.dart' as http;
 
+import 'pages_model/home_tab/notes/user_note.dart';
 import '../routes.dart';
 
 /// Our interface to the backend OR our mock data
@@ -107,6 +110,204 @@ class CMPLRService {
         'Inter Milan',
         'Ac Milan',
       ]
+    },
+    Routes.notes: {
+      'response': {
+        'notes': [
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'square',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'Xz'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content':
+                'This is a post comment. This is a post comment. This is a post'
+                    'comment. This is a post comment. This is a post comment.'
+                    'This is a post comment. This is a post comment.'
+                    'This is a post comment.'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'true',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'reblog',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed'
+          },
+          {
+            'type': 'reblog',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed'
+          },
+        ],
+        'total_notes': 21,
+      }
     },
   };
 
@@ -225,6 +426,20 @@ class CMPLRService {
         },
         body: jsonEncode(params),
       );
+    }
+  }
+
+  static Future<List<UserNote>> getNotes(String route) async {
+    final notes = <UserNote>[];
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      for (var i = 0; i < _mockData[route]['response']['total_notes']; i++) {
+        notes.add(UserNote.fromJson(_mockData[route]['response']['notes'][i]));
+      }
+      return notes;
+    } else {
+      // TODO: Do a get request
+      return notes;
     }
   }
 }
