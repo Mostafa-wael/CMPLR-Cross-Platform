@@ -38,7 +38,7 @@ class SignupEmailOrGoogle extends StatelessWidget {
                 children: [
                   SizedBox(height: Sizing.blockSizeVertical * 18),
                   Text(
-                    'tumblr',
+                    'Cmplr',
                     style: TextStyle(
                         fontSize: Sizing.fontSize * 13,
                         color: Colors.white,
