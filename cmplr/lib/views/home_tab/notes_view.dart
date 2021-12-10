@@ -212,167 +212,11 @@ class Notes extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                showModalBottomSheet(
-                                    constraints: BoxConstraints(
-                                        maxHeight:
-                                            Sizing.blockSizeVertical * 30),
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return GetBuilder<NotesController>(
-                                          builder: (controller) => Obx(
-                                                () => Column(
-                                                  children: [
-                                                    Icon(Icons.line_weight),
-                                                    SizedBox(
-                                                        height: Sizing
-                                                                .blockSizeVertical *
-                                                            4.5),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        if (!controller
-                                                            .reblogsWithComments
-                                                            .value) {
-                                                          controller
-                                                              .reblogsWithComments
-                                                              .value = true;
-                                                        }
-                                                        Get.back();
-                                                      },
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.fromLTRB(
-                                                                12, 0, 0, 0),
-                                                        height: 60,
-                                                        width: Sizing.width,
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              width: 330,
-                                                              child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    'Reblogs with comments',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            Sizing.blockSize *
-                                                                                4.2,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                  Text(
-                                                                    'Show reblogs with added comments and/or tags.',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            Sizing.blockSize *
-                                                                                4.2),
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .visible,
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 20,
-                                                            ),
-                                                            Visibility(
-                                                              visible: controller
-                                                                  .reblogsWithComments
-                                                                  .value,
-                                                              child: Icon(
-                                                                  CustomIcons
-                                                                      .check,
-                                                                  size: Sizing
-                                                                          .blockSize *
-                                                                      5),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 20),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        if (controller
-                                                            .reblogsWithComments
-                                                            .value) {
-                                                          controller
-                                                              .reblogsWithComments
-                                                              .value = false;
-                                                        }
-                                                        Get.back();
-                                                      },
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.fromLTRB(
-                                                                12, 0, 0, 0),
-                                                        height: 60,
-                                                        width: Sizing.width,
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              width: 330,
-                                                              child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    'Other reblogs',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            Sizing.blockSize *
-                                                                                4.2,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                  Text(
-                                                                    'Show empty reblogs.',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            Sizing.blockSize *
-                                                                                4.2),
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .visible,
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 20,
-                                                            ),
-                                                            Visibility(
-                                                              visible: !controller
-                                                                  .reblogsWithComments
-                                                                  .value,
-                                                              child: Icon(
-                                                                  CustomIcons
-                                                                      .check,
-                                                                  size: Sizing
-                                                                          .blockSize *
-                                                                      5),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ));
-                                    });
+                                getModalSheet(context);
                               },
                               child: Container(
-                                padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(
+                                    Sizing.blockSize * 4.5, 0, 0, 0),
                                 height: 50,
                                 width: Sizing.width,
                                 child: Row(
@@ -516,7 +360,7 @@ class Notes extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
+              SizedBox(
                   width: 50,
                   child: Stack(
                     children: [
@@ -537,7 +381,8 @@ class Notes extends StatelessWidget {
                             radius: Sizing.blockSize * 1.85,
                             child: Center(
                                 child: Icon(CustomIcons.reblog,
-                                    size: 10, color: Colors.white))),
+                                    size: Sizing.blockSize * 2.0,
+                                    color: Colors.white))),
                         bottom: 0,
                         right: 14,
                       )
@@ -547,7 +392,7 @@ class Notes extends StatelessWidget {
                 onTap: () {
                   print('User profile tapped');
                 },
-                child: Container(
+                child: SizedBox(
                   width: 120,
                   child: Text(
                     note.blogName,
@@ -565,11 +410,10 @@ class Notes extends StatelessWidget {
               )
             ],
           ),
-          Container(
+          SizedBox(
             width: Sizing.width,
             child: Text(
-              'cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaaaaaaaaaaaaaaaaaaa'
-              'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxxxxxxxxx',
+              note.postReply,
               style: TextStyle(
                 fontSize: Sizing.blockSize * 4.2,
               ),
@@ -633,8 +477,8 @@ class Notes extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 50,
+            SizedBox(
+              width: Sizing.blockSize * 12.16,
               child: Stack(
                 children: [
                   note.avatarShape == 'circle'
@@ -654,7 +498,8 @@ class Notes extends StatelessWidget {
                         radius: Sizing.blockSize * 1.85,
                         child: Center(
                             child: Icon(CustomIcons.reblog,
-                                size: 10, color: Colors.white))),
+                                size: Sizing.blockSize * 3.5,
+                                color: Colors.white))),
                     bottom: 0,
                     right: 14,
                   )
@@ -786,5 +631,118 @@ class Notes extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> getModalSheet(BuildContext context) {
+    return showModalBottomSheet(
+        constraints: BoxConstraints(maxHeight: Sizing.blockSizeVertical * 30),
+        context: context,
+        builder: (BuildContext context) {
+          return GetBuilder<NotesController>(
+              builder: (controller) => Obx(
+                    () => Column(
+                      children: [
+                        const Icon(Icons.line_weight),
+                        SizedBox(height: Sizing.blockSizeVertical * 4.5),
+                        InkWell(
+                          onTap: () {
+                            if (!controller.reblogsWithComments.value) {
+                              controller.reblogsWithComments.value = true;
+                            }
+                            Get.back();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                            height: Sizing.blockSizeVertical * 8.78,
+                            width: Sizing.width,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: Sizing.blockSize * 80.29,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Reblogs with comments',
+                                        style: TextStyle(
+                                            fontSize: Sizing.blockSize * 4.2,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'Show reblogs with added comments and/or tags.',
+                                        style: TextStyle(
+                                            fontSize: Sizing.blockSize * 4.2),
+                                        overflow: TextOverflow.visible,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: Sizing.blockSize * 4.86,
+                                ),
+                                Visibility(
+                                  visible: controller.reblogsWithComments.value,
+                                  child: Icon(CustomIcons.check,
+                                      size: Sizing.blockSize * 5),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: Sizing.blockSizeVertical),
+                        InkWell(
+                          onTap: () {
+                            if (controller.reblogsWithComments.value) {
+                              controller.reblogsWithComments.value = false;
+                            }
+                            Get.back();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                            height: Sizing.blockSizeVertical * 8.78,
+                            width: Sizing.width,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: Sizing.blockSize * 80.29,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Other reblogs',
+                                        style: TextStyle(
+                                            fontSize: Sizing.blockSize * 4.2,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'Show empty reblogs.',
+                                        style: TextStyle(
+                                            fontSize: Sizing.blockSize * 4.2),
+                                        overflow: TextOverflow.visible,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: Sizing.blockSize * 4.86,
+                                ),
+                                Visibility(
+                                  visible:
+                                      !controller.reblogsWithComments.value,
+                                  child: Icon(CustomIcons.check,
+                                      size: Sizing.blockSize * 5),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ));
+        });
   }
 }
