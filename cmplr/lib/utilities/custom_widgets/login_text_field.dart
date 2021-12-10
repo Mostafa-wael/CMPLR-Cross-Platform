@@ -38,14 +38,12 @@ class LoginTextField extends StatelessWidget {
             suffixIcon: isEmail
                 ? controller.showClearIcon
                     ? InkWell(
-                        child: Icon(
-                          Icons.clear,
-                          color: iconColor,
-                        ),
+                        child: Icon(Icons.clear, color: iconColor),
                         onTap: () {
                           textController.clear();
                           controller.emailFieldChanged();
                         },
+                        key: ValueKey('${text}_clear'),
                       )
                     : const Icon(
                         Icons.clear,
@@ -56,6 +54,7 @@ class LoginTextField extends StatelessWidget {
                         child: Icon(
                           Icons.visibility,
                           color: iconColor,
+                          key: ValueKey('${text}_visibility'),
                         ),
                         onTap: () {
                           controller.viewHidePassword();
@@ -64,6 +63,7 @@ class LoginTextField extends StatelessWidget {
                         child: Icon(
                           Icons.visibility_off,
                           color: iconColor,
+                          key: ValueKey('${text}_visibility'),
                         ),
                         onTap: () {
                           controller.viewHidePassword();

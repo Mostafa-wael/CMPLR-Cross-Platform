@@ -12,6 +12,8 @@ class PostForgotPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           toolbarHeight: Sizing.blockSizeVertical * 10.5,
           elevation: 0.0,
           title: Row(
@@ -30,6 +32,7 @@ class PostForgotPassword extends StatelessWidget {
                 child: const Text(
                   'Log in',
                   style: TextStyle(color: Colors.blueAccent),
+                  key: ValueKey('postForgotPassword_login'),
                 ),
                 onTap: () {
                   controller.returnFromSendResetEmail();

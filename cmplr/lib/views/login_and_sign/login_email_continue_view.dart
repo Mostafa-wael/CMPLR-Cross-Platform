@@ -44,29 +44,29 @@ class LoginEmailContinue extends StatelessWidget {
                       ? Text(
                           't',
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 17.5,
-                              color: Colors.black,
+                              fontSize: Sizing.fontSize * 17.5,
+                              color: Colors.white,
                               fontWeight: FontWeight.w900),
                         )
                       : Text(
                           't',
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 35,
-                              color: Colors.black,
+                              fontSize: Sizing.fontSize * 35,
+                              color: Colors.white,
                               fontWeight: FontWeight.w900),
                         ),
                   visibleKeyboard
                       ? SizedBox(height: Sizing.blockSizeVertical * 9)
                       : SizedBox(height: Sizing.blockSizeVertical * 43.5),
                   LoginTextField(
-                    key: const ValueKey('getEmail_getEmail'),
+                    key: const ValueKey('getEmail2_getEmail'),
                     controller: controller,
                     text: 'email',
                     focus: true,
                     enabled: true,
                     underlineColor: Colors.blueAccent,
                     isEmail: true,
-                    iconColor: Colors.black,
+                    iconColor: Colors.white,
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 1.5),
                   SizedBox(
@@ -75,10 +75,10 @@ class LoginEmailContinue extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'Enter Password',
-                            key: const ValueKey('getEmail_getpassword'),
+                            key: const ValueKey('getEmail2_getPassword'),
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 3.715,
-                                color: Colors.black,
+                                fontSize: Sizing.fontSize * 3.715,
+                                color: Colors.white,
                                 fontWeight: FontWeight.w300),
                           ),
                         ),
@@ -87,7 +87,7 @@ class LoginEmailContinue extends StatelessWidget {
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                     width: Sizing.blockSize * 84,
                     height: Sizing.blockSizeVertical * 6,
