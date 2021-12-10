@@ -23,6 +23,7 @@ dependencies:
   get_storage:
   firebase_core:
   firebase_auth: ^3.3.3
+  driver_extensions:
 
   file_picker:
   flutter_html:
