@@ -7,6 +7,7 @@ import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
 
+// TODO: Fix it with the CMPLRTheme.trueBlue()
 /// The screen that shows when you choose to sign up with email
 /// then go to your profile.
 class SignupMailName extends StatelessWidget {
@@ -189,7 +190,7 @@ class SignupMailName extends StatelessWidget {
                   'Login',
                   style: TextStyle(
                       fontSize: Sizing.fontSize * 4.65,
-                      color: Colors.blue[600]),
+                      color: Theme.of(context).secondaryHeaderColor),
                 ),
                 underlineDistance: Sizing.blockSizeVertical * 0.15,
                 underlineWidth: Sizing.blockSize * 0.25,
@@ -207,7 +208,8 @@ class SignupMailName extends StatelessWidget {
               text: Text(
                 'Privacy dashboard',
                 style: TextStyle(
-                    fontSize: Sizing.fontSize * 4.65, color: Colors.blue[600]),
+                    fontSize: Sizing.fontSize * 4.65,
+                    color: Theme.of(context).secondaryHeaderColor),
               ),
             ),
             onTap: () {
