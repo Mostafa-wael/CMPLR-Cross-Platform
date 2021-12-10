@@ -2,6 +2,13 @@ import '../../routes.dart';
 import 'package:get/get.dart';
 
 class PostController extends GetxController with SingleGetTickerProviderMixin {
+  final _userName = 'Username';
+  final _userAvatar = 'lib/utilities/assets/logo/logo_icon.png';
+
+  String get userName => _userName;
+
+  String get userAvatar => _userAvatar;
+
   void openNotes(int numNotes) {
     Get.toNamed(Routes.notes, arguments: numNotes);
   }

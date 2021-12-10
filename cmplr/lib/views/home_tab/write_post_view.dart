@@ -55,8 +55,6 @@ class WritePost extends StatelessWidget {
                           builder: (controller) => Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  // TODO: Add the bar at the very top
-                                  //(don't know which icon)
                                   SizedBox(
                                       height: Sizing.blockSizeVertical * 3),
                                   Container(
