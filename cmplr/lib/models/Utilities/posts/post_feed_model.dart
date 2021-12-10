@@ -1,10 +1,4 @@
-import 'dart:convert';
-
 import '../../../utilities/custom_widgets/post_item.dart';
-import '../../../../backend_uris.dart';
-import '../../cmplr_service.dart';
-import '../../../../utilities/functions.dart';
-import 'package:http/http.dart' as http;
 
 class ModelPostsFeed {
   // TODO: this function should return list of posts
@@ -34,6 +28,7 @@ class ModelPostsFeed {
           'Roaan',
           'Hiiii',
         ],
+        showBottomBar: true,
       ),
       const PostItem(
         name: 'Wael',
@@ -41,6 +36,7 @@ class ModelPostsFeed {
         postData: 'lib/utilities/assets/intro_screen/intro_4.jpg',
         numNotes: 100,
         hashtags: ['3azmaaaaaaaaaaaaaaaaaa', 'Hyhyhy', 'NNNAAANNNAAAA'],
+        showBottomBar: true,
       )
     ];
   }

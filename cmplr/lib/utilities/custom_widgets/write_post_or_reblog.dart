@@ -14,7 +14,6 @@ class WritePostOrReblog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: Sizing.blockSizeVertical * 12,
@@ -38,7 +37,7 @@ class WritePostOrReblog extends StatelessWidget {
                 ),
               ),
               onPressed: () {},
-              backgroundColor: Colors.black26,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             ),
           ),
           IconButton(
@@ -64,7 +63,7 @@ class WritePostOrReblog extends StatelessWidget {
                                   height: Sizing.blockSize * 1,
                                   //TODO: Link this to theme
                                   decoration: BoxDecoration(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(Sizing.blockSize))),
                                 ),
@@ -90,8 +89,9 @@ class WritePostOrReblog extends StatelessWidget {
                                         'Done',
                                         style: TextStyle(
                                           fontSize: Sizing.fontSize * 4,
+                                          // TODO: Link this to theme
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.blue,
+                                          color: Colors.cyan[400],
                                         ),
                                       ),
                                       onTap: () {
@@ -246,7 +246,7 @@ class WritePostOrReblog extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              visibleKeyboard
+              controller.showTags(context)
                   ? Padding(
                       padding: EdgeInsets.only(left: Sizing.blockSize * 3),
                       child: Align(

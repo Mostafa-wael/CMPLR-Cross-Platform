@@ -33,7 +33,6 @@ dependencies:
   # Using fork for now
   # flutter_link_preview:
   #   git: 'https://github.com/ItzNotABug/flutter_link_preview'
-  intl:
   # focused_menu: Since we have our own modified version
 
 dev_dependencies:

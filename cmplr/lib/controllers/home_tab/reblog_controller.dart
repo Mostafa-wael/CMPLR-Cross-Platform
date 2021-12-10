@@ -6,5 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReblogController extends WritePostController {
-  ReblogController(model) : super(model);
+  ReblogController(model) : super(model) {
+    tagsAlwaysVisible = true;
+  }
 }

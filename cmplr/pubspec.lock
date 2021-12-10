@@ -126,33 +126,21 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "3.2.0"
-=======
     version: "3.3.3"
->>>>>>> Stashed changes
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "6.1.4"
-=======
     version: "6.1.8"
->>>>>>> Stashed changes
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "3.2.0"
-=======
     version: "3.3.4"
->>>>>>> Stashed changes
   firebase_core:
     dependency: "direct main"
     description:
@@ -166,22 +154,14 @@ packages:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "4.1.0"
-=======
     version: "4.2.2"
->>>>>>> Stashed changes
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "1.2.0"
-=======
     version: "1.5.2"
->>>>>>> Stashed changes
   flutter:
     dependency: "direct main"
     description: flutter
@@ -193,11 +173,7 @@ packages:
       name: flutter_html
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "2.1.5"
-=======
     version: "2.2.1"
->>>>>>> Stashed changes
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -702,29 +678,21 @@ packages:
       name: webview_flutter_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "2.3.0"
-=======
     version: "2.8.0"
->>>>>>> Stashed changes
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.1"
+    version: "1.8.0"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "2.4.0"
-=======
     version: "2.7.0"
->>>>>>> Stashed changes
   win32:
     dependency: transitive
     description:

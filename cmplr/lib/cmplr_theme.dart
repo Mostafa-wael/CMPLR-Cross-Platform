@@ -98,6 +98,6 @@ class CMPLRTheme {
           backgroundColor: Colors.white,
         ),
         textTheme: darkTextTheme,
-        scaffoldBackgroundColor: const Color.fromARGB(0xFF, 0, 26, 53));
+        scaffoldBackgroundColor: const Color.fromARGB(0xFF, 34, 34, 34));
   }
 }

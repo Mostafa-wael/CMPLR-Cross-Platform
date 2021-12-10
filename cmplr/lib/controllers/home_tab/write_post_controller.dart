@@ -45,6 +45,11 @@ class WritePostController extends GetxController {
 
   final _model;
 
+  bool tagsAlwaysVisible = false;
+
+  bool showTags(context) =>
+      MediaQuery.of(context).viewInsets.bottom == 0 || tagsAlwaysVisible;
+
   List<TextField> urls = [];
   List<TextEditingController> urlControllers = [];
 
