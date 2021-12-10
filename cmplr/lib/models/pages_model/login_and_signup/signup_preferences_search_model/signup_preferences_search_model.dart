@@ -1,10 +1,9 @@
-import 'signup_preferences_search_mock_service.dart';
+import '../../../../routes.dart';
+import '../../../cmplr_service.dart';
 
 class SignupPreferencesSearchModel {
-  final SignupPreferencesSearchMockService _mockService =
-      SignupPreferencesSearchMockService();
-
-  List getPopularSearchedTopics() {
-    return _mockService.getPopularSearchedTopics();
+  List searchedTopics(String topic) {
+    return CMPLRService.searchedTopics(
+        Routes.signupPreferencesSearchScreen, topic);
   }
 }

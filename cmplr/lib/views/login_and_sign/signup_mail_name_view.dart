@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
@@ -38,7 +39,7 @@ class SignupMailName extends StatelessWidget {
             return _getBody(context, controller);
           },
         ),
-        resizeToAvoidBottomInset: false);
+        resizeToAvoidBottomInset: true);
   }
 
   /// Only one button that should route to the page the user was intending on.
@@ -53,7 +54,6 @@ class SignupMailName extends StatelessWidget {
             return TextButton(
               onPressed: () {
                 controller.validateInfo();
-                controller.toActivityOrProfile();
               },
               child: const Text('Done'),
             );
@@ -64,8 +64,8 @@ class SignupMailName extends StatelessWidget {
 
   /// Top column containing 2 Text, 3 TextField for email, password, name.
   static Widget _getTopColumn(context, controller) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             _title,
@@ -165,7 +165,6 @@ class SignupMailName extends StatelessWidget {
           context, EmailPasswordNameAfterSignupController controller) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             'Already have an account?',
@@ -210,20 +209,24 @@ class SignupMailName extends StatelessWidget {
         init: EmailPasswordNameAfterSignupController(),
         builder: (controller) {
           return Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Sizing.blockSize * 15.85,
-                  vertical: Sizing.blockSizeVertical * 2.4),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: _maxWidth),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _getTopColumn(context, controller),
-                    _getBottomColumn(context, controller)
-                  ],
+            padding: EdgeInsets.symmetric(
+                horizontal: Sizing.blockSize * 15.85,
+                vertical: Sizing.blockSizeVertical * 2.4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: ListView(children: [
+                  _getTopColumn(context, controller),
+                ])),
+                const SizedBox(
+                  height: 32,
                 ),
-              ));
+                _getBottomColumn(context, controller)
+              ],
+            ),
+          );
         },
       ));
 }

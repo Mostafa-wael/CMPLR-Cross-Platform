@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import '../../controllers/controllers.dart';
+import '../../routes.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
 
@@ -16,7 +17,7 @@ class SignupPreferences extends StatelessWidget {
               builder: (context) => Dialog(
                   insetPadding: EdgeInsets.zero,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: Sizing.blockSizeVertical * 21.75,
@@ -59,7 +60,7 @@ class SignupPreferences extends StatelessWidget {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Get.offAllNamed('/signup_or_login_screen');
+                                  Get.offAllNamed(Routes.signupOrLoginScreen);
                                 },
                                 child: Text('LEAVE',
                                     style: TextStyle(
@@ -91,7 +92,7 @@ class SignupPreferences extends StatelessWidget {
                         ],
                       )
                     : Material(
-                        color: Colors.transparent,
+                        color: const Color(0xFF001A35),
                         child: InkWell(
                           highlightColor: Colors.transparent,
                           splashColor: const Color(0x33f2f2f2),
@@ -133,7 +134,7 @@ class SignupPreferences extends StatelessWidget {
                       'Follow some of the tags below to start filling '
                       'your dashboard with the things you love.',
                       style: TextStyle(
-                          color: const Color(0xFF7F8D9C),
+                          color: Theme.of(context).primaryColor,
                           fontSize: Sizing.blockSize * 4.55),
                     ),
                   ],

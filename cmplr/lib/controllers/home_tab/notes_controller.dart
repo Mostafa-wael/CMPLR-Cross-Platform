@@ -36,7 +36,7 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
       snackBarMessage = 'Okay you are subscribed to this post.';
     }
     _postSubscribed.value = !_postSubscribed.value;
-    if (Get.isSnackbarOpen! == true) {
+    if (Get.isSnackbarOpen == true) {
       Get.back();
     }
     // Show error SnackBar

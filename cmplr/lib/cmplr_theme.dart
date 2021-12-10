@@ -58,31 +58,9 @@ class CMPLRTheme {
     ),
   );
 
-  static ThemeData light() {
+  static ThemeData trueBlue() {
     return ThemeData(
-      brightness: Brightness.light,
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateColor.resolveWith((states) {
-          return Colors.black;
-        }),
-      ),
-      appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
-      ),
-      textTheme: lightTextTheme,
-    );
-  }
-
-  static ThemeData dark() {
-    return ThemeData(
+        primaryColor: Colors.black,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           foregroundColor: Colors.white,
@@ -92,10 +70,33 @@ class CMPLRTheme {
           foregroundColor: Colors.white,
           backgroundColor: Colors.green,
         ),
+        canvasColor: const Color.fromARGB(
+            0xFF, 0, 26, 53), //related to the BottomNavigationBarThemeData
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Colors.green,
+          selectedItemColor: Colors.white,
         ),
         textTheme: darkTextTheme,
-        scaffoldBackgroundColor: const Color.fromARGB(0xFF, 0, 26, 53));
+        scaffoldBackgroundColor: Colors.white);
+  }
+
+  static ThemeData darkTheme() {
+    return ThemeData(
+        primaryColor: Colors.white,
+        brightness: Brightness.dark,
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.black,
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.green,
+        ),
+        canvasColor: Colors.black,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.white,
+          backgroundColor: Colors.white,
+        ),
+        textTheme: darkTextTheme,
+        scaffoldBackgroundColor: const Color.fromARGB(0xFF, 34, 34, 34));
   }
 }

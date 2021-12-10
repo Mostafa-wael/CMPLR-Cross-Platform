@@ -1,3 +1,4 @@
+import '../../routes.dart';
 import '../../views/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class SignupPreferencesController extends GetxController {
   List _availablePreferenceCards = [];
 
   // data model for preferences
-  SignupPreferencesModel preferencesModel = SignupPreferencesModel();
+  final SignupPreferencesModel _preferencesModel = SignupPreferencesModel();
 
   // getters for class attributes
   String get buttonText => _buttonText;
@@ -36,7 +37,7 @@ class SignupPreferencesController extends GetxController {
   @override
   void onInit() {
     // get the initial preferences
-    _availablePreferenceCards = preferencesModel.getInitialPreferences();
+    _availablePreferenceCards = _preferencesModel.getInitialPreferences();
     super.onInit();
   }
 
@@ -80,7 +81,7 @@ class SignupPreferencesController extends GetxController {
       Get.offAll(const MasterPage());
     } else {
       // if a SnackBar is already open, then close it to show another one
-      if (Get.isSnackbarOpen! == true) {
+      if (Get.isSnackbarOpen == true) {
         Get.back();
       }
       // Show error SnackBar
@@ -98,7 +99,7 @@ class SignupPreferencesController extends GetxController {
 
   void chooseNewPreference() {
     // navigate to search preference page
-    Get.toNamed('/signup_preferences_search_screen', arguments: this);
+    Get.toNamed(Routes.signupPreferencesSearchScreen, arguments: this);
   }
 
   // check if the preference card is already chosen before
@@ -115,7 +116,7 @@ class SignupPreferencesController extends GetxController {
   void addPreference(String preferenceName) {
     if (!preferenceChosen(preferenceName)) {
       _availablePreferenceCards.insert(
-          0, preferencesModel.createNewPreference(preferenceName));
+          0, _preferencesModel.createNewPreference(preferenceName));
       tapPreferenceCard(0);
       update();
     }
