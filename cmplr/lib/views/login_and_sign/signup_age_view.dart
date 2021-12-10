@@ -81,7 +81,8 @@ class SignupAge extends StatelessWidget {
                   maxLength: 3,
                   autofocus: true,
                   cursorColor: Colors.grey,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Colors.white, fontSize: Sizing.blockSize * 4.0),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),

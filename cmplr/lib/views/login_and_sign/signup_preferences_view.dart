@@ -116,7 +116,7 @@ class SignupPreferences extends StatelessWidget {
             body: Column(children: [
               Container(
                 width: double.infinity,
-                height: Sizing.blockSizeVertical * 17.25,
+                height: MediaQuery.of(context).size.height * 0.2,
                 // TODO: HARDCODED
                 color: const Color(0xFF001A35),
                 padding: EdgeInsets.fromLTRB(Sizing.blockSize * 3.5,
@@ -159,7 +159,8 @@ class SignupPreferences extends StatelessWidget {
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   childAspectRatio:
                                       (MediaQuery.of(context).size.width / 3) /
-                                          150,
+                                          (MediaQuery.of(context).size.height /
+                                              4.65),
                                   crossAxisCount: 3,
                                   crossAxisSpacing: Sizing.blockSize * 3,
                                   mainAxisSpacing:
