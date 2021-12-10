@@ -1,11 +1,23 @@
+<<<<<<< Updated upstream
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/models.dart';
+=======
+import 'package:firebase_auth/firebase_auth.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+<<<<<<< Updated upstream
+=======
+
+import '../../models/persistent_storage_api.dart';
+import '../../utilities/functions.dart';
+import '../../models/models.dart';
+import '../../routes.dart';
+>>>>>>> Stashed changes
 import '../../views/views.dart';
 import '../../utilities/authentication/authentication.dart';
 

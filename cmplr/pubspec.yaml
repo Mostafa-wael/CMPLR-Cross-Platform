@@ -22,10 +22,20 @@ dependencies:
   url_launcher:
   get_storage:
   firebase_core:
-  firebase_auth:
+  firebase_auth: ^3.3.3
 
   file_picker:
   flutter_html:
+<<<<<<< Updated upstream
+=======
+  intl:
+  metadata_fetch: 
+
+  # Original package is old and has dependency issues
+  # Using fork for now
+  # flutter_link_preview:
+  #   git: 'https://github.com/ItzNotABug/flutter_link_preview'
+>>>>>>> Stashed changes
   # focused_menu: Since we have our own modified version
 
 dev_dependencies:

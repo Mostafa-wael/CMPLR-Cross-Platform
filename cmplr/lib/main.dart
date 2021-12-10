@@ -1,3 +1,12 @@
+<<<<<<< Updated upstream
+=======
+import 'controllers/controllers.dart';
+import 'models/models.dart';
+
+import 'models/persistent_storage_api.dart';
+import 'models/models.dart';
+
+>>>>>>> Stashed changes
 import 'flags.dart';
 import 'cmplr_theme.dart';
 
@@ -15,6 +24,10 @@ Future<void> main() async {
   if (Flags.cleanState) {
     GetStorage().erase();
   }
+
+  Get.put(ReblogController(const ReblogModel()));
+  Get.put(WritePostController(const WritePostModel()));
+
   runApp(const CMPLR());
 }
 
