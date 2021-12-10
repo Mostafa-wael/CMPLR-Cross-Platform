@@ -115,31 +115,56 @@ class CMPLRService {
   static const invalidData = 422;
   static const unauthenticated = 401;
 
-  static Future<http.Response> post(String route, Map params) async {
+  static const Map<String, String> postHeader = {
+    'Content-Type': 'application/json; charset=UTF-8; accept: application/json',
+    //  TODO add authorization header
+  };
+
+  // getHeader = postHeader for now until we find a reason to split them
+  static const Map<String, String> getHeader = postHeader;
+
+  static const String apiIp = 'http://13.68.206.72/api';
+
+  static Future<http.Response> post(String backendURI, Map params) async {
     // Switch case since we might need to send requests with different
     // content types
 
-    switch (route) {
+    switch (backendURI) {
       case PostURIs.signup:
-        return signupMailNameVerification(route, params);
+        return signupMailNameVerification(backendURI, params);
       case PostURIs.login:
-        return login(route, params);
+        return login(backendURI, params);
       case PostURIs.askBlog:
-        return askBlog(route, params);
-      case PostURIs.posts:
-        return getPosts(route, params);
+        return askBlog(backendURI, params);
+      case PostURIs.post:
+        return createNewPost(backendURI, params);
+      case PostURIs.reblog:
+        return reblogExistingPost(backendURI, params);
 
       default:
         throw Exception('Invalid request route');
     }
   }
 
+  static Future<http.Response> get(String backendURI, Map params) async {
+    switch (backendURI) {
+      case GetURIs.posts:
+        throw Exception('Not yet implemented');
+      default:
+        throw Exception('Inavlid GET URI');
+    }
+  }
+
+  /* ======================================================================== */
+  // Post functions
+  /* ======================================================================== */
+
   // TODO: Rename this screen to "extra signup"
   static Future<http.Response> signupMailNameVerification(
-      String route, Map params) async {
+      String backendURI, Map params) async {
     if (Flags.mock) {
-      final Set emails = _mockData[route]['emails'];
-      final Set names = _mockData[route]['names'];
+      final Set emails = _mockData[backendURI]['emails'];
+      final Set names = _mockData[backendURI]['names'];
 
       final registeredEmail = emails.contains(params['Email']);
       final registeredName = names.contains(params['BlogName']);
@@ -158,23 +183,19 @@ class CMPLRService {
       return http.Response(jsonEncode(errors), responseCode);
     } else {
       return http.post(
-        Uri(path: PostURIs.signup),
-        headers: {
-          'Content-Type':
-              'application/json; charset=UTF-8; accept: application/json',
-          // TODO add authorization header
-        },
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
         body: jsonEncode(params),
       );
     }
   }
 
-  static Future<http.Response> login(String route, Map params) async {
+  static Future<http.Response> login(String backendURI, Map params) async {
     if (Flags.mock) {
       final email = params['Email'];
       final password = params['Password'];
 
-      final emailsPasswords = _mockData[route]['users'];
+      final emailsPasswords = _mockData[backendURI]['users'];
 
       final matchingEmailPasswordCombination =
           emailsPasswords[email] == password;
@@ -185,30 +206,65 @@ class CMPLRService {
       return http.Response('', requestSuccess);
     } else {
       return http.post(
-        Uri(path: PostURIs.login),
-        headers: {
-          'Content-Type':
-              'application/json; charset=UTF-8; accept: application/json',
-          // TODO add authorization header
-        },
+        Uri.parse(backendURI + backendURI),
+        headers: postHeader,
         body: jsonEncode(params),
       );
     }
   }
 
-  static Future<http.Response> askBlog(String route, Map param) {
+  static Future<http.Response> askBlog(String backendURI, Map params) {
     if (Flags.mock) {
       throw Exception();
     } else {
-      return http.post(Uri(path: PostURIs.getAskBlog(param['BlogId'])),
-          headers: {
-            'Content-Type':
-                'application/json; charset=UTF-8; accept: application/json',
-            // TODO add authorization header
-          },
-          body: jsonEncode(param)); /* e */
+      return http.post(Uri.parse(apiIp + PostURIs.getAskBlog(params['BlogId'])),
+          headers: postHeader, body: jsonEncode(params)); /* e */
     }
   }
+
+  static Future<http.Response> createNewPost(String backendURI, Map params) {
+    if (Flags.mock) {
+      throw Exception();
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+      );
+    }
+  }
+
+  static Future<http.Response> reblogExistingPost(
+      String backendURI, Map params) {
+    if (Flags.mock) {
+      throw Exception();
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+      );
+    }
+  }
+
+  /* ======================================================================== */
+  // Get functions
+  /* ======================================================================== */
+
+// TODO: add mock data, get them from the controller
+  static Future<http.Response> getPosts(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response('', 200);
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: getHeader,
+        body: jsonEncode(params),
+      );
+    }
+  }
+
+  /* ======================================================================== */
+  // Not in the backend
+  /* ======================================================================== */
 
   // This functionality is not implemeted in the back-end
   static List initialPreferences(String route) {
@@ -218,21 +274,5 @@ class CMPLRService {
   // This functionality is not implemeted in the back-end
   static List searchedTopics(String route, String topics) {
     return _mockData[route][topics];
-  }
-
-// TODO: add mock data, get them from the controller
-  static Future<http.Response> getPosts(String route, Map params) async {
-    if (Flags.mock) {
-      return http.Response('', 200);
-    } else {
-      return http.post(
-        Uri(path: PostURIs.signup),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          // TODO add authorization header
-        },
-        body: jsonEncode(params),
-      );
-    }
   }
 }

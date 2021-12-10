@@ -20,6 +20,8 @@ class ModelPostsFeed {
     return [
       const PostItem(
         name: 'Mostafa',
+        postID: '1231465396890',
+        reblogKey: 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
         profilePhoto: 'lib/utilities/assets/intro_screen/intro_4.jpg',
         postData: 'lib/utilities/assets/intro_screen/intro_3.jpg',
         numNotes: 200,
@@ -32,6 +34,8 @@ class ModelPostsFeed {
       ),
       const PostItem(
         name: 'Wael',
+        postID: '12318290312',
+        reblogKey: 'akjsdhkjHKJHKLJFHAsDFsdFWEdfSEfsfs',
         profilePhoto: 'lib/utilities/assets/intro_screen/intro_3.jpg',
         postData: 'lib/utilities/assets/intro_screen/intro_4.jpg',
         numNotes: 100,

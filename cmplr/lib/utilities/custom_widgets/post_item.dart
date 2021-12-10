@@ -8,6 +8,8 @@ import '../../controllers/controllers.dart';
 /// This widget represents the post item with all its data
 class PostItem extends StatefulWidget {
   final String postData;
+  final String postID;
+  final String reblogKey;
   final String name;
   final String profilePhoto;
   final int numNotes;
@@ -17,6 +19,8 @@ class PostItem extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   const PostItem(
       {required this.postData,
+      required this.postID,
+      required this.reblogKey,
       required this.name,
       required this.hashtags,
       required this.numNotes,

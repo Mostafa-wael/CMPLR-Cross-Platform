@@ -7,6 +7,8 @@ import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:http/http.dart' as http;
+
 class WritePostOrReblog extends StatelessWidget {
   final model, controller;
   const WritePostOrReblog(this.model, this.controller, {Key? key})
@@ -29,14 +31,14 @@ class WritePostOrReblog extends StatelessWidget {
                 top: Sizing.blockSizeVertical * 1.8,
                 bottom: Sizing.blockSizeVertical * 1.8),
             child: ActionChip(
-              label: Text(
-                'Post',
-                style: TextStyle(
-                  fontSize: Sizing.fontSize * 4.2,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              onPressed: () {},
+              label: controller.getPostOrReblog(),
+              onPressed: () {
+                // If the post was created/reblogged successfully
+                // Close the write post / reblog view.
+                controller.postOrReblog().then((bool insertSuccess) {
+                  if (insertSuccess) Get.back();
+                });
+              },
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             ),
           ),
@@ -104,14 +106,14 @@ class WritePostOrReblog extends StatelessWidget {
                                   height: Sizing.blockSizeVertical * 3,
                                 ),
                                 postOption('Post Now', Icons.edit,
-                                    controller.isActivated(postOptions.postNow),
+                                    controller.isActivated(PostOptions.postNow),
                                     () {
-                                  controller.setPostOption(postOptions.postNow);
+                                  controller.setPostOption(PostOptions.postNow);
                                 }),
                                 SizedBox(height: Sizing.blockSizeVertical * 3),
                                 scheduleOption(
                                     controller
-                                        .isActivated(postOptions.schedule),
+                                        .isActivated(PostOptions.schedule),
                                     controller,
                                     context),
                                 SizedBox(height: Sizing.blockSizeVertical * 3),
@@ -119,28 +121,28 @@ class WritePostOrReblog extends StatelessWidget {
                                     'Save as draft',
                                     Icons.drafts_outlined,
                                     controller.isActivated(
-                                        postOptions.saveAsDraft), () {
+                                        PostOptions.saveAsDraft), () {
                                   controller
-                                      .setPostOption(postOptions.saveAsDraft);
+                                      .setPostOption(PostOptions.saveAsDraft);
                                 }),
                                 SizedBox(height: Sizing.blockSizeVertical * 3),
                                 postOption(
                                     'Post privately',
                                     Icons.lock_outline,
                                     controller.isActivated(
-                                        postOptions.postPrivately), () {
+                                        PostOptions.postPrivately), () {
                                   controller
-                                      .setPostOption(postOptions.postPrivately);
+                                      .setPostOption(PostOptions.postPrivately);
                                 }),
                                 SizedBox(height: Sizing.blockSizeVertical * 3),
                                 controller.isActivated(
-                                            postOptions.saveAsDraft) ||
+                                            PostOptions.saveAsDraft) ||
                                         controller.isActivated(
-                                            postOptions.postPrivately)
+                                            PostOptions.postPrivately)
                                     ? Container()
                                     : shareToTwitter(
                                         controller.isActivated(
-                                            postOptions.shareToTwitter),
+                                            PostOptions.shareToTwitter),
                                         controller),
                               ],
                             ));
@@ -193,6 +195,8 @@ class WritePostOrReblog extends StatelessWidget {
                                     width: Sizing.blockSize / 20)),
                             child: PostItem(
                               postData: controller.post.postData,
+                              postID: controller.post.postID,
+                              reblogKey: controller.post.reblogKey,
                               name: controller.post.name,
                               hashtags: controller.post.hashtags,
                               numNotes: controller.post.numNotes,
@@ -202,6 +206,7 @@ class WritePostOrReblog extends StatelessWidget {
                           ),
 
                         TextField(
+                          controller: controller.textController,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Add something, if you\'d like'),
@@ -268,7 +273,9 @@ class WritePostOrReblog extends StatelessWidget {
                                   Colors.grey[900] ?? Colors.red),
                               shape: MaterialStateProperty.all(
                                   const StadiumBorder())),
-                          onPressed: () {},
+                          onPressed: () {
+                            // FIXME: ADD TAG SELECTION
+                          },
                         ),
                       ),
                     )

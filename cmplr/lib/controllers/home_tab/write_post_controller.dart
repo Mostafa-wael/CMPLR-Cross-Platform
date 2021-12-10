@@ -1,6 +1,9 @@
-import 'package:metadata_fetch/metadata_fetch.dart';
+import '../../models/cmplr_service.dart';
 
 import '../../utilities/sizing/sizing.dart';
+
+import '../../models/models.dart';
+import 'package:metadata_fetch/metadata_fetch.dart';
 
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,24 +12,35 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:http/http.dart' as http;
 
-enum postOptions {
-  postNow,
-  schedule,
-  saveAsDraft,
-  postPrivately,
-  shareToTwitter
+class PostOptions {
+  // postNow
+  static const postNow = 'published';
+  // schedule
+  static const String schedule = 'scheduled';
+  // saveAsDraft
+  static const String saveAsDraft = 'draft';
+  // postPrivately
+  static const String postPrivately = 'private';
+  // shareToTwitter // Not in the backend
+
+  static const String shareToTwitter =
+      'THIS SHOULDN\'T BE HERE, IT\'S NOT THE BACKEND\'S RESPONSIBILITY';
 }
 
 class WritePostController extends GetxController {
-  postOptions _currentPostOption = postOptions.postNow;
+  String _currentPostOption = PostOptions.postNow;
+
   String _date = '';
   DateTime _dateTime = DateTime.now();
   TimeOfDay _timeOfDay = TimeOfDay.now();
   final _currentDate = DateTime.now();
+
   bool _bold = false;
   bool _italic = false;
   bool _strikethrough = false;
+
   final allColors = [
     Colors.white,
     Colors.red,
@@ -34,10 +48,21 @@ class WritePostController extends GetxController {
     Colors.green,
     Colors.blue,
     Colors.purple,
-    Colors.pink
+    Colors.pink,
   ];
+
+  final allColorsNames = [
+    'white',
+    'red',
+    'orange',
+    'green',
+    'blue',
+    'purple',
+    'pink',
+  ];
+
   // TODO: Change default color according to theme
-  Color _currentColor = Colors.white;
+  int _currentColor = 0;
   final _userName = 'Username';
   final _userAvatar = 'lib/utilities/assets/logo/logo_icon.png';
 
@@ -50,19 +75,21 @@ class WritePostController extends GetxController {
   bool showTags(context) =>
       MediaQuery.of(context).viewInsets.bottom == 0 || tagsAlwaysVisible;
 
-  List<TextField> urls = [];
-  List<TextEditingController> urlControllers = [];
+  final TextEditingController textController = TextEditingController();
 
-  List<Widget> previews = [];
+  // List<TextField> urls = [];
+  // List<TextEditingController> urlControllers = [];
+
+  // List<Widget> previews = [];
 
   String get userName => _userName;
 
   String get userAvatar => _userAvatar;
 
-  Color get currentColor => _currentColor;
+  Color get currentColor => allColors[_currentColor];
 
   Future<void> changeColor(int colorIndex) async {
-    _currentColor = allColors[colorIndex];
+    _currentColor = colorIndex;
     update();
   }
 
@@ -81,13 +108,34 @@ class WritePostController extends GetxController {
     update();
   }
 
+  Text getPostOrReblog() {
+    // Have a post => Reblogging
+    if (post != null)
+      return Text(
+        'Reblog',
+        style: TextStyle(
+          fontSize: Sizing.fontSize * 4.2,
+          fontWeight: FontWeight.w400,
+        ),
+      );
+    // Otherwise, we're posting
+    else
+      return Text(
+        'Post',
+        style: TextStyle(
+          fontSize: Sizing.fontSize * 4.2,
+          fontWeight: FontWeight.w400,
+        ),
+      );
+  }
+
   bool get bold => _bold;
 
   bool get italic => _italic;
 
   bool get strikethough => _strikethrough;
 
-  postOptions get currentPostOption => _currentPostOption;
+  String get currentPostOption => _currentPostOption;
 
   String get date => _date;
 
@@ -134,35 +182,95 @@ class WritePostController extends GetxController {
     }
   }
 
-  bool isActivated(postOptions option) {
+  bool isActivated(String option) {
     return _currentPostOption == option;
   }
 
-  Future<void> setPostOption(postOptions option) async {
+  Future<void> setPostOption(String option) async {
     _currentPostOption = option;
     update();
   }
 
-  void addLink() {
-    Future<Metadata?>? fut;
-    final editingController = TextEditingController();
-    final textField = TextField(
-      controller: editingController,
-      decoration: const InputDecoration(
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 5.0))),
-      onEditingComplete: () {
-        // previews.add(FlutterLinkPreview(url: editingController.text));
-        fut = MetadataFetch.extract(editingController.text);
-      },
-    );
+  // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  // void addLink() {
+  //   Future<Metadata?>? fut;
+  //   final editingController = TextEditingController();
+  //   final textField = TextField(
+  //     controller: editingController,
+  //     decoration: const InputDecoration(
+  //         border: OutlineInputBorder(
+  //             borderSide: BorderSide(color: Colors.white, width: 5.0))),
+  //     onEditingComplete: () {
+  //       // previews.add(FlutterLinkPreview(url: editingController.text));
+  //       fut = MetadataFetch.extract(editingController.text);
+  //     },
+  //   );
 
-    fut?.then((value) => print(value));
+  //   fut?.then((value) => print(value));
 
-    urls.add(textField);
-    urlControllers.add(editingController);
+  //   urls.add(textField);
+  //   urlControllers.add(editingController);
 
-    update();
+  //   update();
+  // }
+
+  // TODO: Show the created or reblogged post somewhere?
+  Future<bool> postOrReblog() async {
+    final postText = prepareText();
+
+    final http.Response response;
+    if (_model is WritePostModel)
+      response = await _model.createPost(
+          content: postText,
+          state: _currentPostOption,
+          publishOn: _date,
+          tags: '',
+          date: DateTime.now().toString(),
+          isPrivate: _currentPostOption == PostOptions.postPrivately);
+    else if (_model is ReblogModel)
+      response = await _model.reblogPost();
+    else
+      throw Exception('Unsupported model');
+
+    return response.statusCode == CMPLRService.insertSuccess;
+  }
+
+  // wrap text in needed tags and return it
+  String prepareText() {
+    // Split into 3 part so we can insert the color more easily
+    final tags = [
+      ['<b', '>', '</b>'],
+      ['<i', '>', '</i>'],
+      ['<s', '>', '</s>']
+    ];
+
+    final flags = [
+      _bold,
+      _italic,
+      _strikethrough,
+    ];
+
+    assert(flags.length == tags.length);
+
+    var postText = textController.text;
+    var colored = false;
+    for (var i = 0; i < flags.length; i++) {
+      if (flags[i]) {
+        if (!colored) {
+          // Should result in something like
+          // <b style="color:red">text</b>
+          postText = tags[i][0] +
+              ' style="color:${allColorsNames[_currentColor]}"' +
+              tags[i][1] +
+              postText +
+              tags[i][2];
+
+          colored = true;
+        } else
+          postText = tags[i][0] + tags[i][1] + postText + tags[i][2];
+      }
+    }
+    return postText;
   }
 }
 
