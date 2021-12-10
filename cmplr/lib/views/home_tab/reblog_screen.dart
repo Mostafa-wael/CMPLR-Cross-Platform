@@ -1,5 +1,3 @@
-import '../../models/pages_model/home_tab/reblog_model.dart';
-import '../../utilities/custom_widgets/write_post_or_reblog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
@@ -11,7 +9,6 @@ class ReblogView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
     return GetBuilder<ReblogController>(
       init: ReblogController(),
       builder: (controller) => Scaffold(
@@ -184,8 +181,5 @@ class ReblogView extends StatelessWidget {
         ),
       ),
     );
-=======
-    return WritePostOrReblog(const ReblogModel(), Get.find<ReblogController>());
->>>>>>> Stashed changes
   }
 }

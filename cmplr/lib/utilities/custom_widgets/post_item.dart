@@ -11,7 +11,6 @@ class PostItem extends StatefulWidget {
   final String profilePhoto;
   final int numNotes;
   final List<String> hashtags;
-  final bool showBottomBar;
 
   // ignore: use_key_in_widget_constructors
   const PostItem(
@@ -19,8 +18,7 @@ class PostItem extends StatefulWidget {
       required this.name,
       required this.hashtags,
       required this.numNotes,
-      required this.profilePhoto,
-      required this.showBottomBar});
+      required this.profilePhoto});
   @override
   _PostItemState createState() => _PostItemState();
 }
@@ -38,7 +36,7 @@ class _PostItemState extends State<PostItem> {
             getUpperBar(),
             getPostData(),
             getHashtagsBar(),
-            if (widget.showBottomBar) getBottomBar(),
+            getBottomBar()
           ],
         ),
         onTap: () {
@@ -50,7 +48,7 @@ class _PostItemState extends State<PostItem> {
 
   Widget getUpperBar() {
     return ListTile(
-      contentPadding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+      contentPadding: const EdgeInsets.all(0),
       leading: CircleAvatar(
         backgroundImage: AssetImage(
           '${widget.postData}',
@@ -106,12 +104,9 @@ class _PostItemState extends State<PostItem> {
   }
 
   Widget getHashtagsBar() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: RichText(
-        text: TextSpan(
-          children: getHashtags(widget.hashtags),
-        ),
+    return RichText(
+      text: TextSpan(
+        children: getHashtags(widget.hashtags),
       ),
     );
   }
@@ -150,7 +145,7 @@ class _PostItemState extends State<PostItem> {
             IconButton(
               icon: const Icon(Icons.loop_rounded),
               onPressed: () {
-                controller.reblog(widget);
+                controller.reblog();
                 print('reblog clicked');
               },
             ),

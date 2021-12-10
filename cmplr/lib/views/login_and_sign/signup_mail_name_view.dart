@@ -31,7 +31,7 @@ class SignupMailName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _getAppBar(context),
+        appBar: _getAppBar(),
         body: GetBuilder<MasterPageController>(
           builder: (MasterPageController controller) {
             return _getBody(context, controller);
@@ -45,7 +45,7 @@ class SignupMailName extends StatelessWidget {
   /// If the user isn't logged in, an extra signup page shows up.
   /// When the user fills their data properly and presses 'done', this should
   /// route them to the page they intended on originally. (activity/profile)/
-  static AppBar _getAppBar(context) => AppBar(
+  static AppBar _getAppBar() => AppBar(
         actions: [
           GetBuilder<EmailPasswordNameAfterSignupController>(
               builder: (controller) {
@@ -54,7 +54,7 @@ class SignupMailName extends StatelessWidget {
                 controller.validateInfo();
                 controller.toActivityOrProfile();
               },
-              child: controller.getDoneButton(context),
+              child: const Text('Done'),
             );
           })
         ],
@@ -62,14 +62,7 @@ class SignupMailName extends StatelessWidget {
       );
 
   /// Top column containing 2 Text, 3 TextField for email, password, name.
-<<<<<<< Updated upstream
   static Widget _getTopColumn(context, controller) => Column(
-=======
-  static Widget _getTopColumn(
-          context, EmailPasswordNameAfterSignupController controller) =>
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
->>>>>>> Stashed changes
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -87,22 +80,14 @@ class SignupMailName extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
-              controller.validInfo ? '' : controller.getErrors(),
+              controller.validInfo ? '' : 'Invalid information',
               style: const TextStyle(color: Colors.red),
             ),
           ),
           TextField(
-<<<<<<< Updated upstream
               controller: controller.emailController,
               decoration: const InputDecoration(hintText: 'email')),
           const SizedBox(height: 8),
-=======
-            controller: controller.emailController,
-            decoration: const InputDecoration(hintText: 'email'),
-            onChanged: controller.fieldChanged,
-          ),
-          SizedBox(height: Sizing.blockSizeVertical * 1.2),
->>>>>>> Stashed changes
           TextField(
             controller: controller.passwordController,
             decoration: InputDecoration(
@@ -120,14 +105,11 @@ class SignupMailName extends StatelessWidget {
             obscureText: controller.passwordHidden,
             enableSuggestions: false,
             autocorrect: false,
-            onChanged: controller.fieldChanged,
           ),
           const SizedBox(height: 8),
           TextField(
-            controller: controller.nameController,
-            decoration: const InputDecoration(hintText: 'name'),
-            onChanged: controller.fieldChanged,
-          ),
+              controller: controller.nameController,
+              decoration: const InputDecoration(hintText: 'name')),
         ],
       );
 

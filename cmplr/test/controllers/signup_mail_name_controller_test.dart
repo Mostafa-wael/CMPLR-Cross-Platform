@@ -32,52 +32,27 @@ void main() {
     expect(controller.validInfo, false);
 
     controller.emailController.text = 'tester@cmplr.org';
-<<<<<<< Updated upstream
     controller.validateInfo();
     expect(controller.validInfo, false);
 
     controller.passwordController.text = 'aReallyStrongPassword!@#!';
     controller.validateInfo();
-=======
-    controller.fieldChanged('');
-    await controller.validateInfo();
-    expect(controller.validInfo, false);
-
-    controller.passwordController.text = 'aReallyStrongPassword!@#!';
-    controller.fieldChanged('');
-    await controller.validateInfo();
->>>>>>> Stashed changes
     expect(controller.validInfo, false);
 
     // Since all 3 are different from the mock data, it will return true
     controller.nameController.text = 'too much for one project';
-<<<<<<< Updated upstream
     controller.validateInfo();
-=======
-    controller.fieldChanged('');
-    await controller.validateInfo();
->>>>>>> Stashed changes
     expect(controller.validInfo, true);
 
     // Email already exists
     controller.emailController.text = 'tarek@cmplr.org';
-<<<<<<< Updated upstream
     controller.validateInfo();
-=======
-    controller.fieldChanged('');
-    await controller.validateInfo();
->>>>>>> Stashed changes
     expect(controller.validInfo, false);
 
     // Name already exists
     controller.emailController.text = 'tester@cmplr.org';
     controller.nameController.text = 'burh';
-<<<<<<< Updated upstream
     controller.validateInfo();
-=======
-    controller.fieldChanged('');
-    await controller.validateInfo();
->>>>>>> Stashed changes
     expect(controller.validInfo, false);
   });
 }

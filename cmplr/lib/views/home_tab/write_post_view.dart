@@ -1,10 +1,3 @@
-<<<<<<< Updated upstream
-=======
-import '../../models/pages_model/home_tab/write_post_model.dart';
-
-import '../../utilities/custom_widgets/write_post_or_reblog.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
@@ -16,7 +9,6 @@ class WritePost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
     final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return GetBuilder<WritePostController>(
       init: WritePostController(),
@@ -203,9 +195,5 @@ class WritePost extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
     );
-=======
-    return WritePostOrReblog(
-        const WritePostModel(), Get.find<WritePostController>());
->>>>>>> Stashed changes
   }
 }

@@ -27,7 +27,6 @@ class _HomeFollowingScreenState extends State<HomeFollowingScreen> {
         'Hyhyhy',
         'NNNAAANNNAAAA'
       ],
-      showBottomBar: true,
     );
   }
 }
