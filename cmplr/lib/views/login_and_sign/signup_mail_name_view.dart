@@ -138,7 +138,7 @@ class SignupMailName extends StatelessWidget {
             children: [
               Text(
                 _nevermindText,
-                style: TextStyle(fontSize: Sizing.blockSize * 3.715),
+                style: TextStyle(fontSize: Sizing.fontSize * 3.715),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 GestureDetector(
@@ -175,14 +175,14 @@ class SignupMailName extends StatelessWidget {
         children: [
           Text(
             'Already have an account?',
-            style: TextStyle(fontSize: Sizing.blockSize * 4.65),
+            style: TextStyle(fontSize: Sizing.fontSize * 4.65),
           ),
           GestureDetector(
               child: CustomUnderline(
                 text: Text(
                   'Login',
                   style: TextStyle(
-                      fontSize: Sizing.blockSize * 4.65,
+                      fontSize: Sizing.fontSize * 4.65,
                       color: Colors.blue[600]),
                 ),
                 underlineDistance: Sizing.blockSizeVertical * 0.15,
@@ -200,7 +200,7 @@ class SignupMailName extends StatelessWidget {
               text: Text(
                 'Privacy dashboard',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 4.65, color: Colors.blue[600]),
+                    fontSize: Sizing.fontSize * 4.65, color: Colors.blue[600]),
               ),
             ),
             onTap: () {

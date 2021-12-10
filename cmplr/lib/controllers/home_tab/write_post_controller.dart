@@ -5,31 +5,20 @@ import '../../utilities/sizing/sizing.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+enum postOptions {
+  postNow,
+  schedule,
+  saveAsDraft,
+  postPrivately,
+  shareToTwitter
+}
 
 class WritePostController extends GetxController {
-<<<<<<< Updated upstream
-  bool longPressed = false;
-
-  late FocusNode textFocus;
-  String currentMode = 'Regular';
-  Map<String, List<String>> textModes = {
-    'Regular': ['<p>', '</p>'], // Regular
-    'Bigger': ['<h6>', '</h6>'], // Bigger
-    'Biggest': ['<h5>', '</h5>'], // Biggest
-    'Quote': ['<blockquote>', '</blockquote>'], // Quote
-    'Chat': ['', ''], // Chat, note it uses mono
-    'Luccile': ['', ''], // Lucille
-    'Indent': [
-      '<blockquote>',
-      '</blockquote>'
-    ], // Indented, blockquote seems to do this
-    'Bulleted list': ['<ul>', '</ul>', '<li>', '</li>'], // Bulleted list
-    'Numbered list': ['<ul>', '</ul>', '<li>', '</li>'], // Numbered list
-  };
-  WritePostController() {
-    textFocus = FocusNode();
-=======
   postOptions _currentPostOption = postOptions.postNow;
   String _date = '';
   DateTime _dateTime = DateTime.now();
@@ -102,37 +91,51 @@ class WritePostController extends GetxController {
     final date_1 = DateFormat.MMMEd().format(_dateTime);
     final date_2 = DateFormat.jm().format(_dateTime);
     _date = '${date_1}at ${date_2}';
->>>>>>> Stashed changes
   }
 
-  void focusOnText() {
-    if (textFocus.hasFocus) {
-      // TODO: Cycle modes
-    } else
-      textFocus.requestFocus();
+  Future<void> setDateTime(BuildContext context) async {
+    final picked = await showDatePicker(
+        context: context,
+        initialDate: _dateTime,
+        firstDate: _currentDate,
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _dateTime) {
+      _dateTime = picked;
+      final date_1 = DateFormat.MMMEd().format(_dateTime);
+      _date = '${date_1} at ${_date.split('at')[1]}';
+      update();
+    }
   }
 
-  Future showFontPopup(context) {
-    return showMenu(
+  Future<void> setTimeOfDay(BuildContext context) async {
+    final picked = await showTimePicker(
       context: context,
-      items: [
-        PopupMenuItem(
-            child: GestureDetector(
-              child: const Text('Regular'),
-            )),
-        PopupMenuItem(
-            child: GestureDetector(
-              child: const Text('Bigger'),
-            ))
-      ],
-      position: const RelativeRect.fromLTRB(0, 0, 0, 0),
+      initialTime: _timeOfDay,
     );
+    if (picked != null && picked != _timeOfDay) {
+      if (picked.hour < TimeOfDay.fromDateTime(_currentDate).hour ||
+          (picked.hour == TimeOfDay.fromDateTime(_currentDate).hour &&
+              picked.minute < TimeOfDay.fromDateTime(_currentDate).minute)) {
+        _showToast('Nice try, but you can\'t post from the past.');
+      } else {
+        _timeOfDay = picked;
+        final hour =
+            _timeOfDay.hour >= 12 ? _timeOfDay.hour - 12 : _timeOfDay.hour;
+        final am = _timeOfDay.hour >= 12 ? 'PM' : 'AM';
+        final date_2 = '${hour}:${_timeOfDay.minute}${am}';
+        _date = '${_date.split('at')[0]}at ${date_2}';
+        update();
+      }
+    }
   }
 
-  void setMode(String mode) {
-    print(mode);
-    assert(textModes.containsKey(mode));
-    currentMode = mode;
+  bool isActivated(postOptions option) {
+    return _currentPostOption == option;
+  }
+
+  Future<void> setPostOption(postOptions option) async {
+    _currentPostOption = option;
+    update();
   }
 
   void addLink() {
@@ -157,3 +160,12 @@ class WritePostController extends GetxController {
     update();
   }
 }
+
+void _showToast(String message) => Fluttertoast.showToast(
+      msg: message,
+      fontSize: 16,
+      gravity: ToastGravity.BOTTOM,
+      textColor: Colors.white,
+      backgroundColor: const Color(0xFF4E4F53),
+      timeInSecForIosWeb: 1,
+    );

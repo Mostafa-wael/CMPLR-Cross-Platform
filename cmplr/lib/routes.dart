@@ -23,6 +23,7 @@ class Routes {
   static const String loginEmailSplash = '/login_email_splash';
   static const String loginEmail = '/login_email';
   static const String loginEmailPassword = '/login_email_password';
+  static const String loginEmailContinue = '/login_email_continue';
 
   // Password
   static const String forgotPassword = '/forgot_password';

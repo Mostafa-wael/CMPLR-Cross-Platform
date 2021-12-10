@@ -16,12 +16,12 @@ import 'views/views.dart';
 import './routes.dart';
 
 Future<void> main() async {
-  PersistentStorage.initStorage();
+  await PersistentStorage.initStorage();
 
   // Clears all persistent data based on a flag
   // USE CAREFULLY
   if (Flags.cleanState) {
-    PersistentStorage.clearStorage();
+    await PersistentStorage.clearStorage();
   }
 
   Get.put(ReblogController(const ReblogModel()));
@@ -39,7 +39,7 @@ class CMPLR extends StatelessWidget {
     final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PersistentStorage.isLoggedIn
+      home: PersistentStorage.isLoggedIn ?? false
           ? const MasterPage() /*const MasterPage()*/
           : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
       theme: themes[0],
@@ -97,5 +97,8 @@ List<GetPage<dynamic>> get getLoginAndSignPages {
     GetPage(
         name: Routes.postForgotPassword,
         page: () => const PostForgotPassword()),
+    GetPage(
+        name: Routes.loginEmailContinue,
+        page: () => const LoginEmailContinue()),
   ];
 }

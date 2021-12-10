@@ -38,7 +38,7 @@ class ReblogView extends StatelessWidget {
                     'Reblog',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: Sizing.blockSize * 4.2,
+                        fontSize: Sizing.fontSize * 4.2,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -70,7 +70,7 @@ class ReblogView extends StatelessWidget {
                   SizedBox(width: Sizing.blockSize * 2),
                   Text('Username',
                       style: TextStyle(
-                          fontSize: Sizing.blockSize * 4.2,
+                          fontSize: Sizing.fontSize * 4.2,
                           fontWeight: FontWeight.bold))
                 ],
               ),
@@ -129,7 +129,7 @@ class ReblogView extends StatelessWidget {
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: Sizing.blockSize * 3.715),
+                            fontSize: Sizing.fontSize * 3.715),
                       ),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

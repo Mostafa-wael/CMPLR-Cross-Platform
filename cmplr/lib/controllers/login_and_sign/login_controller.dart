@@ -54,8 +54,6 @@ class LoginController extends GetxController {
   /// navigating to a splash screen for 0.5 seconds then
   /// to the email login screen
   Future<void> loginEmail() async {
-    // (Tarek) TODO: Check if this is needed, I think this inserts a page
-    // we already inserted in main()
     Get.to(
       const LoginEmailSplash(),
       transition: Transition.rightToLeft,
@@ -64,8 +62,6 @@ class LoginController extends GetxController {
     update();
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      // (Tarek) TODO: Check if this is needed, I think this inserts a page
-      // we already inserted in main()
       Get.off(
         const LoginEmail(),
         routeName: Routes.loginEmail,
@@ -83,7 +79,9 @@ class LoginController extends GetxController {
     } else {
       if (await _model.checkEmailPasswordCombination(
           emailController.text, passwordController.text)) {
+        // Log in
         PersistentStorage.changeLoggedIn(true);
+
         Get.offAll(
           const MasterPage(),
           transition: Transition.rightToLeft,
@@ -101,14 +99,18 @@ class LoginController extends GetxController {
   /// This method navigates to the last screen in the login with email process
   /// where the user can enter their email and password
   Future<void> enterPasswordLoginEmail() async {
-    // (Tarek) TODO: Check if this is needed, I think this inserts a page
-    // we already inserted in main()
     Get.off(
       const LoginEmailPassword(),
       transition: Transition.downToUp,
       routeName: Routes.loginEmailPassword,
     );
     update();
+  }
+
+  // This method navigates from the email login screen to
+  /// a screen where the user can click the 'Enter Password' button
+  Future<void> continueLoginEmail() async {
+    Get.toNamed(Routes.loginEmailContinue);
   }
 
   /// This method handles the backtrack from the
@@ -128,6 +130,10 @@ class LoginController extends GetxController {
 
   /// This method handles the email field text changes & updates the widget
   Future<void> emailFieldChanged() async {
+    if (Get.rawRoute != null && isCurrentPage(Routes.loginEmailContinue)) {
+      returnFromContinueLoginEmail();
+    }
+
     if (emailController.text.isNotEmpty)
       _showClearIcon = true;
     else
@@ -135,6 +141,7 @@ class LoginController extends GetxController {
 
     _activateLoginButton =
         (emailController.text.isNotEmpty && passwordController.text.isNotEmpty);
+
     _activateSubmitButton = emailController.text.isNotEmpty;
     _validLoginEmail = validateEmail(emailController.text);
 
@@ -208,6 +215,22 @@ class LoginController extends GetxController {
     Get.until((route) => Get.currentRoute == Routes.loginEmailPassword);
     update();
   }
+
+  /// This method handles the validation of the user email/password combination
+  /// and if the combination is valid, it navigates to the home page
+  // Future<void> enterPassword() async {
+  //   if () {
+  //     GetStorage().write('logged_in', true);
+  //     Get.offAll(
+  //       const MasterPage(),
+  //       transition: Transition.rightToLeft,
+  //     );
+  //   } else {
+  //     // TODO: Replace this will a message below the text field
+  //     _showToast('Incorrect email address or password. Please try again');
+  //   }
+  //   update();
+  // }
 }
 
 void _showToast(String message) => Fluttertoast.showToast(

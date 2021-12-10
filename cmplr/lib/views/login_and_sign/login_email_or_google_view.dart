@@ -40,7 +40,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   Text(
                     'tumblr',
                     style: TextStyle(
-                        fontSize: Sizing.blockSize * 13,
+                        fontSize: Sizing.fontSize * 13,
                         color: Colors.white,
                         fontWeight: FontWeight.w900),
                   ),
@@ -48,7 +48,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   SignUpInButton(
                     text: 'Log in with Email',
                     onTap: () {
-                      controller.enterPasswordLoginEmail();
+                      controller.loginEmail();
                     },
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),

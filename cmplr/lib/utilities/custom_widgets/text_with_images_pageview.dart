@@ -1,3 +1,4 @@
+import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 // This widget is used to generate page view with images and text on it
@@ -32,9 +33,9 @@ class TextWithImagesPageView extends StatelessWidget {
               child: Text(
                 texts[i],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 36,
+                  fontSize: Sizing.fontSize * 9,
                 ),
               ),
             )

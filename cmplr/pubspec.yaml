@@ -26,8 +26,6 @@ dependencies:
 
   file_picker:
   flutter_html:
-<<<<<<< Updated upstream
-=======
   intl:
   metadata_fetch: 
 
@@ -35,7 +33,7 @@ dependencies:
   # Using fork for now
   # flutter_link_preview:
   #   git: 'https://github.com/ItzNotABug/flutter_link_preview'
->>>>>>> Stashed changes
+  intl:
   # focused_menu: Since we have our own modified version
 
 dev_dependencies:
