@@ -60,6 +60,7 @@ class CMPLRTheme {
 
   static ThemeData light() {
     return ThemeData(
+<<<<<<< Updated upstream
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateColor.resolveWith((states) {
@@ -79,10 +80,31 @@ class CMPLRTheme {
       ),
       textTheme: lightTextTheme,
     );
+=======
+        primaryColor: Colors.black,
+        brightness: Brightness.dark,
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(0xFF, 0, 26, 53),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.green,
+        ),
+        canvasColor: const Color.fromARGB(
+            0xFF, 0, 26, 53), //related to the BottomNavigationBarThemeData
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.white,
+        ),
+        textTheme: darkTextTheme,
+        scaffoldBackgroundColor: Colors.white,
+        secondaryHeaderColor: Colors.blue[700]);
+>>>>>>> Stashed changes
   }
 
   static ThemeData dark() {
     return ThemeData(
+<<<<<<< Updated upstream
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           foregroundColor: Colors.white,
@@ -97,5 +119,26 @@ class CMPLRTheme {
         ),
         textTheme: darkTextTheme,
         scaffoldBackgroundColor: const Color.fromARGB(0xFF, 0, 26, 53));
+=======
+      primaryColor: Colors.white,
+      brightness: Brightness.dark,
+      appBarTheme: const AppBarTheme(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.black,
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.green,
+      ),
+      canvasColor: Colors.black,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: Colors.white,
+        backgroundColor: Colors.white,
+      ),
+      textTheme: darkTextTheme,
+      scaffoldBackgroundColor: const Color.fromARGB(0xFF, 34, 34, 34),
+      secondaryHeaderColor: Colors.cyan[500],
+    );
+>>>>>>> Stashed changes
   }
 }

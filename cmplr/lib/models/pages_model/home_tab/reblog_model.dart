@@ -1,0 +1,3 @@
+class ReblogModel {
+  const ReblogModel();
+}

@@ -85,6 +85,7 @@ class SignupPreferences extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           highlightColor: Colors.transparent,
+                          // TODO: HARDCODED
                           splashColor: const Color(0x33f2f2f2),
                           onTap: () {
                             controller.nextButtonPressed();
@@ -104,7 +105,12 @@ class SignupPreferences extends StatelessWidget {
             body: Column(children: [
               Container(
                 width: double.infinity,
+<<<<<<< Updated upstream
                 height: 115,
+=======
+                height: Sizing.blockSizeVertical * 17.25,
+                // TODO: HARDCODED
+>>>>>>> Stashed changes
                 color: const Color(0xFF001A35),
                 padding: const EdgeInsets.fromLTRB(15, 4, 15, 0),
                 child: Column(
@@ -128,7 +134,17 @@ class SignupPreferences extends StatelessWidget {
               ),
               Expanded(
                   child: Container(
+<<<<<<< Updated upstream
                       padding: const EdgeInsets.fromLTRB(10, 6, 10, 0),
+=======
+                      padding: EdgeInsets.fromLTRB(
+                        Sizing.blockSize * 2.5,
+                        Sizing.blockSizeVertical * 0.9,
+                        Sizing.blockSize * 2.5,
+                        0,
+                      ),
+                      // TODO: HARDCODED
+>>>>>>> Stashed changes
                       color: const Color(0xFF001A35),
                       child: GridView.builder(
                           primary: false,
@@ -159,8 +175,12 @@ class SignupPreferences extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
         child: Material(
+          // TODO: HARDCODED
+
           color: const Color(0xFF001A35),
           child: InkWell(
+            // TODO: HARDCODED
+
             splashColor: const Color(0xaa00689b),
             borderRadius: const BorderRadius.all(Radius.circular(20.0)),
             onTap: () {

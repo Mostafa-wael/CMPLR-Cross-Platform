@@ -1,0 +1,3 @@
+class WritePostModel {
+  const WritePostModel();
+}
