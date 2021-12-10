@@ -1,31 +1,62 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../../models/models.dart';
 
-class NotesController extends GetxController with SingleGetTickerProviderMixin {
+class NotesController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  KeyboardVisibilityController keyboardController =
+      KeyboardVisibilityController();
+
   final RxBool _postSubscribed = false.obs;
 
   late TabController _tabController;
 
-  final RxInt _tabBarIndex = 0.obs;
+  int _tabIndex = 0;
 
-  RxBool get postSubscribed => _postSubscribed;
+  final RxBool _reblogsWithComments = true.obs;
 
   final NotesModel _notesModel = NotesModel();
 
-  final Rx<MaterialColor> _tabBarIndicatorColor = Colors.lightBlue.obs;
+  final RxBool _focusCommentTextField = false.obs;
 
-  RxInt get tabBarIndex => _tabBarIndex;
+  final RxBool _emptyCommentTextField = true.obs;
 
-  MaterialColor get tabBarIndicatorColor => _tabBarIndicatorColor.value;
+  // This is just a reference to the notes in the data model
+  List<List<UserNote>>? notes;
+
+  RxBool get postSubscribed => _postSubscribed;
 
   TabController get tabController => _tabController;
 
   NotesModel get notesModel => _notesModel;
 
-  set setTabBarIndex(int index) {
-    _tabBarIndex.value = index;
+  RxBool get focusCommentTextField => _focusCommentTextField;
+
+  RxBool get emptyCommentTextField => _emptyCommentTextField;
+
+  RxBool get reblogsWithComments => _reblogsWithComments;
+
+  @override
+  void onInit() {
+    _tabController = TabController(length: 3, vsync: this);
+
+    _tabController.addListener(() {
+      if (_tabIndex == 0 && _tabController.index != 0) {
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+      }
+      _tabIndex = _tabController.index;
+    });
+
+    keyboardController.onChange.listen((isVisible) {
+      isVisible
+          ? _focusCommentTextField.value = true
+          : _focusCommentTextField.value = false;
+    });
+
+    super.onInit();
   }
 
   void subscriptionButtonPressed() {
@@ -39,6 +70,7 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
     if (Get.isSnackbarOpen == true) {
       Get.back();
     }
+
     // Show error SnackBar
     Get.rawSnackbar(
       backgroundColor: Colors.green,
@@ -50,32 +82,21 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
     );
   }
 
-  @override
-  void onInit() {
-    _tabController = TabController(length: 3, vsync: this);
-    // _tabController.addListener(_handleTabSelection);
-    super.onInit();
+  void commentTextFieldFocusChanged(bool hasFocus) {
+    if (hasFocus) {
+      _focusCommentTextField.value = true;
+    } else {
+      _focusCommentTextField.value = false;
+    }
   }
 
-  // void handleTabSelection() {
-  //   switch (_tabController.index) {
-  //     case 0:
-  //       {
-  //         _tabBarIndicatorColor.value = Colors.lightBlue;
-  //       }
-  //       break;
-  //     case 1:
-  //       {
-  //         _tabBarIndicatorColor.value = Colors.green;
-  //       }
-  //       break;
-  //     case 2:
-  //       {
-  //         _tabBarIndicatorColor.value = Colors.red;
-  //       }
-  //       break;
-  //   }
-  // }
+  void commentTextFieldChanged(String comment) {
+    if (comment == '') {
+      _emptyCommentTextField.value = true;
+    } else {
+      _emptyCommentTextField.value = false;
+    }
+  }
 
   void closeNotesScreen() {
     Get.back();
