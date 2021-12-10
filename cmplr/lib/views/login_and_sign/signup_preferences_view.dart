@@ -94,6 +94,7 @@ class SignupPreferences extends StatelessWidget {
                     : Material(
                         color: const Color(0xFF001A35),
                         child: InkWell(
+                          key: const ValueKey('signUpPreferences_next'),
                           highlightColor: Colors.transparent,
                           splashColor: const Color(0x33f2f2f2),
                           onTap: () {
@@ -164,9 +165,13 @@ class SignupPreferences extends StatelessWidget {
                               controller.availablePreferenceCards.length + 1,
                           itemBuilder: (context, index) {
                             if (index == 0) {
-                              return buildCustomCard(controller);
+                              return buildCustomCard(
+                                controller,
+                                key: const ValueKey('signUpPreferences_yours'),
+                              );
                             }
-                            return buildPreferencesCard(controller, index - 1);
+                            return buildPreferencesCard(controller, index - 1,
+                                'signUpPreferences_index');
                           }))),
             ])),
       ),
@@ -175,8 +180,10 @@ class SignupPreferences extends StatelessWidget {
 
   /// This method builds the 'Choose your own' widget,
   /// (it navigates to the preferences search page)
-  Widget buildCustomCard(SignupPreferencesController controller) {
+  Widget buildCustomCard(SignupPreferencesController controller,
+      {ValueKey<String>? key}) {
     return Padding(
+        key: key,
         padding: EdgeInsets.fromLTRB(0, 0, 0, Sizing.blockSizeVertical * 1.5),
         child: Material(
           color: const Color(0xFF001A35),
@@ -228,8 +235,9 @@ class SignupPreferences extends StatelessWidget {
 
   /// This method build all the preference card in the grid view
   Widget buildPreferencesCard(
-      SignupPreferencesController controller, int index) {
+      SignupPreferencesController controller, int index, String key) {
     return InkWell(
+      key: ValueKey(key + index.toString()),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () {

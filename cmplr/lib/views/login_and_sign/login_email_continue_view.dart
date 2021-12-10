@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../utilities/sizing/sizing.dart';
 
+// ToDo: Need serious refactoring
 class LoginEmailContinue extends StatelessWidget {
   const LoginEmailContinue({Key? key}) : super(key: key);
 
@@ -44,27 +45,28 @@ class LoginEmailContinue extends StatelessWidget {
                           't',
                           style: TextStyle(
                               fontSize: Sizing.blockSize * 17.5,
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w900),
                         )
                       : Text(
                           't',
                           style: TextStyle(
                               fontSize: Sizing.blockSize * 35,
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w900),
                         ),
                   visibleKeyboard
                       ? SizedBox(height: Sizing.blockSizeVertical * 9)
                       : SizedBox(height: Sizing.blockSizeVertical * 43.5),
                   LoginTextField(
+                    key: const ValueKey('getEmail_getEmail'),
                     controller: controller,
                     text: 'email',
                     focus: true,
                     enabled: true,
                     underlineColor: Colors.blueAccent,
                     isEmail: true,
-                    iconColor: Colors.white,
+                    iconColor: Colors.black,
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 1.5),
                   SizedBox(
@@ -73,9 +75,10 @@ class LoginEmailContinue extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'Enter Password',
+                            key: const ValueKey('getEmail_getpassword'),
                             style: TextStyle(
                                 fontSize: Sizing.blockSize * 3.715,
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w300),
                           ),
                         ),
@@ -84,7 +87,7 @@ class LoginEmailContinue extends StatelessWidget {
                         },
                         splashFactory: NoSplash.splashFactory,
                       ),
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                     width: Sizing.blockSize * 84,
                     height: Sizing.blockSizeVertical * 6,

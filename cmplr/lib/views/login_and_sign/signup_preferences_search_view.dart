@@ -22,7 +22,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: const Color(0xFF001A35),
                     padding: const EdgeInsets.fromLTRB(18, 0, 5, 0),
                     height: Sizing.blockSizeVertical * 28.5,
                     child: Column(

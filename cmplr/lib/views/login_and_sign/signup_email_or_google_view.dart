@@ -46,6 +46,7 @@ class SignupEmailOrGoogle extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
+                    key: const ValueKey('signUp_withEmail'),
                     text: 'Sign up with Email',
                     onTap: () {
                       controller.signUpEmail();
@@ -53,6 +54,7 @@ class SignupEmailOrGoogle extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
+                    key: const ValueKey('signUp_withGmail'),
                     text: 'Sign up with Google',
                     onTap: () {
                       controller.signUpGoogle(context);

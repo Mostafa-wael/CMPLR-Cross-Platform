@@ -52,6 +52,7 @@ class SignupOrLoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
+                    key: const ValueKey('introScreen_signUp'),
                     text: 'Sign Up',
                     onTap: () {
                       controller.signUp();
@@ -59,6 +60,7 @@ class SignupOrLoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
+                    key: const ValueKey('introScreen_logIn'),
                     text: 'Log in',
                     onTap: () {
                       controller.signIn();

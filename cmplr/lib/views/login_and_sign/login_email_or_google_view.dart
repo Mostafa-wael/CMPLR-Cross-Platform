@@ -46,6 +46,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
+                    key: const ValueKey('login_withEmail'),
                     text: 'Log in with Email',
                     onTap: () {
                       controller.enterPasswordLoginEmail();
@@ -53,7 +54,8 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
-                    text: 'log in with Google',
+                    key: const ValueKey('login_withGmail'),
+                    text: 'Log in with Google',
                     onTap: () {
                       controller.loginGoogle(context);
                     },
