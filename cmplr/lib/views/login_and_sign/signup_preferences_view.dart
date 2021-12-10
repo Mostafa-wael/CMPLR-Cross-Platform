@@ -38,7 +38,7 @@ class SignupPreferences extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: Sizing.blockSize * 4.9),
+                                  fontSize: Sizing.fontSize * 4.9),
                             )),
                         SizedBox(
                           height: Sizing.blockSizeVertical * 3,
@@ -53,7 +53,7 @@ class SignupPreferences extends StatelessWidget {
                                 child: Text(
                                   'CONTINUE',
                                   style: TextStyle(
-                                      fontSize: Sizing.blockSize * 3.715),
+                                      fontSize: Sizing.fontSize * 3.715),
                                 )),
                             SizedBox(
                               width: Sizing.blockSize * 2.5,
@@ -64,7 +64,7 @@ class SignupPreferences extends StatelessWidget {
                                 },
                                 child: Text('LEAVE',
                                     style: TextStyle(
-                                        fontSize: Sizing.blockSize * 3.715)))
+                                        fontSize: Sizing.fontSize * 3.715)))
                           ],
                         )
                       ],
@@ -96,6 +96,7 @@ class SignupPreferences extends StatelessWidget {
                         child: InkWell(
                           key: const ValueKey('signUpPreferences_next'),
                           highlightColor: Colors.transparent,
+                          // TODO: HARDCODED
                           splashColor: const Color(0x33f2f2f2),
                           onTap: () {
                             controller.nextButtonPressed();
@@ -105,7 +106,7 @@ class SignupPreferences extends StatelessWidget {
                               '  ${controller.buttonText}  ',
                               style: TextStyle(
                                   color: Color(controller.buttonTextColor),
-                                  fontSize: Sizing.blockSize * 4.65,
+                                  fontSize: Sizing.fontSize * 4.65,
                                   fontWeight: FontWeight.w800),
                             ),
                           ),
@@ -116,6 +117,7 @@ class SignupPreferences extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: Sizing.blockSizeVertical * 17.25,
+                // TODO: HARDCODED
                 color: const Color(0xFF001A35),
                 padding: EdgeInsets.fromLTRB(Sizing.blockSize * 3.5,
                     Sizing.blockSizeVertical * 0.6, Sizing.blockSize * 3.5, 0),
@@ -125,7 +127,7 @@ class SignupPreferences extends StatelessWidget {
                     Text(
                       'What do you like?',
                       style: TextStyle(
-                          color: Colors.white, fontSize: Sizing.blockSize * 7),
+                          color: Colors.white, fontSize: Sizing.fontSize * 7),
                     ),
                     SizedBox(
                       height: Sizing.blockSizeVertical * 1.5,
@@ -149,6 +151,7 @@ class SignupPreferences extends StatelessWidget {
                         Sizing.blockSize * 2.5,
                         0,
                       ),
+                      // TODO: HARDCODED
                       color: const Color(0xFF001A35),
                       child: GridView.builder(
                           primary: false,
@@ -186,8 +189,12 @@ class SignupPreferences extends StatelessWidget {
         key: key,
         padding: EdgeInsets.fromLTRB(0, 0, 0, Sizing.blockSizeVertical * 1.5),
         child: Material(
+          // TODO: HARDCODED
+
           color: const Color(0xFF001A35),
           child: InkWell(
+            // TODO: HARDCODED
+
             splashColor: const Color(0xaa00689b),
             borderRadius:
                 BorderRadius.all(Radius.circular(Sizing.blockSize * 4.95)),
@@ -220,7 +227,7 @@ class SignupPreferences extends StatelessWidget {
                         maxLines: 2,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: Sizing.blockSize * 4.65,
+                          fontSize: Sizing.fontSize * 4.65,
                         ),
                       ),
                     ),
@@ -280,7 +287,7 @@ class SignupPreferences extends StatelessWidget {
                   child: Text(
                     controller.availablePreferenceCards[index].preferenceName,
                     style: TextStyle(
-                        fontSize: Sizing.blockSize * 4.65, color: Colors.black),
+                        fontSize: Sizing.fontSize * 4.65, color: Colors.black),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),

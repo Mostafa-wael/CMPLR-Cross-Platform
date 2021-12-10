@@ -11,6 +11,9 @@ class PostURIs {
   static const String signup = '/signup';
   static const String login = '/login';
 
+  static const String reblog = '/posts/reblog';
+  static const String post = '/posts';
+
   // URIs just for the switch case.
   // To get the real URI, use the help functions below.
   static const String askBlog = '/blog/ask';
@@ -18,7 +21,6 @@ class PostURIs {
   static const String submitPost = '/blog/submit';
   static const String subscribeBlog = '/blog/subscribe';
   static const String addTagsToPost = '/add_tags_to_posts';
-  static const String posts = '/posts';
 
   // Helper functions
   static String getAskBlog(String blogId) => '/blog' + blogId + '/ask';
@@ -37,6 +39,7 @@ class GetURIs {
       '/' + blogID + '/get_tags_for_posts';
 
   static const String getTagsForPosts = '/get_tags_for_posts';
+  static const String posts = 'CHANGE THIS';
   // TODO: Add the remaining get request URIS
 
 }

@@ -36,6 +36,12 @@ void main() {
     expect(controller.validInfo, false);
 
     controller.emailController.text = 'tester@cmplr.org';
+    controller.fieldChanged('');
+    await controller.validateInfo();
+    expect(controller.validInfo, false);
+
+    controller.passwordController.text = 'aReallyStrongPassword!@#!';
+    controller.fieldChanged('');
     await controller.validateInfo();
     expect(controller.validInfo, false);
 
@@ -45,17 +51,20 @@ void main() {
 
     // Since all 3 are different from the mock data, it will return true
     controller.nameController.text = 'too much for one project';
+    controller.fieldChanged('');
     await controller.validateInfo();
     expect(controller.validInfo, true);
 
     // Email already exists
     controller.emailController.text = 'tarek@cmplr.org';
+    controller.fieldChanged('');
     await controller.validateInfo();
     expect(controller.validInfo, false);
 
     // Name already exists
     controller.emailController.text = 'tester@cmplr.org';
     controller.nameController.text = 'burh';
+    controller.fieldChanged('');
     await controller.validateInfo();
     expect(controller.validInfo, false);
   });

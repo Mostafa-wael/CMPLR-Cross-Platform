@@ -33,7 +33,7 @@ class SignupMailName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _getAppBar(),
+        appBar: _getAppBar(context),
         body: GetBuilder<MasterPageController>(
           builder: (MasterPageController controller) {
             return _getBody(context, controller);
@@ -47,7 +47,7 @@ class SignupMailName extends StatelessWidget {
   /// If the user isn't logged in, an extra signup page shows up.
   /// When the user fills their data properly and presses 'done', this should
   /// route them to the page they intended on originally. (activity/profile)/
-  static AppBar _getAppBar() => AppBar(
+  static AppBar _getAppBar(context) => AppBar(
         actions: [
           GetBuilder<EmailPasswordNameAfterSignupController>(
               builder: (controller) {
@@ -55,7 +55,7 @@ class SignupMailName extends StatelessWidget {
               onPressed: () {
                 controller.validateInfo();
               },
-              child: const Text('Done'),
+              child: controller.getDoneButton(context),
             );
           })
         ],
@@ -63,7 +63,9 @@ class SignupMailName extends StatelessWidget {
       );
 
   /// Top column containing 2 Text, 3 TextField for email, password, name.
-  static Widget _getTopColumn(context, controller) => Column(
+  static Widget _getTopColumn(
+          context, EmailPasswordNameAfterSignupController controller) =>
+      Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -81,13 +83,15 @@ class SignupMailName extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
             child: Text(
-              controller.validInfo ? '' : 'Invalid information',
+              controller.validInfo ? '' : controller.getErrors(),
               style: const TextStyle(color: Colors.red),
             ),
           ),
           TextField(
-              controller: controller.emailController,
-              decoration: const InputDecoration(hintText: 'email')),
+            controller: controller.emailController,
+            decoration: const InputDecoration(hintText: 'email'),
+            onChanged: controller.fieldChanged,
+          ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
             controller: controller.passwordController,
@@ -106,11 +110,14 @@ class SignupMailName extends StatelessWidget {
             obscureText: controller.passwordHidden,
             enableSuggestions: false,
             autocorrect: false,
+            onChanged: controller.fieldChanged,
           ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
-              controller: controller.nameController,
-              decoration: const InputDecoration(hintText: 'name')),
+            controller: controller.nameController,
+            decoration: const InputDecoration(hintText: 'name'),
+            onChanged: controller.fieldChanged,
+          ),
         ],
       );
 
@@ -131,7 +138,7 @@ class SignupMailName extends StatelessWidget {
             children: [
               Text(
                 _nevermindText,
-                style: TextStyle(fontSize: Sizing.blockSize * 3.715),
+                style: TextStyle(fontSize: Sizing.fontSize * 3.715),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 GestureDetector(
@@ -168,14 +175,14 @@ class SignupMailName extends StatelessWidget {
         children: [
           Text(
             'Already have an account?',
-            style: TextStyle(fontSize: Sizing.blockSize * 4.65),
+            style: TextStyle(fontSize: Sizing.fontSize * 4.65),
           ),
           GestureDetector(
               child: CustomUnderline(
                 text: Text(
                   'Login',
                   style: TextStyle(
-                      fontSize: Sizing.blockSize * 4.65,
+                      fontSize: Sizing.fontSize * 4.65,
                       color: Colors.blue[600]),
                 ),
                 underlineDistance: Sizing.blockSizeVertical * 0.15,
@@ -193,7 +200,7 @@ class SignupMailName extends StatelessWidget {
               text: Text(
                 'Privacy dashboard',
                 style: TextStyle(
-                    fontSize: Sizing.blockSize * 4.65, color: Colors.blue[600]),
+                    fontSize: Sizing.fontSize * 4.65, color: Colors.blue[600]),
               ),
             ),
             onTap: () {

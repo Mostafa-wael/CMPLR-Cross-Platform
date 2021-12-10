@@ -1,3 +1,4 @@
+import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 class SignUpInButton extends StatelessWidget {
@@ -18,16 +19,16 @@ class SignUpInButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
-                fontSize: 16,
+                fontSize: Sizing.fontSize * 3.715,
               ),
             ),
           ),
           onTap: onTap,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
-        borderRadius:  const BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       width: 300,
       height: 40,

@@ -35,7 +35,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                             Text(
                               'Pick your own topics',
                               style: TextStyle(
-                                  fontSize: Sizing.blockSize * 7.25,
+                                  fontSize: Sizing.fontSize * 7.25,
                                   color: Colors.white),
                             ),
                             SizedBox(width: Sizing.blockSize * 14.85),
@@ -54,7 +54,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                         Text(
                           'Didn\'t find what you wanted? Add it below.',
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 4.4,
+                              fontSize: Sizing.fontSize * 4.4,
                               color: Colors.white),
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 3),
@@ -69,7 +69,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                           },
                           cursorColor: Colors.black,
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 3.715,
+                              fontSize: Sizing.fontSize * 3.715,
                               color: Colors.black),
                           decoration: InputDecoration(
                               prefixIconConstraints: BoxConstraints(
@@ -102,7 +102,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                         SizedBox(height: Sizing.blockSize * 3.75),
                         Text(controller.searchIndicatorString,
                             style: TextStyle(
-                                fontSize: Sizing.blockSize * 5.8,
+                                fontSize: Sizing.fontSize * 5.8,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500)),
                       ],
@@ -150,7 +150,7 @@ class SignupPreferencesSearch extends StatelessWidget {
               Text(
                 controller.currentlyShownTopics[index],
                 style: TextStyle(
-                    color: Colors.white, fontSize: Sizing.blockSize * 4.2),
+                    color: Colors.white, fontSize: Sizing.fontSize * 4.2),
               )
             ],
           ),

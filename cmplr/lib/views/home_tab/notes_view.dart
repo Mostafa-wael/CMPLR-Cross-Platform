@@ -220,7 +220,7 @@ class Notes extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: Sizing.blockSize * 4.2,
+                            fontSize: Sizing.fontSize * 4.2,
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
@@ -228,7 +228,7 @@ class Notes extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: Sizing.blockSize * 4.2,
+                          fontSize: Sizing.fontSize * 4.2,
                           fontWeight: FontWeight.w400,
                           // color: Colors.black54
                         ),
@@ -252,7 +252,7 @@ class Notes extends StatelessWidget {
                             child: Text(
                           'Follow',
                           style: TextStyle(
-                              fontSize: Sizing.blockSize * 4.65,
+                              fontSize: Sizing.fontSize * 4.65,
                               fontWeight: FontWeight.w500,
                               color: Colors.lightBlue),
                         ))),

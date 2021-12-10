@@ -16,6 +16,7 @@ class MasterPage extends StatelessWidget {
     Sizing.height = MediaQuery.of(context).size.height;
     Sizing.blockSize = Sizing.width / 100;
     Sizing.blockSizeVertical = Sizing.height / 100;
+    Sizing.setFontSize();
 
     return GetBuilder(
         init: MasterPageController(),
@@ -50,7 +51,7 @@ class MasterPage extends StatelessWidget {
               ],
             ),
             floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.pin),
+              child: const Icon(Icons.edit),
               onPressed: () {
                 Get.to(
                   const WritePost(),
