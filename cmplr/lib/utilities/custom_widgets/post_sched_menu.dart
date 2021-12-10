@@ -122,7 +122,7 @@ Widget scheduleOption(bool activated, controller, context) {
                     ),
                   ),
                   onTap: () {
-                    controller.setPostOption(postOptions.schedule);
+                    controller.setPostOption(PostOptions.schedule);
                   }),
               SizedBox(height: Sizing.blockSizeVertical * 1.5),
               Row(
@@ -226,7 +226,7 @@ Widget scheduleOption(bool activated, controller, context) {
               ),
             ),
             onTap: () {
-              controller.setPostOption(postOptions.schedule);
+              controller.setPostOption(PostOptions.schedule);
             }),
   );
 }

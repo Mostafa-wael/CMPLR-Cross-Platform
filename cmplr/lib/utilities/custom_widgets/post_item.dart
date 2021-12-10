@@ -191,8 +191,8 @@ class _PostItemState extends State<PostItem> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               UserNameAvatar(
-                                  controller.userAvatar,
-                                  controller.userName,
+                                  widget.profilePhoto,
+                                  widget.name,
                                   TextStyle(
                                     fontSize: Sizing.fontSize * 5,
                                     fontWeight: FontWeight.bold,
