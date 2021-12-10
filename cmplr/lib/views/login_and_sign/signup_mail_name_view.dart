@@ -52,6 +52,7 @@ class SignupMailName extends StatelessWidget {
           GetBuilder<EmailPasswordNameAfterSignupController>(
               builder: (controller) {
             return TextButton(
+              key: const ValueKey('completeSignUp_done'),
               onPressed: () {
                 controller.validateInfo();
               },
@@ -88,16 +89,19 @@ class SignupMailName extends StatelessWidget {
             ),
           ),
           TextField(
+            key: const ValueKey('completeSignUp_email'),
             controller: controller.emailController,
             decoration: const InputDecoration(hintText: 'email'),
             onChanged: controller.fieldChanged,
           ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
+            key: const ValueKey('completeSignUp_password'),
             controller: controller.passwordController,
             decoration: InputDecoration(
                 hintText: 'password',
                 suffixIcon: IconButton(
+                  key: const ValueKey('completeSignUp_eye'),
                   icon: Icon(
                     controller.passwordHidden
                         ? Icons.remove_red_eye
@@ -114,6 +118,7 @@ class SignupMailName extends StatelessWidget {
           ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
+            key: const ValueKey('completeSignUp_name'),
             controller: controller.nameController,
             decoration: const InputDecoration(hintText: 'name'),
             onChanged: controller.fieldChanged,
@@ -123,7 +128,7 @@ class SignupMailName extends StatelessWidget {
 
   /// Login popup to confirm with the user.
   static Widget _getLoginPopup(
-          EmailPasswordNameAfterSignupController controller) =>
+          context, EmailPasswordNameAfterSignupController controller) =>
       Popup(
         Padding(
           padding: EdgeInsets.only(
@@ -142,9 +147,9 @@ class SignupMailName extends StatelessWidget {
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 GestureDetector(
-                  child: const Text(
+                  child: Text(
                     'Nevermind',
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   onTap: () {
                     Get.back();
@@ -178,6 +183,7 @@ class SignupMailName extends StatelessWidget {
             style: TextStyle(fontSize: Sizing.fontSize * 4.65),
           ),
           GestureDetector(
+              key: const ValueKey('completeSignUp_login'),
               child: CustomUnderline(
                 text: Text(
                   'Login',
@@ -192,10 +198,11 @@ class SignupMailName extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return _getLoginPopup(controller);
+                      return _getLoginPopup(context, controller);
                     });
               }),
           GestureDetector(
+            key: const ValueKey('completeSignUp_privacy'),
             child: CustomUnderline(
               text: Text(
                 'Privacy dashboard',

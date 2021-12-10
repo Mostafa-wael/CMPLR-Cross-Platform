@@ -22,7 +22,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    color: const Color(0xFF001A35),
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     padding: const EdgeInsets.fromLTRB(18, 0, 5, 0),
                     height: Sizing.blockSizeVertical * 28.5,
                     child: Column(
@@ -36,7 +36,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                               'Pick your own topics',
                               style: TextStyle(
                                   fontSize: Sizing.fontSize * 7.25,
-                                  color: Colors.white),
+                                  color: Theme.of(context).primaryColor),
                             ),
                             SizedBox(width: Sizing.blockSize * 14.85),
                             IconButton(
@@ -55,7 +55,7 @@ class SignupPreferencesSearch extends StatelessWidget {
                           'Didn\'t find what you wanted? Add it below.',
                           style: TextStyle(
                               fontSize: Sizing.fontSize * 4.4,
-                              color: Colors.white),
+                              color: Theme.of(context).primaryColor),
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 3),
                         TextField(
@@ -97,13 +97,13 @@ class SignupPreferencesSearch extends StatelessWidget {
                               filled: true,
                               hintStyle: TextStyle(color: Colors.grey[500]),
                               hintText: 'Add topic',
-                              fillColor: Colors.white),
+                              fillColor: Theme.of(context).primaryColor),
                         ),
                         SizedBox(height: Sizing.blockSize * 3.75),
                         Text(controller.searchIndicatorString,
                             style: TextStyle(
                                 fontSize: Sizing.fontSize * 5.8,
-                                color: Colors.white,
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500)),
                       ],
                     ),
@@ -114,7 +114,8 @@ class SignupPreferencesSearch extends StatelessWidget {
                     child: ListView.builder(
                         itemCount: controller.currentlyShownTopics.length,
                         itemBuilder: (context, index) {
-                          return buildSearchResultTile(controller, index);
+                          return buildSearchResultTile(
+                              context, controller, index);
                         }),
                   )),
                 ],
@@ -124,7 +125,7 @@ class SignupPreferencesSearch extends StatelessWidget {
 
   /// This builds the search list view tile widget (a tile is used to show one
   /// search result)
-  Widget buildSearchResultTile(
+  Widget buildSearchResultTile(BuildContext context,
       SignupPreferencesSearchController controller, int index) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -140,9 +141,9 @@ class SignupPreferencesSearch extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Icon(
+              Icon(
                 Icons.add,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
               ),
               SizedBox(
                 width: Sizing.blockSize * 1.24,
@@ -150,7 +151,8 @@ class SignupPreferencesSearch extends StatelessWidget {
               Text(
                 controller.currentlyShownTopics[index],
                 style: TextStyle(
-                    color: Colors.white, fontSize: Sizing.fontSize * 4.2),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: Sizing.fontSize * 4.2),
               )
             ],
           ),
