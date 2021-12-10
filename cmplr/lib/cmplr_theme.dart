@@ -76,7 +76,8 @@ class CMPLRTheme {
           selectedItemColor: Colors.white,
         ),
         textTheme: darkTextTheme,
-        scaffoldBackgroundColor: Colors.white);
+        scaffoldBackgroundColor: Colors.white,
+        secondaryHeaderColor: Colors.blue[700]);
   }
 
   static ThemeData darkTheme() {

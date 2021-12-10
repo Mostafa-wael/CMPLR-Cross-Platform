@@ -1,13 +1,17 @@
+import '../controllers.dart';
+import '../../utilities/custom_widgets/custom_widgets.dart';
+
 import '../../routes.dart';
 import 'package:get/get.dart';
 
-class PostItemController extends GetxController
-    with SingleGetTickerProviderMixin {
+class PostItemController extends GetxController {
   void openNotes(int numNotes) {
     Get.toNamed(Routes.notes, arguments: numNotes);
   }
 
-  void reblog() {
+  void reblog(PostItem postItem) {
+    final reblogController = Get.find<ReblogController>();
+    reblogController.post = postItem;
     Get.toNamed(Routes.reblog);
   }
 

@@ -16,6 +16,7 @@ class SignupOrLoginScreen extends StatelessWidget {
     Sizing.height = MediaQuery.of(context).size.height;
     Sizing.blockSize = Sizing.width / 100;
     Sizing.blockSizeVertical = Sizing.height / 100;
+    Sizing.setFontSize();
 
     return GetBuilder<SignupLoginController>(
       init: SignupLoginController(),
@@ -46,12 +47,13 @@ class SignupOrLoginScreen extends StatelessWidget {
                   Text(
                     'tumblr',
                     style: TextStyle(
-                        fontSize: Sizing.blockSize * 13,
+                        fontSize: Sizing.fontSize * 13,
                         color: Colors.white,
                         fontWeight: FontWeight.w900),
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
+                    key: const ValueKey('introScreen_signUp'),
                     text: 'Sign Up',
                     onTap: () {
                       controller.signUp();
@@ -59,6 +61,7 @@ class SignupOrLoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
+                    key: const ValueKey('introScreen_logIn'),
                     text: 'Log in',
                     onTap: () {
                       controller.signIn();
