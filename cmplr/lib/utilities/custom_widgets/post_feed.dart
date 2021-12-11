@@ -5,22 +5,15 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../controllers/controllers.dart';
 
 /// This widget represents the post feed with all its data
-class PostFeed extends StatefulWidget {
-  const PostFeed({
+class PostFeed extends StatelessWidget {
+  PostFeed({
     Key? key,
   }) : super(key: key);
-  @override
-  _PostFeedState createState() => _PostFeedState();
-}
 
-class _PostFeedState extends State<PostFeed> {
   final _scrollController = ScrollController();
-  var controller = Get.put(PostFeedController());
+  final controller = Get.put(PostFeedController());
 
-  @override
   void initState() {
-    super.initState();
-
     // Setup the listener to indicate if we reached the top of the page.
     _scrollController.addListener(() {
       if (_scrollController.position.atEdge) {
