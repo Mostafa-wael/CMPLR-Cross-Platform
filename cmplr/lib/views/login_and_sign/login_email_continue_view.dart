@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../utilities/sizing/sizing.dart';
 
+// ToDo: Need serious refactoring
 class LoginEmailContinue extends StatelessWidget {
   const LoginEmailContinue({Key? key}) : super(key: key);
 
@@ -58,6 +59,7 @@ class LoginEmailContinue extends StatelessWidget {
                       ? SizedBox(height: Sizing.blockSizeVertical * 9)
                       : SizedBox(height: Sizing.blockSizeVertical * 43.5),
                   LoginTextField(
+                    key: const ValueKey('getEmail2_getEmail'),
                     controller: controller,
                     text: 'email',
                     focus: true,
@@ -73,6 +75,7 @@ class LoginEmailContinue extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'Enter Password',
+                            key: const ValueKey('getEmail2_getPassword'),
                             style: TextStyle(
                                 fontSize: Sizing.fontSize * 3.715,
                                 color: Colors.white,

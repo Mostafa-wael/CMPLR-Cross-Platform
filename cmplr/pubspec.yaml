@@ -15,6 +15,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   
   get: ^4.3.8
+  flutter_keyboard_visibility: ^5.1.0
+  getwidget: ^2.0.4
   google_fonts: 
   fluttertoast: 
   progress_indicators:
@@ -23,6 +25,7 @@ dependencies:
   get_storage:
   firebase_core:
   firebase_auth: ^3.3.3
+  driver_extensions:
 
   file_picker:
   flutter_html:

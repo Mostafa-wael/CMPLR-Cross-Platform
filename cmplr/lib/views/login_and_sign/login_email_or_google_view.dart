@@ -38,7 +38,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                 children: [
                   SizedBox(height: Sizing.blockSizeVertical * 18),
                   Text(
-                    'tumblr',
+                    'Cmplr',
                     style: TextStyle(
                         fontSize: Sizing.fontSize * 13,
                         color: Colors.white,
@@ -46,6 +46,7 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 48),
                   SignUpInButton(
+                    key: const ValueKey('login_withEmail'),
                     text: 'Log in with Email',
                     onTap: () {
                       controller.loginEmail();
@@ -53,7 +54,8 @@ class LoginEmailOrGoogle extends StatelessWidget {
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),
                   SignUpInButton(
-                    text: 'log in with Google',
+                    key: const ValueKey('login_withGmail'),
+                    text: 'Log in with Google',
                     onTap: () {
                       controller.loginGoogle(context);
                     },

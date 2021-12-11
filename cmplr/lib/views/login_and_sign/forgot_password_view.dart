@@ -14,6 +14,8 @@ class ForgotPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             toolbarHeight: Sizing.blockSizeVertical * 10.5,
             elevation: 0.0,
             title: Padding(
@@ -35,6 +37,7 @@ class ForgotPassword extends StatelessWidget {
                           child: const Text(
                             'Submit',
                             style: TextStyle(color: Colors.blueAccent),
+                            key: ValueKey('forgotPassword_submit'),
                           ),
                           onTap: () {
                             controller.sendResetEmail();
@@ -43,6 +46,7 @@ class ForgotPassword extends StatelessWidget {
                       : const Text(
                           'Submit',
                           style: TextStyle(color: Color(0x448AFFFF)),
+                          key: ValueKey('forgotPassword_submit'),
                         ),
                 ],
               ),
@@ -80,6 +84,7 @@ class ForgotPassword extends StatelessWidget {
                             underlineColor: Colors.grey,
                             isEmail: true,
                             iconColor: Colors.grey,
+                            key: const ValueKey('forgotPassword_getEmail'),
                           ),
                         ],
                       ),
@@ -117,6 +122,7 @@ class ForgotPassword extends StatelessWidget {
                             underlineColor: Colors.grey,
                             isEmail: true,
                             iconColor: Colors.grey,
+                            key: const ValueKey('forgotPassword_getEmail'),
                           ),
                         ],
                       ),

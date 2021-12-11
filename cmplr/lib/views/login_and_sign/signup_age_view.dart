@@ -21,10 +21,10 @@ class SignupAge extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           shadowColor: Colors.transparent,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: const Color(0xFF001A35),
           leading: IconButton(
-              icon:
-                  Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+              key: const ValueKey('signUpAge_back'),
+              icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
               onPressed: () {
                 controller.closeAgeScreen();
               },
@@ -33,6 +33,7 @@ class SignupAge extends StatelessWidget {
           actions: [
             Stack(children: [
               TextButton(
+                  key: const ValueKey('signUpAge_next'),
                   onPressed: () {
                     controller.nextButtonPressed();
                   },
@@ -42,14 +43,14 @@ class SignupAge extends StatelessWidget {
                   child: Text('Next',
                       style: TextStyle(
                           color: Color(controller.nextButtonColor),
-                          fontSize: Sizing.fontSize * 4.65,
+                          fontSize: Sizing.blockSize * 4.65,
                           fontWeight: FontWeight.w800))),
               Positioned(
                 left: Sizing.blockSize * 3.5,
                 top: Sizing.blockSizeVertical,
                 child: (controller.isLoading)
                     ? CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
+                        color: const Color(0xFF00CF36),
                         strokeWidth: Sizing.blockSize * 1.2,
                       )
                     : Container(color: Colors.transparent),
@@ -58,7 +59,7 @@ class SignupAge extends StatelessWidget {
           ],
         ),
         body: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: const Color(0xFF001A35),
           width: double.infinity,
           height: double.infinity,
           child: Padding(
@@ -74,12 +75,14 @@ class SignupAge extends StatelessWidget {
                   height: Sizing.blockSizeVertical * 7.5,
                 ),
                 TextFormField(
+                  key: const ValueKey('signUpAge_getAge'),
                   controller: controller.ageController,
                   focusNode: controller.focusNode,
                   maxLength: 3,
                   autofocus: true,
                   cursorColor: Colors.grey,
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: TextStyle(
+                      color: Colors.white, fontSize: Sizing.blockSize * 4.0),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -93,7 +96,7 @@ class SignupAge extends StatelessWidget {
                         visible: controller.showClearButton,
                         child: IconButton(
                           icon: const Icon(Icons.close),
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.white,
                           onPressed: () {
                             controller.ageController.clear();
                             controller.ageFieldChanged();
@@ -102,7 +105,8 @@ class SignupAge extends StatelessWidget {
                       ),
                       hintText: 'How old are you?',
                       hintStyle: TextStyle(
-                          color: Colors.grey, fontSize: Sizing.fontSize * 4.65),
+                          color: Colors.grey,
+                          fontSize: Sizing.blockSize * 4.65),
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       focusedBorder: const UnderlineInputBorder(
@@ -112,7 +116,7 @@ class SignupAge extends StatelessWidget {
                 RichText(
                     text: TextSpan(
                         style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                            color: Colors.white,
                             fontSize: Sizing.blockSize * 4.45,
                             height: Sizing.blockSizeVertical * 0.2),
                         children: <TextSpan>[

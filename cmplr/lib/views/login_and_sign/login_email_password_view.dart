@@ -15,6 +15,8 @@ class LoginEmailPassword extends StatelessWidget {
       builder: (controller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           toolbarHeight: Sizing.blockSizeVertical * 10.5,
           elevation: 0.0,
           title: Padding(
@@ -37,6 +39,7 @@ class LoginEmailPassword extends StatelessWidget {
                         child: const Text(
                           'Log in',
                           style: TextStyle(color: Colors.blueAccent),
+                          key: ValueKey('getEmailPassword_login'),
                         ),
                         onTap: () {
                           controller.tryLogin();
@@ -44,8 +47,8 @@ class LoginEmailPassword extends StatelessWidget {
                       )
                     : const Text(
                         'Log in',
-                        // TODO: AAAAAAAAAAAAAA
                         style: TextStyle(color: Color(0x448AFFFF)),
+                        key: ValueKey('getEmailPassword_login'),
                       )
               ],
             ),
@@ -70,6 +73,7 @@ class LoginEmailPassword extends StatelessWidget {
                         //   ),
                         // ),
                         LoginTextField(
+                          key: const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
                           text: 'email',
                           focus: false,
@@ -80,6 +84,7 @@ class LoginEmailPassword extends StatelessWidget {
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 0.5),
                         LoginTextField(
+                          key: const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
                           focus: false,
@@ -110,6 +115,7 @@ class LoginEmailPassword extends StatelessWidget {
                     child: Column(
                       children: [
                         LoginTextField(
+                          key: const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
                           text: 'email',
                           focus: false,
@@ -120,6 +126,7 @@ class LoginEmailPassword extends StatelessWidget {
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
+                          key: const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
                           focus: true,
@@ -128,7 +135,7 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: false,
                           iconColor: Colors.grey,
                         ),
-                        // SizedBox(height: Sizing.blockSizeVertical * 30),
+                        SizedBox(height: Sizing.blockSizeVertical * 30),
                       ],
                     ),
                   ),
@@ -142,6 +149,7 @@ class LoginEmailPassword extends StatelessWidget {
                           fontSize: Sizing.fontSize * 3.715,
                           color: Colors.grey,
                         ),
+                        key: const ValueKey('getEmailPassword_forgotPassword'),
                       ),
                       onTap: () {
                         controller.forgotPassword();

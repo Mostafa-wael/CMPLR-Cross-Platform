@@ -2,9 +2,6 @@ import 'controllers/controllers.dart';
 import 'models/models.dart';
 
 import 'models/persistent_storage_api.dart';
-import 'models/models.dart';
-
-import 'models/persistent_storage_api.dart';
 
 import 'flags.dart';
 import 'cmplr_theme.dart';
@@ -14,6 +11,8 @@ import 'package:get/get.dart';
 
 import 'views/views.dart';
 import './routes.dart';
+
+// import 'package:flutter_driver/driver_extension.dart';
 
 Future<void> main() async {
   await PersistentStorage.initStorage();
@@ -27,6 +26,7 @@ Future<void> main() async {
   Get.put(ReblogController(const ReblogModel()));
   Get.put(WritePostController(const WritePostModel()));
 
+  // enableFlutterDriverExtension();
   runApp(const CMPLR());
 }
 

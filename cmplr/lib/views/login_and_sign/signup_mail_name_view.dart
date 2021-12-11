@@ -8,6 +8,7 @@ import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
 
+// TODO: Fix it with the CMPLRTheme.trueBlue()
 /// The screen that shows when you choose to sign up with email
 /// then go to your profile.
 class SignupMailName extends StatelessWidget {
@@ -53,6 +54,7 @@ class SignupMailName extends StatelessWidget {
           GetBuilder<EmailPasswordNameAfterSignupController>(
               builder: (controller) {
             return TextButton(
+              key: const ValueKey('completeSignUp_done'),
               onPressed: () {
                 controller.validateInfo();
               },
@@ -89,16 +91,19 @@ class SignupMailName extends StatelessWidget {
             ),
           ),
           TextField(
+            key: const ValueKey('completeSignUp_email'),
             controller: controller.emailController,
             decoration: const InputDecoration(hintText: 'email'),
             onChanged: controller.fieldChanged,
           ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
+            key: const ValueKey('completeSignUp_password'),
             controller: controller.passwordController,
             decoration: InputDecoration(
                 hintText: 'password',
                 suffixIcon: IconButton(
+                  key: const ValueKey('completeSignUp_eye'),
                   icon: Icon(
                     controller.passwordHidden
                         ? Icons.remove_red_eye
@@ -115,6 +120,7 @@ class SignupMailName extends StatelessWidget {
           ),
           SizedBox(height: Sizing.blockSizeVertical * 1.2),
           TextField(
+            key: const ValueKey('completeSignUp_name'),
             controller: controller.nameController,
             decoration: const InputDecoration(hintText: 'name'),
             onChanged: controller.fieldChanged,
@@ -124,7 +130,7 @@ class SignupMailName extends StatelessWidget {
 
   /// Login popup to confirm with the user.
   static Widget _getLoginPopup(
-          EmailPasswordNameAfterSignupController controller) =>
+          context, EmailPasswordNameAfterSignupController controller) =>
       Popup(
         Padding(
           padding: EdgeInsets.only(
@@ -143,9 +149,9 @@ class SignupMailName extends StatelessWidget {
               ),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 GestureDetector(
-                  child: const Text(
+                  child: Text(
                     'Nevermind',
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   onTap: () {
                     Get.back();
@@ -179,12 +185,13 @@ class SignupMailName extends StatelessWidget {
             style: TextStyle(fontSize: Sizing.fontSize * 4.65),
           ),
           GestureDetector(
+              key: const ValueKey('completeSignUp_login'),
               child: CustomUnderline(
                 text: Text(
                   'Login',
                   style: TextStyle(
                       fontSize: Sizing.fontSize * 4.65,
-                      color: Colors.blue[600]),
+                      color: Theme.of(context).secondaryHeaderColor),
                 ),
                 underlineDistance: Sizing.blockSizeVertical * 0.15,
                 underlineWidth: Sizing.blockSize * 0.25,
@@ -193,15 +200,17 @@ class SignupMailName extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return _getLoginPopup(controller);
+                      return _getLoginPopup(context, controller);
                     });
               }),
           GestureDetector(
+            key: const ValueKey('completeSignUp_privacy'),
             child: CustomUnderline(
               text: Text(
                 'Privacy dashboard',
                 style: TextStyle(
-                    fontSize: Sizing.fontSize * 4.65, color: Colors.blue[600]),
+                    fontSize: Sizing.fontSize * 4.65,
+                    color: Theme.of(context).secondaryHeaderColor),
               ),
             ),
             onTap: () {

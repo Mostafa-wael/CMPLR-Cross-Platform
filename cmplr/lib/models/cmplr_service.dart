@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:get/get_connect/http/src/request/request.dart';
+import 'package:get/get.dart';
 
 import '../backend_uris.dart';
 
 import '../flags.dart';
 import 'package:http/http.dart' as http;
 
+import 'pages_model/home_tab/notes/user_note.dart';
 import '../routes.dart';
 
 /// Our interface to the backend OR our mock data
@@ -110,10 +111,207 @@ class CMPLRService {
         'Ac Milan',
       ]
     },
+    Routes.notes: {
+      'response': {
+        'notes': [
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'square',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'Xz'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content':
+                'This is a post comment. This is a post comment. This is a post'
+                    'comment. This is a post comment. This is a post comment.'
+                    'This is a post comment. This is a post comment.'
+                    'This is a post comment.'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post comment'
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'true',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'like',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'followed': 'false',
+          },
+          {
+            'type': 'reblog',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed'
+          },
+          {
+            'type': 'reblog',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed'
+          },
+        ],
+        'total_notes': 21,
+      }
+    },
   };
 
   static const requestSuccess = 200;
-  static const insertSuccess = 201;
   static const invalidData = 422;
   static const unauthenticated = 401;
 
@@ -140,27 +338,12 @@ class CMPLRService {
       case PostURIs.askBlog:
         return askBlog(backendURI, params);
       case PostURIs.post:
-        return createNewPost(backendURI, params);
-      case PostURIs.reblog:
-        return reblogExistingPost(backendURI, params);
+        return getPosts(backendURI, params);
 
       default:
-        throw Exception('Invalid request route');
+        throw Exception('Invalid request backendURI');
     }
   }
-
-  static Future<http.Response> get(String backendURI, Map params) async {
-    switch (backendURI) {
-      case GetURIs.posts:
-        throw Exception('Not yet implemented');
-      default:
-        throw Exception('Inavlid GET URI');
-    }
-  }
-
-  /* ======================================================================== */
-  // Post functions
-  /* ======================================================================== */
 
   // TODO: Rename this screen to "extra signup"
   static Future<http.Response> signupMailNameVerification(
@@ -173,17 +356,13 @@ class CMPLRService {
       final registeredName = names.contains(params['BlogName']);
 
       final bothFree = !registeredName && !registeredEmail;
-
-      final errors = [];
-      if (registeredName) {
-        errors.add('Name already taken');
-      }
-      if (registeredEmail) {
-        errors.add('Email already taken');
+      if (bothFree) {
+        emails.add(params['Email']);
+        names.add(params['BlogName']);
       }
 
       final responseCode = bothFree ? requestSuccess : invalidData;
-      return http.Response(jsonEncode(errors), responseCode);
+      return http.Response('', responseCode);
     } else {
       final request = http.post(
         Uri.parse(apiIp + backendURI),
@@ -218,12 +397,16 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> askBlog(String backendURI, Map params) {
+  static Future<http.Response> askBlog(String route, Map param) {
     if (Flags.mock) {
       return Future.value(http.Response('', 201));
     } else {
-      return http.post(Uri.parse(apiIp + PostURIs.getAskBlog(params['BlogId'])),
-          headers: postHeader, body: jsonEncode(params)); /* e */
+      return http.post(Uri(path: PostURIs.getAskBlog(param['BlogId'])),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            // TODO add authorization header
+          },
+          body: jsonEncode(param)); /* e */
     }
   }
 
@@ -250,27 +433,6 @@ class CMPLRService {
     }
   }
 
-  /* ======================================================================== */
-  // Get functions
-  /* ======================================================================== */
-
-// TODO: add mock data, get them from the controller
-  static Future<http.Response> getPosts(String backendURI, Map params) async {
-    if (Flags.mock) {
-      return http.Response('', 200);
-    } else {
-      return http.post(
-        Uri.parse(apiIp + backendURI),
-        headers: getHeader,
-        body: jsonEncode(params),
-      );
-    }
-  }
-
-  /* ======================================================================== */
-  // Not in the backend
-  /* ======================================================================== */
-
   // This functionality is not implemeted in the back-end
   static List initialPreferences(String route) {
     return _mockData[route]['preference_names'];
@@ -279,5 +441,35 @@ class CMPLRService {
   // This functionality is not implemeted in the back-end
   static List searchedTopics(String route, String topics) {
     return _mockData[route][topics];
+  }
+
+// TODO: add mock data, get them from the controller
+  static Future<http.Response> getPosts(String route, Map params) async {
+    if (Flags.mock) {
+      return http.Response('', 200);
+    } else {
+      return http.post(
+        Uri(path: PostURIs.signup),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          // TODO add authorization header
+        },
+        body: jsonEncode(params),
+      );
+    }
+  }
+
+  static Future<List<UserNote>> getNotes(String route) async {
+    final notes = <UserNote>[];
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      for (var i = 0; i < _mockData[route]['response']['total_notes']; i++) {
+        notes.add(UserNote.fromJson(_mockData[route]['response']['notes'][i]));
+      }
+      return notes;
+    } else {
+      // TODO: Do a get request
+      return notes;
+    }
   }
 }

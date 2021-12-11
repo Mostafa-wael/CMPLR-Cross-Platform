@@ -5,3 +5,4 @@ export 'pages_model/login_and_signup/login_mail_model/model_email_password_login
 export 'pages_model/home_tab/notes/notes_model.dart';
 export 'pages_model/home_tab/write_post_model.dart';
 export 'pages_model/home_tab/reblog_model.dart';
+export 'pages_model/home_tab/notes/user_note.dart';

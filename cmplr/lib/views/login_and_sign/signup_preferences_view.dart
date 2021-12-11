@@ -94,6 +94,7 @@ class SignupPreferences extends StatelessWidget {
                     : Material(
                         color: const Color(0xFF001A35),
                         child: InkWell(
+                          key: const ValueKey('signUpPreferences_next'),
                           highlightColor: Colors.transparent,
                           // TODO: HARDCODED
                           splashColor: const Color(0x33f2f2f2),
@@ -115,7 +116,7 @@ class SignupPreferences extends StatelessWidget {
             body: Column(children: [
               Container(
                 width: double.infinity,
-                height: Sizing.blockSizeVertical * 17.25,
+                height: MediaQuery.of(context).size.height * 0.2,
                 // TODO: HARDCODED
                 color: const Color(0xFF001A35),
                 padding: EdgeInsets.fromLTRB(Sizing.blockSize * 3.5,
@@ -158,7 +159,8 @@ class SignupPreferences extends StatelessWidget {
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   childAspectRatio:
                                       (MediaQuery.of(context).size.width / 3) /
-                                          150,
+                                          (MediaQuery.of(context).size.height /
+                                              4.65),
                                   crossAxisCount: 3,
                                   crossAxisSpacing: Sizing.blockSize * 3,
                                   mainAxisSpacing:
@@ -167,9 +169,13 @@ class SignupPreferences extends StatelessWidget {
                               controller.availablePreferenceCards.length + 1,
                           itemBuilder: (context, index) {
                             if (index == 0) {
-                              return buildCustomCard(controller);
+                              return buildCustomCard(
+                                controller,
+                                key: const ValueKey('signUpPreferences_yours'),
+                              );
                             }
-                            return buildPreferencesCard(controller, index - 1);
+                            return buildPreferencesCard(controller, index - 1,
+                                'signUpPreferences_index');
                           }))),
             ])),
       ),
@@ -178,8 +184,10 @@ class SignupPreferences extends StatelessWidget {
 
   /// This method builds the 'Choose your own' widget,
   /// (it navigates to the preferences search page)
-  Widget buildCustomCard(SignupPreferencesController controller) {
+  Widget buildCustomCard(SignupPreferencesController controller,
+      {ValueKey<String>? key}) {
     return Padding(
+        key: key,
         padding: EdgeInsets.fromLTRB(0, 0, 0, Sizing.blockSizeVertical * 1.5),
         child: Material(
           // TODO: HARDCODED
@@ -235,8 +243,9 @@ class SignupPreferences extends StatelessWidget {
 
   /// This method build all the preference card in the grid view
   Widget buildPreferencesCard(
-      SignupPreferencesController controller, int index) {
+      SignupPreferencesController controller, int index, String key) {
     return InkWell(
+      key: ValueKey(key + index.toString()),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
