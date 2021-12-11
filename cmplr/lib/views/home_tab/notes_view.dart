@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -94,7 +95,7 @@ class Notes extends StatelessWidget {
   }
 
   Widget getBody(BuildContext context) {
-    if (!NotesController.dataReloaded) {
+    if (!controller.dataReloaded) {
       return FutureBuilder(
           future: controller.notesModel.getNotes(),
           builder: (context, AsyncSnapshot snapshot) {
@@ -153,7 +154,9 @@ class Notes extends StatelessWidget {
                           ),
                           SizedBox(width: Sizing.blockSize * 3.71),
                           Text(
-                              '${controller.notes![1].length + controller.notes![2].length}',
+                              (controller.notes![1].length +
+                                      controller.notes![2].length)
+                                  .toString(),
                               style: const TextStyle(
                                   // color: Colors.black
                                   ))
@@ -199,11 +202,13 @@ class Notes extends StatelessWidget {
                           return controller.refreshScreen();
                         },
                         child: ListView.builder(
+                          controller: controller.commentListViewController,
                           itemCount: controller.notes![0].length,
                           itemBuilder: (context, index) {
                             return buildCommentsListTile(
                                 controller.notes![0][index],
-                                index == controller.notes![0].length - 1);
+                                index == controller.notes![0].length - 1,
+                                context);
                           },
                         ),
                       ),
@@ -218,9 +223,41 @@ class Notes extends StatelessWidget {
                     ),
                     child: Obx(() => Row(
                           children: [
+                            SizedBox(
+                              width: Sizing.blockSize * 1.94,
+                            ),
                             controller.focusCommentTextField.value
-                                ? const Text('@')
-                                : const Text('image'),
+                                ? InkWell(
+                                    onTap: () {
+                                      controller.addStringToComment('@');
+                                    },
+                                    child: SizedBox(
+                                        width: Sizing.blockSize * 6.81,
+                                        child: Text(
+                                          '@',
+                                          style: TextStyle(
+                                              fontSize:
+                                                  Sizing.blockSize * 5.59),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                  )
+                                : InkWell(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () {
+                                      controller.addStringToComment('@');
+                                    },
+                                    child: 'square' == 'circle'
+                                        ? CircleAvatar(
+                                            backgroundColor: Colors.red,
+                                            radius: Sizing.blockSize * 3.4,
+                                          )
+                                        : GFAvatar(
+                                            shape: GFAvatarShape.square,
+                                            backgroundColor: Colors.red,
+                                            size: Sizing.blockSize * 4.6,
+                                          ),
+                                  ),
                             SizedBox(width: Sizing.blockSize * 4.87),
                             SizedBox(
                               width: Sizing.blockSize * 68.12,
@@ -230,9 +267,13 @@ class Notes extends StatelessWidget {
                                       .commentTextFieldFocusChanged(hasFocus);
                                 },
                                 child: TextField(
+                                  focusNode:
+                                      controller.commentTextFieldFocusNode,
                                   onChanged: (value) {
                                     controller.commentTextFieldChanged(value);
                                   },
+                                  controller:
+                                      controller.commentTextFieldController,
                                   maxLines: 2,
                                   decoration: const InputDecoration(
                                       hintText: 'Unleash a compliment ',
@@ -240,15 +281,43 @@ class Notes extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              width: Sizing.blockSize * 2.91,
+                            ),
                             Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {},
-                                child: SizedBox(
-                                    width: Sizing.blockSize * 14.59,
-                                    child: const Center(child: Text('Reply'))),
-                              ),
-                            )
+                                color: Colors.transparent,
+                                child: Obx(
+                                  () => controller.emptyCommentTextField.value
+                                      ? InkWell(
+                                          child: SizedBox(
+                                              width: Sizing.blockSize * 14.59,
+                                              child: Center(
+                                                  child: Text(
+                                                'Reply',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: Sizing.blockSize *
+                                                        3.64),
+                                              ))),
+                                        )
+                                      : InkWell(
+                                          onTap: () {
+                                            controller.commentSubmitted();
+                                          },
+                                          child: SizedBox(
+                                              width: Sizing.blockSize * 14.59,
+                                              child: Center(
+                                                  child: Text(
+                                                'Reply',
+                                                style: TextStyle(
+                                                    color: Colors.lightBlue,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: Sizing.blockSize *
+                                                        3.64),
+                                              ))),
+                                        ),
+                                ))
                           ],
                         )),
                   ),
@@ -258,12 +327,12 @@ class Notes extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      getModalSheet(context);
+                      getReblogsModalSheet(context);
                     },
                     child: Container(
                       padding:
                           EdgeInsets.fromLTRB(Sizing.blockSize * 4.5, 0, 0, 0),
-                      height: 50,
+                      height: Sizing.blockSizeVertical * 7.32,
                       width: Sizing.width,
                       child: Row(
                         children: [
@@ -328,7 +397,8 @@ class Notes extends StatelessWidget {
     );
   }
 
-  Widget buildCommentsListTile(UserNote note, bool lastComment) {
+  Widget buildCommentsListTile(
+      UserNote note, bool lastComment, BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(
           Sizing.blockSize * 4.5,
@@ -361,7 +431,7 @@ class Notes extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onLongPress: () {
-              print('Comment long press');
+              getCommentModalSheet(context, note.blogName, note.postReply);
             },
             child: Container(
               width: Sizing.blockSize * 78,
@@ -410,59 +480,67 @@ class Notes extends StatelessWidget {
       highlightColor: Colors.transparent,
       child: Column(
         children: [
-          Row(
-            children: [
-              SizedBox(
-                  width: 50,
-                  child: Stack(
-                    children: [
-                      note.avatarShape == 'circle'
-                          ? CircleAvatar(
-                              backgroundImage: NetworkImage(note.avatarURL),
-                              radius: Sizing.blockSize * 3.7,
-                            )
-                          : GFAvatar(
-                              backgroundImage: NetworkImage(note.avatarURL),
-                              shape: GFAvatarShape.square,
-                              backgroundColor: Colors.white,
-                              size: Sizing.blockSize * 5.1,
-                            ),
-                      Positioned(
-                        child: CircleAvatar(
-                            backgroundColor: Colors.green,
-                            radius: Sizing.blockSize * 1.85,
-                            child: Center(
-                                child: Icon(CustomIcons.reblog,
-                                    size: Sizing.blockSize * 2.0,
-                                    color: Colors.white))),
-                        bottom: 0,
-                        right: 14,
-                      )
-                    ],
-                  )),
-              InkWell(
-                onTap: () {
-                  print('User profile tapped');
-                },
-                child: SizedBox(
-                  width: 120,
-                  child: Text(
-                    note.blogName,
-                    style: TextStyle(
-                      fontSize: Sizing.blockSize * 4.2,
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+                Sizing.blockSize * 3.1, 0, 0, Sizing.blockSize * 3.1),
+            child: Row(
+              children: [
+                SizedBox(
+                    width: Sizing.blockSize * 12.16,
+                    child: Stack(
+                      children: [
+                        note.avatarShape == 'circle'
+                            ? CircleAvatar(
+                                backgroundImage: NetworkImage(note.avatarURL),
+                                radius: Sizing.blockSize * 3.7,
+                              )
+                            : GFAvatar(
+                                backgroundImage: NetworkImage(note.avatarURL),
+                                shape: GFAvatarShape.square,
+                                backgroundColor: Colors.white,
+                                size: Sizing.blockSize * 5.1,
+                              ),
+                        Positioned(
+                          child: CircleAvatar(
+                              backgroundColor: Colors.green,
+                              radius: Sizing.blockSize * 1.85,
+                              child: Center(
+                                  child: Icon(CustomIcons.reblog,
+                                      size: Sizing.blockSize * 3.5,
+                                      color: Colors.white))),
+                          bottom: 0,
+                          right: 14,
+                        )
+                      ],
+                    )),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    print('User profile tapped');
+                  },
+                  child: SizedBox(
+                    width: Sizing.blockSize * 70.55,
+                    child: Text(
+                      note.blogName,
+                      style: TextStyle(
+                        fontSize: Sizing.blockSize * 4.2,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.more_horiz),
-                onPressed: () {},
-              )
-            ],
+                IconButton(
+                  icon: const Icon(Icons.more_horiz),
+                  onPressed: () {},
+                )
+              ],
+            ),
           ),
-          SizedBox(
+          Container(
+            padding: EdgeInsets.fromLTRB(
+                Sizing.blockSize * 3.1, 0, 0, Sizing.blockSize * 3.1),
             width: Sizing.width,
             child: Text(
               note.postReply,
@@ -474,6 +552,9 @@ class Notes extends StatelessWidget {
           ),
           Row(
             children: [
+              SizedBox(
+                width: Sizing.blockSize * 1.09,
+              ),
               Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -525,7 +606,7 @@ class Notes extends StatelessWidget {
         print('User profile tapped');
       },
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(Sizing.blockSize * 2.91),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -685,7 +766,74 @@ class Notes extends StatelessWidget {
     );
   }
 
-  Future<void> getModalSheet(BuildContext context) {
+  Widget buildModalSheetTile(String text, var onTapFunction) {
+    return InkWell(
+      onTap: onTapFunction,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(Sizing.blockSize * 2.91, 0, 0, 0),
+        height: Sizing.blockSizeVertical * 7,
+        width: Sizing.width,
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              text,
+              style: TextStyle(fontSize: Sizing.blockSize * 3.89),
+            )),
+      ),
+    );
+  }
+
+  Future<void> getCommentModalSheet(
+      BuildContext context, String blogName, String comment) {
+    return showModalBottomSheet(
+        constraints: BoxConstraints(
+            maxHeight: blogName == 'current-user'
+                ? Sizing.blockSizeVertical * 15
+                : Sizing.blockSizeVertical * 30),
+        context: context,
+        builder: (BuildContext context) {
+          // Change this later
+          if (blogName == 'current-user') {
+            return GetBuilder<NotesController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Copy', () {
+                          Clipboard.setData(ClipboardData(text: comment));
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Reply', () {
+                          controller.addStringToComment('@' + blogName + ' ');
+                          Get.back();
+                        }),
+                      ],
+                    ));
+          } else {
+            return GetBuilder<NotesController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Copy', () {
+                          Clipboard.setData(ClipboardData(text: comment));
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Reply', () {
+                          controller.addStringToComment('@' + blogName + ' ');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Report', () {
+                          print('Report');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Block ' + blogName, () {
+                          print('Block');
+                          Get.back();
+                        }),
+                      ],
+                    ));
+          }
+        });
+  }
+
+  Future<void> getReblogsModalSheet(BuildContext context) {
     return showModalBottomSheet(
         constraints: BoxConstraints(maxHeight: Sizing.blockSizeVertical * 30),
         context: context,
@@ -704,7 +852,8 @@ class Notes extends StatelessWidget {
                             Get.back();
                           },
                           child: Container(
-                            padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+                            padding: EdgeInsets.fromLTRB(
+                                Sizing.blockSize * 2.91, 0, 0, 0),
                             height: Sizing.blockSizeVertical * 8.78,
                             width: Sizing.width,
                             child: Row(

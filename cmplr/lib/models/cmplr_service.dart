@@ -124,6 +124,15 @@ class CMPLRService {
             'content': 'This is a post reply'
           },
           {
+            'type': 'reblog_with_comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post reply'
+          },
+          {
             'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
@@ -306,7 +315,7 @@ class CMPLRService {
             'profile_title': 'Mohamed'
           },
         ],
-        'total_notes': 21,
+        'total_notes': 22,
       }
     },
   };
@@ -483,7 +492,7 @@ class CMPLRService {
   static Future<List<UserNote>> getNotes(String backendURI) async {
     final notes = <UserNote>[];
     if (Flags.mock) {
-      await Future.delayed(const Duration(milliseconds: 2000));
+      await Future.delayed(const Duration(milliseconds: 1000));
       for (var i = 0;
           i < _mockData[backendURI]['response']['total_notes'];
           i++) {

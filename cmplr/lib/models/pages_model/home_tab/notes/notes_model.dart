@@ -6,8 +6,6 @@ import '../../../cmplr_service.dart';
 import 'user_note.dart';
 
 class NotesModel {
-  static int test = 0;
-
   Future<List<List<UserNote>>> getNotes() async {
     var _comments = <UserNote>[];
     var _reblogsWithComments = <UserNote>[];
@@ -32,16 +30,12 @@ class NotesModel {
           break;
       }
     }
-    if (test >= 1) {
-      _otherReblogs.add(notes[notes.length - 1]);
-    }
     // ignore: omit_local_variable_types
     List<List<UserNote>> classifiedNotes = [];
     classifiedNotes.add(_comments);
     classifiedNotes.add(_reblogsWithComments);
     classifiedNotes.add(_otherReblogs);
     classifiedNotes.add(_likes);
-    test++;
     return classifiedNotes;
   }
 }
