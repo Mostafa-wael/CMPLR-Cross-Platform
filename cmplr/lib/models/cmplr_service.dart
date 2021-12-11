@@ -380,10 +380,7 @@ class CMPLRService {
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          // TODO add authorization header
-        },
+        headers: postHeader,
         body: jsonEncode(params),
       );
     }
@@ -410,10 +407,7 @@ class CMPLRService {
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          // TODO add authorization header
-        },
+        headers: postHeader,
         body: jsonEncode(params),
       );
     }

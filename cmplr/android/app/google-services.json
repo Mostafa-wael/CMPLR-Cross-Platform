@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "197648128008",
-    "project_id": "cmplr-jimmy",
-    "storage_bucket": "cmplr-jimmy.appspot.com"
+    "project_number": "629616628640",
+    "project_id": "cmplr-2ddc1",
+    "storage_bucket": "cmplr-2ddc1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:197648128008:android:98ccdda7a53653d9d819bd",
+        "mobilesdk_app_id": "1:629616628640:android:c89c140699211b53ba8ac5",
         "android_client_info": {
-          "package_name": "com.example.cmplr"
+          "package_name": "cmplr.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "197648128008-3amijn480jdpun8oguvimfdtoifdr6ug.apps.googleusercontent.com",
+          "client_id": "629616628640-7tvsmo4bgdqav8k9l64glpo3dr1ukkhp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.cmplr",
-            "certificate_hash": "e6869da9691b1e0c7f755d38dd6503234d6bb261"
+            "package_name": "cmplr.android",
+            "certificate_hash": "69744ee20b78a023a79353a013157e76efd659d3"
           }
         },
         {
-          "client_id": "197648128008-7gefbjeb9ivh5stptuan2cs8nof9u89g.apps.googleusercontent.com",
+          "client_id": "629616628640-5iooa062af3108rtdcfvbu2nb4d409md.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCxbzVLSOjqb3X7O-pJfCX158PotA5ExYk"
+          "current_key": "AIzaSyB5m9_e_qcVY5LPdjhI1Ab7RHBAxkkxLzk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "197648128008-7gefbjeb9ivh5stptuan2cs8nof9u89g.apps.googleusercontent.com",
+              "client_id": "629616628640-5iooa062af3108rtdcfvbu2nb4d409md.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
