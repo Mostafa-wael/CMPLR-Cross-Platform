@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import '../../utilities/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -83,7 +84,7 @@ class SignupMailName extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
             child: Text(
-              controller.validInfo ? '' : controller.getErrors(),
+              controller.validInfo ? '' : getErrors(controller.errors),
               style: const TextStyle(color: Colors.red),
             ),
           ),

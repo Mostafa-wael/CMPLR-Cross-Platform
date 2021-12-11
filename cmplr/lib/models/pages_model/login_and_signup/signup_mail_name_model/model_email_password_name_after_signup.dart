@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get_storage/get_storage.dart';
+
 import '../../../../backend_uris.dart';
 import '../../../../utilities/functions.dart';
 import '../../../cmplr_service.dart';
@@ -18,13 +20,15 @@ class ModelEmailPasswordNameAfterSignup {
     final response = await CMPLRService.post(
       PostURIs.signup,
       {
-        'Email': email,
-        'Password': password,
-        'BlogName': name,
+        'email': email,
+        'password': password,
+        'blog_name': name,
+        'age': GetStorage().read('age') ?? 12,
       },
     );
 
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
     // Check response for errors
-    return jsonDecode(response.body);
+    return responseMap.containsKey('error') ? responseMap['error'] : [];
   }
 }

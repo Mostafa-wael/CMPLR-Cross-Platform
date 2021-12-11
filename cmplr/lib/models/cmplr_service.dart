@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:get/get_connect/http/src/request/request.dart';
+
 import '../backend_uris.dart';
 
 import '../flags.dart';
@@ -116,7 +118,8 @@ class CMPLRService {
   static const unauthenticated = 401;
 
   static const Map<String, String> postHeader = {
-    'Content-Type': 'application/json; charset=UTF-8; accept: application/json',
+    'Content-Type': 'application/json; charset=UTF-8',
+    'Accept': 'application/json',
     //  TODO add authorization header
   };
 
@@ -182,11 +185,13 @@ class CMPLRService {
       final responseCode = bothFree ? requestSuccess : invalidData;
       return http.Response(jsonEncode(errors), responseCode);
     } else {
-      return http.post(
+      final request = http.post(
         Uri.parse(apiIp + backendURI),
         headers: postHeader,
         body: jsonEncode(params),
       );
+
+      return request;
     }
   }
 
@@ -206,7 +211,7 @@ class CMPLRService {
       return http.Response('', requestSuccess);
     } else {
       return http.post(
-        Uri.parse(backendURI + backendURI),
+        Uri.parse(apiIp + backendURI),
         headers: postHeader,
         body: jsonEncode(params),
       );
@@ -215,7 +220,7 @@ class CMPLRService {
 
   static Future<http.Response> askBlog(String backendURI, Map params) {
     if (Flags.mock) {
-      throw Exception();
+      return Future.value(http.Response('', 201));
     } else {
       return http.post(Uri.parse(apiIp + PostURIs.getAskBlog(params['BlogId'])),
           headers: postHeader, body: jsonEncode(params)); /* e */
@@ -224,7 +229,7 @@ class CMPLRService {
 
   static Future<http.Response> createNewPost(String backendURI, Map params) {
     if (Flags.mock) {
-      throw Exception();
+      return Future.value(http.Response('', 201));
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),
@@ -236,7 +241,7 @@ class CMPLRService {
   static Future<http.Response> reblogExistingPost(
       String backendURI, Map params) {
     if (Flags.mock) {
-      throw Exception();
+      return Future.value(http.Response('', 201));
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),

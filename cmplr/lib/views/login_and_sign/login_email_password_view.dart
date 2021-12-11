@@ -1,3 +1,4 @@
+import '../../utilities/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -54,10 +55,20 @@ class LoginEmailPassword extends StatelessWidget {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Sizing.blockSizeVertical * 22.5),
                   Center(
                     child: Column(
                       children: [
+                        SizedBox(height: Sizing.blockSizeVertical * 15),
+                        // Padding(
+                        //   padding:
+                        //       EdgeInsets.all(Sizing.blockSizeVertical * 0.5),
+                        //   child: Text(
+                        //     controller.errors.isEmpty
+                        //         ? ''
+                        //         : getErrors(controller.errors),
+                        //     style: const TextStyle(color: Colors.red),
+                        //   ),
+                        // ),
                         LoginTextField(
                           controller: controller,
                           text: 'email',
@@ -67,11 +78,11 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: true,
                           iconColor: Colors.grey,
                         ),
-                        SizedBox(height: Sizing.blockSizeVertical * 1.5),
+                        SizedBox(height: Sizing.blockSizeVertical * 0.5),
                         LoginTextField(
                           controller: controller,
                           text: 'password',
-                          focus: true,
+                          focus: false,
                           enabled: true,
                           underlineColor: Colors.grey,
                           isEmail: false,
@@ -85,7 +96,16 @@ class LoginEmailPassword extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Sizing.blockSizeVertical * 34),
+                  SizedBox(height: Sizing.blockSizeVertical * 20),
+                  // Padding(
+                  //   padding: EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
+                  //   child: Text(
+                  //     controller.errors.isEmpty
+                  //         ? ''
+                  //         : getErrors(controller.errors),
+                  //     style: const TextStyle(color: Colors.red),
+                  //   ),
+                  // ),
                   Center(
                     child: Column(
                       children: [
@@ -108,22 +128,29 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: false,
                           iconColor: Colors.grey,
                         ),
-                        SizedBox(height: Sizing.blockSizeVertical * 30),
-                        GestureDetector(
-                          child: Text(
-                            'Forgot Your Password?',
-                            style: TextStyle(
-                              fontSize: Sizing.fontSize * 3.715,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          onTap: () {
-                            controller.forgotPassword();
-                          },
-                        ),
+                        // SizedBox(height: Sizing.blockSizeVertical * 30),
                       ],
                     ),
                   ),
+                  Expanded(
+                      child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: GestureDetector(
+                      child: Text(
+                        'Forgot Your Password?',
+                        style: TextStyle(
+                          fontSize: Sizing.fontSize * 3.715,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.forgotPassword();
+                      },
+                    ),
+                  )),
+                  SizedBox(
+                    height: Sizing.blockSizeVertical,
+                  )
                 ],
               ),
       ),

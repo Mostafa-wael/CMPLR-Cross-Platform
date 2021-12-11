@@ -49,6 +49,10 @@ class LoginController extends GetxController {
 
   bool get activateSubmitButton => _activateSubmitButton;
 
+  List errors = [];
+
+  FocusNode passwordFocusNode = FocusNode();
+
   /// This method navigates from the first login screen
   /// to the email login screen. It does this by first
   /// navigating to a splash screen for 0.5 seconds then
@@ -71,39 +75,43 @@ class LoginController extends GetxController {
 
   /// This method navigates from the email login screen to
   /// a screen where the user can click the 'Enter Password' button
-  Future<bool> tryLogin() async {
-    var successful;
-    if (emailController.text.isEmpty) {
-      _showToast('Oops! You forgot to enter your email address!');
-      successful = Future.value(false);
-    } else {
-      if (await _model.checkEmailPasswordCombination(
-          emailController.text, passwordController.text)) {
-        // Log in
-        PersistentStorage.changeLoggedIn(true);
+  Future<List> tryLogin() async {
+    errors = await _model.checkEmailPasswordCombination(
+        emailController.text, passwordController.text);
 
-        Get.offAll(
-          const MasterPage(),
-          transition: Transition.rightToLeft,
-        );
-        successful = Future.value(true);
-      } else {
-        _showToast("Email isn't registered or incorrect password");
-        successful = Future.value(false);
-      }
+    if (errors.isEmpty) {
+      // Log in
+      PersistentStorage.changeLoggedIn(true);
+
+      Get.offAll(
+        const MasterPage(),
+        transition: Transition.rightToLeft,
+      );
     }
+
     update();
-    return successful;
+    return errors;
+  }
+
+  Future<void> focusOnPassword() async {
+    await Future.delayed(const Duration(milliseconds: 2000))
+        .then((value) => passwordFocusNode.requestFocus());
   }
 
   /// This method navigates to the last screen in the login with email process
   /// where the user can enter their email and password
   Future<void> enterPasswordLoginEmail() async {
-    Get.off(
-      const LoginEmailPassword(),
-      transition: Transition.downToUp,
-      routeName: Routes.loginEmailPassword,
-    );
+    if (emailController.text.isEmpty) {
+      _showToast('Oops! You forgot to enter your email address!');
+    } else {
+      Get.off(
+        const LoginEmailPassword(),
+        transition: Transition.downToUp,
+        routeName: Routes.loginEmailPassword,
+      )!
+          .then((value) => focusOnPassword());
+    }
+
     update();
   }
 

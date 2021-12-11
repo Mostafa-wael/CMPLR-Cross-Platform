@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../routes.dart';
@@ -78,6 +79,7 @@ class SignupAgeController extends GetxController {
         _isLoading = false;
         _showToast('Minor hiccup. Try again.');
       } else {
+        GetStorage().write('age', ageController.text);
         Get.offNamed(Routes.signupPreferencesScreen);
       }
       update();

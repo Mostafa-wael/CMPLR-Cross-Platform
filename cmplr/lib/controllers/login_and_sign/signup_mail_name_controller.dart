@@ -26,14 +26,6 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
   List? errors;
 
-  String getErrors() {
-    final errorString = StringBuffer();
-    for (final error in errors ?? []) {
-      errorString.writeln(error);
-    }
-    return errorString.toString();
-  }
-
   Widget getDoneButton(context) {
     if (_fieldsFilled)
       return Text(

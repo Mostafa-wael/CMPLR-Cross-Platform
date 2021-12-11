@@ -77,10 +77,10 @@ class WritePostController extends GetxController {
 
   final TextEditingController textController = TextEditingController();
 
-  // List<TextField> urls = [];
-  // List<TextEditingController> urlControllers = [];
+  List<TextField> urls = [];
+  List<TextEditingController> urlControllers = [];
 
-  // List<Widget> previews = [];
+  List<Widget> previews = [];
 
   String get userName => _userName;
 
@@ -88,22 +88,22 @@ class WritePostController extends GetxController {
 
   Color get currentColor => allColors[_currentColor];
 
-  Future<void> changeColor(int colorIndex) async {
+  void changeColor(int colorIndex) {
     _currentColor = colorIndex;
     update();
   }
 
-  Future<void> toggleBold() async {
+  void toggleBold() {
     _bold = !_bold;
     update();
   }
 
-  Future<void> toggleItalic() async {
+  void toggleItalic() {
     _italic = !_italic;
     update();
   }
 
-  Future<void> toggleStrikethrough() async {
+  void toggleStrikethrough() {
     _strikethrough = !_strikethrough;
     update();
   }
@@ -160,6 +160,8 @@ class WritePostController extends GetxController {
     }
   }
 
+  // FIXME: This breaks if the day is is newer but the time is older
+  // Dec 10, 16:50 VS Dec 17, 13:00 gives an error
   Future<void> setTimeOfDay(BuildContext context) async {
     final picked = await showTimePicker(
       context: context,
@@ -221,14 +223,18 @@ class WritePostController extends GetxController {
     final http.Response response;
     if (_model is WritePostModel)
       response = await _model.createPost(
-          content: postText,
-          state: _currentPostOption,
-          publishOn: _date,
-          tags: '',
-          date: DateTime.now().toString(),
-          isPrivate: _currentPostOption == PostOptions.postPrivately);
+          postText,
+          _currentPostOption,
+          _date,
+          '',
+          DateTime.now().toString(),
+          _currentPostOption == PostOptions.postPrivately);
     else if (_model is ReblogModel)
-      response = await _model.reblogPost();
+      response = await _model.reblogPost(
+        post?.postID,
+        post?.reblogKey,
+        postText,
+      );
     else
       throw Exception('Unsupported model');
 
