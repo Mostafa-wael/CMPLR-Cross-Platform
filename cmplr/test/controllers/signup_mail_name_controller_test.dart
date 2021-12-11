@@ -8,23 +8,17 @@ import '../../lib/controllers/controllers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
-class _MyHttpOverrides extends HttpOverrides {}
-
 void main() async {
-  HttpOverrides.global = _MyHttpOverrides();
-
-  setUpAll(() {
-    PersistentStorage.initStorage(container: 'testing');
-    GetStorage('testing').erase();
-    Get.testMode = true;
-    Flags.mock = true;
-    PersistentStorage.changeLoggedIn(false);
-  });
-
   const emailTaken = 'The email has already been taken';
   const blogNameTaken = 'The blog name has already been taken';
   testWidgets('email password name after signup controller ...',
       (tester) async {
+    Get.testMode = true;
+    await PersistentStorage.initStorage();
+    await GetStorage().erase();
+    Flags.mock = true;
+    PersistentStorage.changeLoggedIn(false);
+
     // passwordHidden = true, validInfo = true
     final masterPageCont = MasterPageController();
     Get.put(masterPageCont, permanent: true);

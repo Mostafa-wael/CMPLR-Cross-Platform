@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:get_storage/get_storage.dart';
 
 import '../../lib/models/persistent_storage_api.dart';
@@ -9,17 +7,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
 void main() {
-  setUpAll(() {
-    PersistentStorage.initStorage(container: 'testing');
-    GetStorage('testing').erase();
-    Get.testMode = true;
-    Flags.mock = true;
-    PersistentStorage.changeLoggedIn(false);
-  });
   const emptyPassword = 'Password is empty';
   const invalidEmail = 'Invalid Email';
 
   testWidgets('login controller', (tester) async {
+    Get.testMode = true;
+    await PersistentStorage.initStorage();
+    await GetStorage().erase();
+    Flags.mock = true;
+    PersistentStorage.changeLoggedIn(false);
+
     final controller = LoginController();
 
     // email field empty, password field empty
