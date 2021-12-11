@@ -35,9 +35,12 @@ class ModelEmailPasswordLogin {
     // Each should point to an array of errors, we concatenate them here.
     if (responseMap.containsKey('error')) {
       final errorMap = responseMap['error'];
-      for (final key in errorMap.keys) {
-        errors += errorMap[key];
-      }
+      if (errorMap is Map) {
+        for (final key in errorMap.keys) {
+          errors += errorMap[key];
+        }
+      } else
+        errors = errorMap;
     }
 
     // TODO: Refactor this
@@ -47,6 +50,12 @@ class ModelEmailPasswordLogin {
     }
 
     // Check response for errors
-    return errors;
+
+    if (response.statusCode != CMPLRService.requestSuccess) {
+      // FIXME: Check for this later on
+      if (errors.isEmpty) errors.add('Internal server error');
+      return errors;
+    } else
+      return [];
   }
 }

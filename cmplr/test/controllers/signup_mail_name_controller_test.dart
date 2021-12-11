@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cmplr/flags.dart';
 import 'package:cmplr/models/persistent_storage_api.dart';
 import 'package:get_storage/get_storage.dart';
@@ -6,7 +8,11 @@ import '../../lib/controllers/controllers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
-void main() {
+class _MyHttpOverrides extends HttpOverrides {}
+
+void main() async {
+  HttpOverrides.global = _MyHttpOverrides();
+
   setUpAll(() {
     PersistentStorage.initStorage(container: 'testing');
     GetStorage('testing').erase();
@@ -14,6 +20,7 @@ void main() {
     Flags.mock = true;
     PersistentStorage.changeLoggedIn(false);
   });
+
   const emailTaken = 'The email has already been taken';
   const blogNameTaken = 'The blog name has already been taken';
   testWidgets('email password name after signup controller ...',
@@ -38,17 +45,18 @@ void main() {
     await controller.validateInfo();
     expect(controller.validInfo, false);
 
-    controller.emailController.text = 'tester@cmplr.org';
+    controller.emailController.text = 'tester@cmplasdasdrTEST.org';
     controller.fieldChanged('');
     expect(controller.validInfo, false);
 
-    controller.passwordController.text = 'aReallyStrongPassword!@#!';
+    controller.passwordController.text = 'aStrongPassword!@#!2';
     controller.fieldChanged('');
     expect(controller.validInfo, false);
 
     // Since all 3 are different from the mock data, it will return true
-    controller.nameController.text = 'too much for one project';
+    controller.nameController.text = 'pleaseDontAsdasdasReturn';
     controller.fieldChanged('');
+    GetStorage().write('age', 19);
     await controller.validateInfo();
     expect(controller.validInfo, true);
 
@@ -64,7 +72,7 @@ void main() {
     controller.nameController.text = 'burh';
     controller.fieldChanged('');
     await controller.validateInfo();
-    expect(controller.errors, [emailTaken, blogNameTaken]);
+    expect(controller.errors, [blogNameTaken]);
     expect(controller.validInfo, false);
   });
 }

@@ -224,23 +224,23 @@ class WritePostOrReblog extends StatelessWidget {
                           ),
                         ),
 
-                        ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: controller.previews.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return controller.previews[index];
-                            }),
+                        // ListView.builder(
+                        //     shrinkWrap: true,
+                        //     scrollDirection: Axis.vertical,
+                        //     itemCount: controller.previews.length,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return controller.previews[index];
+                        //     }),
 
-                        ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: controller.urls.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return TextField(
-                                controller: controller.urlControllers[index],
-                              );
-                            }),
+                        // ListView.builder(
+                        //     shrinkWrap: true,
+                        //     scrollDirection: Axis.vertical,
+                        //     itemCount: controller.urls.length,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return TextField(
+                        //         controller: controller.urlControllers[index],
+                        //       );
+                        //     }),
                       ],
                     )),
               ],
