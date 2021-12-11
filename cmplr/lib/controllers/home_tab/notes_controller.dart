@@ -6,13 +6,14 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../../models/models.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_ticket_provider_mixin.dart';
 
-class NotesController extends GetxController with SingleGetTickerProviderMixin {
+class NotesController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   KeyboardVisibilityController keyboardController =
       KeyboardVisibilityController();
 
   final RxBool _postSubscribed = false.obs;
 
-  late TabController _tabController;
+  TabController? _tabController;
 
   int _tabIndex = 0;
 
@@ -37,7 +38,7 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
 
   RxBool get postSubscribed => _postSubscribed;
 
-  TabController get tabController => _tabController;
+  TabController? get tabController => _tabController;
 
   NotesModel get notesModel => _notesModel;
 
@@ -51,11 +52,11 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
   void onInit() {
     _tabController = TabController(length: 3, vsync: this);
 
-    _tabController.addListener(() {
-      if (_tabIndex == 0 && _tabController.index != 0) {
+    _tabController?.addListener(() {
+      if (_tabIndex == 0 && _tabController?.index != 0) {
         SystemChannels.textInput.invokeMethod('TextInput.hide');
       }
-      _tabIndex = _tabController.index;
+      _tabIndex = _tabController!.index;
     });
 
     keyboardController.onChange.listen((isVisible) {

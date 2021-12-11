@@ -5,7 +5,7 @@ import '../../utilities/custom_widgets/custom_widgets.dart';
 import 'package:get/get.dart';
 
 class PostFeedController extends GetxController
-    with SingleGetTickerProviderMixin {
+    with GetSingleTickerProviderStateMixin {
   final ModelPostsFeed model = ModelPostsFeed();
 
   bool _isLoading = false;

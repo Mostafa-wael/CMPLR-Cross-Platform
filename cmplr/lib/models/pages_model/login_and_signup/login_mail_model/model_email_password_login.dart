@@ -33,29 +33,32 @@ class ModelEmailPasswordLogin {
     // Error should be a map with at most? 3 keys:
     // blog_name, email, and password
     // Each should point to an array of errors, we concatenate them here.
-    if (responseMap.containsKey('error')) {
-      final errorMap = responseMap['error'];
-      if (errorMap is Map) {
-        for (final key in errorMap.keys) {
-          errors += errorMap[key];
-        }
-      } else
-        errors = errorMap;
-    }
-
-    // TODO: Refactor this
-    if (responseMap.containsKey('token')) {
-      GetStorage().write('token', responseMap['token']);
-      GetStorage().write('user', responseMap['user']);
-    }
 
     // Check response for errors
 
     if (response.statusCode != CMPLRService.requestSuccess) {
       // FIXME: Check for this later on
+
+      if (responseMap.containsKey('error')) {
+        final errorMap = responseMap['error'];
+        if (errorMap is Map) {
+          for (final key in errorMap.keys) {
+            errors += errorMap[key];
+          }
+        } else
+          errors = errorMap;
+      }
+
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
-    } else
+    } else {
+      // TODO: Refactor this
+      if (responseMap.containsKey('token')) {
+        GetStorage().write('token', responseMap['token']);
+        GetStorage().write('user', responseMap['user']);
+      }
+
       return [];
+    }
   }
 }

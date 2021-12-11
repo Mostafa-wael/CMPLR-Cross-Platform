@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../lib/models/persistent_storage_api.dart';
@@ -9,17 +8,33 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
 void main() {
-  setUpAll(() {
-    PersistentStorage.initStorage(container: 'testing');
-    GetStorage('testing').erase();
-    Get.testMode = true;
-    Flags.mock = true;
-    PersistentStorage.changeLoggedIn(false);
-  });
   const emptyPassword = 'Password is empty';
   const invalidEmail = 'Invalid Email';
 
+  TestWidgetsFlutterBinding.ensureInitialized();
+  const channel = MethodChannel('plugins.flutter.io/path_provider');
+  void setUpMockChannels(MethodChannel channel) {
+    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getApplicationDocumentsDirectory') {
+        return '.';
+      }
+    });
+  }
+
+  setUpAll(() async {
+    setUpMockChannels(channel);
+  });
+
+  setUp(() async {
+    await GetStorage.init();
+    await GetStorage().erase();
+  });
+
   testWidgets('login controller', (tester) async {
+    Get.testMode = true;
+    Flags.mock = true;
+    PersistentStorage.changeLoggedIn(false);
+
     final controller = LoginController();
 
     // email field empty, password field empty

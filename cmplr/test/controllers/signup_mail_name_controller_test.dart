@@ -1,30 +1,43 @@
-import 'dart:io';
-
 import 'package:cmplr/flags.dart';
 import 'package:cmplr/models/persistent_storage_api.dart';
+import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../lib/controllers/controllers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
-class _MyHttpOverrides extends HttpOverrides {}
-
 void main() async {
-  HttpOverrides.global = _MyHttpOverrides();
-
-  setUpAll(() {
-    PersistentStorage.initStorage(container: 'testing');
-    GetStorage('testing').erase();
-    Get.testMode = true;
-    Flags.mock = true;
-    PersistentStorage.changeLoggedIn(false);
-  });
+  TestWidgetsFlutterBinding.ensureInitialized();
 
   const emailTaken = 'The email has already been taken';
   const blogNameTaken = 'The blog name has already been taken';
+
+  const channel = MethodChannel('plugins.flutter.io/path_provider');
+  void setUpMockChannels(MethodChannel channel) {
+    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getApplicationDocumentsDirectory') {
+        return '.';
+      }
+    });
+  }
+
+  setUpAll(() async {
+    setUpMockChannels(channel);
+  });
+
+  setUp(() async {
+    await GetStorage.init();
+    await GetStorage().erase();
+  });
+
   testWidgets('email password name after signup controller ...',
       (tester) async {
+    Get.testMode = true;
+
+    Flags.mock = true;
+    PersistentStorage.changeLoggedIn(false);
+
     // passwordHidden = true, validInfo = true
     final masterPageCont = MasterPageController();
     Get.put(masterPageCont, permanent: true);
