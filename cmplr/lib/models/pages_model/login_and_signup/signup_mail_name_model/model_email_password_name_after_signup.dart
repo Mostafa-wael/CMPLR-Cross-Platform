@@ -23,8 +23,25 @@ class ModelEmailPasswordNameAfterSignup {
         'BlogName': name,
       },
     );
+<<<<<<< Updated upstream
 
     // Check response for errors
     return jsonDecode(response.body);
+=======
+    final errors = [];
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // Error should be a map with at most? 3 keys:
+    // blog_name, email, and password
+    // Each should point to an array of errors, we concatenate them here.
+    if (responseMap.containsKey('error')) {
+      final errorMap = responseMap['error'];
+      for (final key in errorMap) {
+        errors.add(errorMap[key]);
+      }
+    }
+    // Check response for errors
+    return errors;
+>>>>>>> Stashed changes
   }
 }

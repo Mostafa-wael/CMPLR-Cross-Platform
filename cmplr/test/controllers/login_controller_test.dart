@@ -23,7 +23,7 @@ void main() {
     expect(controller.activateLoginButton, false);
     // (Tarek) TODO: Make sure this is tested somewhere?
     expect(controller.validLoginEmail, false);
-    expect(await controller.tryLogin(), false);
+    expect(await controller.tryLogin(), ['Empty email or password']);
 
     // email is 'aaaa@aaaa.org' (invalid email, not registered),
     // password field empty
@@ -34,7 +34,7 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, false);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), false);
+    expect(await controller.tryLogin(), ['Empty email or password']);
 
     // email is 'tarek@cmplr.org' (valid email, registered)
     // password field empty
@@ -45,7 +45,7 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, false);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), false);
+    expect(await controller.tryLogin(), ['Empty email or password']);
 
     // email field empty, password is '1234'
     controller.passwordController.text = '1234';
@@ -56,7 +56,7 @@ void main() {
     expect(controller.activateSubmitButton, false);
     expect(controller.activateLoginButton, false);
     expect(controller.validLoginEmail, false);
-    expect(await controller.tryLogin(), false);
+    expect(await controller.tryLogin(), ['Empty email or password']);
 
     // email is 'tarek@cmplr.org', password is '1234'
     // (valid email, invalid password)
@@ -68,7 +68,7 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, true);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), false);
+    expect(await controller.tryLogin(), ['UnAuthorized']);
 
     // email is 'tarek@cmplr.org', password is'12345678'
     // (valid email & password)
@@ -80,6 +80,6 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, true);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), true);
+    expect(await controller.tryLogin(), []);
   });
 }

@@ -314,6 +314,7 @@ class CMPLRService {
   static const requestSuccess = 200;
   static const invalidData = 422;
   static const unauthenticated = 401;
+  static const insertSuccess = 201;
 
   static Future<http.Response> post(String route, Map params) async {
     // Switch case since we might need to send requests with different
@@ -341,17 +342,30 @@ class CMPLRService {
       final Set emails = _mockData[route]['emails'];
       final Set names = _mockData[route]['names'];
 
-      final registeredEmail = emails.contains(params['Email']);
-      final registeredName = names.contains(params['BlogName']);
+      final response = {};
+      final errors = {};
+      response['error'] = errors;
+
+      final registeredEmail = emails.contains(params['email']);
+      final registeredName = names.contains(params['blog_name']);
+
+      if (registeredEmail) {
+        errors['email'] = [];
+        errors['email'].add('The email has already been taken');
+      }
+      if (registeredName) {
+        errors['blog_name'] = [];
+        errors['blog_name'].add('The blog name has already been taken');
+      }
 
       final bothFree = !registeredName && !registeredEmail;
       if (bothFree) {
-        emails.add(params['Email']);
-        names.add(params['BlogName']);
+        emails.add(params['email']);
+        names.add(params['blog_name']);
       }
 
       final responseCode = bothFree ? requestSuccess : invalidData;
-      return http.Response('', responseCode);
+      return http.Response(jsonEncode(response), responseCode);
     } else {
       return http.post(
         Uri(path: PostURIs.signup),
@@ -366,8 +380,8 @@ class CMPLRService {
 
   static Future<http.Response> login(String route, Map params) async {
     if (Flags.mock) {
-      final email = params['Email'];
-      final password = params['Password'];
+      final email = params['email'];
+      final password = params['password'];
 
       final emailsPasswords = _mockData[route]['users'];
 
@@ -375,9 +389,13 @@ class CMPLRService {
           emailsPasswords[email] == password;
 
       if (!matchingEmailPasswordCombination)
-        return http.Response('', unauthenticated);
+        return http.Response(
+            jsonEncode({
+              'error': ['UnAuthorized']
+            }),
+            unauthenticated);
 
-      return http.Response('', requestSuccess);
+      return http.Response(jsonEncode({}), requestSuccess);
     } else {
       return http.post(
         Uri(path: PostURIs.login),
@@ -392,7 +410,11 @@ class CMPLRService {
 
   static Future<http.Response> askBlog(String route, Map param) {
     if (Flags.mock) {
+<<<<<<< Updated upstream
       throw Exception();
+=======
+      return Future.value(http.Response(jsonEncode({}), 201));
+>>>>>>> Stashed changes
     } else {
       return http.post(Uri(path: PostURIs.getAskBlog(param['BlogId'])),
           headers: {
@@ -403,6 +425,32 @@ class CMPLRService {
     }
   }
 
+<<<<<<< Updated upstream
+=======
+  static Future<http.Response> createNewPost(String backendURI, Map params) {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), 201));
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+      );
+    }
+  }
+
+  static Future<http.Response> reblogExistingPost(
+      String backendURI, Map params) {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), 201));
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+      );
+    }
+  }
+
+>>>>>>> Stashed changes
   // This functionality is not implemeted in the back-end
   static List initialPreferences(String route) {
     return _mockData[route]['preference_names'];
@@ -416,15 +464,14 @@ class CMPLRService {
 // TODO: add mock data, get them from the controller
   static Future<http.Response> getPosts(String route, Map params) async {
     if (Flags.mock) {
-      return http.Response('', 200);
+      return http.Response(jsonEncode({}), 200);
     } else {
-      return http.post(
-        Uri(path: PostURIs.signup),
+      return http.get(
+        Uri(path: apiIp + PostURIs.signup),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
         },
-        body: jsonEncode(params),
       );
     }
   }
