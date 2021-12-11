@@ -24,6 +24,14 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
 
   final RxBool _emptyCommentTextField = true.obs;
 
+  TextEditingController commentTextFieldController = TextEditingController();
+
+  FocusNode commentTextFieldFocusNode = FocusNode();
+
+  bool dataReloaded = false;
+
+  ScrollController commentListViewController = ScrollController();
+
   // This is just a reference to the notes in the data model
   List<List<UserNote>>? notes;
 
@@ -96,6 +104,52 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
     } else {
       _emptyCommentTextField.value = false;
     }
+  }
+
+  void addStringToComment(String text) {
+    commentTextFieldController.text = commentTextFieldController.text + text;
+    commentTextFieldController.selection = TextSelection.fromPosition(
+        TextPosition(offset: commentTextFieldController.text.length));
+    commentTextFieldChanged(commentTextFieldController.text);
+  }
+
+  void commentSubmitted() {
+    /*
+    1- Send a post request to submit the comment
+    2- Update the current comments list
+    3- Timeless refresh so that the comment appears
+    */
+    // Replace the following data with the current user data
+    notes![0].insert(
+        0,
+        UserNote(
+            noteType: 'reply',
+            blogName: 'current-user',
+            avatarShape: 'circle',
+            avatarURL:
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            followed: false.obs,
+            postReply: commentTextFieldController.text));
+    commentTextFieldController.text = '';
+    timelessRefreshScreen();
+    commentListViewController
+        .jumpTo(commentListViewController.position.minScrollExtent);
+
+    emptyCommentTextField.value = true;
+    SystemChannels.textInput.invokeMethod('TextInput.show');
+    commentTextFieldFocusNode.requestFocus();
+  }
+
+  Future<void> timelessRefreshScreen() async {
+    dataReloaded = true;
+    update();
+  }
+
+  // This fetches the data once again
+  Future<void> refreshScreen() async {
+    notes = await notesModel.getNotes();
+    dataReloaded = true;
+    update();
   }
 
   void closeNotesScreen() {

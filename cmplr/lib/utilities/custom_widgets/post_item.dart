@@ -15,7 +15,7 @@ class PostItem extends StatelessWidget {
   final String name;
   final String profilePhoto;
   final int numNotes;
-  final List<String> hashtags;
+  final List<dynamic> hashtags;
   final bool showBottomBar;
 
   PostItem(
@@ -93,7 +93,7 @@ class PostItem extends StatelessWidget {
     );
   }
 
-  List<TextSpan> getHashtags(List<String> hashtags) {
+  List<TextSpan> getHashtags(List<dynamic> hashtags) {
     final hashtagsWidget = <TextSpan>[];
     for (final hashtag in hashtags) {
       hashtagsWidget.add(
@@ -219,7 +219,9 @@ class PostItem extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  controller.share(context, 'Test1');
+                                },
                               ),
                             ],
                           ),
@@ -271,6 +273,19 @@ class PostItem extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+
+  factory PostItem.fromJson(Map<String, dynamic> json) {
+    return PostItem(
+      postData: json['postData'],
+      postID: json['postData'],
+      reblogKey: json['reblogKey'],
+      name: json['name'],
+      profilePhoto: json['profilePhoto'],
+      numNotes: json['numNotes'],
+      hashtags: json['hashtags'],
+      showBottomBar: json['showBottomBar'],
     );
   }
 }
