@@ -18,7 +18,7 @@ class ModelPostsFeed {
 
   List<PostItem> getNewPosts() {
     return [
-      const PostItem(
+      PostItem(
         name: 'Mostafa',
         postID: '1231465396890',
         reblogKey: 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
@@ -32,7 +32,7 @@ class ModelPostsFeed {
         ],
         showBottomBar: true,
       ),
-      const PostItem(
+      PostItem(
         name: 'Wael',
         postID: '12318290312',
         reblogKey: 'akjsdhkjHKJHKLJFHAsDFsdFWEdfSEfsfs',

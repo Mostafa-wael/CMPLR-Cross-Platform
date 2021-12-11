@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 class PostItemController extends GetxController {
   //final _followers = ;
 
+  bool lovedPost = false;
   void openNotes(int numNotes) {
     Get.toNamed(Routes.notes, arguments: numNotes);
   }
@@ -41,7 +42,8 @@ class PostItemController extends GetxController {
     // Get.toNamed(Routes.openProfile);
   }
 
-  void lovePost() {
+  void loveClicked() {
+    lovedPost = !lovedPost;
     // TODO: send post request to '/user/like/ with post_id and reblog_key
   }
 }

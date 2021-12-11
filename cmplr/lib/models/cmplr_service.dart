@@ -325,7 +325,8 @@ class CMPLRService {
   // getHeader = postHeader for now until we find a reason to split them
   static const Map<String, String> getHeader = postHeader;
 
-  static const String apiIp = 'http://13.68.206.72/api';
+  // static const String apiIp = 'http://13.68.206.72/api';
+  static const String apiIp = 'http://be0b-156-215-2-141.ngrok.io/api';
 
   static Future<http.Response> post(String route, Map params) async {
     // Switch case since we might need to send requests with different
@@ -375,7 +376,7 @@ class CMPLRService {
         names.add(params['blog_name']);
       }
 
-      final responseCode = bothFree ? requestSuccess : invalidData;
+      final responseCode = bothFree ? insertSuccess : invalidData;
       return http.Response(jsonEncode(response), responseCode);
     } else {
       return http.post(

@@ -1,7 +1,7 @@
 import 'package:flutter_html/shims/dart_ui_real.dart';
 
 import 'custom_widgets.dart';
-
+import 'package:flutter/cupertino.dart';
 import '../sizing/sizing.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
 
 /// This widget represents the post item with all its data
-class PostItem extends StatefulWidget {
+class PostItem extends StatelessWidget {
   final String postData;
   final String postID;
   final String reblogKey;
@@ -20,22 +20,18 @@ class PostItem extends StatefulWidget {
   final List<String> hashtags;
   final bool showBottomBar;
 
-  // ignore: use_key_in_widget_constructors
-  const PostItem(
-      {required this.postData,
+  PostItem(
+      {Key? key,
+      required this.postData,
       required this.postID,
       required this.reblogKey,
       required this.name,
       required this.hashtags,
       required this.numNotes,
       required this.profilePhoto,
-      required this.showBottomBar});
-  @override
-  _PostItemState createState() => _PostItemState();
-}
-
-class _PostItemState extends State<PostItem> {
-  var controller = Get.put(PostItemController());
+      required this.showBottomBar})
+      : super(key: key);
+  final controller = Get.put(PostItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +40,10 @@ class _PostItemState extends State<PostItem> {
       child: InkWell(
         child: Column(
           children: <Widget>[
-            getUpperBar(),
-            getPostData(),
-            getHashtagsBar(),
-            if (widget.showBottomBar) getBottomBar(),
+            getUpperBar(context),
+            getPostData(context),
+            getHashtagsBar(context),
+            if (showBottomBar) getBottomBar(context),
           ],
         ),
         onTap: () {
@@ -57,12 +53,12 @@ class _PostItemState extends State<PostItem> {
     );
   }
 
-  Widget getUpperBar() {
+  Widget getUpperBar(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
       leading: CircleAvatar(
         backgroundImage: AssetImage(
-          '${widget.postData}',
+          '${postData}',
         ),
       ),
       title: InkWell(
@@ -70,7 +66,7 @@ class _PostItemState extends State<PostItem> {
           print('Profile clicked');
         },
         child: Text(
-          '${widget.name}',
+          '${name}',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).primaryColor,
@@ -87,10 +83,10 @@ class _PostItemState extends State<PostItem> {
     );
   }
 
-  Widget getPostData() {
+  Widget getPostData(BuildContext context) {
     return FittedBox(
       child: Image.asset(
-        '${widget.profilePhoto}',
+        '${profilePhoto}',
         height: 170,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
@@ -122,18 +118,18 @@ class _PostItemState extends State<PostItem> {
     return hashtagsWidget;
   }
 
-  Widget getHashtagsBar() {
+  Widget getHashtagsBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RichText(
         text: TextSpan(
-          children: getHashtags(widget.hashtags),
+          children: getHashtags(hashtags),
         ),
       ),
     );
   }
 
-  Widget getBottomBar() {
+  Widget getBottomBar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -142,10 +138,10 @@ class _PostItemState extends State<PostItem> {
             textStyle: TextStyle(fontSize: Sizing.fontSize * 3.8),
           ),
           onPressed: () {
-            controller.openNotes(widget.numNotes);
+            controller.openNotes(numNotes);
             print('Notes clicked');
           },
-          child: Text('${widget.numNotes} notes',
+          child: Text('${numNotes} notes',
               style: const TextStyle(
                   color: Colors.grey, fontWeight: FontWeight.bold)),
         ),
@@ -155,7 +151,7 @@ class _PostItemState extends State<PostItem> {
               icon: Icon(Icons.chat_bubble_outline,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
-                controller.openNotes(widget.numNotes);
+                controller.openNotes(numNotes);
                 print('Notes clicked');
               },
             ),
@@ -193,8 +189,8 @@ class _PostItemState extends State<PostItem> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               UserNameAvatar(
-                                  widget.profilePhoto,
-                                  widget.name,
+                                  profilePhoto,
+                                  name,
                                   TextStyle(
                                     fontSize: Sizing.fontSize * 5,
                                     fontWeight: FontWeight.bold,
@@ -277,15 +273,17 @@ class _PostItemState extends State<PostItem> {
               icon: Icon(Icons.loop_rounded,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
-                controller.reblog(widget);
+                controller.reblog(this);
                 print('reblog clicked');
               },
             ),
             IconButton(
-              icon: Icon(Icons.favorite, color: Theme.of(context).primaryColor),
+              icon: Icon(
+                  controller.lovedPost ? Icons.favorite : CupertinoIcons.heart,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
-                controller.lovePost();
-                print('Love clicked');
+                controller.loveClicked();
+                print('Love state: ${controller.lovedPost}');
               },
             ),
           ],

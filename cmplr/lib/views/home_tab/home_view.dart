@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import '../views.dart';
 
 /// The home screen, it has 2 tabs: Following and stuff for you
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -46,7 +41,6 @@ TabBar getTabBar(context) {
 
 const List<Tab> _tabs = [Tab(text: 'Following'), Tab(text: 'Stuff for you')];
 List<Widget> _views = [
-  const HomeFollowingScreen(),
-  const Text('Stuff for you',
-      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+  const HomeFollowing(),
+  const HomeStuffForYou(),
 ];

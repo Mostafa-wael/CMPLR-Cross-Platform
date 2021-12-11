@@ -42,7 +42,7 @@ class CMPLR extends StatelessWidget {
       home: PersistentStorage.isLoggedIn ?? false
           ? const MasterPage() /*const MasterPage()*/
           : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
-      theme: themes[1],
+      theme: themes[0],
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
   }
@@ -56,9 +56,7 @@ class CMPLR extends StatelessWidget {
       GetPage(name: Routes.writePost, page: () => const WritePost()),
       GetPage(name: Routes.reblog, page: () => const ReblogView()),
       GetPage(name: Routes.notes, page: () => Notes()),
-      GetPage(
-          name: Routes.homeFollowingTab,
-          page: () => const HomeFollowingScreen()),
+      GetPage(name: Routes.homeFollowingTab, page: () => const HomeFollowing()),
     ];
   }
 }
