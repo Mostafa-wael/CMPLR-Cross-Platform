@@ -18,13 +18,24 @@ class ModelEmailPasswordNameAfterSignup {
     final response = await CMPLRService.post(
       PostURIs.signup,
       {
-        'Email': email,
-        'Password': password,
-        'BlogName': name,
+        'email': email,
+        'password': password,
+        'blog_name': name,
       },
     );
+    var errors = [];
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
 
+    // Error should be a map with at most? 3 keys:
+    // blog_name, email, and password
+    // Each should point to an array of errors, we concatenate them here.
+    if (responseMap.containsKey('error')) {
+      final errorMap = responseMap['error'];
+      for (final key in errorMap.keys) {
+        errors += errorMap[key];
+      }
+    }
     // Check response for errors
-    return jsonDecode(response.body);
+    return errors;
   }
 }

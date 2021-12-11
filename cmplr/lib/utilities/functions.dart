@@ -7,3 +7,11 @@ bool validateEmail(String email) {
 
   return !email.isEmpty && email.isEmail;
 }
+
+String getErrors(List errors) {
+  final buff = StringBuffer();
+  for (final error in errors) {
+    buff.writeln(error);
+  }
+  return buff.toString();
+}

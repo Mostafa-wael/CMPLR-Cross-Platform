@@ -314,6 +314,18 @@ class CMPLRService {
   static const requestSuccess = 200;
   static const invalidData = 422;
   static const unauthenticated = 401;
+  static const insertSuccess = 201;
+
+  static const Map<String, String> postHeader = {
+    'Content-Type': 'application/json; charset=UTF-8',
+    'Accept': 'application/json',
+    //  TODO add authorization header
+  };
+
+  // getHeader = postHeader for now until we find a reason to split them
+  static const Map<String, String> getHeader = postHeader;
+
+  static const String apiIp = 'http://13.68.206.72/api';
 
   static Future<http.Response> post(String route, Map params) async {
     // Switch case since we might need to send requests with different
@@ -326,7 +338,7 @@ class CMPLRService {
         return login(route, params);
       case PostURIs.askBlog:
         return askBlog(route, params);
-      case PostURIs.posts:
+      case PostURIs.post:
         return getPosts(route, params);
 
       default:
@@ -336,25 +348,38 @@ class CMPLRService {
 
   // TODO: Rename this screen to "extra signup"
   static Future<http.Response> signupMailNameVerification(
-      String route, Map params) async {
+      String backendURI, Map params) async {
     if (Flags.mock) {
-      final Set emails = _mockData[route]['emails'];
-      final Set names = _mockData[route]['names'];
+      final Set emails = _mockData[backendURI]['emails'];
+      final Set names = _mockData[backendURI]['names'];
 
-      final registeredEmail = emails.contains(params['Email']);
-      final registeredName = names.contains(params['BlogName']);
+      final response = {};
+      final errors = {};
+      response['error'] = errors;
+
+      final registeredEmail = emails.contains(params['email']);
+      final registeredName = names.contains(params['blog_name']);
+
+      if (registeredEmail) {
+        errors['email'] = [];
+        errors['email'].add('The email has already been taken');
+      }
+      if (registeredName) {
+        errors['blog_name'] = [];
+        errors['blog_name'].add('The blog name has already been taken');
+      }
 
       final bothFree = !registeredName && !registeredEmail;
       if (bothFree) {
-        emails.add(params['Email']);
-        names.add(params['BlogName']);
+        emails.add(params['email']);
+        names.add(params['blog_name']);
       }
 
       final responseCode = bothFree ? requestSuccess : invalidData;
-      return http.Response('', responseCode);
+      return http.Response(jsonEncode(response), responseCode);
     } else {
       return http.post(
-        Uri(path: PostURIs.signup),
+        Uri.parse(apiIp + backendURI),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
@@ -364,23 +389,27 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> login(String route, Map params) async {
+  static Future<http.Response> login(String backendURI, Map params) async {
     if (Flags.mock) {
-      final email = params['Email'];
-      final password = params['Password'];
+      final email = params['email'];
+      final password = params['password'];
 
-      final emailsPasswords = _mockData[route]['users'];
+      final emailsPasswords = _mockData[backendURI]['users'];
 
       final matchingEmailPasswordCombination =
           emailsPasswords[email] == password;
 
       if (!matchingEmailPasswordCombination)
-        return http.Response('', unauthenticated);
+        return http.Response(
+            jsonEncode({
+              'error': ['UnAuthorized']
+            }),
+            unauthenticated);
 
-      return http.Response('', requestSuccess);
+      return http.Response(jsonEncode({}), requestSuccess);
     } else {
       return http.post(
-        Uri(path: PostURIs.login),
+        Uri.parse(apiIp + backendURI),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
@@ -390,9 +419,9 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> askBlog(String route, Map param) {
+  static Future<http.Response> askBlog(String backendURI, Map param) {
     if (Flags.mock) {
-      throw Exception();
+      return Future.value(http.Response(jsonEncode({}), 201));
     } else {
       return http.post(Uri(path: PostURIs.getAskBlog(param['BlogId'])),
           headers: {
@@ -400,6 +429,29 @@ class CMPLRService {
             // TODO add authorization header
           },
           body: jsonEncode(param)); /* e */
+    }
+  }
+
+  static Future<http.Response> createNewPost(String backendURI, Map params) {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), 201));
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+      );
+    }
+  }
+
+  static Future<http.Response> reblogExistingPost(
+      String backendURI, Map params) {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), 201));
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+      );
     }
   }
 
@@ -414,27 +466,29 @@ class CMPLRService {
   }
 
 // TODO: add mock data, get them from the controller
-  static Future<http.Response> getPosts(String route, Map params) async {
+  static Future<http.Response> getPosts(String backendURI, Map params) async {
     if (Flags.mock) {
-      return http.Response('', 200);
+      return http.Response(jsonEncode({}), 200);
     } else {
-      return http.post(
-        Uri(path: PostURIs.signup),
+      return http.get(
+        Uri.parse(apiIp + backendURI),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
         },
-        body: jsonEncode(params),
       );
     }
   }
 
-  static Future<List<UserNote>> getNotes(String route) async {
+  static Future<List<UserNote>> getNotes(String backendURI) async {
     final notes = <UserNote>[];
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
-      for (var i = 0; i < _mockData[route]['response']['total_notes']; i++) {
-        notes.add(UserNote.fromJson(_mockData[route]['response']['notes'][i]));
+      for (var i = 0;
+          i < _mockData[backendURI]['response']['total_notes'];
+          i++) {
+        notes.add(
+            UserNote.fromJson(_mockData[backendURI]['response']['notes'][i]));
       }
       return notes;
     } else {

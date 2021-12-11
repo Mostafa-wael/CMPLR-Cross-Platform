@@ -1,5 +1,6 @@
 import 'package:cmplr/flags.dart';
 import 'package:cmplr/models/persistent_storage_api.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../lib/controllers/controllers.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,12 +8,14 @@ import 'package:get/get.dart';
 
 void main() {
   setUpAll(() {
-    PersistentStorage.initStorage();
+    PersistentStorage.initStorage(container: 'testing');
+    GetStorage('testing').erase();
     Get.testMode = true;
     Flags.mock = true;
     PersistentStorage.changeLoggedIn(false);
   });
-
+  const emailTaken = 'The email has already been taken';
+  const blogNameTaken = 'The blog name has already been taken';
   testWidgets('email password name after signup controller ...',
       (tester) async {
     // passwordHidden = true, validInfo = true
@@ -37,16 +40,10 @@ void main() {
 
     controller.emailController.text = 'tester@cmplr.org';
     controller.fieldChanged('');
-    await controller.validateInfo();
     expect(controller.validInfo, false);
 
     controller.passwordController.text = 'aReallyStrongPassword!@#!';
     controller.fieldChanged('');
-    await controller.validateInfo();
-    expect(controller.validInfo, false);
-
-    controller.passwordController.text = 'aReallyStrongPassword!@#!';
-    await controller.validateInfo();
     expect(controller.validInfo, false);
 
     // Since all 3 are different from the mock data, it will return true
@@ -59,6 +56,7 @@ void main() {
     controller.emailController.text = 'tarek@cmplr.org';
     controller.fieldChanged('');
     await controller.validateInfo();
+    expect(controller.errors, [emailTaken, blogNameTaken]);
     expect(controller.validInfo, false);
 
     // Name already exists
@@ -66,6 +64,7 @@ void main() {
     controller.nameController.text = 'burh';
     controller.fieldChanged('');
     await controller.validateInfo();
+    expect(controller.errors, [emailTaken, blogNameTaken]);
     expect(controller.validInfo, false);
   });
 }
