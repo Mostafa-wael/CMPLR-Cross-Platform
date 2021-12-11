@@ -59,7 +59,7 @@ class LoginEmailContinue extends StatelessWidget {
                       ? SizedBox(height: Sizing.blockSizeVertical * 9)
                       : SizedBox(height: Sizing.blockSizeVertical * 43.5),
                   LoginTextField(
-                    key: const ValueKey('getEmail2_getEmail'),
+                    textFieldKey: const ValueKey('getEmail2_getEmail'),
                     controller: controller,
                     text: 'email',
                     focus: true,

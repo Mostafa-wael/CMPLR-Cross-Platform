@@ -84,7 +84,8 @@ class ForgotPassword extends StatelessWidget {
                             underlineColor: Colors.grey,
                             isEmail: true,
                             iconColor: Colors.grey,
-                            key: const ValueKey('forgotPassword_getEmail'),
+                            textFieldKey:
+                                const ValueKey('forgotPassword_getEmail'),
                           ),
                         ],
                       ),
@@ -122,7 +123,8 @@ class ForgotPassword extends StatelessWidget {
                             underlineColor: Colors.grey,
                             isEmail: true,
                             iconColor: Colors.grey,
-                            key: const ValueKey('forgotPassword_getEmail'),
+                            textFieldKey:
+                                const ValueKey('forgotPassword_getEmail'),
                           ),
                         ],
                       ),

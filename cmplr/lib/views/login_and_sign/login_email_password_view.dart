@@ -73,7 +73,8 @@ class LoginEmailPassword extends StatelessWidget {
                           ),
                         ),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getEmail'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
                           text: 'email',
                           focus: false,
@@ -84,7 +85,8 @@ class LoginEmailPassword extends StatelessWidget {
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getPassword'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
                           focus: true,
@@ -116,7 +118,8 @@ class LoginEmailPassword extends StatelessWidget {
                           ),
                         ),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getEmail'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
                           text: 'email',
                           focus: false,
@@ -127,7 +130,8 @@ class LoginEmailPassword extends StatelessWidget {
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getPassword'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
                           focus: true,
