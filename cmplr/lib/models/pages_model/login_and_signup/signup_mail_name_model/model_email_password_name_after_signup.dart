@@ -23,11 +23,6 @@ class ModelEmailPasswordNameAfterSignup {
         'BlogName': name,
       },
     );
-<<<<<<< Updated upstream
-
-    // Check response for errors
-    return jsonDecode(response.body);
-=======
     final errors = [];
     final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -42,6 +37,5 @@ class ModelEmailPasswordNameAfterSignup {
     }
     // Check response for errors
     return errors;
->>>>>>> Stashed changes
   }
 }

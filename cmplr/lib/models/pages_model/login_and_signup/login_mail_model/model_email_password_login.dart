@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../../../backend_uris.dart';
 import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
@@ -18,13 +20,9 @@ class ModelEmailPasswordLogin {
       },
     );
 
-<<<<<<< Updated upstream
-    return response.statusCode == CMPLRService.requestSuccess;
-=======
     final errors = [];
     final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
 
     return responseMap.containsKey('error') ? responseMap['error'] : [];
->>>>>>> Stashed changes
   }
 }

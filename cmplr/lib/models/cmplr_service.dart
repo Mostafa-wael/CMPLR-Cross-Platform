@@ -316,6 +316,17 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
+  static const Map<String, String> postHeader = {
+    'Content-Type': 'application/json; charset=UTF-8',
+    'Accept': 'application/json',
+    //  TODO add authorization header
+  };
+
+  // getHeader = postHeader for now until we find a reason to split them
+  static const Map<String, String> getHeader = postHeader;
+
+  static const String apiIp = 'http://13.68.206.72/api';
+
   static Future<http.Response> post(String route, Map params) async {
     // Switch case since we might need to send requests with different
     // content types
@@ -327,7 +338,7 @@ class CMPLRService {
         return login(route, params);
       case PostURIs.askBlog:
         return askBlog(route, params);
-      case PostURIs.posts:
+      case PostURIs.post:
         return getPosts(route, params);
 
       default:
@@ -410,11 +421,7 @@ class CMPLRService {
 
   static Future<http.Response> askBlog(String route, Map param) {
     if (Flags.mock) {
-<<<<<<< Updated upstream
-      throw Exception();
-=======
       return Future.value(http.Response(jsonEncode({}), 201));
->>>>>>> Stashed changes
     } else {
       return http.post(Uri(path: PostURIs.getAskBlog(param['BlogId'])),
           headers: {
@@ -425,8 +432,6 @@ class CMPLRService {
     }
   }
 
-<<<<<<< Updated upstream
-=======
   static Future<http.Response> createNewPost(String backendURI, Map params) {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), 201));
@@ -450,7 +455,6 @@ class CMPLRService {
     }
   }
 
->>>>>>> Stashed changes
   // This functionality is not implemeted in the back-end
   static List initialPreferences(String route) {
     return _mockData[route]['preference_names'];
