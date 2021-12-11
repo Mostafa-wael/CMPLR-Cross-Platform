@@ -34,6 +34,25 @@ class __KeepAliveWrapperState extends State<KeepAliveWrapper>
   bool get wantKeepAlive => true;
 }
 
+class RefreshWidget extends StatefulWidget {
+  final Widget child;
+  final Future Function() onRefresh;
+  const RefreshWidget({
+    Key? key,
+    required this.onRefresh,
+    required this.child,
+  }) : super(key: key);
+  @override
+  _RefreshWidgetState createState() => _RefreshWidgetState();
+}
+
+class _RefreshWidgetState extends State<RefreshWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(child: widget.child, onRefresh: widget.onRefresh);
+  }
+}
+
 class Notes extends StatelessWidget {
   Notes({Key? key}) : super(key: key);
 
@@ -41,241 +60,272 @@ class Notes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: const Color(0xFF001A35),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
-            onPressed: () {
-              controller.closeNotesScreen();
-            },
-            splashRadius: Sizing.blockSize * 7.5,
-          ),
-          title: Text(
-            '${Get.arguments} notes',
-            style: const TextStyle(color: Colors.white),
-          ),
-          actions: [
-            Obx(() => IconButton(
-                  icon: Icon(controller.postSubscribed.value
-                      ? Icons.notifications
-                      : Icons.notifications_off_outlined),
-                  color: Colors.white,
-                  iconSize: Sizing.blockSize * 7.415,
-                  onPressed: () {
-                    controller.subscriptionButtonPressed();
-                  },
-                )),
-          ],
-        ),
-        body: getBody());
+    return GetBuilder<NotesController>(
+        init: NotesController(),
+        builder: (controller) => Scaffold(
+            appBar: AppBar(
+              shadowColor: Colors.transparent,
+              backgroundColor: const Color(0xFF001A35),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
+                onPressed: () {
+                  controller.closeNotesScreen();
+                },
+                splashRadius: Sizing.blockSize * 7.5,
+              ),
+              title: Text(
+                '${Get.arguments} notes',
+                style: const TextStyle(color: Colors.white),
+              ),
+              actions: [
+                Obx(() => IconButton(
+                      icon: Icon(controller.postSubscribed.value
+                          ? Icons.notifications
+                          : Icons.notifications_off_outlined),
+                      color: Colors.white,
+                      iconSize: Sizing.blockSize * 7.415,
+                      onPressed: () {
+                        controller.subscriptionButtonPressed();
+                      },
+                    )),
+              ],
+            ),
+            body: getBody(context)));
   }
 
-  Widget getBody() {
-    return FutureBuilder(
-        future: controller.notesModel.getNotes(),
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final List<List<UserNote>> notes = snapshot.data ?? [];
-            controller.notes = notes;
-            return Column(
-              children: [
-                Container(
-                  color: Colors.white,
-                  child: Material(
-                    child: InkWell(
-                        onTap: () {},
-                        child: TabBar(
-                          controller: controller.tabController,
-                          indicatorColor: Colors.lightBlue,
-                          tabs: <Widget>[
-                            Tab(
-                              height: Sizing.blockSizeVertical * 7.5,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    CustomIcons.comment,
-                                  ),
-                                  SizedBox(width: Sizing.blockSize * 3.71),
-                                  Text(
-                                    '${notes[0].length}',
-                                    style: const TextStyle(),
-                                  )
-                                ],
+  Widget getBody(BuildContext context) {
+    if (!NotesController.dataReloaded) {
+      return FutureBuilder(
+          future: controller.notesModel.getNotes(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              controller.notes = snapshot.data ?? [];
+              return buildMainView(context);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.purple,
+                ),
+              );
+            }
+          });
+    } else {
+      return buildMainView(context);
+    }
+  }
+
+  Widget buildMainView(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          child: Material(
+            child: InkWell(
+                onTap: () {},
+                child: TabBar(
+                  controller: controller.tabController,
+                  indicatorColor: Colors.lightBlue,
+                  tabs: <Widget>[
+                    Tab(
+                      height: Sizing.blockSizeVertical * 7.5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            CustomIcons.comment,
+                          ),
+                          SizedBox(width: Sizing.blockSize * 3.71),
+                          Text(
+                            '${controller.notes![0].length}',
+                            style: const TextStyle(),
+                          )
+                        ],
+                      ),
+                    ),
+                    Tab(
+                      height: Sizing.blockSizeVertical * 7.5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            CustomIcons.reblog,
+                            // color: Colors.black,
+                          ),
+                          SizedBox(width: Sizing.blockSize * 3.71),
+                          Text(
+                              '${controller.notes![1].length + controller.notes![2].length}',
+                              style: const TextStyle(
+                                  // color: Colors.black
+                                  ))
+                        ],
+                      ),
+                    ),
+                    Tab(
+                      height: Sizing.blockSizeVertical * 7.5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CustomIcons.heart,
+                            size: Sizing.blockSize * 5.44,
+                            // color: Colors.black,
+                          ),
+                          SizedBox(width: Sizing.blockSize * 3.71),
+                          Text('${controller.notes![3].length}',
+                              style: const TextStyle(
+                                  // color: Colors.black
+                                  ))
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: controller.tabController,
+            children: <Widget>[
+              Column(
+                children: [
+                  Expanded(
+                    child: KeepAliveWrapper(
+                        child: RefreshWidget(
+                      onRefresh: () {
+                        return controller.refreshScreen();
+                      },
+                      child: RefreshWidget(
+                        onRefresh: () {
+                          return controller.refreshScreen();
+                        },
+                        child: ListView.builder(
+                          itemCount: controller.notes![0].length,
+                          itemBuilder: (context, index) {
+                            return buildCommentsListTile(
+                                controller.notes![0][index],
+                                index == controller.notes![0].length - 1);
+                          },
+                        ),
+                      ),
+                    )),
+                  ),
+                  Container(
+                    height: Sizing.blockSizeVertical * 6.44,
+                    width: Sizing.width,
+                    decoration: const BoxDecoration(
+                      border: Border(
+                          top: BorderSide(color: Colors.black, width: 0.5)),
+                    ),
+                    child: Obx(() => Row(
+                          children: [
+                            controller.focusCommentTextField.value
+                                ? const Text('@')
+                                : const Text('image'),
+                            SizedBox(width: Sizing.blockSize * 4.87),
+                            SizedBox(
+                              width: Sizing.blockSize * 68.12,
+                              child: Focus(
+                                onFocusChange: (hasFocus) {
+                                  controller
+                                      .commentTextFieldFocusChanged(hasFocus);
+                                },
+                                child: TextField(
+                                  onChanged: (value) {
+                                    controller.commentTextFieldChanged(value);
+                                  },
+                                  maxLines: 2,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Unleash a compliment ',
+                                      border: InputBorder.none),
+                                ),
                               ),
                             ),
-                            Tab(
-                              height: Sizing.blockSizeVertical * 7.5,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    CustomIcons.reblog,
-                                    // color: Colors.black,
-                                  ),
-                                  SizedBox(width: Sizing.blockSize * 3.71),
-                                  Text('${notes[1].length + notes[2].length}',
-                                      style: const TextStyle(
-                                          // color: Colors.black
-                                          ))
-                                ],
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {},
+                                child: SizedBox(
+                                    width: Sizing.blockSize * 14.59,
+                                    child: const Center(child: Text('Reply'))),
                               ),
-                            ),
-                            Tab(
-                              height: Sizing.blockSizeVertical * 7.5,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    CustomIcons.heart,
-                                    size: Sizing.blockSize * 5.44,
-                                    // color: Colors.black,
-                                  ),
-                                  SizedBox(width: Sizing.blockSize * 3.71),
-                                  Text('${notes[3].length}',
-                                      style: const TextStyle(
-                                          // color: Colors.black
-                                          ))
-                                ],
-                              ),
-                            ),
+                            )
                           ],
                         )),
                   ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    controller: controller.tabController,
-                    children: <Widget>[
-                      Column(
-                        children: [
-                          Expanded(
-                            child: KeepAliveWrapper(
-                                child: ListView.builder(
-                              itemCount: notes[0].length,
-                              itemBuilder: (context, index) {
-                                return buildCommentsListTile(notes[0][index],
-                                    index == notes[0].length - 1);
-                              },
-                            )),
-                          ),
-                          Container(
-                            height: Sizing.blockSizeVertical * 6.44,
-                            width: Sizing.width,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                  top: BorderSide(
-                                      color: Colors.black, width: 0.5)),
-                            ),
-                            child: Obx(() => Row(
-                                  children: [
-                                    controller.focusCommentTextField.value
-                                        ? const Text('@')
-                                        : const Text('image'),
-                                    SizedBox(width: Sizing.blockSize * 4.87),
-                                    SizedBox(
-                                      width: Sizing.blockSize * 68.12,
-                                      child: Focus(
-                                        onFocusChange: (hasFocus) {
-                                          controller
-                                              .commentTextFieldFocusChanged(
-                                                  hasFocus);
-                                        },
-                                        child: TextField(
-                                          onChanged: (value) {
-                                            controller
-                                                .commentTextFieldChanged(value);
-                                          },
-                                          maxLines: 2,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Unleash a compliment ',
-                                              border: InputBorder.none),
-                                        ),
-                                      ),
-                                    ),
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: SizedBox(
-                                            width: Sizing.blockSize * 14.59,
-                                            child: const Center(
-                                                child: Text('Reply'))),
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              getModalSheet(context);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  Sizing.blockSize * 4.5, 0, 0, 0),
-                              height: 50,
-                              width: Sizing.width,
-                              child: Row(
-                                children: [
-                                  Obx(() => Text(
-                                        controller.reblogsWithComments.value
-                                            ? 'Reblogs with comments'
-                                            : 'Other reblogs',
-                                        style: TextStyle(
-                                            fontSize: Sizing.blockSize * 4.2),
-                                      )),
-                                  Icon(Icons.arrow_drop_down,
-                                      size: Sizing.blockSize * 7.415)
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                              child: KeepAliveWrapper(
-                            child:
-                                Obx(() => controller.reblogsWithComments.value
-                                    ? ListView.builder(
-                                        itemCount: notes[1].length,
-                                        itemBuilder: (context, index) {
-                                          return // AAAAAAAAAAA
-                                              buildReblogsWithCommentsListTile(
-                                                  notes[1][index]);
-                                        })
-                                    : ListView.builder(
-                                        itemCount: notes[2].length,
-                                        itemBuilder: (context, index) {
-                                          return buildOtherReblogsListTile(
-                                              notes[2][index]);
-                                        })),
-                          ))
-                        ],
-                      ),
-                      KeepAliveWrapper(
-                          child: ListView.builder(
-                              itemCount: notes[3].length,
-                              itemBuilder: (context, index) {
-                                return buildLikesListTile(
-                                    notes[3][index], index);
-                              }))
-                    ],
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.purple,
+                ],
               ),
-            );
-          }
-        });
+              Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      getModalSheet(context);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.fromLTRB(Sizing.blockSize * 4.5, 0, 0, 0),
+                      height: 50,
+                      width: Sizing.width,
+                      child: Row(
+                        children: [
+                          Obx(() => Text(
+                                controller.reblogsWithComments.value
+                                    ? 'Reblogs with comments'
+                                    : 'Other reblogs',
+                                style:
+                                    TextStyle(fontSize: Sizing.blockSize * 4.2),
+                              )),
+                          Icon(Icons.arrow_drop_down,
+                              size: Sizing.blockSize * 7.415)
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: KeepAliveWrapper(
+                    child: Obx(() => controller.reblogsWithComments.value
+                        ? RefreshWidget(
+                            onRefresh: () {
+                              return controller.refreshScreen();
+                            },
+                            child: ListView.builder(
+                                itemCount: controller.notes![1].length,
+                                itemBuilder: (context, index) {
+                                  return // AAAAAAAAAAA
+                                      buildReblogsWithCommentsListTile(
+                                          controller.notes![1][index]);
+                                }),
+                          )
+                        : RefreshWidget(
+                            onRefresh: () {
+                              return controller.refreshScreen();
+                            },
+                            child: ListView.builder(
+                                itemCount: controller.notes![2].length,
+                                itemBuilder: (context, index) {
+                                  return buildOtherReblogsListTile(
+                                      controller.notes![2][index]);
+                                }),
+                          )),
+                  ))
+                ],
+              ),
+              KeepAliveWrapper(
+                  child: RefreshWidget(
+                onRefresh: () {
+                  return controller.refreshScreen();
+                },
+                child: ListView.builder(
+                    itemCount: controller.notes![3].length,
+                    itemBuilder: (context, index) {
+                      return buildLikesListTile(
+                          controller.notes![3][index], index);
+                    }),
+              ))
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   Widget buildCommentsListTile(UserNote note, bool lastComment) {

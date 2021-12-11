@@ -115,16 +115,16 @@ class CMPLRService {
       'response': {
         'notes': [
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'square',
@@ -133,62 +133,62 @@ class CMPLRService {
             'content': 'Xz'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
             'content':
-                'This is a post comment. This is a post comment. This is a post'
-                    'comment. This is a post comment. This is a post comment.'
-                    'This is a post comment. This is a post comment.'
-                    'This is a post comment.'
+                'This is a post reply. This is a post reply. This is a post'
+                    'reply. This is a post reply. This is a post reply.'
+                    'This is a post reply. This is a post reply.'
+                    'This is a post reply.'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
             'type': 'like',
@@ -483,7 +483,7 @@ class CMPLRService {
   static Future<List<UserNote>> getNotes(String backendURI) async {
     final notes = <UserNote>[];
     if (Flags.mock) {
-      await Future.delayed(const Duration(milliseconds: 1500));
+      await Future.delayed(const Duration(milliseconds: 2000));
       for (var i = 0;
           i < _mockData[backendURI]['response']['total_notes'];
           i++) {

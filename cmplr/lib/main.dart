@@ -39,14 +39,17 @@ class CMPLR extends StatelessWidget {
     final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PersistentStorage.isLoggedIn ?? false
-          ? const MasterPage() /*const MasterPage()*/
-          : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
+      home: const MasterPage(),
       theme: themes[1],
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
   }
 
+  /*
+  PersistentStorage.isLoggedIn ?? false
+          ? const MasterPage() /*const MasterPage()*/
+          : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/ 
+  */
   List<GetPage<dynamic>> get getHomeScreenPages {
     return [
       GetPage(

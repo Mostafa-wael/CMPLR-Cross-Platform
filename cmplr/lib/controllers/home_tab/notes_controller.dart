@@ -24,6 +24,8 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
 
   final RxBool _emptyCommentTextField = true.obs;
 
+  static bool dataReloaded = false;
+
   // This is just a reference to the notes in the data model
   List<List<UserNote>>? notes;
 
@@ -96,6 +98,12 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
     } else {
       _emptyCommentTextField.value = false;
     }
+  }
+
+  Future<void> refreshScreen() async {
+    notes = await notesModel.getNotes();
+    dataReloaded = true;
+    update();
   }
 
   void closeNotesScreen() {
