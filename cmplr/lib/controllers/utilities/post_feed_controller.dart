@@ -6,31 +6,22 @@ import 'package:get/get.dart';
 
 class PostFeedController extends GetxController
     with SingleGetTickerProviderMixin {
-  final ModelPostsFeed _model = ModelPostsFeed();
+  final ModelPostsFeed model = ModelPostsFeed();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   List<PostItem> posts = [];
 
-  List<PostItem> getNewPosts() {
-    return _model.getNewPosts();
+  @override
+  void onInit() async {
+    _isLoading = true;
+    await Future.delayed(const Duration(milliseconds: 1500));
+    _isLoading = false;
+    super.onInit();
   }
 
-  void initialPosts() async {
-    _isLoading = true;
-    update();
-    await Future.delayed(const Duration(milliseconds: 1500));
-    posts += getNewPosts();
-    _isLoading = false;
-    update();
-  }
-
-  void updatePosts() async {
-    _isLoading = true;
-    update();
-    await Future.delayed(const Duration(milliseconds: 1500));
-    posts += getNewPosts();
-    _isLoading = false;
-    update();
+  Future<void> updatePosts() async {
+    final newPosts = await model.getNewPosts();
+    posts += newPosts;
   }
 }

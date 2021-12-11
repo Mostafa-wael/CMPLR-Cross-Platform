@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
+import '../utilities/custom_widgets/custom_widgets.dart';
 import 'package:get/get.dart';
 
 import '../backend_uris.dart';
 
 import '../flags.dart';
 import 'package:http/http.dart' as http;
-
-import 'pages_model/home_tab/notes/user_note.dart';
+import 'models.dart';
 import '../routes.dart';
 
 /// Our interface to the backend OR our mock data
@@ -84,6 +84,37 @@ class CMPLRService {
         'Fashion'
       ]
     },
+    GetURIs.postFollow: {
+      'response': {
+        'total_posts': 2,
+        'posts': [
+          {
+            'name': 'Mostafa',
+            'postID': '1231465396890',
+            'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
+            'profilePhoto': 'lib/utilities/assets/intro_screen/intro_4.jpg',
+            'postData': 'lib/utilities/assets/intro_screen/intro_3.jpg',
+            'numNotes': 200,
+            'showBottomBar': true,
+            'hashtags': [
+              'Gamadan',
+              'Roaan',
+              'Hiiii',
+            ],
+          },
+          {
+            'name': 'Wael',
+            'postID': '1231465396890',
+            'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
+            'profilePhoto': 'lib/utilities/assets/intro_screen/intro_3.jpg',
+            'postData': 'lib/utilities/assets/intro_screen/intro_4.jpg',
+            'numNotes': 100,
+            'showBottomBar': true,
+            'hashtags': ['3azmaaaaaaaaaaaaaaaaaa', 'Hyhyhy', 'NNNAAANNNAAAA']
+          }
+        ]
+      }
+    },
     // Doesn't use post()
     Routes.signupPreferencesSearchScreen: {
       'popular_searched_topics': [
@@ -111,7 +142,7 @@ class CMPLRService {
         'Ac Milan',
       ]
     },
-    Routes.notes: {
+    GetURIs.notes: {
       'response': {
         'notes': [
           {
@@ -338,8 +369,20 @@ class CMPLRService {
         return login(route, params);
       case PostURIs.askBlog:
         return askBlog(route, params);
-      case PostURIs.post:
+      default:
+        throw Exception('Invalid request route');
+    }
+  }
+
+  static Future<http.Response> get(String route, Map params) async {
+    // Switch case since we might need to send requests with different
+    // content types
+
+    switch (route) {
+      case GetURIs.postFollow:
         return getPosts(route, params);
+      case GetURIs.notes:
+        return getNotes(route, params);
 
       default:
         throw Exception('Invalid request route');
@@ -459,35 +502,32 @@ class CMPLRService {
     return _mockData[route][topics];
   }
 
-// TODO: add mock data, get them from the controller
+  // ToDo: should be a Get request
   static Future<http.Response> getPosts(String backendURI, Map params) async {
     if (Flags.mock) {
-      return http.Response(jsonEncode({}), 200);
+      await Future.delayed(const Duration(milliseconds: 1500));
+      print('service');
+      final res = _mockData[GetURIs.postFollow]['response'];
+      return http.Response(
+          jsonEncode(_mockData[GetURIs.postFollow]['response']),
+          requestSuccess);
     } else {
-      return http.get(
-        Uri.parse(apiIp + backendURI),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          // TODO add authorization header
-        },
-      );
+      return http.Response(
+          jsonEncode(_mockData[GetURIs.postFollow]['response']),
+          requestSuccess);
     }
   }
 
-  static Future<List<UserNote>> getNotes(String backendURI) async {
-    final notes = <UserNote>[];
+  // ToDo: should be a Get request
+  static Future<http.Response> getNotes(String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
-      for (var i = 0;
-          i < _mockData[backendURI]['response']['total_notes'];
-          i++) {
-        notes.add(
-            UserNote.fromJson(_mockData[backendURI]['response']['notes'][i]));
-      }
-      return notes;
+
+      return http.Response(
+          jsonEncode(_mockData[GetURIs.notes]['response']), requestSuccess);
     } else {
-      // TODO: Do a get request
-      return notes;
+      return http.Response(
+          jsonEncode(_mockData[GetURIs.notes]['response']), requestSuccess);
     }
   }
 }

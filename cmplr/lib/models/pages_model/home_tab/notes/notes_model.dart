@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_final_locals
 
+import 'dart:convert';
+
 import '../../../cmplr_service.dart';
 import 'user_note.dart';
 
@@ -10,7 +12,12 @@ class NotesModel {
   final List<UserNote> _likes = [];
 
   Future<List<List<UserNote>>> getNotes() async {
-    final notes = await CMPLRService.getNotes('/notes');
+    final notes = <UserNote>[];
+    final response = await CMPLRService.getNotes('/notes', {});
+    final responseBody = jsonDecode(response.body);
+    for (var i = 0; i < responseBody['total_notes']; i++) {
+      notes.add(UserNote.fromJson(responseBody['notes'][i]));
+    }
     print(notes.length);
     for (var i = 0; i < notes.length; i++) {
       switch (notes[i].noteType) {
