@@ -26,7 +26,7 @@ void main() {
     expect(controller.showClearButton, true);
 
     // correct age
-    controller.ageController.text = '14';
+    controller.ageController.text = '15';
     controller.ageFieldChanged();
     expect(controller.nextButtonActivated, true);
     expect(controller.showClearButton, true);
