@@ -43,7 +43,7 @@ class SignupAge extends StatelessWidget {
                   child: Text('Next',
                       style: TextStyle(
                           color: Color(controller.nextButtonColor),
-                          fontSize: Sizing.blockSize * 4.65,
+                          fontSize: Sizing.fontSize * 4.65,
                           fontWeight: FontWeight.w800))),
               Positioned(
                 left: Sizing.blockSize * 3.5,
@@ -82,7 +82,7 @@ class SignupAge extends StatelessWidget {
                   autofocus: true,
                   cursorColor: Colors.grey,
                   style: TextStyle(
-                      color: Colors.white, fontSize: Sizing.blockSize * 4.0),
+                      color: Colors.white, fontSize: Sizing.fontSize * 4.0),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -105,8 +105,7 @@ class SignupAge extends StatelessWidget {
                       ),
                       hintText: 'How old are you?',
                       hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontSize: Sizing.blockSize * 4.65),
+                          color: Colors.grey, fontSize: Sizing.fontSize * 4.65),
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       focusedBorder: const UnderlineInputBorder(
@@ -117,7 +116,7 @@ class SignupAge extends StatelessWidget {
                     text: TextSpan(
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Sizing.blockSize * 4.45,
+                            fontSize: Sizing.fontSize * 4.45,
                             height: Sizing.blockSizeVertical * 0.2),
                         children: <TextSpan>[
                       const TextSpan(

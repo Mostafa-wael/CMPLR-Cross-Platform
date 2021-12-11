@@ -146,16 +146,25 @@ class CMPLRService {
       'response': {
         'notes': [
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reblog_with_comment',
+            'avatar_URL':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'profile_title': 'Mohamed',
+            'content': 'This is a post reply'
+          },
+          {
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'square',
@@ -164,62 +173,62 @@ class CMPLRService {
             'content': 'Xz'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
             'content':
-                'This is a post comment. This is a post comment. This is a post'
-                    'comment. This is a post comment. This is a post comment.'
-                    'This is a post comment. This is a post comment.'
-                    'This is a post comment.'
+                'This is a post reply. This is a post reply. This is a post'
+                    'reply. This is a post reply. This is a post reply.'
+                    'This is a post reply. This is a post reply.'
+                    'This is a post reply.'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
-            'type': 'comment',
+            'type': 'reply',
             'avatar_URL':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
             'blog_name': 'Mostafa',
             'profile_title': 'Mohamed',
-            'content': 'This is a post comment'
+            'content': 'This is a post reply'
           },
           {
             'type': 'like',
@@ -337,7 +346,7 @@ class CMPLRService {
             'profile_title': 'Mohamed'
           },
         ],
-        'total_notes': 21,
+        'total_notes': 22,
       }
     },
   };
@@ -356,7 +365,8 @@ class CMPLRService {
   // getHeader = postHeader for now until we find a reason to split them
   static const Map<String, String> getHeader = postHeader;
 
-  static const String apiIp = 'http://13.68.206.72/api';
+  // static const String apiIp = 'http://13.68.206.72/api';
+  static const String apiIp = 'http://be0b-156-215-2-141.ngrok.io/api';
 
   static Future<http.Response> post(String route, Map params) async {
     // Switch case since we might need to send requests with different
@@ -418,7 +428,7 @@ class CMPLRService {
         names.add(params['blog_name']);
       }
 
-      final responseCode = bothFree ? requestSuccess : invalidData;
+      final responseCode = bothFree ? insertSuccess : invalidData;
       return http.Response(jsonEncode(response), responseCode);
     } else {
       return http.post(
@@ -521,10 +531,21 @@ class CMPLRService {
   // ToDo: should be a Get request
   static Future<http.Response> getNotes(String backendURI, Map params) async {
     if (Flags.mock) {
+<<<<<<< HEAD
       await Future.delayed(const Duration(milliseconds: 1500));
 
       return http.Response(
           jsonEncode(_mockData[GetURIs.notes]['response']), requestSuccess);
+=======
+      await Future.delayed(const Duration(milliseconds: 1000));
+      for (var i = 0;
+          i < _mockData[backendURI]['response']['total_notes'];
+          i++) {
+        notes.add(
+            UserNote.fromJson(_mockData[backendURI]['response']['notes'][i]));
+      }
+      return notes;
+>>>>>>> 8f5a2a095e014130abe28586360c9f5155f601fd
     } else {
       return http.Response(
           jsonEncode(_mockData[GetURIs.notes]['response']), requestSuccess);
