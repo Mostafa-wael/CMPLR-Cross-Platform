@@ -531,21 +531,10 @@ class CMPLRService {
   // ToDo: should be a Get request
   static Future<http.Response> getNotes(String backendURI, Map params) async {
     if (Flags.mock) {
-<<<<<<< HEAD
       await Future.delayed(const Duration(milliseconds: 1500));
 
       return http.Response(
           jsonEncode(_mockData[GetURIs.notes]['response']), requestSuccess);
-=======
-      await Future.delayed(const Duration(milliseconds: 1000));
-      for (var i = 0;
-          i < _mockData[backendURI]['response']['total_notes'];
-          i++) {
-        notes.add(
-            UserNote.fromJson(_mockData[backendURI]['response']['notes'][i]));
-      }
-      return notes;
->>>>>>> 8f5a2a095e014130abe28586360c9f5155f601fd
     } else {
       return http.Response(
           jsonEncode(_mockData[GetURIs.notes]['response']), requestSuccess);

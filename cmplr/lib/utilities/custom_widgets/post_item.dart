@@ -1,5 +1,3 @@
-import 'package:flutter_html/shims/dart_ui_real.dart';
-
 import 'custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import '../sizing/sizing.dart';
@@ -222,8 +220,6 @@ class PostItem extends StatelessWidget {
                                   ],
                                 ),
                                 onTap: () {
-                                  //TODO: Change this to post id
-                                  // or whatever we decide on
                                   controller.share(context, 'Test1');
                                 },
                               ),
@@ -239,29 +235,17 @@ class PostItem extends StatelessWidget {
                           SizedBox(
                             height: Sizing.blockSizeVertical * 4,
                           ),
-                          Container(
-                              height: Sizing.blockSizeVertical * 6,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(Sizing.blockSize)),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  // TODO: Link this to a request from the
-                                  // controller -> controller.getTumblrs()
-                                  // TODO: Add suffix Icon while loading
-                                  prefixIcon: const Icon(Icons.search),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        Sizing.blockSize * 2),
-                                  ),
-                                  filled: false,
-                                  hintStyle: TextStyle(
-                                      //TODO: Link this to theme
-                                      color: Colors.white,
-                                      fontSize: Sizing.fontSize * 3),
-                                  hintText: 'Send to...',
+                          TextField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      Sizing.blockSize * 2),
                                 ),
-                              )),
+                                filled: true,
+                                hintStyle: const TextStyle(color: Colors.white),
+                                hintText: 'Type in your text',
+                                fillColor: Colors.white70),
+                          ),
                         ],
                       ),
                     );
