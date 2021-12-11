@@ -33,24 +33,26 @@ class MasterPage extends StatelessWidget {
               },
               items: <BottomNavigationBarItem>[
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.home, key: ValueKey('masterPage_home')),
                   label: 'Home',
                 ),
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
+                  icon: Icon(Icons.search, key: ValueKey('masterPage_search')),
                   label: 'Search',
                 ),
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.message),
+                  icon:
+                      Icon(Icons.message, key: ValueKey('masterPage_activity')),
                   label: 'Activity',
                 ),
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
+                  icon: Icon(Icons.person, key: ValueKey('masterPage_profile')),
                   label: 'Profile',
                 ),
               ],
             ),
             floatingActionButton: FloatingActionButton(
+              key: const ValueKey('masterPage_write_post'),
               child: const Icon(Icons.edit),
               onPressed: () {
                 Get.to(

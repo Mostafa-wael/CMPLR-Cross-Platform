@@ -8,7 +8,7 @@ class PostURIs {
 
   // Real URIs you can use
   static const String createBlog = '/blog';
-  static const String signup = '/signup';
+  static const String signup = '/register/insert';
   static const String login = '/login';
 
   static const String reblog = '/posts/reblog';

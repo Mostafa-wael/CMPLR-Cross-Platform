@@ -28,6 +28,7 @@ class Authentication {
         userCredential = await auth.signInWithPopup(authProvider);
 
         user = userCredential.user;
+        print(user);
       } catch (e) {
         print(e);
       }

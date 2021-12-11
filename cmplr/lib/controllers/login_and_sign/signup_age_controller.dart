@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../routes.dart';
 
@@ -51,7 +52,7 @@ class SignupAgeController extends GetxController {
       final age = int.parse(_ageController.text);
 
       // age constraints
-      if (age == 0 || age > 130) {
+      if (age < 15 || age > 120) {
         _nextButtonColor = 0xFF015887;
         _nextButtonActivated = false;
       } else {
@@ -78,6 +79,7 @@ class SignupAgeController extends GetxController {
         _isLoading = false;
         _showToast('Minor hiccup. Try again.');
       } else {
+        GetStorage().write('age', ageController.text);
         Get.offNamed(Routes.signupPreferencesScreen);
       }
       update();
