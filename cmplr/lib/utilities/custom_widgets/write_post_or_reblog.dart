@@ -20,7 +20,9 @@ class WritePostOrReblog extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: Sizing.blockSizeVertical * 12,
         leading: IconButton(
-          icon: Icon(Icons.close, size: Sizing.blockSize * 6.2),
+          icon: Icon(Icons.close, //TODO: Make the color according to theme
+              size: Sizing.blockSize * 6.2,
+              color: Colors.white),
           onPressed: () {
             Get.back();
           },
@@ -43,6 +45,8 @@ class WritePostOrReblog extends StatelessWidget {
             ),
           ),
           IconButton(
+              //TODO: Make the color according to theme
+              color: Colors.white,
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
@@ -224,23 +228,23 @@ class WritePostOrReblog extends StatelessWidget {
                           ),
                         ),
 
-                        ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: controller.previews.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return controller.previews[index];
-                            }),
+                        // ListView.builder(
+                        //     shrinkWrap: true,
+                        //     scrollDirection: Axis.vertical,
+                        //     itemCount: controller.previews.length,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return controller.previews[index];
+                        //     }),
 
-                        ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: controller.urls.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return TextField(
-                                controller: controller.urlControllers[index],
-                              );
-                            }),
+                        // ListView.builder(
+                        //     shrinkWrap: true,
+                        //     scrollDirection: Axis.vertical,
+                        //     itemCount: controller.urls.length,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return TextField(
+                        //         controller: controller.urlControllers[index],
+                        //       );
+                        //     }),
                       ],
                     )),
               ],

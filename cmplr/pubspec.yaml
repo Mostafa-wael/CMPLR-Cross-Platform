@@ -26,6 +26,7 @@ dependencies:
   firebase_core:
   firebase_auth: ^3.3.3
   driver_extensions:
+  share_plus:
 
   file_picker:
   flutter_html:
