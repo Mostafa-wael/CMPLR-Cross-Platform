@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../lib/models/persistent_storage_api.dart';
@@ -10,10 +11,27 @@ void main() {
   const emptyPassword = 'Password is empty';
   const invalidEmail = 'Invalid Email';
 
+  TestWidgetsFlutterBinding.ensureInitialized();
+  const channel = MethodChannel('plugins.flutter.io/path_provider');
+  void setUpMockChannels(MethodChannel channel) {
+    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getApplicationDocumentsDirectory') {
+        return '.';
+      }
+    });
+  }
+
+  setUpAll(() async {
+    setUpMockChannels(channel);
+  });
+
+  setUp(() async {
+    await GetStorage.init();
+    await GetStorage().erase();
+  });
+
   testWidgets('login controller', (tester) async {
     Get.testMode = true;
-    await PersistentStorage.initStorage();
-    await GetStorage().erase();
     Flags.mock = true;
     PersistentStorage.changeLoggedIn(false);
 

@@ -3,7 +3,7 @@ import '../../models/cmplr_service.dart';
 import '../../utilities/sizing/sizing.dart';
 
 import '../../models/models.dart';
-import 'package:metadata_fetch/metadata_fetch.dart';
+// import 'package:metadata_fetch/metadata_fetch.dart';
 
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
