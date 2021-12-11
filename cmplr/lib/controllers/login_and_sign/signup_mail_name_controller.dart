@@ -94,7 +94,7 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
     // (Tarek) TODO:
     // Go to login page
-    Get.offAllNamed(Routes.login);
+    Get.offAllNamed(Routes.signupOrLoginScreen);
   }
 
   /// After the extra signup, routes the user to the page they were originally
