@@ -5,22 +5,27 @@ import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
 
 class ModelEmailPasswordLogin {
-  Future<bool> checkEmailPasswordCombination(
+  Future<List> checkEmailPasswordCombination(
       String email, String password) async {
     final validEmail = validateEmail(email);
-    if (!validEmail || password.isEmpty) return Future.value(false);
 
-    if (!validEmail) return Future.value(false);
+    final errors = [];
+    if (password.isEmpty) errors.add('Password is empty');
+
+    if (!validEmail) errors.add('Invalid Email');
+
+    if (!errors.isEmpty) return errors;
 
     final response = await CMPLRService.post(
       PostURIs.login,
       {
-        'Email': email,
-        'Password': password,
+        'email': email,
+        'password': password,
       },
     );
 
-    final errors = [];
+    // FIXME: Check if the response for a failed login is a nested map
+    // or a list
     final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
 
     return responseMap.containsKey('error') ? responseMap['error'] : [];

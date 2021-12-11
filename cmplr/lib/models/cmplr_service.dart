@@ -348,10 +348,10 @@ class CMPLRService {
 
   // TODO: Rename this screen to "extra signup"
   static Future<http.Response> signupMailNameVerification(
-      String route, Map params) async {
+      String backendURI, Map params) async {
     if (Flags.mock) {
-      final Set emails = _mockData[route]['emails'];
-      final Set names = _mockData[route]['names'];
+      final Set emails = _mockData[backendURI]['emails'];
+      final Set names = _mockData[backendURI]['names'];
 
       final response = {};
       final errors = {};
@@ -379,7 +379,7 @@ class CMPLRService {
       return http.Response(jsonEncode(response), responseCode);
     } else {
       return http.post(
-        Uri(path: PostURIs.signup),
+        Uri.parse(apiIp + backendURI),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
@@ -389,12 +389,12 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> login(String route, Map params) async {
+  static Future<http.Response> login(String backendURI, Map params) async {
     if (Flags.mock) {
       final email = params['email'];
       final password = params['password'];
 
-      final emailsPasswords = _mockData[route]['users'];
+      final emailsPasswords = _mockData[backendURI]['users'];
 
       final matchingEmailPasswordCombination =
           emailsPasswords[email] == password;
@@ -409,7 +409,7 @@ class CMPLRService {
       return http.Response(jsonEncode({}), requestSuccess);
     } else {
       return http.post(
-        Uri(path: PostURIs.login),
+        Uri.parse(apiIp + backendURI),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
@@ -419,7 +419,7 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> askBlog(String route, Map param) {
+  static Future<http.Response> askBlog(String backendURI, Map param) {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), 201));
     } else {
@@ -466,12 +466,12 @@ class CMPLRService {
   }
 
 // TODO: add mock data, get them from the controller
-  static Future<http.Response> getPosts(String route, Map params) async {
+  static Future<http.Response> getPosts(String backendURI, Map params) async {
     if (Flags.mock) {
       return http.Response(jsonEncode({}), 200);
     } else {
       return http.get(
-        Uri(path: apiIp + PostURIs.signup),
+        Uri.parse(apiIp + backendURI),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           // TODO add authorization header
@@ -480,12 +480,15 @@ class CMPLRService {
     }
   }
 
-  static Future<List<UserNote>> getNotes(String route) async {
+  static Future<List<UserNote>> getNotes(String backendURI) async {
     final notes = <UserNote>[];
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
-      for (var i = 0; i < _mockData[route]['response']['total_notes']; i++) {
-        notes.add(UserNote.fromJson(_mockData[route]['response']['notes'][i]));
+      for (var i = 0;
+          i < _mockData[backendURI]['response']['total_notes'];
+          i++) {
+        notes.add(
+            UserNote.fromJson(_mockData[backendURI]['response']['notes'][i]));
       }
       return notes;
     } else {

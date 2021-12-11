@@ -1,3 +1,4 @@
+import '../../utilities/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -57,10 +58,20 @@ class LoginEmailPassword extends StatelessWidget {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Sizing.blockSizeVertical * 22.5),
+                  SizedBox(height: Sizing.blockSizeVertical * 16.5),
                   Center(
                     child: Column(
                       children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
+                          child: Text(
+                            controller.errors.isEmpty
+                                ? ''
+                                : getErrors(controller.errors),
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
                         LoginTextField(
                           key: const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
@@ -90,10 +101,20 @@ class LoginEmailPassword extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Sizing.blockSizeVertical * 34),
+                  SizedBox(height: Sizing.blockSizeVertical * 25),
                   Center(
                     child: Column(
                       children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
+                          child: Text(
+                            controller.errors.isEmpty
+                                ? ''
+                                : getErrors(controller.errors),
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
                         LoginTextField(
                           key: const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
@@ -116,23 +137,25 @@ class LoginEmailPassword extends StatelessWidget {
                           iconColor: Colors.grey,
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 30),
-                        GestureDetector(
-                          child: Text(
-                            'Forgot Your Password?',
-                            style: TextStyle(
-                              fontSize: Sizing.fontSize * 3.715,
-                              color: Colors.grey,
-                            ),
-                            key: const ValueKey(
-                                'getEmailPassword_forgotPassword'),
-                          ),
-                          onTap: () {
-                            controller.forgotPassword();
-                          },
-                        ),
                       ],
                     ),
                   ),
+                  Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: GestureDetector(
+                      child: Text(
+                        'Forgot Your Password?',
+                        style: TextStyle(
+                          fontSize: Sizing.fontSize * 3.715,
+                          color: Colors.grey,
+                        ),
+                        key: const ValueKey('getEmailPassword_forgotPassword'),
+                      ),
+                      onTap: () {
+                        controller.forgotPassword();
+                      },
+                    ),
+                  )
                 ],
               ),
       ),
