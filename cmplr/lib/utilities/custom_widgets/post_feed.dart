@@ -19,6 +19,11 @@ class PostFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return GetBuilder<PostFeedController>(
+        init: PostFeedController(), builder: (controller) => getBody(context));
+  }
+
+  Widget getBody(BuildContext context) {
     if (!controller.dataReloaded) {
       return FutureBuilder(
           future: controller.model.getNewPosts(),
