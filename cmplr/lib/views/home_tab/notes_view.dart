@@ -215,7 +215,7 @@ class Notes extends StatelessWidget {
                     )),
                   ),
                   Container(
-                    height: Sizing.blockSizeVertical * 6.44,
+                    height: Sizing.blockSizeVertical * 6.5,
                     width: Sizing.width,
                     decoration: const BoxDecoration(
                       border: Border(
@@ -276,7 +276,7 @@ class Notes extends StatelessWidget {
                                       controller.commentTextFieldController,
                                   maxLines: 2,
                                   decoration: const InputDecoration(
-                                      hintText: 'Unleash a compliment ',
+                                      hintText: 'Unleash a compliment...',
                                       border: InputBorder.none),
                                 ),
                               ),
@@ -304,6 +304,7 @@ class Notes extends StatelessWidget {
                                       : InkWell(
                                           onTap: () {
                                             controller.commentSubmitted();
+                                            FocusScope.of(context).unfocus();
                                           },
                                           child: SizedBox(
                                               width: Sizing.blockSize * 14.59,
@@ -328,6 +329,7 @@ class Notes extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       getReblogsModalSheet(context);
+                      FocusScope.of(context).unfocus();
                     },
                     child: Container(
                       padding:
@@ -431,6 +433,7 @@ class Notes extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onLongPress: () {
+              FocusScope.of(context).unfocus();
               getCommentModalSheet(context, note.blogName, note.postReply);
             },
             child: Container(
@@ -472,131 +475,124 @@ class Notes extends StatelessWidget {
   }
 
   Widget buildReblogsWithCommentsListTile(UserNote note) {
-    return InkWell(
-      onLongPress: () {
-        print('Hold reblog with comment tile');
-      },
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                Sizing.blockSize * 3.1, 0, 0, Sizing.blockSize * 3.1),
-            child: Row(
-              children: [
-                SizedBox(
-                    width: Sizing.blockSize * 12.16,
-                    child: Stack(
-                      children: [
-                        note.avatarShape == 'circle'
-                            ? CircleAvatar(
-                                backgroundImage: NetworkImage(note.avatarURL),
-                                radius: Sizing.blockSize * 3.7,
-                              )
-                            : GFAvatar(
-                                backgroundImage: NetworkImage(note.avatarURL),
-                                shape: GFAvatarShape.square,
-                                backgroundColor: Colors.white,
-                                size: Sizing.blockSize * 5.1,
-                              ),
-                        Positioned(
-                          child: CircleAvatar(
-                              backgroundColor: Colors.green,
-                              radius: Sizing.blockSize * 1.85,
-                              child: Center(
-                                  child: Icon(CustomIcons.reblog,
-                                      size: Sizing.blockSize * 3.5,
-                                      color: Colors.white))),
-                          bottom: 0,
-                          right: 14,
-                        )
-                      ],
-                    )),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () {
-                    print('User profile tapped');
-                  },
-                  child: SizedBox(
-                    width: Sizing.blockSize * 70.55,
-                    child: Text(
-                      note.blogName,
-                      style: TextStyle(
-                        fontSize: Sizing.blockSize * 4.2,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.more_horiz),
-                  onPressed: () {},
-                )
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(
-                Sizing.blockSize * 3.1, 0, 0, Sizing.blockSize * 3.1),
-            width: Sizing.width,
-            child: Text(
-              note.postReply,
-              style: TextStyle(
-                fontSize: Sizing.blockSize * 4.2,
-              ),
-              overflow: TextOverflow.visible,
-            ),
-          ),
-          Row(
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(
+              Sizing.blockSize * 3.1, 0, 0, Sizing.blockSize * 3.1),
+          child: Row(
             children: [
               SizedBox(
-                width: Sizing.blockSize * 1.09,
+                  width: Sizing.blockSize * 12.16,
+                  child: Stack(
+                    children: [
+                      note.avatarShape == 'circle'
+                          ? CircleAvatar(
+                              backgroundImage: NetworkImage(note.avatarURL),
+                              radius: Sizing.blockSize * 3.7,
+                            )
+                          : GFAvatar(
+                              backgroundImage: NetworkImage(note.avatarURL),
+                              shape: GFAvatarShape.square,
+                              backgroundColor: Colors.white,
+                              size: Sizing.blockSize * 5.1,
+                            ),
+                      Positioned(
+                        child: CircleAvatar(
+                            backgroundColor: Colors.green,
+                            radius: Sizing.blockSize * 1.85,
+                            child: Center(
+                                child: Icon(CustomIcons.reblog,
+                                    size: Sizing.blockSize * 3.5,
+                                    color: Colors.white))),
+                        bottom: 0,
+                        right: 14,
+                      )
+                    ],
+                  )),
+              InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () {
+                  print('User profile tapped');
+                },
+                child: SizedBox(
+                  width: Sizing.blockSize * 70.55,
+                  child: Text(
+                    note.blogName,
+                    style: TextStyle(
+                      fontSize: Sizing.blockSize * 4.2,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ),
-              Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () {
-                      print('Reblog button pressed');
-                    },
-                    child: Container(
-                        height: Sizing.blockSizeVertical * 6.75,
-                        padding: EdgeInsets.fromLTRB(Sizing.blockSize * 2.5, 0,
-                            Sizing.blockSize * 2.5, 0),
-                        child: Center(
-                            child: Text(
-                          'Reblog',
-                          style: TextStyle(
-                              fontSize: Sizing.blockSize * 4.65,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.lightBlue),
-                        ))),
-                  )),
-              Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () {
-                      print('View post button pressed');
-                    },
-                    child: Container(
-                        height: Sizing.blockSizeVertical * 6.75,
-                        padding: EdgeInsets.fromLTRB(Sizing.blockSize * 2.5, 0,
-                            Sizing.blockSize * 2.5, 0),
-                        child: Center(
-                            child: Text(
-                          'View post',
-                          style: TextStyle(
-                              fontSize: Sizing.blockSize * 4.65,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.lightBlue),
-                        ))),
-                  )),
+              IconButton(
+                icon: const Icon(Icons.more_horiz),
+                onPressed: () {},
+              )
             ],
-          )
-        ],
-      ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.fromLTRB(
+              Sizing.blockSize * 3.1, 0, 0, Sizing.blockSize * 3.1),
+          width: Sizing.width,
+          child: Text(
+            note.postReply,
+            style: TextStyle(
+              fontSize: Sizing.blockSize * 4.2,
+            ),
+            overflow: TextOverflow.visible,
+          ),
+        ),
+        Row(
+          children: [
+            SizedBox(
+              width: Sizing.blockSize * 1.09,
+            ),
+            Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    print('Reblog button pressed');
+                  },
+                  child: Container(
+                      height: Sizing.blockSizeVertical * 6.75,
+                      padding: EdgeInsets.fromLTRB(
+                          Sizing.blockSize * 2.5, 0, Sizing.blockSize * 2.5, 0),
+                      child: Center(
+                          child: Text(
+                        'Reblog',
+                        style: TextStyle(
+                            fontSize: Sizing.blockSize * 4.65,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.lightBlue),
+                      ))),
+                )),
+            Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    print('View post button pressed');
+                  },
+                  child: Container(
+                      height: Sizing.blockSizeVertical * 6.75,
+                      padding: EdgeInsets.fromLTRB(
+                          Sizing.blockSize * 2.5, 0, Sizing.blockSize * 2.5, 0),
+                      child: Center(
+                          child: Text(
+                        'View post',
+                        style: TextStyle(
+                            fontSize: Sizing.blockSize * 4.65,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.lightBlue),
+                      ))),
+                )),
+          ],
+        )
+      ],
     );
   }
 
