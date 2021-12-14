@@ -197,20 +197,15 @@ class Notes extends StatelessWidget {
                       onRefresh: () {
                         return controller.refreshScreen();
                       },
-                      child: RefreshWidget(
-                        onRefresh: () {
-                          return controller.refreshScreen();
+                      child: ListView.builder(
+                        controller: controller.commentListViewController,
+                        itemCount: controller.notes![0].length,
+                        itemBuilder: (context, index) {
+                          return buildCommentsListTile(
+                              controller.notes![0][index],
+                              index == controller.notes![0].length - 1,
+                              context);
                         },
-                        child: ListView.builder(
-                          controller: controller.commentListViewController,
-                          itemCount: controller.notes![0].length,
-                          itemBuilder: (context, index) {
-                            return buildCommentsListTile(
-                                controller.notes![0][index],
-                                index == controller.notes![0].length - 1,
-                                context);
-                          },
-                        ),
                       ),
                     )),
                   ),

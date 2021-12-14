@@ -8,20 +8,19 @@ class PostFeedController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final ModelPostsFeed model = ModelPostsFeed();
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  bool _dataReloaded = false;
+  bool get dataReloaded => _dataReloaded;
   List<PostItem> posts = [];
 
   @override
   void onInit() async {
-    _isLoading = true;
-    await Future.delayed(const Duration(milliseconds: 1500));
-    _isLoading = false;
     super.onInit();
   }
 
   Future<void> updatePosts() async {
     final newPosts = await model.getNewPosts();
     posts += newPosts;
+    _dataReloaded = true;
+    update();
   }
 }
