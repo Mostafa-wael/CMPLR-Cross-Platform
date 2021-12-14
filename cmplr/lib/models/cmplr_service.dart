@@ -98,6 +98,7 @@ class CMPLRService {
               'Roaan',
               'Hiiii',
             ],
+            'is_liked': 'true'
           },
           {
             'name': 'Wael',
@@ -107,7 +108,8 @@ class CMPLRService {
             'postData': 'lib/utilities/assets/intro_screen/intro_4.jpg',
             'numNotes': 100,
             'showBottomBar': true,
-            'hashtags': ['3azmaaaaaaaaaaaaaaaaaa', 'Hyhyhy', 'NNNAAANNNAAAA']
+            'hashtags': ['3azmaaaaaaaaaaaaaaaaaa', 'Hyhyhy', 'NNNAAANNNAAAA'],
+            'is_liked': 'false'
           }
         ]
       }
