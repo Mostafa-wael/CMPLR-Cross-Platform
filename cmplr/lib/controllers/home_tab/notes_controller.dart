@@ -136,8 +136,8 @@ class NotesController extends GetxController with SingleGetTickerProviderMixin {
         .jumpTo(commentListViewController.position.minScrollExtent);
 
     emptyCommentTextField.value = true;
-    SystemChannels.textInput.invokeMethod('TextInput.show');
-    commentTextFieldFocusNode.requestFocus();
+    // SystemChannels.textInput.invokeMethod('TextInput.show');
+    // commentTextFieldFocusNode.requestFocus();
   }
 
   Future<void> timelessRefreshScreen() async {
