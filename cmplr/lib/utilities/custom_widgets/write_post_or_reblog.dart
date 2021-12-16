@@ -206,6 +206,7 @@ class WritePostOrReblog extends StatelessWidget {
                               numNotes: controller.post.numNotes,
                               profilePhoto: controller.post.profilePhoto,
                               showBottomBar: false,
+                              isLiked: controller.post.isLiked,
                             ),
                           ),
 

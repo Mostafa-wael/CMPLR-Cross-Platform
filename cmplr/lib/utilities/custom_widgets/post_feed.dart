@@ -19,7 +19,12 @@ class PostFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (controller.isLoading) {
+    return GetBuilder<PostFeedController>(
+        init: PostFeedController(), builder: (controller) => getBody(context));
+  }
+
+  Widget getBody(BuildContext context) {
+    if (!controller.dataReloaded) {
       return FutureBuilder(
           future: controller.model.getNewPosts(),
           builder: (context, AsyncSnapshot snapshot) {
@@ -91,7 +96,6 @@ Widget buildMainView(PostFeedController controller) {
       },
       child: ListView.builder(
           padding: const EdgeInsets.all(8),
-          reverse: true, // so that the new posts are added on the top
           physics: const ClampingScrollPhysics(),
           itemCount: controller.posts.length,
           itemBuilder: (context, index) {

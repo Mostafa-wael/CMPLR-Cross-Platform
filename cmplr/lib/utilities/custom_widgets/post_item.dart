@@ -1,3 +1,8 @@
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+
+import '../custom_icons/custom_icons.dart';
+
 import 'custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import '../sizing/sizing.dart';
@@ -17,6 +22,7 @@ class PostItem extends StatelessWidget {
   final int numNotes;
   final List<dynamic> hashtags;
   final bool showBottomBar;
+  RxBool isLiked = false.obs;
 
   PostItem(
       {Key? key,
@@ -27,7 +33,8 @@ class PostItem extends StatelessWidget {
       required this.hashtags,
       required this.numNotes,
       required this.profilePhoto,
-      required this.showBottomBar})
+      required this.showBottomBar,
+      required this.isLiked})
       : super(key: key);
   final controller = Get.put(PostItemController());
   @override
@@ -145,7 +152,13 @@ class PostItem extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              icon: Icon(Icons.chat_bubble_outline,
+              icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
+              onPressed: () {
+                shareMenu(null, controller, context, profilePhoto, name);
+              },
+            ),
+            IconButton(
+              icon: Icon(CustomIcons.comment,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.openNotes(numNotes);
@@ -153,28 +166,23 @@ class PostItem extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
-              onPressed: () {
-                shareMenu(null, controller, context, profilePhoto, name);
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.loop_rounded,
+              icon: Icon(CustomIcons.reblog,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
                 controller.reblog(this);
                 print('reblog clicked');
               },
             ),
-            IconButton(
-              icon: Icon(
-                  controller.lovedPost ? Icons.favorite : CupertinoIcons.heart,
-                  color: Theme.of(context).primaryColor),
-              onPressed: () {
-                controller.loveClicked();
-                print('Love state: ${controller.lovedPost}');
-              },
-            ),
+            Obx(() => IconButton(
+                  icon: Icon(
+                      isLiked.value ? Icons.favorite : CupertinoIcons.heart,
+                      color: Theme.of(context).primaryColor),
+                  onPressed: () {
+                    isLiked.value = !isLiked.value;
+                    controller.loveClicked();
+                    print('Love state: ${isLiked.value}');
+                  },
+                )),
           ],
         )
       ],
@@ -182,6 +190,7 @@ class PostItem extends StatelessWidget {
   }
 
   factory PostItem.fromJson(Map<String, dynamic> json) {
+    final isLikedValue = json['is_liked'] == 'true' ? true.obs : false.obs;
     return PostItem(
       postData: json['postData'],
       postID: json['postData'],
@@ -191,6 +200,7 @@ class PostItem extends StatelessWidget {
       numNotes: json['numNotes'],
       hashtags: json['hashtags'],
       showBottomBar: json['showBottomBar'],
+      isLiked: isLikedValue,
     );
   }
 }

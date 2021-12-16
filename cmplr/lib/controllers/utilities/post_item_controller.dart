@@ -50,7 +50,6 @@ class PostItemController extends GetxController {
   }
 
   void loveClicked() {
-    lovedPost = !lovedPost;
     // TODO: send post request to '/user/like/ with post_id and reblog_key
   }
 }
