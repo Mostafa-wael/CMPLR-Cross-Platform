@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../backend_uris.dart';
+import '../../../../user.dart';
 import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
 
@@ -54,6 +55,8 @@ class ModelEmailPasswordLogin {
     } else {
       // TODO: Refactor this
       if (responseMap.containsKey('token')) {
+        User.userData = responseMap['user'];
+        User.userToken = responseMap['token'];
         GetStorage().write('token', responseMap['token']);
         GetStorage().write('user', responseMap['user']);
       }

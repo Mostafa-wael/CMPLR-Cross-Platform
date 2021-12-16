@@ -1,3 +1,4 @@
+import '../../models/models.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
@@ -7,9 +8,12 @@ import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../routes.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../user.dart';
 
 class PostItemController extends GetxController {
   //final _followers = ;
+
+  final _shareModel = ShareModel();
 
   bool lovedPost = false;
   void openNotes(int numNotes) {
@@ -31,13 +35,14 @@ class PostItemController extends GetxController {
     update();
   }
 
+  Future<void> back() async {
+    Get.back();
+    update();
+  }
+
   // TODO: Change this to Future<user>
   Future<List> getFollowers() async {
-    // TODO: Add the logic that returns the list of users
-    // Each user contains an avatar & name
-    // This will all be added after creating the model
-    // final following = await _model.getFollowing();
-    return [];
+    return _shareModel.getFollowers(User.userData['id']);
   }
 
   void openProfile() {

@@ -30,7 +30,6 @@ class PostItem extends StatelessWidget {
       required this.showBottomBar})
       : super(key: key);
   final controller = Get.put(PostItemController());
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -156,101 +155,7 @@ class PostItem extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
               onPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  constraints: BoxConstraints(
-                    maxHeight: Sizing.blockSizeVertical * 90,
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(Sizing.blockSize * 5)),
-                  builder: (BuildContext context) {
-                    return Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          Sizing.blockSize * 4, 0, Sizing.blockSize * 4, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(height: Sizing.blockSizeVertical * 3),
-                          Container(
-                            width: Sizing.blockSize * 12,
-                            height: Sizing.blockSize * 1,
-                            //TODO: Link this to theme
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(Sizing.blockSize))),
-                          ),
-                          SizedBox(height: Sizing.blockSizeVertical * 3),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              UserNameAvatar(
-                                  profilePhoto,
-                                  name,
-                                  TextStyle(
-                                    fontSize: Sizing.fontSize * 5,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ],
-                          ),
-                          SizedBox(height: Sizing.blockSizeVertical * 4),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkResponse(
-                                child: Column(
-                                  children: [
-                                    const Icon(Icons.copy),
-                                    const Text(
-                                      'Copy',
-                                    )
-                                  ],
-                                ),
-                                onTap: () {},
-                              ),
-                              InkResponse(
-                                child: Column(
-                                  children: [
-                                    const Icon(Icons.share),
-                                    const Text(
-                                      'Other',
-                                    )
-                                  ],
-                                ),
-                                onTap: () {
-                                  controller.share(context, 'Test1');
-                                },
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: Sizing.blockSizeVertical * 4,
-                          ),
-                          Container(
-                              width: Sizing.blockSize * 92,
-                              height: Sizing.blockSize * 0.25,
-                              color: Colors.white),
-                          SizedBox(
-                            height: Sizing.blockSizeVertical * 4,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      Sizing.blockSize * 2),
-                                ),
-                                filled: true,
-                                hintStyle: const TextStyle(color: Colors.white),
-                                hintText: 'Type in your text',
-                                fillColor: Colors.white70),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
+                shareMenu(null, controller, context, profilePhoto, name);
               },
             ),
             IconButton(
