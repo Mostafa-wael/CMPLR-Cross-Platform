@@ -8,11 +8,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
 void main() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   const emailTaken = 'The email has already been taken';
   const blogNameTaken = 'The blog name has already been taken';
 
+  TestWidgetsFlutterBinding.ensureInitialized();
   const channel = MethodChannel('plugins.flutter.io/path_provider');
   void setUpMockChannels(MethodChannel channel) {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
