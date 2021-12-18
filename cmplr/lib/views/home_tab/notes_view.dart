@@ -132,13 +132,15 @@ class Notes extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
+                          Icon(
                             CustomIcons.comment,
+                            color: Theme.of(context).primaryColor,
                           ),
                           SizedBox(width: Sizing.blockSize * 3.71),
                           Text(
                             '${controller.notes![0].length}',
-                            style: const TextStyle(),
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
                           )
                         ],
                       ),
@@ -148,18 +150,17 @@ class Notes extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
+                          Icon(
                             CustomIcons.reblog,
-                            // color: Colors.black,
+                            color: Theme.of(context).primaryColor,
                           ),
                           SizedBox(width: Sizing.blockSize * 3.71),
                           Text(
                               (controller.notes![1].length +
                                       controller.notes![2].length)
                                   .toString(),
-                              style: const TextStyle(
-                                  // color: Colors.black
-                                  ))
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor))
                         ],
                       ),
                     ),
@@ -171,13 +172,12 @@ class Notes extends StatelessWidget {
                           Icon(
                             CustomIcons.heart,
                             size: Sizing.blockSize * 5.44,
-                            // color: Colors.black,
+                            color: Theme.of(context).primaryColor,
                           ),
                           SizedBox(width: Sizing.blockSize * 3.71),
                           Text('${controller.notes![3].length}',
-                              style: const TextStyle(
-                                  // color: Colors.black
-                                  ))
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor))
                         ],
                       ),
                     ),
@@ -231,8 +231,9 @@ class Notes extends StatelessWidget {
                                         child: Text(
                                           '@',
                                           style: TextStyle(
-                                              fontSize:
-                                                  Sizing.blockSize * 5.59),
+                                              fontSize: Sizing.blockSize * 5.59,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           textAlign: TextAlign.center,
                                         )),
                                   )
@@ -262,6 +263,8 @@ class Notes extends StatelessWidget {
                                       .commentTextFieldFocusChanged(hasFocus);
                                 },
                                 child: TextField(
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
                                   focusNode:
                                       controller.commentTextFieldFocusNode,
                                   onChanged: (value) {
@@ -271,8 +274,9 @@ class Notes extends StatelessWidget {
                                       controller.commentTextFieldController,
                                   maxLines: 2,
                                   decoration: const InputDecoration(
-                                      hintText: 'Unleash a compliment...',
-                                      border: InputBorder.none),
+                                    hintText: 'Unleash a compliment...',
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               ),
                             ),
@@ -337,11 +341,13 @@ class Notes extends StatelessWidget {
                                 controller.reblogsWithComments.value
                                     ? 'Reblogs with comments'
                                     : 'Other reblogs',
-                                style:
-                                    TextStyle(fontSize: Sizing.blockSize * 4.2),
+                                style: TextStyle(
+                                    fontSize: Sizing.blockSize * 4.2,
+                                    color: Theme.of(context).primaryColor),
                               )),
                           Icon(Icons.arrow_drop_down,
-                              size: Sizing.blockSize * 7.415)
+                              size: Sizing.blockSize * 7.415,
+                              color: Theme.of(context).primaryColor)
                         ],
                       ),
                     ),
@@ -358,7 +364,7 @@ class Notes extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return // AAAAAAAAAAA
                                       buildReblogsWithCommentsListTile(
-                                          controller.notes![1][index]);
+                                          controller.notes![1][index], context);
                                 }),
                           )
                         : RefreshWidget(
@@ -369,7 +375,7 @@ class Notes extends StatelessWidget {
                                 itemCount: controller.notes![2].length,
                                 itemBuilder: (context, index) {
                                   return buildOtherReblogsListTile(
-                                      controller.notes![2][index]);
+                                      controller.notes![2][index], context);
                                 }),
                           )),
                   ))
@@ -384,7 +390,7 @@ class Notes extends StatelessWidget {
                     itemCount: controller.notes![3].length,
                     itemBuilder: (context, index) {
                       return buildLikesListTile(
-                          controller.notes![3][index], index);
+                          controller.notes![3][index], index, context);
                     }),
               ))
             ],
@@ -439,9 +445,13 @@ class Notes extends StatelessWidget {
                   Sizing.blockSize * 2.5,
                   Sizing.blockSizeVertical * 1.5),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 1.5),
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(Sizing.blockSize * 4))),
+                border: Border.all(
+                  width: 1.5,
+                  color: Theme.of(context).primaryColor,
+                ),
+                borderRadius:
+                    BorderRadius.all(Radius.circular(Sizing.blockSize * 4)),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -451,13 +461,14 @@ class Notes extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontSize: Sizing.blockSize * 4.2,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).primaryColor),
                   ),
                   Text(
                     note.postReply,
                     style: TextStyle(
-                      fontSize: Sizing.blockSize * 4.2,
-                    ),
+                        fontSize: Sizing.blockSize * 4.2,
+                        color: Theme.of(context).primaryColor),
                     overflow: TextOverflow.visible,
                   ),
                 ],
@@ -469,7 +480,7 @@ class Notes extends StatelessWidget {
     );
   }
 
-  Widget buildReblogsWithCommentsListTile(UserNote note) {
+  Widget buildReblogsWithCommentsListTile(UserNote note, BuildContext context) {
     return Column(
       children: [
         Padding(
@@ -516,15 +527,16 @@ class Notes extends StatelessWidget {
                   child: Text(
                     note.blogName,
                     style: TextStyle(
-                      fontSize: Sizing.blockSize * 4.2,
-                    ),
+                        fontSize: Sizing.blockSize * 4.2,
+                        color: Theme.of(context).primaryColor),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.more_horiz),
+                icon: Icon(Icons.more_horiz,
+                    color: Theme.of(context).primaryColor),
                 onPressed: () {},
               )
             ],
@@ -537,8 +549,8 @@ class Notes extends StatelessWidget {
           child: Text(
             note.postReply,
             style: TextStyle(
-              fontSize: Sizing.blockSize * 4.2,
-            ),
+                fontSize: Sizing.blockSize * 4.2,
+                color: Theme.of(context).primaryColor),
             overflow: TextOverflow.visible,
           ),
         ),
@@ -591,7 +603,7 @@ class Notes extends StatelessWidget {
     );
   }
 
-  Widget buildOtherReblogsListTile(UserNote note) {
+  Widget buildOtherReblogsListTile(UserNote note, BuildContext context) {
     return InkWell(
       onTap: () {
         print('User profile tapped');
@@ -633,8 +645,8 @@ class Notes extends StatelessWidget {
             Text(
               note.blogName + '  ',
               style: TextStyle(
-                fontSize: Sizing.blockSize * 4.2,
-              ),
+                  fontSize: Sizing.blockSize * 4.2,
+                  color: Theme.of(context).primaryColor),
             ),
             InkWell(
               onTap: () {
@@ -647,8 +659,8 @@ class Notes extends StatelessWidget {
                   Text(
                     '  ' + note.blogName,
                     style: TextStyle(
-                      fontSize: Sizing.blockSize * 4.2,
-                    ),
+                        fontSize: Sizing.blockSize * 4.2,
+                        color: Theme.of(context).primaryColor),
                   ),
                 ],
               ),
@@ -659,7 +671,7 @@ class Notes extends StatelessWidget {
     );
   }
 
-  Widget buildLikesListTile(UserNote note, int index) {
+  Widget buildLikesListTile(UserNote note, int index, BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -700,17 +712,17 @@ class Notes extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: Sizing.blockSize * 4.2,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).primaryColor),
                       ),
                       Text(
                         note.profileTitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: Sizing.blockSize * 4.2,
-                          fontWeight: FontWeight.w400,
-                          // color: Colors.black54
-                        ),
+                            fontSize: Sizing.blockSize * 4.2,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).primaryColor),
                       ),
                     ],
                   ),
@@ -833,7 +845,6 @@ class Notes extends StatelessWidget {
               builder: (controller) => Obx(
                     () => Column(
                       children: [
-                        const Icon(Icons.line_weight),
                         SizedBox(height: Sizing.blockSizeVertical * 4.5),
                         InkWell(
                           onTap: () {
@@ -859,8 +870,9 @@ class Notes extends StatelessWidget {
                                       Text(
                                         'Reblogs with comments',
                                         style: TextStyle(
-                                            fontSize: Sizing.blockSize * 4.2,
-                                            fontWeight: FontWeight.bold),
+                                          fontSize: Sizing.blockSize * 4.2,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       Text(
                                         'Show reblogs with added comments and/or tags.',
