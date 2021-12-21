@@ -16,6 +16,7 @@ dependencies:
   
   get: ^4.3.8
   flutter_keyboard_visibility: ^5.1.0
+  extended_nested_scroll_view: ^5.0.0
   getwidget: ^2.0.4
   google_fonts: 
   fluttertoast: 
