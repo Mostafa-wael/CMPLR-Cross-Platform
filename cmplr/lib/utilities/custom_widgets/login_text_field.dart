@@ -32,69 +32,59 @@ class LoginTextField extends StatelessWidget {
     final textController =
         isEmail ? controller.emailController : controller.passwordController;
     return SizedBox(
-      child: Focus(
-        child: TextField(
-          autofocus: focus,
-          decoration: InputDecoration(
-            hintText: text,
-            suffixIcon: isEmail
-                ? controller.showClearIcon
-                    ? InkWell(
-                        child: Icon(Icons.clear, color: iconColor),
-                        onTap: () {
-                          textController.clear();
-                          controller.emailFieldChanged();
-                        },
-                        key: ValueKey('${text}_clear'),
-                      )
-                    : const Icon(
+      child: TextField(
+        autofocus: focus,
+        decoration: InputDecoration(
+          hintText: text,
+          suffixIcon: isEmail
+              ? controller.showClearIcon
+                  ? InkWell(
+                      child: Icon(
                         Icons.clear,
-                        color: Colors.transparent,
-                      )
-                : controller.hidePassword
-                    ? InkWell(
-                        child: Icon(
-                          Icons.visibility,
-                          color: iconColor,
-                          key: ValueKey('${text}_visibility'),
-                        ),
-                        onTap: () {
-                          controller.viewHidePassword();
-                        })
-                    : InkWell(
-                        child: Icon(
-                          Icons.visibility_off,
-                          color: iconColor,
-                          key: ValueKey('${text}_visibility'),
-                        ),
-                        onTap: () {
-                          controller.viewHidePassword();
-                        }),
-            enabledBorder: isEmail
-                ? UnderlineInputBorder(
-                    borderSide: BorderSide(color: underlineColor))
-                : InputBorder.none,
-            focusedBorder: isEmail
-                ? UnderlineInputBorder(
-                    borderSide: BorderSide(color: underlineColor))
-                : InputBorder.none,
-          ),
-          controller: textController,
-          onChanged: isEmail
-              ? (text) {
-                  controller.emailFieldChanged();
-                }
-              : (text) {
-                  controller.passwordFieldChanged();
-                },
-          enabled: enabled,
-          obscureText: isEmail ? false : controller.hidePassword,
-          style: TextStyle(
-              fontSize: Sizing.fontSize * 5.6,
-              color: Colors.white,
-              fontWeight: FontWeight.w600),
-          key: textFieldKey,
+                        color: iconColor,
+                      ),
+                      onTap: () {
+                        textController.clear();
+                        controller.emailFieldChanged();
+                      },
+                    )
+                  : const Icon(
+                      Icons.clear,
+                      color: Colors.transparent,
+                    )
+              : InkWell(
+                  child: Icon(
+                    controller.hidePassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: iconColor,
+                  ),
+                  onTap: () {
+                    controller.viewHidePassword();
+                  }),
+          enabledBorder: isEmail
+              ? UnderlineInputBorder(
+                  borderSide: BorderSide(color: underlineColor))
+              : InputBorder.none,
+          focusedBorder: isEmail
+              ? UnderlineInputBorder(
+                  borderSide: BorderSide(color: underlineColor))
+              : InputBorder.none,
         ),
+        controller: textController,
+        onChanged: isEmail
+            ? (text) {
+                controller.emailFieldChanged();
+              }
+            : (text) {
+                controller.passwordFieldChanged();
+              },
+        enabled: enabled,
+        obscureText: isEmail ? false : controller.hidePassword,
+        style: TextStyle(
+            fontSize: Sizing.fontSize * 5.6,
+            color: Colors.white,
+            fontWeight: FontWeight.w600),
       ),
       width: Sizing.blockSize * 80,
     );

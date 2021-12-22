@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../backend_uris.dart';
@@ -27,8 +28,8 @@ class ModelEmailPasswordNameAfterSignup {
       },
     );
     var errors = [];
-    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
 
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
     // Check response for errors
     if (response.statusCode != CMPLRService.insertSuccess) {
       // Error should be a map with at most? 3 keys:
@@ -44,7 +45,12 @@ class ModelEmailPasswordNameAfterSignup {
       // FIXME: Check for this later on
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
-    } else
+    } else {
+      GetStorage().write('blog_name', responseMap['blog_name']);
+      GetStorage().write('avatar', responseMap['avatar]']);
+      GetStorage().write('token', responseMap['token']);
+      GetStorage().write('user', responseMap['user']);
       return [];
+    }
   }
 }

@@ -28,7 +28,7 @@ class LoginEmailPassword extends StatelessWidget {
                   width: Sizing.blockSize,
                 ),
                 Text(
-                  't',
+                  'c',
                   style: TextStyle(
                       fontSize: Sizing.fontSize * 16.25,
                       color: Colors.white,
@@ -83,13 +83,13 @@ class LoginEmailPassword extends StatelessWidget {
                           isEmail: true,
                           iconColor: Colors.grey,
                         ),
-                        SizedBox(height: Sizing.blockSizeVertical * 1.5),
+                        SizedBox(height: Sizing.blockSizeVertical * 0.5),
                         LoginTextField(
                           textFieldKey:
                               const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
-                          focus: true,
+                          focus: false,
                           enabled: true,
                           underlineColor: Colors.grey,
                           isEmail: false,
