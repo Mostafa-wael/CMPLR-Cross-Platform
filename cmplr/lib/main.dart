@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'controllers/controllers.dart';
 import 'models/models.dart';
 
@@ -13,6 +15,14 @@ import 'views/views.dart';
 import './routes.dart';
 
 // import 'package:flutter_driver/driver_extension.dart';
+
+class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
+}
 
 Future<void> main() async {
   await PersistentStorage.initStorage();
@@ -38,6 +48,7 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
     return GetMaterialApp(
+      scrollBehavior: MouseAndTourchScrollBehaviour(),
       debugShowCheckedModeBanner: false,
       home: PersistentStorage.isLoggedIn ?? false
           ? const MasterPage() /*const MasterPage()*/

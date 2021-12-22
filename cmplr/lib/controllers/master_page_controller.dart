@@ -1,3 +1,5 @@
+import '../views/home_tab/explore_screen.dart';
+
 import '../views/views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +15,7 @@ class MasterPageController extends GetxController {
   /// List of pages to view, corresponds to the bottom buttons.
   List<Widget> pages = [
     const HomeScreen(),
-    const Center(child: Text('Search')),
+    const ExploreScreen(),
     const SignupMailName(),
     const SignupMailName(),
   ];
