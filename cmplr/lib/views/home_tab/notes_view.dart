@@ -12,48 +12,7 @@ import '../../models/models.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
-
-// This preserves the scroll state of the list view,
-// It is used due to this issue in Getx: https://github.com/jonataslaw/getx/issues/822
-class KeepAliveWrapper extends StatefulWidget {
-  final Widget child;
-
-  const KeepAliveWrapper({Key? key, required this.child}) : super(key: key);
-
-  @override
-  __KeepAliveWrapperState createState() => __KeepAliveWrapperState();
-}
-
-class __KeepAliveWrapperState extends State<KeepAliveWrapper>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return widget.child;
-  }
-
-  @override
-  bool get wantKeepAlive => true;
-}
-
-class RefreshWidget extends StatefulWidget {
-  final Widget child;
-  final Future Function() onRefresh;
-  const RefreshWidget({
-    Key? key,
-    required this.onRefresh,
-    required this.child,
-  }) : super(key: key);
-  @override
-  _RefreshWidgetState createState() => _RefreshWidgetState();
-}
-
-class _RefreshWidgetState extends State<RefreshWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return RefreshIndicator(child: widget.child, onRefresh: widget.onRefresh);
-  }
-}
+import '../../utilities/custom_widgets/custom_widgets.dart';
 
 class Notes extends StatelessWidget {
   Notes({Key? key}) : super(key: key);
@@ -538,7 +497,10 @@ class Notes extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.more_horiz,
                     color: Theme.of(context).primaryColor),
-                onPressed: () {},
+                onPressed: () {
+                  getReblogsWithCommentsModalSheet(
+                      context, note.blogName, note.postReply);
+                },
               )
             ],
           ),
@@ -950,6 +912,49 @@ class Notes extends StatelessWidget {
                       ],
                     ),
                   ));
+        });
+  }
+
+  Future<void> getReblogsWithCommentsModalSheet(
+      BuildContext context, String blogName, String comment) {
+    return showModalBottomSheet(
+        constraints: BoxConstraints(maxHeight: Sizing.blockSizeVertical * 30),
+        context: context,
+        builder: (BuildContext context) {
+          // Change this later
+          if (blogName == 'current-user') {
+            return GetBuilder<NotesController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Reblog', () {
+                          print('reblog');
+                        }),
+                        buildModalSheetTile('View Post', () {
+                          print('view post');
+                        }),
+                      ],
+                    ));
+          } else {
+            return GetBuilder<NotesController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Reblog', () {
+                          print('reblog');
+                        }),
+                        buildModalSheetTile('View Post', () {
+                          print('view post');
+                        }),
+                        buildModalSheetTile('Report', () {
+                          print('Report');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Block ' + blogName, () {
+                          print('Block');
+                          Get.back();
+                        }),
+                      ],
+                    ));
+          }
         });
   }
 }
