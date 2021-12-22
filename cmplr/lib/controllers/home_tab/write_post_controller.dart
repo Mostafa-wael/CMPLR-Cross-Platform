@@ -130,6 +130,10 @@ class WritePostController extends GetxController {
       );
   }
 
+  void setPost(PostItem postItem) {
+    post = postItem;
+  }
+
   bool get bold => _bold;
 
   bool get italic => _italic;

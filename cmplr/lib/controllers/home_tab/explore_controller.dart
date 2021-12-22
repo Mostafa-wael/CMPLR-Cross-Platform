@@ -171,19 +171,16 @@ class ExploreController extends GetxController {
       final ttpList = <Widget>[];
       var index = 0;
 
+      // TODO: ONE gesture detector for the whole grid
       for (final ttp in tryThesePostsMockData) {
-        ttpList.add(GestureDetector(
-          child: FadeInImage.assetNetwork(
+        ttpList.add(
+          FadeInImage.assetNetwork(
             placeholder:
                 placeHolders[math.Random().nextInt(placeHolders.length)],
             image: tryThesePostsMockData[index++],
             fit: BoxFit.cover,
           ),
-          onTap: () {
-            // TODO: Go to 'recommended for you'
-            dev.log('Try these posts element tapped');
-          },
-        ));
+        );
       }
       return ttpList;
     } else

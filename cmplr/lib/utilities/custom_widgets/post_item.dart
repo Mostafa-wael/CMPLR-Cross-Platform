@@ -143,8 +143,7 @@ class PostItem extends StatelessWidget {
             textStyle: TextStyle(fontSize: Sizing.fontSize * 3.8),
           ),
           onPressed: () {
-            controller.openNotes(numNotes);
-            print('Notes clicked');
+            controller.openNotes(this);
           },
           child: Text('${numNotes} notes',
               style: const TextStyle(
@@ -256,7 +255,7 @@ class PostItem extends StatelessWidget {
               icon: Icon(CustomIcons.comment,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
-                controller.openNotes(numNotes);
+                controller.openNotes(this);
                 print('Notes clicked');
               },
             ),

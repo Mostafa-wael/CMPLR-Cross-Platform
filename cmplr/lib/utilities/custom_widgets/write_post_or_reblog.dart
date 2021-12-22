@@ -48,7 +48,7 @@ class WritePostOrReblog extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: IconButton(
-                  //TODO: Make the color according to theme
+                  //TODO: Make the color according to thetme
                   color: Colors.white,
                   onPressed: () {
                     roundedModalSheet(

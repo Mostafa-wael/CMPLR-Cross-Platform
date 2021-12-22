@@ -1,3 +1,4 @@
+import 'reblog_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -563,7 +564,9 @@ class Notes extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    print('Reblog button pressed');
+                    final reblogCont = Get.find<ReblogController>();
+
+                    Get.to(const ReblogView());
                   },
                   child: Container(
                       height: Sizing.blockSizeVertical * 6.75,

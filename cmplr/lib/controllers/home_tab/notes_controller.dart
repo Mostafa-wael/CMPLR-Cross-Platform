@@ -1,3 +1,4 @@
+import '../../utilities/custom_widgets/custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,6 +49,8 @@ class NotesController extends GetxController
 
   RxBool get reblogsWithComments => _reblogsWithComments;
 
+  PostItem? postItem;
+
   @override
   void onInit() {
     _tabController = TabController(length: 3, vsync: this);
@@ -65,6 +68,7 @@ class NotesController extends GetxController
           : _focusCommentTextField.value = false;
     });
 
+    postItem = Get.arguments();
     super.onInit();
   }
 
