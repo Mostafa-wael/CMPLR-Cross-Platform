@@ -116,7 +116,7 @@ class SignupPreferences extends StatelessWidget {
             body: Column(children: [
               Container(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: Sizing.blockSizeVertical * 20,
                 // TODO: HARDCODED
                 color: const Color(0xFF001A35),
                 padding: EdgeInsets.fromLTRB(Sizing.blockSize * 3.5,
@@ -138,7 +138,7 @@ class SignupPreferences extends StatelessWidget {
                       'your dashboard with the things you love.',
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
-                          fontSize: Sizing.blockSize * 4.55),
+                          fontSize: Sizing.fontSize * 4.55),
                     ),
                   ],
                 ),

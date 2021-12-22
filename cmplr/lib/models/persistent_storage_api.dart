@@ -6,7 +6,8 @@ class PersistentStorage {
 
   static bool? get isLoggedIn => GetStorage().read('logged_in');
 
-  static Future<bool> initStorage() async => GetStorage.init();
+  static Future<bool> initStorage({String container = 'GetStorage'}) async =>
+      GetStorage.init();
 
   static Future<void> clearStorage() async => GetStorage().erase();
 }

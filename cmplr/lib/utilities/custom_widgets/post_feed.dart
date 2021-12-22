@@ -1,62 +1,106 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:getwidget/getwidget.dart';
+
 import '../../controllers/controllers.dart';
 
 /// This widget represents the post feed with all its data
-class PostFeed extends StatefulWidget {
-  const PostFeed({
+class PostFeed extends StatelessWidget {
+  PostFeed({
     Key? key,
   }) : super(key: key);
-  @override
-  _PostFeedState createState() => _PostFeedState();
-}
 
-class _PostFeedState extends State<PostFeed> {
-  final _scrollController = ScrollController();
-  var controller = Get.put(PostFeedController());
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Setup the listener to indicate if we reached the top of the page.
-    _scrollController.addListener(() {
-      if (_scrollController.position.atEdge) {
-        if (_scrollController.position.pixels == 0) {
-          print("You're at the bottom, do nothing");
-        } else {
-          print("You're at the top, get new feeds");
-          controller.updatePosts();
-        }
-      }
-    });
-  }
+  final controller = Get.put(PostFeedController());
 
   @override
   Widget build(BuildContext context) {
-    controller.initialPosts();
     return GetBuilder<PostFeedController>(
-        // USe satck to be able to add the laod indicator on the top of the page
-        builder: (controller) => Stack(children: [
-              controller.isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : const SizedBox(
-                      width: 0,
-                      height: 0,
-                    ),
-              ListView.builder(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(8),
-                  reverse: true, // so that the new posts are added on the top
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: controller.posts.length,
-                  itemBuilder: (context, index) {
-                    return controller.posts[index];
-                  }),
-            ]));
+        init: PostFeedController(), builder: (controller) => getBody(context));
   }
+
+  Widget getBody(BuildContext context) {
+    if (!controller.dataReloaded) {
+      return FutureBuilder(
+          future: controller.model.getNewPosts(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              controller.posts = snapshot.data ?? [];
+              print('view');
+              print(controller.posts.length);
+              return buildMainView(controller);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.purple,
+                ),
+              );
+            }
+          });
+    } else {
+      return buildMainView(controller);
+    }
+  }
+}
+////////////////////////////////////////////////////////////////
+
+// This preserves the scroll state of the list view,
+// It is used due to this issue in Getx: https://github.com/jonataslaw/getx/issues/822
+class KeepAliveWrapper extends StatefulWidget {
+  final Widget child;
+  const KeepAliveWrapper({Key? key, required this.child}) : super(key: key);
+  @override
+  __KeepAliveWrapperState createState() => __KeepAliveWrapperState();
+}
+
+class __KeepAliveWrapperState extends State<KeepAliveWrapper>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return widget.child;
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+class RefreshWidget extends StatefulWidget {
+  final Widget child;
+  final Future Function() onRefresh;
+  const RefreshWidget({
+    Key? key,
+    required this.onRefresh,
+    required this.child,
+  }) : super(key: key);
+  @override
+  _RefreshWidgetState createState() => _RefreshWidgetState();
+}
+
+class _RefreshWidgetState extends State<RefreshWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(child: widget.child, onRefresh: widget.onRefresh);
+  }
+}
+
+Widget buildMainView(PostFeedController controller) {
+  return KeepAliveWrapper(
+    child: RefreshWidget(
+      onRefresh: () {
+        return controller.updatePosts();
+      },
+      child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          physics: const ClampingScrollPhysics(),
+          itemCount: controller.posts.length,
+          itemBuilder: (context, index) {
+            return controller.posts[index];
+          }),
+    ),
+  );
 }

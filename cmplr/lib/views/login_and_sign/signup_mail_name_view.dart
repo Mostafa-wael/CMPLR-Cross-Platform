@@ -240,7 +240,10 @@ class SignupMailName extends StatelessWidget {
                 const SizedBox(
                   height: 32,
                 ),
-                _getBottomColumn(context, controller)
+                Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: _getBottomColumn(context, controller),
+                )
               ],
             ),
           );

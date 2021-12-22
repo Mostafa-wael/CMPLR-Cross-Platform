@@ -38,6 +38,7 @@ class LoginEmailSplash extends StatelessWidget {
                             underlineColor: Colors.grey,
                             isEmail: true,
                             iconColor: Colors.grey,
+                            textFieldKey: const ValueKey('Spash_getEmail'),
                           ),
                           SizedBox(height: Sizing.blockSizeVertical * 1.5),
                           Opacity(

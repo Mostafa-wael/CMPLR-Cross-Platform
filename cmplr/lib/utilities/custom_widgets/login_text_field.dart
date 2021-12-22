@@ -11,6 +11,7 @@ class LoginTextField extends StatelessWidget {
   final isEmail;
   final focus;
   final iconColor;
+  final textFieldKey;
 
   const LoginTextField({
     this.underlineDistance = 1.0,
@@ -22,6 +23,7 @@ class LoginTextField extends StatelessWidget {
     required this.underlineColor,
     required this.isEmail,
     required this.iconColor,
+    required this.textFieldKey,
     Key? key,
   }) : super(key: key);
 

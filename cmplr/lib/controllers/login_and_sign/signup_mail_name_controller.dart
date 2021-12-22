@@ -24,7 +24,15 @@ class EmailPasswordNameAfterSignupController extends GetxController {
   bool _fieldsFilled = false;
   static const _loginURL = Routes.login;
 
-  List? errors;
+  List errors = [];
+
+  String getErrors() {
+    final errorString = StringBuffer();
+    for (final error in errors) {
+      errorString.writeln(error);
+    }
+    return errorString.toString();
+  }
 
   Widget getDoneButton(context) {
     if (_fieldsFilled)
@@ -86,7 +94,7 @@ class EmailPasswordNameAfterSignupController extends GetxController {
 
     // (Tarek) TODO:
     // Go to login page
-    Get.offAllNamed(_loginURL);
+    Get.offAllNamed(Routes.signupOrLoginScreen);
   }
 
   /// After the extra signup, routes the user to the page they were originally

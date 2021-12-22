@@ -58,22 +58,23 @@ class LoginEmailPassword extends StatelessWidget {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(height: Sizing.blockSizeVertical * 16.5),
                   Center(
                     child: Column(
                       children: [
-                        SizedBox(height: Sizing.blockSizeVertical * 15),
-                        // Padding(
-                        //   padding:
-                        //       EdgeInsets.all(Sizing.blockSizeVertical * 0.5),
-                        //   child: Text(
-                        //     controller.errors.isEmpty
-                        //         ? ''
-                        //         : getErrors(controller.errors),
-                        //     style: const TextStyle(color: Colors.red),
-                        //   ),
-                        // ),
+                        Padding(
+                          padding:
+                              EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
+                          child: Text(
+                            controller.errors.isEmpty
+                                ? ''
+                                : getErrors(controller.errors),
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getEmail'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
                           text: 'email',
                           focus: false,
@@ -84,7 +85,8 @@ class LoginEmailPassword extends StatelessWidget {
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 0.5),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getPassword'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
                           focus: false,
@@ -101,21 +103,23 @@ class LoginEmailPassword extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Sizing.blockSizeVertical * 20),
-                  // Padding(
-                  //   padding: EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
-                  //   child: Text(
-                  //     controller.errors.isEmpty
-                  //         ? ''
-                  //         : getErrors(controller.errors),
-                  //     style: const TextStyle(color: Colors.red),
-                  //   ),
-                  // ),
+                  SizedBox(height: Sizing.blockSizeVertical * 25),
                   Center(
                     child: Column(
                       children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.all(Sizing.blockSizeVertical * 1.2),
+                          child: Text(
+                            controller.errors.isEmpty
+                                ? ''
+                                : getErrors(controller.errors),
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getEmail'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getEmail'),
                           controller: controller,
                           text: 'email',
                           focus: false,
@@ -126,7 +130,8 @@ class LoginEmailPassword extends StatelessWidget {
                         ),
                         SizedBox(height: Sizing.blockSizeVertical * 1.5),
                         LoginTextField(
-                          key: const ValueKey('getEmailPassword_getPassword'),
+                          textFieldKey:
+                              const ValueKey('getEmailPassword_getPassword'),
                           controller: controller,
                           text: 'password',
                           focus: true,
@@ -139,8 +144,7 @@ class LoginEmailPassword extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(
-                      child: Align(
+                  Align(
                     alignment: FractionalOffset.bottomCenter,
                     child: GestureDetector(
                       child: Text(
@@ -155,9 +159,6 @@ class LoginEmailPassword extends StatelessWidget {
                         controller.forgotPassword();
                       },
                     ),
-                  )),
-                  SizedBox(
-                    height: Sizing.blockSizeVertical,
                   )
                 ],
               ),

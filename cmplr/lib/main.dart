@@ -56,9 +56,7 @@ class CMPLR extends StatelessWidget {
       GetPage(name: Routes.writePost, page: () => const WritePost()),
       GetPage(name: Routes.reblog, page: () => const ReblogView()),
       GetPage(name: Routes.notes, page: () => Notes()),
-      GetPage(
-          name: Routes.homeFollowingTab,
-          page: () => const HomeFollowingScreen()),
+      GetPage(name: Routes.homeFollowingTab, page: () => const HomeFollowing()),
     ];
   }
 }

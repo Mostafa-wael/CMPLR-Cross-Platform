@@ -8,10 +8,10 @@ bool validateEmail(String email) {
   return !email.isEmpty && email.isEmail;
 }
 
-String getErrors(List? errors) {
-  final errorString = StringBuffer();
-  for (final error in errors ?? []) {
-    errorString.writeln(error);
+String getErrors(List errors) {
+  final buff = StringBuffer();
+  for (final error in errors) {
+    buff.writeln(error);
   }
-  return errorString.toString();
+  return buff.toString();
 }

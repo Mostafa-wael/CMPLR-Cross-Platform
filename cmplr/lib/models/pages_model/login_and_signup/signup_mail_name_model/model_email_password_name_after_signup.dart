@@ -26,9 +26,25 @@ class ModelEmailPasswordNameAfterSignup {
         'age': GetStorage().read('age') ?? 12,
       },
     );
+    var errors = [];
 
     final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
     // Check response for errors
-    return responseMap.containsKey('error') ? responseMap['error'] : [];
+    if (response.statusCode != CMPLRService.insertSuccess) {
+      // Error should be a map with at most? 3 keys:
+      // blog_name, email, and password
+      // Each should point to an array of errors, we concatenate them here.
+      if (responseMap.containsKey('error')) {
+        final errorMap = responseMap['error'];
+        for (final key in errorMap.keys) {
+          errors += errorMap[key];
+        }
+      }
+
+      // FIXME: Check for this later on
+      if (errors.isEmpty) errors.add('Internal server error');
+      return errors;
+    } else
+      return [];
   }
 }
