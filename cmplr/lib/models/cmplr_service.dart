@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+import 'package:get_storage/get_storage.dart';
+
 import '../backend_uris.dart';
 
 import '../flags.dart';
@@ -148,28 +151,22 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  static const Map<String, String> postHeader = {
-    'Content-Type': 'application/json; charset=UTF-8',
-    'Accept': 'application/json',
-    //  TODO add authorization header
-  };
-
-  // getHeader = postHeader for now until we find a reason to split them
-  static const Map<String, String> getHeader = postHeader;
-
-  static const String apiIp = 'http://13.68.206.72/api';
+  // static const String apiIp = 'http://13.68.206.72/api';
+  static const String apiIp = 'http://b339-41-46-128-184.ngrok.io/api';
   // static const String apiIp = 'http://be0b-156-215-2-141.ngrok.io/api';
 
-  static const Map<String, String> postHeader = {
+  static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
+
+    // TODO: Change this to the logged user's token
+    'Authorization':
+        // ignore: lines_longer_than_80_chars
+        'Bearer ${GetStorage().read('token')}'
     //  TODO add authorization header
   };
-
   // getHeader = postHeader for now until we find a reason to split them
-  static const Map<String, String> getHeader = postHeader;
-
-  static const String apiIp = 'http://13.68.206.72/api';
+  static final Map<String, String> getHeader = postHeader;
 
   static Future<http.Response> post(String backendURI, Map params) async {
     // Switch case since we might need to send requests with different
@@ -182,6 +179,10 @@ class CMPLRService {
         return login(backendURI, params);
       case PostURIs.askBlog:
         return askBlog(backendURI, params);
+      case PostURIs.post:
+        return createPost(backendURI, params);
+      case PostURIs.reblog:
+        return reblogPost(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -259,7 +260,13 @@ class CMPLRService {
             }),
             unauthenticated);
 
-      return http.Response(jsonEncode({}), requestSuccess);
+      return http.Response(
+          jsonEncode({
+            'user': {
+              'blog_name': 'mock', /* TODO: Add more user data? */
+            },
+          }),
+          requestSuccess);
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),
@@ -342,5 +349,24 @@ class CMPLRService {
       return http.Response(
           jsonEncode(notesMockData['response']), requestSuccess);
     }
+  }
+
+  static Future<http.Response> createPost(String backendURI, Map params) {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
+  }
+
+  static Future<http.Response> reblogPost(String backendURI, Map params) {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else
+      return http.post(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
   }
 }

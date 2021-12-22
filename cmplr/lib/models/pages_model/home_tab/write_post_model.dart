@@ -11,30 +11,27 @@ class WritePostModel {
   // Note that all the parameters mentioned in the API are required
   Future<int?> createPost(
     String content,
-
+    String blogName,
+    String type, // text, photos, video, audio, quotes, chats
     // the state of the post. Specify one of the following:
     // published, draft, queue, private
     String state,
-    String publishOn,
 
     // Comma-separated tags for this post
-    String tags,
-    String date,
-    bool isPrivate,
+    List<String> tags,
   ) async {
     final response = await CMPLRService.post(PostURIs.post, {
       'content': content,
+      'type': type,
+      'blog_name': blogName,
       'state': state,
-      'publish_on': publishOn,
       'tags': tags,
-      'date': date,
-      'is_private': isPrivate,
     });
 
     // TODO: Check if the response decodes successfully
     if (response.statusCode == CMPLRService.insertSuccess) {
-      final responseBody = jsonDecode(response.body);
-      return responseBody['id'];
+      final responseBody = jsonDecode(response.body)['response'];
+      return responseBody['post_id'];
     } else
       return null;
   }

@@ -26,8 +26,9 @@ dependencies:
   firebase_core:
   firebase_auth: ^3.3.3
   share_plus:
-
-
+  html_editor_enhanced: ^2.4.0+1  
+  file_picker:
+  
   # Original package is old and has dependency issues
   # Using fork for now
   # flutter_link_preview:

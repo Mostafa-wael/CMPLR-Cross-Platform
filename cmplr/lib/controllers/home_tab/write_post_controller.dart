@@ -1,3 +1,6 @@
+import 'package:get_storage/get_storage.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
+
 import '../../models/cmplr_service.dart';
 
 import '../../utilities/sizing/sizing.dart';
@@ -16,9 +19,8 @@ import 'package:http/http.dart' as http;
 
 class PostOptions {
   // postNow
-  static const postNow = 'published';
-  // schedule
-  static const String schedule = 'scheduled';
+  static const postNow = 'publish';
+
   // saveAsDraft
   static const String saveAsDraft = 'draft';
   // postPrivately
@@ -30,12 +32,8 @@ class PostOptions {
 }
 
 class WritePostController extends GetxController {
+  HtmlEditorController editorController = HtmlEditorController();
   String _currentPostOption = PostOptions.postNow;
-
-  String _date = '';
-  DateTime _dateTime = DateTime.now();
-  TimeOfDay _timeOfDay = TimeOfDay.now();
-  final _currentDate = DateTime.now();
 
   bool _bold = false;
   bool _italic = false;
@@ -88,6 +86,9 @@ class WritePostController extends GetxController {
 
   Color get currentColor => allColors[_currentColor];
 
+  double get postHeight => post != null ? Sizing.blockSizeVertical * 27 : 0;
+  double get editorHeight => Sizing.blockSizeVertical * 82 - postHeight;
+
   void changeColor(int colorIndex) {
     _currentColor = colorIndex;
     update();
@@ -114,7 +115,7 @@ class WritePostController extends GetxController {
       return Text(
         'Reblog',
         style: TextStyle(
-          fontSize: Sizing.fontSize * 4.2,
+          fontSize: Sizing.fontSize * 3.5,
           fontWeight: FontWeight.w400,
         ),
       );
@@ -123,7 +124,7 @@ class WritePostController extends GetxController {
       return Text(
         'Post',
         style: TextStyle(
-          fontSize: Sizing.fontSize * 4.2,
+          fontSize: Sizing.fontSize * 3.5,
           fontWeight: FontWeight.w400,
         ),
       );
@@ -137,51 +138,8 @@ class WritePostController extends GetxController {
 
   String get currentPostOption => _currentPostOption;
 
-  String get date => _date;
-
   WritePostController(this._model) {
     initializeDateFormatting();
-    final date_1 = DateFormat.MMMEd().format(_dateTime);
-    final date_2 = DateFormat.jm().format(_dateTime);
-    _date = '${date_1}at ${date_2}';
-  }
-
-  Future<void> setDateTime(BuildContext context) async {
-    final picked = await showDatePicker(
-        context: context,
-        initialDate: _dateTime,
-        firstDate: _currentDate,
-        lastDate: DateTime(2101));
-    if (picked != null && picked != _dateTime) {
-      _dateTime = picked;
-      final date_1 = DateFormat.MMMEd().format(_dateTime);
-      _date = '${date_1} at ${_date.split('at')[1]}';
-      update();
-    }
-  }
-
-  // FIXME: This breaks if the day is is newer but the time is older
-  // Dec 10, 16:50 VS Dec 17, 13:00 gives an error
-  Future<void> setTimeOfDay(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: _timeOfDay,
-    );
-    if (picked != null && picked != _timeOfDay) {
-      if (picked.hour < TimeOfDay.fromDateTime(_currentDate).hour ||
-          (picked.hour == TimeOfDay.fromDateTime(_currentDate).hour &&
-              picked.minute < TimeOfDay.fromDateTime(_currentDate).minute)) {
-        _showToast('Nice try, but you can\'t post from the past.');
-      } else {
-        _timeOfDay = picked;
-        final hour =
-            _timeOfDay.hour >= 12 ? _timeOfDay.hour - 12 : _timeOfDay.hour;
-        final am = _timeOfDay.hour >= 12 ? 'PM' : 'AM';
-        final date_2 = '${hour}:${_timeOfDay.minute}${am}';
-        _date = '${_date.split('at')[0]}at ${date_2}';
-        update();
-      }
-    }
   }
 
   bool isActivated(String option) {
@@ -218,17 +176,22 @@ class WritePostController extends GetxController {
 
   // TODO: Show the created or reblogged post somewhere?
   Future<bool> postOrReblog() async {
-    final postText = prepareText();
+    final postText = await editorController.getText();
+
+    // TODO: get the real blog name
+    final blogName = GetStorage().read('blog_name') ?? 'tarek';
+    const type = 'text';
+    const tags = ['test_tag', 'other_test_tag'];
 
     final http.Response response;
     if (_model is WritePostModel)
       response = await _model.createPost(
-          postText,
-          _currentPostOption,
-          _date,
-          '',
-          DateTime.now().toString(),
-          _currentPostOption == PostOptions.postPrivately);
+        postText,
+        blogName,
+        type,
+        _currentPostOption,
+        tags,
+      );
     else if (_model is ReblogModel)
       response = await _model.reblogPost(
         post?.postID,

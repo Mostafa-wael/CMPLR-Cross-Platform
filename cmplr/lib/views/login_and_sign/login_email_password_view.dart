@@ -28,7 +28,7 @@ class LoginEmailPassword extends StatelessWidget {
                   width: Sizing.blockSize,
                 ),
                 Text(
-                  't',
+                  'c',
                   style: TextStyle(
                       fontSize: Sizing.fontSize * 16.25,
                       color: Colors.white,
