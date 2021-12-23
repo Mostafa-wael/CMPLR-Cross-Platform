@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../../utilities/user.dart';
 import '../../../../backend_uris.dart';
 import '../../../../utilities/functions.dart';
 import '../../../cmplr_service.dart';
@@ -46,10 +45,12 @@ class ModelEmailPasswordNameAfterSignup {
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
     } else {
-      GetStorage().write('blog_name', responseMap['blog_name']);
-      GetStorage().write('avatar', responseMap['avatar]']);
-      GetStorage().write('token', responseMap['token']);
-      GetStorage().write('user', responseMap['user']);
+      User.storeUserData(
+        responseMap['blog_name'],
+        responseMap['avatar'],
+        responseMap['token'],
+        responseMap['user'],
+      );
       return [];
     }
   }

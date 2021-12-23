@@ -1,17 +1,23 @@
+import 'package:get_storage/get_storage.dart';
+import '../home_tab/write_post_controller.dart';
+import '../../views/home_tab/write_post_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/models.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_ticket_provider_mixin.dart';
+import 'package:share_plus/share_plus.dart';
+import '../../utilities/functions.dart' as cmplr_fn;
 
 class HashtagPostsController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  TabController? _tabController;
-
+  late RxBool hashtagFollowed;
   bool dataReloaded = false;
 
-  late RxBool hashtagFollowed;
-
+  TabController? _tabController;
   TabController? get tabController => _tabController;
+
+  String tagName;
+
+  HashtagPostsController(this.tagName) {}
 
   @override
   void onInit() {
@@ -29,5 +35,26 @@ class HashtagPostsController extends GetxController
     //notes = await notesModel.getNotes();
     dataReloaded = true;
     update();
+  }
+
+  Future<void> share(BuildContext context, tagURL) async {
+    await Share.share(tagURL);
+    update();
+  }
+
+  void writePostWithTag() {
+    final writePostController = Get.find<WritePostController>();
+    writePostController.tags = [tagName];
+    Get.to(const WritePost());
+  }
+
+  void showShareMenu(context) {
+    cmplr_fn.showShareMenu(
+      context,
+      () {
+        // TODO: share tag url
+        share(context, 'FIXME:');
+      },
+    );
   }
 }

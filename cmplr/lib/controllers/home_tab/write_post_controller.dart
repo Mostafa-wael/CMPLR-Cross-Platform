@@ -1,19 +1,13 @@
+import '../../models/cmplr_service.dart';
+import '../../utilities/sizing/sizing.dart';
+import '../../models/models.dart';
+import '../../utilities/custom_widgets/custom_widgets.dart';
+
 import 'package:get_storage/get_storage.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-
-import '../../models/cmplr_service.dart';
-
-import '../../utilities/sizing/sizing.dart';
-
-import '../../models/models.dart';
-// import 'package:metadata_fetch/metadata_fetch.dart';
-
-import '../../utilities/custom_widgets/custom_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
 
@@ -178,6 +172,8 @@ class WritePostController extends GetxController {
   //   update();
   // }
 
+  List<String> tags = [];
+
   // TODO: Show the created or reblogged post somewhere?
   Future<bool> postOrReblog() async {
     final postText = await editorController.getText();
@@ -185,7 +181,6 @@ class WritePostController extends GetxController {
     // TODO: get the real blog name
     final blogName = GetStorage().read('blog_name') ?? 'tarek';
     const type = 'text';
-    const tags = ['test_tag', 'other_test_tag'];
 
     final http.Response response;
     if (_model is WritePostModel)

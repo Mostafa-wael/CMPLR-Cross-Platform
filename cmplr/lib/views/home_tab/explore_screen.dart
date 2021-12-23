@@ -156,13 +156,20 @@ class ExploreScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GridView.count(
-                        padding: EdgeInsets.zero,
-                        primary: false,
-                        shrinkWrap: true,
-                        crossAxisCount: 3,
-                        semanticChildCount: 9,
-                        children: controller.getTryThesePostsGrid()),
+                    GestureDetector(
+                      child: ClipRRect(
+                        borderRadius:
+                            BorderRadius.circular(Sizing.blockSize * 2),
+                        child: GridView.count(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            crossAxisCount: 3,
+                            semanticChildCount: 9,
+                            children: controller.getTryThesePostsGrid()),
+                      ),
+                      onTap: controller.goToTryThesePosts,
+                    ),
                     Column(
                       children: [
                         Padding(

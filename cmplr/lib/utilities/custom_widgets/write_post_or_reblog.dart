@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-import 'package:file_picker/file_picker.dart';
-
-import '../../models/models.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-
 import 'custom_widgets.dart';
-
 import '../../controllers/controllers.dart';
 import 'post_sched_menu.dart';
 import '../sizing/sizing.dart';
+
+import 'package:html_editor_enhanced/html_editor.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,27 +57,10 @@ class WritePostOrReblog extends StatelessWidget {
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(Sizing.blockSizeVertical * 4),
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: Sizing.blockSizeVertical,
-                  horizontal: Sizing.blockSize * 4),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // (Tarek) TODO: Get the user's image and name
-                  // Can be cached on login
-                  CircleAvatar(
-                    backgroundImage: AssetImage(controller.userAvatar),
-                    radius: Sizing.blockSizeVertical * 2.5,
-                  ),
-                  SizedBox(width: Sizing.blockSize * 2),
-                  Text(controller.userName,
-                      style: TextStyle(
-                          fontSize: Sizing.fontSize * 4.2,
-                          fontWeight: FontWeight.bold))
-                ],
-              ),
-            ),
+                padding: EdgeInsets.symmetric(
+                    vertical: Sizing.blockSizeVertical,
+                    horizontal: Sizing.blockSize * 4),
+                child: UserNameAvatar()),
           ),
           backgroundColor: Colors.transparent,
         ),

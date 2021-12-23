@@ -1,11 +1,12 @@
+import '../controllers.dart';
+import '../../views/home_tab/reblog_screen.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import 'package:flutter/cupertino.dart';
+import '../../models/models.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import '../../models/models.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_ticket_provider_mixin.dart';
 
 class NotesController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -68,7 +69,7 @@ class NotesController extends GetxController
           : _focusCommentTextField.value = false;
     });
 
-    postItem = Get.arguments();
+    postItem = Get.arguments;
     super.onInit();
   }
 
@@ -159,5 +160,12 @@ class NotesController extends GetxController
 
   void closeNotesScreen() {
     Get.back();
+  }
+
+  void reblogFromNotes() {
+    // ignore: omit_local_variable_types
+    final ReblogController reblogController = Get.find<ReblogController>();
+    reblogController.setPost(postItem!);
+    Get.to(const ReblogView());
   }
 }
