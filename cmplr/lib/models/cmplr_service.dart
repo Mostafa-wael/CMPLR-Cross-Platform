@@ -85,60 +85,33 @@ class CMPLRService {
       ]
     },
     GetURIs.postFollow: {
+      'meta': {'status_code': 200, 'msg': 'Success'},
       'response': {
-        'total_posts': 3,
+        'total_posts': 1,
         'posts': [
           {
-            'name': 'Mostafa',
-            'postID': '1231465396890',
-            'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
-            'profilePhoto': 'lib/utilities/assets/intro_screen/intro_4.jpg',
-            'postData': '''
+            'post': {
+              'post_id': '1231465396890',
+              'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
+              'content': '''
                   <div> hiiiiiii
                   <h1>This is the first post with a photo</h1> 
                   <img src="https://raw.githubusercontent.com/onimur/.github/master/.resources/git-header.svg">
                   </div>
                   ''',
-            'numNotes': 200,
-            'showBottomBar': true,
-            'hashtags': [
-              'Gamadan',
-              'Roaan',
-              'Hiiii',
-            ],
-            'is_liked': 'true'
-          },
-          {
-            'name': 'Kamal',
-            'postID': '1231465396890',
-            'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
-            'profilePhoto': 'lib/utilities/assets/intro_screen/intro_4.jpg',
-            'postData': '''
-                  <h1>A third post</h1> 
-                  <img src="https://avatars.githubusercontent.com/u/56788883?v=4">
-                  <img src="https://user-images.githubusercontent.com/5713670/87202985-820dcb80-c2b6-11ea-9f56-7ec461c497c3.gif">
-                  ''',
-            'numNotes': 250,
-            'showBottomBar': true,
-            'hashtags': [
-              'HAHAHA',
-              'CMPLR',
-              'L2L2L2',
-            ],
-            'is_liked': 'true'
-          },
-          {
-            'name': 'Wael',
-            'postID': '1231465396890',
-            'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
-            'profilePhoto': 'lib/utilities/assets/intro_screen/intro_3.jpg',
-            'postData': '''
-                  <h1>This is the second post</h1> 
-                  ''',
-            'numNotes': 100,
-            'showBottomBar': true,
-            'hashtags': ['3azmaaaaaaaaaaaaaaaaaa', 'Hyhyhy', 'NNNAAANNNAAAA'],
-            'is_liked': 'false'
+              'num_notes': 200,
+              'tags': [
+                'Gamadan',
+                'Roaan',
+                'Hiiii',
+              ],
+              'is_liked': 'true'
+            },
+            'blog': {
+              'blog_name': 'Mostafa Wael',
+              'avatar':
+                  'https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png',
+            }
           }
         ]
       }
@@ -352,11 +325,9 @@ class CMPLRService {
   static Future<http.Response> getPosts(String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
-      print('service');
-      final res = _mockData[GetURIs.postFollow]['response'];
+      final res = await _mockData[GetURIs.postFollow];
       return http.Response(
-          jsonEncode(_mockData[GetURIs.postFollow]['response']),
-          requestSuccess);
+          jsonEncode(res['response']), res['meta']['status_code']);
     } else {
       return http.Response(
           jsonEncode(_mockData[GetURIs.postFollow]['response']),
