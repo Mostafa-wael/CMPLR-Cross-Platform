@@ -117,6 +117,23 @@ class CMPLRService {
         ]
       }
     },
+    GetURIs.recommendedSearchQueries: {
+      'recommended_search_queries': [
+        'Barcelona',
+        'PSG',
+        'Real Madrid',
+        'Atletico Madrid',
+        'Manchester City',
+        'Manchester United',
+        'Chelsea',
+        'Liverpool',
+        'Arsenal',
+        'Borussia Dortmund',
+        'Inter Milan',
+        'Ac Milan',
+        'Juventus'
+      ]
+    },
     // Doesn't use post()
     Routes.signupPreferencesSearchScreen: {
       'popular_searched_topics': [
@@ -368,5 +385,22 @@ class CMPLRService {
     } else
       return http.post(Uri.parse(apiIp + backendURI),
           headers: postHeader, body: jsonEncode(params));
+  }
+
+  static Future<http.Response> getRecommendedSearchQueries(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+
+      return http.Response(
+          jsonEncode(_mockData[GetURIs.recommendedSearchQueries]
+              ['recommended_search_queries']),
+          requestSuccess);
+    } else {
+      return http.Response(
+          jsonEncode(_mockData[GetURIs.recommendedSearchQueries]
+              ['recommended_search_queries']),
+          requestSuccess);
+    }
   }
 }

@@ -10,6 +10,8 @@ import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../views.dart';
+
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({Key? key}) : super(key: key);
 
@@ -45,7 +47,9 @@ class ExploreScreen extends StatelessWidget {
                             const Text('Search CMPLR')
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(const SearchBar());
+                        },
                         // FIXME: Make sure this changes
                         // correctly with theme
                         style: OutlinedButton.styleFrom(
