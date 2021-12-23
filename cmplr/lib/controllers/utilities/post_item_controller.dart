@@ -11,8 +11,8 @@ import 'package:share_plus/share_plus.dart';
 class PostItemController extends GetxController {
   //final _followers = ;
 
-  void openNotes(int numNotes) {
-    Get.toNamed(Routes.notes, arguments: numNotes);
+  void openNotes(PostItem postItem) {
+    Get.toNamed(Routes.notes, arguments: postItem);
   }
 
   void reblog(PostItem postItem) {

@@ -2,18 +2,18 @@ import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 class CheckOutTheseBlogsElement extends StatelessWidget {
-  var width;
-  var height;
-  var borderRadius;
-  var blogName;
-  var blogImgURL;
-  var blogBgURL;
-  var blogURL;
-  var blogImgRadius;
-  var blogImgCenterHeightFactor;
-  var widgetColor;
+  final width;
+  final height;
+  final borderRadius;
+  final blogName;
+  final blogImgURL;
+  final blogBgURL;
+  final blogURL;
+  final blogImgRadius;
+  final blogImgCenterHeightFactor;
+  final widgetColor;
 
-  CheckOutTheseBlogsElement(
+  const CheckOutTheseBlogsElement(
       {required this.width,
       required this.height,
       required this.borderRadius,
