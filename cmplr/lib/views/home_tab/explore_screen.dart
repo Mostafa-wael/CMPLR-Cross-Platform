@@ -10,6 +10,8 @@ import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../views.dart';
+
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({Key? key}) : super(key: key);
 
@@ -46,7 +48,7 @@ class ExploreScreen extends StatelessWidget {
                           ],
                         ),
                         onPressed: () {
-                          controller.search();
+                          Get.to(const SearchBar());
                         },
                         // FIXME: Make sure this changes
                         // correctly with theme
@@ -158,13 +160,20 @@ class ExploreScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GridView.count(
-                        padding: EdgeInsets.zero,
-                        primary: false,
-                        shrinkWrap: true,
-                        crossAxisCount: 3,
-                        semanticChildCount: 9,
-                        children: controller.getTryThesePostsGrid()),
+                    GestureDetector(
+                      child: ClipRRect(
+                        borderRadius:
+                            BorderRadius.circular(Sizing.blockSize * 2),
+                        child: GridView.count(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            crossAxisCount: 3,
+                            semanticChildCount: 9,
+                            children: controller.getTryThesePostsGrid()),
+                      ),
+                      onTap: controller.goToTryThesePosts,
+                    ),
                     Column(
                       children: [
                         Padding(

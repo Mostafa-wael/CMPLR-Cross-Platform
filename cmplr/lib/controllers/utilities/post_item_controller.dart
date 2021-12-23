@@ -1,3 +1,5 @@
+import '../../utilities/user.dart';
+
 import '../../models/models.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -16,8 +18,9 @@ class PostItemController extends GetxController {
   final _shareModel = ShareModel();
 
   bool lovedPost = false;
-  void openNotes(int numNotes) {
-    Get.toNamed(Routes.notes, arguments: numNotes);
+
+  void openNotes(PostItem postItem) {
+    Get.toNamed(Routes.notes, arguments: postItem);
   }
 
   void reblog(PostItem postItem) {
@@ -42,7 +45,9 @@ class PostItemController extends GetxController {
 
   // TODO: Change this to Future<user>
   Future<List> getFollowers() async {
-    return _shareModel.getFollowers(User.userData['id']);
+    // TODO: Fix this
+    return [];
+    //return _shareModel.getFollowers(User.userData['id']);
   }
 
   void openProfile() {

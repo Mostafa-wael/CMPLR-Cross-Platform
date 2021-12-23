@@ -1,4 +1,6 @@
-import '../../views/views.dart';
+import '../../views/home_tab/search_results_view.dart';
+
+import '../../views/utilities/hashtag_posts_view.dart';
 import '../../utilities/custom_widgets/trending_row.dart';
 
 import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
@@ -9,10 +11,7 @@ import '../../flags.dart';
 import 'check_out_these_blogs_element.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:developer';
 import 'dart:math' as math;
-import 'dart:developer' as dev;
-import 'dart:ui';
 
 class ExploreController extends GetxController {
   static const elementWidthPercentage = 30.0;
@@ -49,6 +48,9 @@ class ExploreController extends GetxController {
             backgroundURL: tyf['img_url'],
             text: tyf['tag_name'],
             borderRadius: BorderRadius.circular(Sizing.blockSize),
+            onTap: () {
+              Get.to(const HashtagPosts(), arguments: tyf['tag_name']);
+            },
           ),
         );
       }
@@ -60,7 +62,7 @@ class ExploreController extends GetxController {
 
   List<Widget> getCheckOutTheseTags() {
     if (Flags.mock) {
-      const widthPercentage = 30, heightPercentage = 10, borderRadiusFactor = 1;
+      const widthPercentage = 30, borderRadiusFactor = 1;
       final checkOutTheseTagsList = <Widget>[];
 
       var colorIndex = 0;
@@ -172,24 +174,19 @@ class ExploreController extends GetxController {
   }
 
   List<Widget> getTryThesePostsGrid() {
-    // TODO: Figure out how to round corners
     if (Flags.mock) {
       final ttpList = <Widget>[];
-      var index = 0;
 
+      //
       for (final ttp in tryThesePostsMockData) {
-        ttpList.add(GestureDetector(
-          child: FadeInImage.assetNetwork(
+        ttpList.add(
+          FadeInImage.assetNetwork(
             placeholder:
                 placeHolders[math.Random().nextInt(placeHolders.length)],
-            image: tryThesePostsMockData[index++],
+            image: ttp,
             fit: BoxFit.cover,
           ),
-          onTap: () {
-            // TODO: Go to 'recommended for you'
-            dev.log('Try these posts element tapped');
-          },
-        ));
+        );
       }
       return ttpList;
     } else
@@ -203,11 +200,15 @@ class ExploreController extends GetxController {
       for (final Map twca in thingsWeCareAboutMockData) {
         twcaList.add(
           TextOnImage(
-              backgroundURL: twca['background_url'],
-              text: twca['tag_name'],
-              width: Sizing.blockSize * 30,
-              height: tagsYouFollowHeight,
-              borderRadius: BorderRadius.circular(Sizing.blockSize)),
+            backgroundURL: twca['background_url'],
+            text: twca['tag_name'],
+            width: Sizing.blockSize * 30,
+            height: tagsYouFollowHeight,
+            borderRadius: BorderRadius.circular(Sizing.blockSize),
+            onTap: () {
+              Get.to(const HashtagPosts(), arguments: twca['tag_name']);
+            },
+          ),
         );
       }
       return twcaList;
@@ -488,4 +489,8 @@ class ExploreController extends GetxController {
       'tag_name': '2B',
     },
   ];
+
+  void goToTryThesePosts() {
+    throw UnimplementedError();
+  }
 }

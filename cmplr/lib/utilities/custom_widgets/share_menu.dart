@@ -40,12 +40,13 @@ Future<dynamic> shareMenu(user, controller, context, profilePhoto, name) {
               children: [
                 UserNameAvatar(
                     // TODO: Replace with user name & user avatar
-                    profilePhoto,
-                    User.userData['email'],
-                    TextStyle(
-                      fontSize: Sizing.fontSize * 4,
-                      fontWeight: FontWeight.bold,
-                    )),
+                    // profilePhoto,
+                    // User1.userData['email'],
+                    // TextStyle(
+                    //   fontSize: Sizing.fontSize * 4,
+                    //   fontWeight: FontWeight.bold,
+                    // )
+                    ),
               ],
             ),
             SizedBox(height: Sizing.blockSizeVertical * 4),

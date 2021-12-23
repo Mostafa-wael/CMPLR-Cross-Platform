@@ -29,6 +29,7 @@ dependencies:
   share_plus:
   html_editor_enhanced: ^2.4.0+1  
   file_picker:
+  flutter_html:
   
   # Original package is old and has dependency issues
   # Using fork for now

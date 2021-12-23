@@ -18,8 +18,9 @@ class PostFeedController extends GetxController
   }
 
   Future<void> updatePosts() async {
-    final newPosts = await model.getNewPosts();
-    posts += newPosts;
+    var newPosts = await model.getNewPosts();
+    newPosts += posts; // So that new posts are added at the top
+    posts = newPosts;
     _dataReloaded = true;
     update();
   }

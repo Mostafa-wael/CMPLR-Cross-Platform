@@ -32,8 +32,6 @@ class PostFeed extends StatelessWidget {
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               controller.posts = snapshot.data ?? [];
-              print('view');
-              print(controller.posts.length);
               return buildMainView(controller);
             } else {
               return const Center(

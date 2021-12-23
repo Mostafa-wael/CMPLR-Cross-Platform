@@ -1,4 +1,4 @@
-class User {
+class User1 {
   static var userData = {
     'id': 15,
     'email': '"yousif.lasheen60@gmail.com',

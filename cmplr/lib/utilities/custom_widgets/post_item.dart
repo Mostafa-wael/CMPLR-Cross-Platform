@@ -1,3 +1,4 @@
+import '../functions.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -11,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
+
+import 'package:flutter_html/flutter_html.dart';
 
 /// This widget represents the post item with all its data
 class PostItem extends StatelessWidget {
@@ -62,7 +65,7 @@ class PostItem extends StatelessWidget {
       contentPadding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
       leading: CircleAvatar(
         backgroundImage: AssetImage(
-          '${postData}',
+          '${profilePhoto}',
         ),
       ),
       title: InkWell(
@@ -89,11 +92,10 @@ class PostItem extends StatelessWidget {
 
   Widget getPostData(BuildContext context) {
     return FittedBox(
-      child: Image.asset(
-        '${profilePhoto}',
-        height: 170,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
+      child: SingleChildScrollView(
+        child: Html(
+          data: '${postData}',
+        ),
       ),
       fit: BoxFit.fill,
     );
@@ -142,8 +144,7 @@ class PostItem extends StatelessWidget {
             textStyle: TextStyle(fontSize: Sizing.fontSize * 3.8),
           ),
           onPressed: () {
-            controller.openNotes(numNotes);
-            print('Notes clicked');
+            controller.openNotes(this);
           },
           child: Text('${numNotes} notes',
               style: const TextStyle(
@@ -161,7 +162,7 @@ class PostItem extends StatelessWidget {
               icon: Icon(CustomIcons.comment,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
-                controller.openNotes(numNotes);
+                controller.openNotes(this);
                 print('Notes clicked');
               },
             ),

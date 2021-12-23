@@ -98,7 +98,7 @@ class SearchResultsView extends StatelessWidget {
                     child: Focus(
                       onFocusChange: (focus) => {controller.returnToSearch()},
                       child: TextField(
-                        controller: controller.searchField,
+                        controller: controller.searchBarController,
                         textAlignVertical: TextAlignVertical.center,
                         decoration:
                             const InputDecoration(border: InputBorder.none),
@@ -149,7 +149,7 @@ class SearchResultsView extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                  '''Explore more #${controller.searchField.text}''',
+                                  '''Explore more #${controller.searchBarController.text}''',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold)),
                             ),
@@ -174,7 +174,7 @@ class SearchResultsView extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                  '''Top ${controller.searchField.text} blogs''',
+                                  '''Top ${controller.searchBarController.text} blogs''',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold)),
                             ),

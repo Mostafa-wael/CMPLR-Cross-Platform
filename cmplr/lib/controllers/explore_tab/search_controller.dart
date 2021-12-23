@@ -1,18 +1,52 @@
-import '../../utilities/custom_widgets/top_blogs_element.dart';
-
-import '../../utilities/custom_widgets/text_on_image.dart';
-
-import '../../utilities/sizing/sizing.dart';
+import '../../views/views.dart';
 import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
+import '../../utilities/custom_widgets/top_blogs_element.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
 import '../../flags.dart';
+import '../../models/models.dart';
 
 class SearchController extends GetxController {
-  TextEditingController searchField = TextEditingController();
+  // data model for search preferences
+  SearchModel searchModel = SearchModel();
+
+  // controller for the search text field
+  final _searchBarController = TextEditingController();
+
+  // list of the recommended search topics
+  List recommendedQueries = [];
+
+  RxBool showClearSearchBarIcon = false.obs;
+
+  // getters for class attributes
+  TextEditingController get searchBarController => _searchBarController;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  /// This reads the search query then it display the results in the list view,
+  /// this method is called whenever the search query is changed
+  void searchQueryChanged() {
+    if (_searchBarController.text == '') {
+      showClearSearchBarIcon.value = false;
+    } else {
+      showClearSearchBarIcon.value = true;
+    }
+  }
+
+  void search(String searchQuery) {
+    // go to the search results here
+    Get.to(const SearchResultsView());
+  }
+
+  void closeSearchPage() {
+    Get.back();
+  }
+
   bool _isFollowed = false;
   bool get isFollowed => _isFollowed;
   // Make this begin with new
@@ -29,7 +63,7 @@ class SearchController extends GetxController {
       _isFollowed = false;
     } else {
       _showToast('''Great! We'll show you the best new things about
-           ${searchField.text} from time to time''');
+           ${_searchBarController.text} from time to time''');
       _isFollowed = true;
     }
     update();

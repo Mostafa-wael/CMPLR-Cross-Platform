@@ -26,3 +26,5 @@ export 'home_tab/search_results_view.dart';
 
 // Utilites
 export 'utilities/hashtag_posts_view.dart';
+
+export 'explore_tab/search_bar_view.dart';
