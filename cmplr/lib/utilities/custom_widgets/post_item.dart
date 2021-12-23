@@ -63,7 +63,7 @@ class PostItem extends StatelessWidget {
       contentPadding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
       leading: CircleAvatar(
         backgroundImage: AssetImage(
-          '${postData}',
+          '${profilePhoto}',
         ),
       ),
       title: InkWell(
@@ -91,7 +91,7 @@ class PostItem extends StatelessWidget {
   Widget getPostData(BuildContext context) {
     return FittedBox(
       child: Image.asset(
-        '${profilePhoto}',
+        '${postData}',
         height: 170,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
