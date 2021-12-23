@@ -45,7 +45,9 @@ class ExploreScreen extends StatelessWidget {
                             const Text('Search CMPLR')
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.search();
+                        },
                         // FIXME: Make sure this changes
                         // correctly with theme
                         style: OutlinedButton.styleFrom(

@@ -22,6 +22,7 @@ export 'home_tab/home_stuff_for_you_view.dart';
 export 'home_tab/notes_view.dart';
 export 'home_tab/reblog_screen.dart';
 export 'home_tab/write_post_view.dart';
+export 'home_tab/search_results_view.dart';
 
 // Utilites
 export 'utilities/hashtag_posts_view.dart';

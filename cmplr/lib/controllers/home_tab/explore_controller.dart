@@ -1,3 +1,4 @@
+import '../../views/views.dart';
 import '../../utilities/custom_widgets/trending_row.dart';
 
 import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
@@ -31,6 +32,10 @@ class ExploreController extends GetxController {
     } else
       // TODO: API Integration
       return null;
+  }
+
+  Future<void> search() async {
+    Get.to(const SearchResultsView());
   }
 
   List<Widget> getTagsYouFollow() {
@@ -68,6 +73,7 @@ class ExploreController extends GetxController {
             imgTwoURL: cott['img_two_url'],
             tagName: cott['tag_name'],
             tagURL: cott['tag_url'],
+            followed: cott['followed'],
             widgetColor: clrs[(colorIndex++ % clrs.length)]));
       }
       return checkOutTheseTagsList;
@@ -382,6 +388,7 @@ class ExploreController extends GetxController {
           'https://64.media.tumblr.com/7ad94a0f1f2e1c0c9cb00d6fed72edf9/b14f71f1c6109186-83/s540x810/3de33fae7a449390f856d243236d8c910ecd402b.png',
       'tag_name': 'Test tag',
       'tag_url': 'https://www.tumblr.com',
+      'followed': 'true',
     },
     {
       'img_one_url':
@@ -390,6 +397,7 @@ class ExploreController extends GetxController {
           'https://64.media.tumblr.com/9410f22a29285fbdc65d884bc5054d56/b14f71f1c6109186-5e/s540x810/56c69ed615e2cb5afebdfa1cce95aacd0ed0d1ae.jpg',
       'tag_name': 'Test tag',
       'tag_url': 'https://www.tumblr.com',
+      'followed': 'false',
     },
     {
       'img_one_url':
@@ -398,6 +406,7 @@ class ExploreController extends GetxController {
           'https://64.media.tumblr.com/a18c8063bf9d095d99f12b51d3dd1eda/57803298a6ae7123-0a/s540x810/35b1580573afd7e8d52a33546e021c3df27778b3.gif',
       'tag_name': 'Test tag',
       'tag_url': 'https://www.tumblr.com',
+      'followed': 'false',
     },
     {
       'img_one_url':
@@ -406,6 +415,7 @@ class ExploreController extends GetxController {
           'https://64.media.tumblr.com/439b77661f74cea5af5559a392dfe505/573d1660335efd03-4e/s540x810/46e78fb5a9f5e7d91352cf6c1ef016977aada3dc.jpg',
       'tag_name': 'Test tag',
       'tag_url': 'https://www.tumblr.com',
+      'followed': 'false',
     },
   ];
 

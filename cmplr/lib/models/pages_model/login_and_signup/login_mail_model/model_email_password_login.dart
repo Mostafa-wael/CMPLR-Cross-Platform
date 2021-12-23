@@ -53,14 +53,16 @@ class ModelEmailPasswordLogin {
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
     } else {
-      User.userData = responseMap['user'];
-      User.userToken = responseMap['token'];
-      GetStorage().write('token', responseMap['token']);
-      GetStorage().write('user', responseMap['user']);
-      //GetStorage().write('blog_name', responseMap['blog_name']);
+      if (responseMap.containsKey('token')) {
+        User.userData = responseMap['user'];
+        User.userToken = responseMap['token'];
+        GetStorage().write('token', responseMap['token']);
+        GetStorage().write('user', responseMap['user']);
+        //GetStorage().write('blog_name', responseMap['blog_name']);
 
-      // TODO: Uncomment when imp lemented in the backend
-      //GetStorage().write('avatar', responseMap['avatar]']);
+        // TODO: Uncomment when imp lemented in the backend
+        //GetStorage().write('avatar', responseMap['avatar]']);
+      }
       return [];
     }
   }
