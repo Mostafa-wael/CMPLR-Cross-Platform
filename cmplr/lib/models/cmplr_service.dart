@@ -86,7 +86,7 @@ class CMPLRService {
         'Fashion'
       ]
     },
-    GetURIs.postFollow: {
+    GetURIs.posts: {
       "meta": {"status_code": 200, "msg": "Success"},
       "response": {
         "post": [
@@ -533,7 +533,7 @@ class CMPLRService {
     // content types
 
     switch (route) {
-      case GetURIs.postFollow:
+      case GetURIs.posts:
         return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
@@ -666,13 +666,12 @@ class CMPLRService {
   static Future<http.Response> getPosts(String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
-      final res = await _mockData[GetURIs.postFollow];
+      final res = await _mockData[GetURIs.posts];
       return http.Response(
           jsonEncode(res['response']), res['meta']['status_code']);
     } else {
       return http.Response(
-          jsonEncode(_mockData[GetURIs.postFollow]['response']),
-          requestSuccess);
+          jsonEncode(_mockData[GetURIs.posts]['response']), requestSuccess);
     }
   }
 

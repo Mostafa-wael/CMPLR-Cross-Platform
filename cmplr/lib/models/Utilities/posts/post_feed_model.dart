@@ -7,7 +7,7 @@ class ModelPostsFeed {
   Future<List<PostItem>> getNewPosts() async {
     final posts = <PostItem>[];
 
-    final response = await CMPLRService.get(GetURIs.postFollow, {});
+    final response = await CMPLRService.get(GetURIs.posts, {});
     final responseBody = jsonDecode(response.body);
     print('model, posts from json');
     print(responseBody['posts_per_page']);
