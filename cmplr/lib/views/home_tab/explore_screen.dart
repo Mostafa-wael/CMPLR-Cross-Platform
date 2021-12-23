@@ -1,3 +1,5 @@
+import '../../routes.dart';
+
 import '../../utilities/custom_widgets/trending_now.dart';
 
 import '../../utilities/custom_widgets/horizontal_fetching_list_view.dart';
@@ -48,7 +50,8 @@ class ExploreScreen extends StatelessWidget {
                           ],
                         ),
                         onPressed: () {
-                          Get.to(const SearchBar());
+                          Get.to(const SearchBar(),
+                              routeName: Routes.searchBar);
                         },
                         // FIXME: Make sure this changes
                         // correctly with theme

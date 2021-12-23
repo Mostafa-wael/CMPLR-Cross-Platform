@@ -3,8 +3,10 @@ import 'dart:convert';
 import '../../../../flags.dart';
 import '../../../../utilities/user.dart';
 import '../../../../backend_uris.dart';
+import '../../../../user.dart';
 import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
+import '../../../../user.dart';
 
 class ModelEmailPasswordLogin {
   Future<List> checkEmailPasswordCombination(

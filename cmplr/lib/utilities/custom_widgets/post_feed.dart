@@ -12,6 +12,7 @@ import '../../controllers/controllers.dart';
 
 /// This widget represents the post feed with all its data
 class PostFeed extends StatelessWidget {
+  var physics;
   PostFeed({
     Key? key,
   }) : super(key: key);
