@@ -9,11 +9,12 @@ class ModelPostsFeed {
 
     final response = await CMPLRService.get(GetURIs.postFollow, {});
     final responseBody = jsonDecode(response.body);
-    print('model');
-    print(responseBody['total_posts']);
-    for (var i = 0; i < responseBody['total_posts']; i++) {
-      posts.add(PostItem.fromJson(responseBody['posts'][i]));
+    print('model, posts from json');
+    print(responseBody['posts_per_page']);
+    for (var i = 0; i < responseBody['posts_per_page']; i++) {
+      posts.add(PostItem.fromJson(responseBody['post'][i]));
     }
+    print('model, posts list');
     print(posts.length);
     return posts;
   }

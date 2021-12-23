@@ -194,9 +194,9 @@ class PostItem extends StatelessWidget {
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
     return PostItem(
       postData: json['post']['content'],
-      postID: json['post']['post_id'],
+      postID: "$json['post']['post_id']",
       reblogKey: json['post']['reblogKey'],
-      numNotes: json['post']['num_notes'],
+      numNotes: json['post']['notes_count'],
       hashtags: json['post']['tags'],
       name: json['blog']['blog_name'],
       profilePhoto: json['blog']['avatar'],
