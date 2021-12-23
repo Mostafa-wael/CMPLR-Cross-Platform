@@ -12,6 +12,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
 
+import 'package:flutter_html/flutter_html.dart';
+
 /// This widget represents the post item with all its data
 class PostItem extends StatelessWidget {
   final String postData;
@@ -90,11 +92,10 @@ class PostItem extends StatelessWidget {
 
   Widget getPostData(BuildContext context) {
     return FittedBox(
-      child: Image.asset(
-        '${postData}',
-        height: 170,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
+      child: SingleChildScrollView(
+        child: Html(
+          data: '${postData}',
+        ),
       ),
       fit: BoxFit.fill,
     );

@@ -86,14 +86,19 @@ class CMPLRService {
     },
     GetURIs.postFollow: {
       'response': {
-        'total_posts': 2,
+        'total_posts': 3,
         'posts': [
           {
             'name': 'Mostafa',
             'postID': '1231465396890',
             'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
             'profilePhoto': 'lib/utilities/assets/intro_screen/intro_4.jpg',
-            'postData': 'lib/utilities/assets/intro_screen/intro_3.jpg',
+            'postData': '''
+                  <div> hiiiiiii
+                  <h1>This is the first post with a photo</h1> 
+                  <img src="https://raw.githubusercontent.com/onimur/.github/master/.resources/git-header.svg">
+                  </div>
+                  ''',
             'numNotes': 200,
             'showBottomBar': true,
             'hashtags': [
@@ -104,11 +109,32 @@ class CMPLRService {
             'is_liked': 'true'
           },
           {
+            'name': 'Kamal',
+            'postID': '1231465396890',
+            'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
+            'profilePhoto': 'lib/utilities/assets/intro_screen/intro_4.jpg',
+            'postData': '''
+                  <h1>A third post</h1> 
+                  <img src="https://avatars.githubusercontent.com/u/56788883?v=4">
+                  <img src="https://user-images.githubusercontent.com/5713670/87202985-820dcb80-c2b6-11ea-9f56-7ec461c497c3.gif">
+                  ''',
+            'numNotes': 250,
+            'showBottomBar': true,
+            'hashtags': [
+              'HAHAHA',
+              'CMPLR',
+              'L2L2L2',
+            ],
+            'is_liked': 'true'
+          },
+          {
             'name': 'Wael',
             'postID': '1231465396890',
             'reblogKey': 'sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU',
             'profilePhoto': 'lib/utilities/assets/intro_screen/intro_3.jpg',
-            'postData': 'lib/utilities/assets/intro_screen/intro_4.jpg',
+            'postData': '''
+                  <h1>This is the second post</h1> 
+                  ''',
             'numNotes': 100,
             'showBottomBar': true,
             'hashtags': ['3azmaaaaaaaaaaaaaaaaaa', 'Hyhyhy', 'NNNAAANNNAAAA'],
