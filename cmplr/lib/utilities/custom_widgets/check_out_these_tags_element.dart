@@ -1,3 +1,6 @@
+import '../../views/utilities/hashtag_posts_view.dart';
+import 'package:get/get.dart';
+
 import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
@@ -102,7 +105,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                       ]),
                 )),
             onTap: () {
-              //FIXME: Go to tag page
+              Get.to(const HashtagPosts(), arguments: tagName);
             }));
   }
 }

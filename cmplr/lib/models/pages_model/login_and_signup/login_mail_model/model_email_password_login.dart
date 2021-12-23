@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:get_storage/get_storage.dart';
-
+import '../../../../flags.dart';
+import '../../../../utilities/user.dart';
 import '../../../../backend_uris.dart';
 import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
@@ -52,14 +52,13 @@ class ModelEmailPasswordLogin {
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
     } else {
-      // TODO: Refactor this
-      GetStorage().write('blog_name', responseMap['blog_name']);
-
-      // TODO: Uncomment when imp lemented in the backend
-      // GetStorage().write('avatar', responseMap['avatar]']);
-      GetStorage().write('token', responseMap['token']);
-      GetStorage().write('user', responseMap['user']);
-
+      if (!Flags.mock)
+        User.storeUserData(
+          responseMap['blog_name'],
+          responseMap['avatar'],
+          responseMap['token'],
+          responseMap['user'],
+        );
       return [];
     }
   }

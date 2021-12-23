@@ -1,35 +1,19 @@
-import 'package:get_storage/get_storage.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+import '../../utilities/custom_widgets/post_sched_menu.dart';
 
 import '../../models/cmplr_service.dart';
-
 import '../../utilities/sizing/sizing.dart';
-
 import '../../models/models.dart';
-// import 'package:metadata_fetch/metadata_fetch.dart';
-
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:get_storage/get_storage.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
-
-class PostOptions {
-  // postNow
-  static const postNow = 'publish';
-
-  // saveAsDraft
-  static const String saveAsDraft = 'draft';
-  // postPrivately
-  static const String postPrivately = 'private';
-  // shareToTwitter // Not in the backend
-
-  static const String shareToTwitter =
-      'THIS SHOULDN\'T BE HERE, IT\'S NOT THE BACKEND\'S RESPONSIBILITY';
-}
 
 class WritePostController extends GetxController {
   HtmlEditorController editorController = HtmlEditorController();
@@ -38,6 +22,13 @@ class WritePostController extends GetxController {
   bool _bold = false;
   bool _italic = false;
   bool _strikethrough = false;
+
+  String _date = DateTime.now().toString();
+  DateTime _dateTime = DateTime.now();
+  TimeOfDay _timeOfDay = TimeOfDay.now();
+  final _currentDate = DateTime.now();
+
+  final _model;
 
   final allColors = [
     Colors.white,
@@ -61,33 +52,36 @@ class WritePostController extends GetxController {
 
   // TODO: Change default color according to theme
   int _currentColor = 0;
-  final _userName = 'Username';
-  final _userAvatar = 'lib/utilities/assets/logo/logo_icon.png';
+
+  TextEditingController textController = TextEditingController();
 
   PostItem? post;
-
-  final _model;
-
   bool tagsAlwaysVisible = false;
 
   bool showTags(context) =>
       MediaQuery.of(context).viewInsets.bottom == 0 || tagsAlwaysVisible;
 
-  final TextEditingController textController = TextEditingController();
-
   List<TextField> urls = [];
   List<TextEditingController> urlControllers = [];
-
   List<Widget> previews = [];
 
-  String get userName => _userName;
-
-  String get userAvatar => _userAvatar;
+  List<String> tags = [];
 
   Color get currentColor => allColors[_currentColor];
 
+  String get date => _date;
+
   double get postHeight => post != null ? Sizing.blockSizeVertical * 27 : 0;
+
   double get editorHeight => Sizing.blockSizeVertical * 82 - postHeight;
+
+  bool get bold => _bold;
+
+  bool get italic => _italic;
+
+  bool get strikethough => _strikethrough;
+
+  String get currentPostOption => _currentPostOption;
 
   void changeColor(int colorIndex) {
     _currentColor = colorIndex;
@@ -130,25 +124,62 @@ class WritePostController extends GetxController {
       );
   }
 
-  bool get bold => _bold;
-
-  bool get italic => _italic;
-
-  bool get strikethough => _strikethrough;
-
-  String get currentPostOption => _currentPostOption;
+  void setPost(PostItem postItem) {
+    post = postItem;
+    update();
+  }
 
   WritePostController(this._model) {
     initializeDateFormatting();
+    final date_1 = DateFormat.MMMEd().format(_dateTime);
+    final date_2 = DateFormat.jm().format(_dateTime);
+    _date = '${date_1} at  ${date_2}';
+    update();
   }
 
   bool isActivated(String option) {
     return _currentPostOption == option;
   }
 
-  Future<void> setPostOption(String option) async {
+  void setPostOption(String option) {
     _currentPostOption = option;
     update();
+  }
+
+  Future<void> setDateTime(BuildContext context) async {
+    final picked = await showDatePicker(
+        context: context,
+        initialDate: _dateTime,
+        firstDate: _currentDate,
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _dateTime) {
+      _dateTime = picked;
+      final date_1 = DateFormat.MMMEd().format(_dateTime);
+      _date = '${date_1} at ${_date.split('at')[1]}';
+      update();
+    }
+  }
+
+  Future<void> setTimeOfDay(BuildContext context) async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: _timeOfDay,
+    );
+    if (picked != null && picked != _timeOfDay) {
+      if (picked.hour < TimeOfDay.fromDateTime(_currentDate).hour ||
+          (picked.hour == TimeOfDay.fromDateTime(_currentDate).hour &&
+              picked.minute < TimeOfDay.fromDateTime(_currentDate).minute)) {
+        _showToast('Nice try, but you can\'t post from the past.');
+      } else {
+        _timeOfDay = picked;
+        final hour =
+            _timeOfDay.hour >= 12 ? _timeOfDay.hour - 12 : _timeOfDay.hour;
+        final am = _timeOfDay.hour >= 12 ? 'PM' : 'AM';
+        final date_2 = '${hour}:${_timeOfDay.minute}${am}';
+        _date = '${_date.split('at')[0]}at ${date_2}';
+        update();
+      }
+    }
   }
 
   // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -181,7 +212,6 @@ class WritePostController extends GetxController {
     // TODO: get the real blog name
     final blogName = GetStorage().read('blog_name') ?? 'tarek';
     const type = 'text';
-    const tags = ['test_tag', 'other_test_tag'];
 
     final http.Response response;
     if (_model is WritePostModel)

@@ -1,3 +1,6 @@
+import 'package:get_storage/get_storage.dart';
+
+import 'reblog_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +37,7 @@ class Notes extends StatelessWidget {
                 splashRadius: Sizing.blockSize * 7.5,
               ),
               title: Text(
-                '${Get.arguments} notes',
+                '${controller.postItem?.numNotes} notes',
                 style: const TextStyle(color: Colors.white),
               ),
               actions: [
@@ -525,7 +528,7 @@ class Notes extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    print('Reblog button pressed');
+                    controller.reblogFromNotes();
                   },
                   child: Container(
                       height: Sizing.blockSizeVertical * 6.75,
@@ -540,6 +543,7 @@ class Notes extends StatelessWidget {
                             color: Colors.lightBlue),
                       ))),
                 )),
+            // TODO: Might change this to 'go to user profile'
             Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -919,13 +923,15 @@ class Notes extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           // Change this later
-          if (blogName == 'current-user') {
+          if (blogName == GetStorage().read('blog_name')) {
             return GetBuilder<NotesController>(
-                builder: (controller) => Column(
+                builder: (NotesController controller) => Column(
                       children: [
                         buildModalSheetTile('Reblog', () {
-                          print('reblog');
+                          controller.reblogFromNotes();
                         }),
+
+                        // TODO: Might change this to 'go to user profile'
                         buildModalSheetTile('View Post', () {
                           print('view post');
                         }),

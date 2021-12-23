@@ -1,3 +1,4 @@
+import '../functions.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -144,8 +145,7 @@ class PostItem extends StatelessWidget {
             textStyle: TextStyle(fontSize: Sizing.fontSize * 3.8),
           ),
           onPressed: () {
-            controller.openNotes(numNotes);
-            print('Notes clicked');
+            controller.openNotes(this);
           },
           child: Text('${numNotes} notes',
               style: const TextStyle(
@@ -156,108 +156,16 @@ class PostItem extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
               onPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  constraints: BoxConstraints(
-                    maxHeight: Sizing.blockSizeVertical * 90,
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(Sizing.blockSize * 5)),
-                  builder: (BuildContext context) {
-                    return Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          Sizing.blockSize * 4, 0, Sizing.blockSize * 4, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(height: Sizing.blockSizeVertical * 3),
-                          Container(
-                            width: Sizing.blockSize * 12,
-                            height: Sizing.blockSize * 1,
-                            //TODO: Link this to theme
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(Sizing.blockSize))),
-                          ),
-                          SizedBox(height: Sizing.blockSizeVertical * 3),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              UserNameAvatar(
-                                  profilePhoto,
-                                  name,
-                                  TextStyle(
-                                    fontSize: Sizing.fontSize * 5,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ],
-                          ),
-                          SizedBox(height: Sizing.blockSizeVertical * 4),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkResponse(
-                                child: Column(
-                                  children: [
-                                    const Icon(Icons.copy),
-                                    const Text(
-                                      'Copy',
-                                    )
-                                  ],
-                                ),
-                                onTap: () {},
-                              ),
-                              InkResponse(
-                                child: Column(
-                                  children: [
-                                    const Icon(Icons.share),
-                                    const Text(
-                                      'Other',
-                                    )
-                                  ],
-                                ),
-                                onTap: () {
-                                  controller.share(context, 'Test1');
-                                },
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: Sizing.blockSizeVertical * 4,
-                          ),
-                          Container(
-                              width: Sizing.blockSize * 92,
-                              height: Sizing.blockSize * 0.25,
-                              color: Colors.white),
-                          SizedBox(
-                            height: Sizing.blockSizeVertical * 4,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      Sizing.blockSize * 2),
-                                ),
-                                filled: true,
-                                hintStyle: const TextStyle(color: Colors.white),
-                                hintText: 'Type in your text',
-                                fillColor: Colors.white70),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
+                showShareMenu(context, () {
+                  controller.share(context, 'Test1');
+                });
               },
             ),
             IconButton(
               icon: Icon(CustomIcons.comment,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
-                controller.openNotes(numNotes);
+                controller.openNotes(this);
                 print('Notes clicked');
               },
             ),
