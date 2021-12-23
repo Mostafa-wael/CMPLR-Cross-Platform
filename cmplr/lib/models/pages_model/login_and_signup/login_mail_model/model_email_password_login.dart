@@ -53,14 +53,14 @@ class ModelEmailPasswordLogin {
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
     } else {
-      // TODO: Refactor this
-      if (responseMap.containsKey('token')) {
-        User.userData = responseMap['user'];
-        User.userToken = responseMap['token'];
-        GetStorage().write('token', responseMap['token']);
-        GetStorage().write('user', responseMap['user']);
-      }
+      User.userData = responseMap['user'];
+      User.userToken = responseMap['token'];
+      GetStorage().write('token', responseMap['token']);
+      GetStorage().write('user', responseMap['user']);
+      //GetStorage().write('blog_name', responseMap['blog_name']);
 
+      // TODO: Uncomment when imp lemented in the backend
+      //GetStorage().write('avatar', responseMap['avatar]']);
       return [];
     }
   }
