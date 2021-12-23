@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../../flags.dart';
 import '../../../../utilities/user.dart';
 import '../../../../backend_uris.dart';
 import '../../../cmplr_service.dart';
@@ -51,12 +52,13 @@ class ModelEmailPasswordLogin {
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
     } else {
-      User.storeUserData(
-        responseMap['blog_name'],
-        responseMap['avatar'],
-        responseMap['token'],
-        responseMap['user'],
-      );
+      if (!Flags.mock)
+        User.storeUserData(
+          responseMap['blog_name'],
+          responseMap['avatar'],
+          responseMap['token'],
+          responseMap['user'],
+        );
       return [];
     }
   }
