@@ -51,9 +51,10 @@ class SearchController extends GetxController {
   bool get isFollowed => _isFollowed;
   // Make this begin with new
 
+  // TODO: Fix this
   Future<void> returnToSearch() async {
     // TODO: This might be changed when search screen is implemented
-    Get.back();
+    Get.off(const SearchBar());
     update();
   }
 
