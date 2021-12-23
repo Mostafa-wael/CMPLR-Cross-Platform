@@ -40,7 +40,6 @@ class PostItem extends StatelessWidget {
       required this.isLiked})
       : super(key: key);
   final controller = Get.put(PostItemController());
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -152,9 +151,7 @@ class PostItem extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
               onPressed: () {
-                showShareMenu(context, () {
-                  controller.share(context, 'Test1');
-                });
+                shareMenu(null, controller, context, profilePhoto, name);
               },
             ),
             IconButton(

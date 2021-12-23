@@ -13,6 +13,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
   var imgTwoURL;
   var tagURL;
   var widgetColor;
+  var followed;
 
   CheckOutTheseTagsElement(
       {required this.width,
@@ -23,6 +24,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
       required this.imgTwoURL,
       required this.tagURL,
       required this.widgetColor,
+      required this.followed,
       Key? key})
       : super(key: key);
 
@@ -91,16 +93,27 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                         SizedBox(
                           height: Sizing.blockSizeVertical * 5,
                           width: Sizing.blockSize * 28,
-                          child: TextButton(
-                            onPressed: () {
-                              // FIXME: follow this tag
-                            },
-                            child: Text('Follow',
-                                style: TextStyle(color: widgetColor)),
-                            style: TextButton.styleFrom(
-                                backgroundColor:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
+                          child: (followed == 'true')
+                              ? TextButton(
+                                  onPressed: () {
+                                    // FIXME: follow/unfollow this tag
+                                  },
+                                  child: Text('Unfollow',
+                                      style: TextStyle(color: widgetColor)),
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor),
+                                )
+                              : TextButton(
+                                  onPressed: () {
+                                    // FIXME: follow this tag
+                                  },
+                                  child: Text('Follow',
+                                      style: TextStyle(color: widgetColor)),
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor),
+                                ),
                         )
                       ]),
                 )),

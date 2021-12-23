@@ -8,6 +8,7 @@ class Routes {
   static const String notes = '/notes';
   static const String homeFollowingTab = '/home_following_tab';
   static const String masterPage = '/master_page';
+  static const String searchBar = '/search_bar';
 
   // Signup
   static const String signupOrLoginScreen = '/signup_or_login_screen';

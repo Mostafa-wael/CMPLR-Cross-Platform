@@ -42,6 +42,7 @@ class GetURIs {
   static const String posts = 'CHANGE THIS';
   static const String postStuff = 'CHANGE THISS';
   static const String notes = '/notes';
+  static const String recommendedSearchQueries = '/search_bar';
   // TODO: Add the remaining get request URIS
 
 }

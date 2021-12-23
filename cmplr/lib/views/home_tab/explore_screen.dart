@@ -1,3 +1,5 @@
+import '../../routes.dart';
+
 import '../../utilities/custom_widgets/trending_now.dart';
 
 import '../../utilities/custom_widgets/horizontal_fetching_list_view.dart';
@@ -9,6 +11,8 @@ import '../../utilities/sizing/sizing.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../views.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -45,7 +49,10 @@ class ExploreScreen extends StatelessWidget {
                             const Text('Search CMPLR')
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(const SearchBar(),
+                              routeName: Routes.searchBar);
+                        },
                         // FIXME: Make sure this changes
                         // correctly with theme
                         style: OutlinedButton.styleFrom(
