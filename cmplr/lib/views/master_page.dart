@@ -1,3 +1,5 @@
+import '../utilities/custom_widgets/draggable_floating_action_button.dart';
+
 import '../views/views.dart';
 
 import '../controllers/master_page_controller.dart';
@@ -51,18 +53,81 @@ class MasterPage extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              key: const ValueKey('masterPage_write_post'),
-              child: const Icon(Icons.edit),
-              onPressed: () {
-                Get.to(
-                  const WritePost(),
-                  transition: Transition.downToUp,
-                );
-              },
-              backgroundColor: Colors.blue,
-            ),
+            floatingActionButton: const MasterFloatingActionButton(),
           );
         });
+  }
+}
+
+class MasterFloatingActionButton extends StatelessWidget {
+  const MasterFloatingActionButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final buttons = <Widget>[
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.edit),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.favorite),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.deepPurple,
+        child: const Icon(Icons.camera_alt_rounded),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.red,
+        child: const Icon(Icons.code),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.flutter_dash_rounded),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.amber,
+        child: const Icon(Icons.android_rounded),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.edit),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.favorite),
+      ),
+      FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.deepPurple,
+        child: const Icon(Icons.camera_alt_rounded),
+      ),
+    ];
+
+    return DraggableFloatingActionButton(
+      key: const ValueKey('masterPage_write_post'),
+      delayBias: 650, // bias in milliseconds
+      // the widgets that will be animated
+      children: buttons,
+      // required paramerters
+      initialOffset: Offset(MediaQuery.of(context).size.width * 0.85,
+          MediaQuery.of(context).size.height * 0.9),
+      onPressed: () {
+        Get.to(
+          const WritePost(),
+          transition: Transition.downToUp,
+        );
+      },
+    );
   }
 }
