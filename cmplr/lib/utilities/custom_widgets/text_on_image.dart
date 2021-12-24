@@ -9,6 +9,7 @@ class TextOnImage extends StatelessWidget {
   final text;
   final width;
   final height;
+  final gestureDetectorKey;
 
   var onTap;
   var showText;
@@ -30,14 +31,13 @@ class TextOnImage extends StatelessWidget {
     this.borderRadius,
     this.fontSizeScale = 1,
     this.maxTextRows = 1,
+    this.gestureDetectorKey,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        // Pass the testing key to the outer widget
-        key: key,
         child: Padding(
           padding: const EdgeInsets.only(left: 4, right: 4),
           child: SizedBox(

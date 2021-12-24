@@ -46,7 +46,7 @@ class ExploreController extends GetxController {
         final tyf = tagsYouFollowMockData[i];
         tagsYouFollow.add(
           TextOnImage(
-            key: ValueKey('TagsYouFollow$i'),
+            gestureDetectorKey: ValueKey('TagsYouFollow$i'),
             width: Sizing.blockSize * elementWidthPercentage,
             height: tagsYouFollowHeight,
             backgroundURL: tyf['img_url'],
