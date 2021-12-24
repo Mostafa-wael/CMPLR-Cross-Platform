@@ -1,19 +1,21 @@
 import 'dart:ui';
 
-import 'utilities/user.dart';
 import 'controllers/controllers.dart';
 import 'models/models.dart';
+
 import 'models/persistent_storage_api.dart';
+
 import 'flags.dart';
 import 'cmplr_theme.dart';
-import 'views/views.dart';
-import './routes.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// Activates swipe controls for web
-// Since flutter web doesn't allow shift+scroll for horizontal scrolling
+import 'views/views.dart';
+import './routes.dart';
+
+// import 'package:flutter_driver/driver_extension.dart';
+
 class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
@@ -33,9 +35,6 @@ Future<void> main() async {
 
   Get.put(ReblogController(const ReblogModel()));
   Get.put(WritePostController(const WritePostModel()));
-
-  // Prepares any GetStorage fields we are supposed to have when we're logged in
-  if (Flags.mock) User.prepareMockData();
 
   // enableFlutterDriverExtension();
   runApp(const CMPLR());

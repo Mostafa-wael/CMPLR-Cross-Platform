@@ -1,3 +1,5 @@
+import '../../views/views.dart';
+
 import '../../views/home_tab/search_results_view.dart';
 
 import '../../views/utilities/hashtag_posts_view.dart';
@@ -491,6 +493,6 @@ class ExploreController extends GetxController {
   ];
 
   void goToTryThesePosts() {
-    throw UnimplementedError();
+    Get.to(TryThesePosts());
   }
 }
