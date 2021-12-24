@@ -13,22 +13,25 @@ import '../../controllers/controllers.dart';
 /// This widget represents the post feed with all its data
 class PostFeed extends StatelessWidget {
   var physics;
-  PostFeed({
-    Key? key,
-  }) : super(key: key);
-
-  final controller = Get.put(PostFeedController());
+  var controller;
+  var postType = '';
+  PostFeed({Key? key, postFeedTypePage}) : super(key: key) {
+    postType = postFeedTypePage;
+    print('in the view, Post Type is $postType');
+    controller = Get.put(PostFeedController(postFeedTypeFeed: postType));
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PostFeedController>(
-        init: PostFeedController(), builder: (controller) => getBody(context));
+        init: PostFeedController(postFeedTypeFeed: postType),
+        builder: (controller) => getBody(context));
   }
 
   Widget getBody(BuildContext context) {
     if (!controller.dataReloaded) {
       return FutureBuilder(
-          future: controller.model.getNewPosts(),
+          future: controller.model.getNewPosts(postFeedTypeContoller: postType),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               controller.posts = snapshot.data ?? [];

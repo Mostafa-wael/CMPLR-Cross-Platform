@@ -8,6 +8,9 @@ class HomeFollowing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PostFeed();
+    print('Following');
+    return PostFeed(
+      postFeedTypePage: 'dashboard',
+    );
   }
 }

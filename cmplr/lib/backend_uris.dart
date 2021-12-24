@@ -39,7 +39,7 @@ class GetURIs {
       '/' + blogID + '/get_tags_for_posts';
 
   static const String getTagsForPosts = '/get_tags_for_posts';
-  static const String posts = 'CHANGE THIS';
+  static const String postFollowing = 'dashboard';
   static const String postStuff = 'CHANGE THISS';
   static const String notes = '/notes';
   static const String recommendedSearchQueries = '/search_bar';
