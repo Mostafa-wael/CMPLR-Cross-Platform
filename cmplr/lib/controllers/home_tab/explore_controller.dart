@@ -35,9 +35,11 @@ class ExploreController extends GetxController {
   List<Widget> getTagsYouFollow() {
     if (Flags.mock) {
       final tagsYouFollow = <Widget>[];
-      for (final tyf in tagsYouFollowMockData) {
+      for (var i = 0; i < tagsYouFollowMockData.length; i++) {
+        final tyf = tagsYouFollowMockData[i];
         tagsYouFollow.add(
           TextOnImage(
+            key: ValueKey('TagsYouFollow$i'),
             width: Sizing.blockSize * elementWidthPercentage,
             height: tagsYouFollowHeight,
             backgroundURL: tyf['img_url'],
