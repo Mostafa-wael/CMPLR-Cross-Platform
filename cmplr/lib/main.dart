@@ -1,13 +1,14 @@
 import 'dart:ui';
 
 import 'utilities/user.dart';
+
 import 'controllers/controllers.dart';
 import 'models/models.dart';
+
 import 'models/persistent_storage_api.dart';
+
 import 'flags.dart';
 import 'cmplr_theme.dart';
-import 'views/views.dart';
-import './routes.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,11 @@ import 'package:flutter_driver/driver_extension.dart';
 
 // Activates swipe controls for web
 // Since flutter web doesn't allow shift+scroll for horizontal scrolling
+import 'views/views.dart';
+import './routes.dart';
+
+// import 'package:flutter_driver/driver_extension.dart';
+
 class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {

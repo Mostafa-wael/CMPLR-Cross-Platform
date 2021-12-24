@@ -13,6 +13,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
 
+import 'package:flutter_html/flutter_html.dart';
+
 /// This widget represents the post item with all its data
 class PostItem extends StatelessWidget {
   final String postData;
@@ -38,7 +40,6 @@ class PostItem extends StatelessWidget {
       required this.isLiked})
       : super(key: key);
   final controller = Get.put(PostItemController());
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,11 +63,7 @@ class PostItem extends StatelessWidget {
   Widget getUpperBar(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-      leading: CircleAvatar(
-        backgroundImage: AssetImage(
-          '${profilePhoto}',
-        ),
-      ),
+      leading: Image.network('${profilePhoto}'),
       title: InkWell(
         onTap: () {
           print('Profile clicked');
@@ -91,11 +88,10 @@ class PostItem extends StatelessWidget {
 
   Widget getPostData(BuildContext context) {
     return FittedBox(
-      child: Image.asset(
-        '${postData}',
-        height: 170,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
+      child: SingleChildScrollView(
+        child: Html(
+          data: '${postData}',
+        ),
       ),
       fit: BoxFit.fill,
     );
@@ -155,9 +151,7 @@ class PostItem extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
               onPressed: () {
-                showShareMenu(context, () {
-                  controller.share(context, 'Test1');
-                });
+                shareMenu(null, controller, context, profilePhoto, name);
               },
             ),
             IconButton(
@@ -193,16 +187,17 @@ class PostItem extends StatelessWidget {
   }
 
   factory PostItem.fromJson(Map<String, dynamic> json) {
-    final isLikedValue = json['is_liked'] == 'true' ? true.obs : false.obs;
+    final isLikedValue =
+        json['post']['is_liked'] == 'true' ? true.obs : false.obs;
     return PostItem(
-      postData: json['postData'],
-      postID: json['postData'],
-      reblogKey: json['reblogKey'],
-      name: json['name'],
-      profilePhoto: json['profilePhoto'],
-      numNotes: json['numNotes'],
-      hashtags: json['hashtags'],
-      showBottomBar: json['showBottomBar'],
+      postData: json['post']['content'],
+      postID: "$json['post']['post_id']",
+      reblogKey: json['post']['reblogKey'],
+      numNotes: json['post']['notes_count'],
+      hashtags: json['post']['tags'],
+      name: json['blog']['blog_name'],
+      profilePhoto: json['blog']['avatar'],
+      showBottomBar: true,
       isLiked: isLikedValue,
     );
   }

@@ -1,3 +1,5 @@
+import 'package:get_storage/get_storage.dart';
+
 import '../controllers.dart';
 import '../../views/home_tab/reblog_screen.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -130,10 +132,9 @@ class NotesController extends GetxController
         0,
         UserNote(
             noteType: 'reply',
-            blogName: 'current-user',
+            blogName: GetStorage().read('blog_name'),
             avatarShape: 'circle',
-            avatarURL:
-                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            avatarURL: GetStorage().read('avatar'),
             followed: false.obs,
             postReply: commentTextFieldController.text));
     commentTextFieldController.text = '';
