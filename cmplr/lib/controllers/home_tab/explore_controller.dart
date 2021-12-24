@@ -49,7 +49,7 @@ class ExploreController extends GetxController {
             text: tyf['tag_name'],
             borderRadius: BorderRadius.circular(Sizing.blockSize),
             onTap: () {
-              Get.to(const HashtagPosts(), arguments: tyf['tag_name']);
+              Get.to(HashtagPosts(), arguments: tyf['tag_name']);
             },
           ),
         );
@@ -206,7 +206,7 @@ class ExploreController extends GetxController {
             height: tagsYouFollowHeight,
             borderRadius: BorderRadius.circular(Sizing.blockSize),
             onTap: () {
-              Get.to(const HashtagPosts(), arguments: twca['tag_name']);
+              Get.to(HashtagPosts(), arguments: twca['tag_name']);
             },
           ),
         );
