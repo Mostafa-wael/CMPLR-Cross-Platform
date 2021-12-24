@@ -9,6 +9,6 @@ class HomeStuffForYou extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Stuff for you');
-    return PostFeed(postFeedTypePage: 'CHANGE THISS');
+    return PostFeed(postFeedTypePage: 'stuffForYou');
   }
 }
