@@ -116,7 +116,7 @@ class MasterFloatingActionButton extends StatelessWidget {
 
     return DraggableFloatingActionButton(
       key: const ValueKey('masterPage_write_post'),
-      delayBias: 650, // bias in milliseconds
+      delayBias: 150, // bias in milliseconds
       // the widgets that will be animated
       children: buttons,
       // required paramerters

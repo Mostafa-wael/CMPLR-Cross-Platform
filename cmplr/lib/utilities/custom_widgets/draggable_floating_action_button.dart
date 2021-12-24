@@ -78,7 +78,8 @@ class _DraggableFloatingActionButtonState
           curve: Curves.fastLinearToSlowEaseIn,
           left: _offset.dx,
           top: _offset.dy,
-          duration: Duration(milliseconds: i * widget.delayBias),
+          duration: Duration(
+              milliseconds: i * widget.delayBias + i * widget.delayBias * 2),
           child: Listener(
             onPointerMove: (PointerEvent details) {
               _updatePosition(details);
