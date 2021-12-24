@@ -2,6 +2,7 @@
     package="com.example.cmplr">
    <application
         android:label="cmplr"
+        android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
