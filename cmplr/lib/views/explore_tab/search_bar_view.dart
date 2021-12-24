@@ -65,6 +65,7 @@ class SearchBar extends StatelessWidget {
                         splashRadius: 24,
                         onPressed: () {
                           controller.searchBarController.text = '';
+                          controller.searchQueryChanged();
                         },
                         icon: Icon(Icons.close,
                             color: Theme.of(context).primaryColor),
@@ -76,16 +77,36 @@ class SearchBar extends StatelessWidget {
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       controller.recommendedQueries = snapshot.data ?? [];
-                      return Expanded(
-                          child: Container(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        child: ListView.builder(
-                            itemCount: controller.recommendedQueries.length,
-                            itemBuilder: (context, index) {
-                              return buildSearchResultTile(
-                                  context, controller, index);
-                            }),
-                      ));
+                      return Obx(() => Visibility(
+                            visible: !controller.showClearSearchBarIcon.value,
+                            child: Expanded(
+                                child: Container(
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              child: ListView.builder(
+                                  itemCount:
+                                      controller.recommendedQueries.length + 1,
+                                  itemBuilder: (context, index) {
+                                    if (index == 0) {
+                                      return Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            Sizing.blockSize * 5,
+                                            Sizing.blockSize * 3,
+                                            Sizing.blockSize * 2.5,
+                                            Sizing.blockSize * 2.5),
+                                        child: Text(
+                                          'Recommended',
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontSize: Sizing.fontSize * 4.2),
+                                        ),
+                                      );
+                                    } else
+                                      return buildSearchResultTile(
+                                          context, controller, index - 1);
+                                  }),
+                            )),
+                          ));
                     } else {
                       return const Expanded(
                         child: Center(
@@ -108,6 +129,7 @@ class SearchBar extends StatelessWidget {
           Sizing.blockSize * 3, 0, Sizing.blockSize * 2.5, 0),
       child: InkWell(
         onTap: () {
+          print('search');
           controller.search(controller.recommendedQueries[index]);
         },
         splashColor: Colors.transparent,
