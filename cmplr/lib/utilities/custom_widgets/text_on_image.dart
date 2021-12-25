@@ -38,6 +38,7 @@ class TextOnImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+        key: gestureDetectorKey,
         child: Padding(
           padding: const EdgeInsets.only(left: 4, right: 4),
           child: SizedBox(
