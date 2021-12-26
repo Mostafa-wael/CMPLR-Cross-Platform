@@ -42,7 +42,7 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
-  enableFlutterDriverExtension();
+  // enableFlutterDriverExtension();
 
   HttpOverrides.global = MyHttpOverrides();
 
