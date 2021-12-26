@@ -13,7 +13,9 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
   final blogImgCenterHeightFactor;
   final widgetColor;
 
-  const CheckOutTheseBlogsElement(
+  var gestureDetectorKey;
+
+  CheckOutTheseBlogsElement(
       {required this.width,
       required this.height,
       required this.borderRadius,
@@ -24,6 +26,7 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
       required this.blogImgRadius,
       required this.blogImgCenterHeightFactor,
       required this.widgetColor,
+      this.gestureDetectorKey,
       Key? key})
       : super(key: key);
 
@@ -32,6 +35,7 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(left: 4, right: 4),
         child: GestureDetector(
+          key: gestureDetectorKey,
           child: Container(
               width: width,
               height: height,

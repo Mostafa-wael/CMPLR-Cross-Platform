@@ -15,6 +15,8 @@ class CheckOutTheseTagsElement extends StatelessWidget {
   var widgetColor;
   var followed;
 
+  var gestureDetectorKey;
+
   CheckOutTheseTagsElement(
       {required this.width,
       required this.height,
@@ -25,6 +27,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
       required this.tagURL,
       required this.widgetColor,
       required this.followed,
+      this.gestureDetectorKey,
       Key? key})
       : super(key: key);
 
@@ -33,6 +36,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(left: 4, right: 4),
         child: GestureDetector(
+            key: gestureDetectorKey,
             child: Container(
                 width: width,
                 height: height,

@@ -46,7 +46,7 @@ class ExploreController extends GetxController {
         final tyf = tagsYouFollowMockData[i];
         tagsYouFollow.add(
           TextOnImage(
-            key: ValueKey('TagsYouFollow$i'),
+            gestureDetectorKey: ValueKey('TagsYouFollow$i'),
             width: Sizing.blockSize * elementWidthPercentage,
             height: tagsYouFollowHeight,
             backgroundURL: tyf['img_url'],
@@ -70,8 +70,10 @@ class ExploreController extends GetxController {
       final checkOutTheseTagsList = <Widget>[];
 
       var colorIndex = 0;
-      for (final Map cott in checkOutTheseTagsMockData) {
+      for (var i = 0; i < checkOutTheseTagsMockData.length; i++) {
+        final cott = checkOutTheseTagsMockData[i];
         checkOutTheseTagsList.add(CheckOutTheseTagsElement(
+            gestureDetectorKey: ValueKey('CheckOutTheseTags$i'),
             width: Sizing.blockSize * widthPercentage,
             height: checkOutTheseTagsHeight,
             borderRadius: Sizing.blockSize * borderRadiusFactor,
@@ -92,8 +94,10 @@ class ExploreController extends GetxController {
       final cotbList = <Widget>[];
       var colorIndex = 0;
 
-      for (final cotb in checkOutTheseBlogsMockData) {
+      for (var i = 0; i < checkOutTheseBlogsMockData.length; i++) {
+        final cotb = checkOutTheseBlogsMockData[i];
         cotbList.add(CheckOutTheseBlogsElement(
+          gestureDetectorKey: ValueKey('CheckOutTheseBlogs$i'),
           width: Sizing.blockSize * 30,
           height: checkOutTheseBlogsHeight,
           borderRadius: Sizing.blockSize * 2,
@@ -177,7 +181,7 @@ class ExploreController extends GetxController {
     return false;
   }
 
-  List<Widget> getTryThesePostsGrid() {
+  Widget getTryThesePostsGrid() {
     if (Flags.mock) {
       final ttpList = <Widget>[];
 
@@ -192,18 +196,33 @@ class ExploreController extends GetxController {
           ),
         );
       }
-      return ttpList;
+      return GestureDetector(
+        key: const ValueKey('TryThesePostsGrid'),
+        child: GridView.count(
+          padding: EdgeInsets.zero,
+          primary: false,
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          semanticChildCount: 9,
+          children: ttpList,
+        ),
+        onTap: goToTryThesePosts,
+      );
     } else
       // TODO: API Integration
-      return [];
+      return Container(
+        decoration: const BoxDecoration(color: Colors.red),
+      );
   }
 
   List<Widget> getThingsWeCareAbout() {
     if (Flags.mock) {
       final twcaList = <Widget>[];
-      for (final Map twca in thingsWeCareAboutMockData) {
+      for (var i = 0; i < thingsWeCareAboutMockData.length; i++) {
+        final twca = thingsWeCareAboutMockData[i];
         twcaList.add(
           TextOnImage(
+            gestureDetectorKey: ValueKey('ThingsWeCareAbout$i'),
             backgroundURL: twca['background_url'],
             text: twca['tag_name'],
             width: Sizing.blockSize * 30,

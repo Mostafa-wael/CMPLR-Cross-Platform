@@ -41,6 +41,8 @@ class ExploreScreen extends StatelessWidget {
                       width: Sizing.blockSize * 60,
                       height: Sizing.blockSizeVertical * 5.0,
                       child: OutlinedButton(
+                        key: const ValueKey('SearchButton'),
+
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,19 +165,9 @@ class ExploreScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(Sizing.blockSize * 2),
-                        child: GridView.count(
-                            padding: EdgeInsets.zero,
-                            primary: false,
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            semanticChildCount: 9,
-                            children: controller.getTryThesePostsGrid()),
-                      ),
-                      onTap: controller.goToTryThesePosts,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(Sizing.blockSize * 2),
+                      child: controller.getTryThesePostsGrid(),
                     ),
                     Column(
                       children: [
