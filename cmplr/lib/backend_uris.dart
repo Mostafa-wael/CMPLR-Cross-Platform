@@ -40,7 +40,8 @@ class GetURIs {
 
   static const String getTagsForPosts = '/get_tags_for_posts';
   static const String postFollowing = '/user/dashboard';
-  static const String postStuff = '/user/stuffForYou'; // FIXME: Check this
+  static const String postStuff =
+      '/user/recommended-blogs'; // FIXME: Check this
   static const String notes = '/notes';
   static const String recommendedSearchQueries = '/search_bar';
   // TODO: Add the remaining get request URIS
