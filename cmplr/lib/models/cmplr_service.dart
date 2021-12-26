@@ -1050,13 +1050,11 @@ class CMPLRService {
     return _mockData[route][topics];
   }
 
-  // ToDo: should be a Get request
   static Future<http.Response> getPosts(String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       final res = await _mockData[backendURI];
-      return http.Response(
-          jsonEncode(res['response']), res['meta']['status_code']);
+      return http.Response(jsonEncode(res), res['meta']['status_code']);
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }

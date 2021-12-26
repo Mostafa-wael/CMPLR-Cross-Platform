@@ -50,8 +50,8 @@ class SignupEmailOrGoogle extends StatelessWidget {
                     key: const ValueKey('signUp_withEmail'),
                     text: 'Sign up with Email',
                     onTap: () {
-                      // controller.signUpEmail(); // FIXME: Age text field doesn't accept inputs for some rason
-                      Get.offNamed(Routes.signupPreferencesScreen);
+                      controller.signUpEmail();
+                      // Get.offNamed(Routes.signupPreferencesScreen);
                     },
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),
