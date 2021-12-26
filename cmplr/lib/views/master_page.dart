@@ -53,7 +53,17 @@ class MasterPage extends StatelessWidget {
                 ),
               ],
             ),
-            // floatingActionButton: const MasterFloatingActionButton(),
+            floatingActionButton: FloatingActionButton(
+              key: const ValueKey('masterPage_write_post'),
+              child: const Icon(Icons.edit),
+              onPressed: () {
+                Get.to(
+                  const WritePost(),
+                  transition: Transition.downToUp,
+                );
+              },
+              backgroundColor: Colors.blue,
+            ),
           );
         });
   }
