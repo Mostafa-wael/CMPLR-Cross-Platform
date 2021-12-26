@@ -192,7 +192,7 @@ class PostItem extends StatelessWidget {
     return PostItem(
       postData: json['post']['content'],
       postID: "$json['post']['post_id']",
-      reblogKey: json['post']['reblogKey'],
+      reblogKey: "$json['post']['post_id']",
       numNotes: json['post']['notes_count'],
       hashtags: json['post']['tags'],
       name: json['blog']['blog_name'],

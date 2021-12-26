@@ -14,12 +14,12 @@ class ModelPostsFeed {
     postFeedType =
         postFeedTypeContoller != '' ? postFeedTypeContoller : postFeedType;
     final posts = <PostItem>[];
-    final response = await CMPLRService.get(postFeedType, {});
+    final response = await CMPLRService.get('/user/' + postFeedType, {});
     final responseBody = jsonDecode(response.body);
-    print('model, $postFeedType posts from json');
-    print(responseBody['posts_per_page']);
-    for (var i = 0; i < responseBody['posts_per_page']; i++) {
-      posts.add(PostItem.fromJson(responseBody['post'][i]));
+    // print('model, $postFeedType posts from json');
+// print(responseBody['posts_per_page']);
+    for (var i = 0; i < responseBody['response']['posts_per_page']; i++) {
+      posts.add(PostItem.fromJson(responseBody['response']['post'][i]));
     }
     print('model, $postFeedType posts list');
     print(posts.length);

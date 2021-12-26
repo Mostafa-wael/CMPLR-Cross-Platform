@@ -879,10 +879,8 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  // static const String apiIp = 'http://13.68.206.72/api';
-  static const String apiIp = 'http://b339-41-46-128-184.ngrok.io/api';
-  // static const String apiIp = 'http://be0b-156-215-2-141.ngrok.io/api';
-
+  //static const String apiIp = 'https://www.cmplr.tech/api';
+  static const String apiIp = 'http://a667-41-44-141-19.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1060,8 +1058,7 @@ class CMPLRService {
       return http.Response(
           jsonEncode(res['response']), res['meta']['status_code']);
     } else {
-      return http.Response(
-          jsonEncode(_mockData[backendURI]['response']), requestSuccess);
+      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
   }
 

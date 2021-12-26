@@ -53,7 +53,7 @@ class MasterPage extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: const MasterFloatingActionButton(),
+            // floatingActionButton: const MasterFloatingActionButton(),
           );
         });
   }
