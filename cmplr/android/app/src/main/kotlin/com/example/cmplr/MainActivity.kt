@@ -1,4 +1,4 @@
-package com.example.cmplr
+package cmplr.android
 
 import io.flutter.embedding.android.FlutterActivity
 

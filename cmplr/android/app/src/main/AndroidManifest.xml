@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cmplr">
+    package="cmplr.android">
    <application
         android:label="cmplr"
         android:icon="@mipmap/launcher_icon">
