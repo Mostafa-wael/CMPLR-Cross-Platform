@@ -3,6 +3,7 @@ import 'dart:ui';
 import '../../controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../routes.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../utilities/sizing/sizing.dart';
 
@@ -49,7 +50,8 @@ class SignupEmailOrGoogle extends StatelessWidget {
                     key: const ValueKey('signUp_withEmail'),
                     text: 'Sign up with Email',
                     onTap: () {
-                      controller.signUpEmail();
+                      // controller.signUpEmail(); // FIXME: Age text field doesn't accept inputs for some rason
+                      Get.offNamed(Routes.signupPreferencesScreen);
                     },
                   ),
                   SizedBox(height: Sizing.blockSizeVertical * 2.25),

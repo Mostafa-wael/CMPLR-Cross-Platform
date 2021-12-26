@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'utilities/user.dart';
@@ -31,8 +32,19 @@ class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
       };
 }
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 Future<void> main() async {
   enableFlutterDriverExtension();
+
+  HttpOverrides.global = MyHttpOverrides();
 
   await PersistentStorage.initStorage();
 

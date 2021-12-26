@@ -34,7 +34,7 @@ class PostFeed extends StatelessWidget {
           future: controller.model.getNewPosts(postFeedTypeContoller: postType),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              controller.posts = snapshot.data ?? [];
+              controller.posts = snapshot.data ?? <PostItem>[];
               return buildMainView(controller);
             } else {
               return const Center(
