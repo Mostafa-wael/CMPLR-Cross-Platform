@@ -44,21 +44,20 @@ class ActivityView extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: DropdownButton<String>(
-                items: moreItems,
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  items: moreItems,
+                  icon: const Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  ),
+                  onChanged: (String? str) {},
                 ),
-                onChanged: (value) {},
               ),
             )
           ],
           bottom: getTabBar(context),
         ),
-
-        /// The home screen, it has 2 tabs: Following and stuff for you
-
         body: TabBarView(children: _views),
       ),
     );
