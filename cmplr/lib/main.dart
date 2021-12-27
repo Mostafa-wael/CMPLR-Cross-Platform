@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'views/profile/create_new_tumblr.dart';
+import 'views/profile_tab/create_new_tumblr.dart';
 
 import 'utilities/user.dart';
 
