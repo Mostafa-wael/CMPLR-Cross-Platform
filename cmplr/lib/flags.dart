@@ -3,5 +3,5 @@ class Flags {
 
   // Clears persistent data on app launch.
   // WARNING: MAKE SURE YOU UNDERSTAND WHAT'S GOING TO BE ERASED
-  static bool cleanState = true;
+  static bool cleanState = false;
 }
