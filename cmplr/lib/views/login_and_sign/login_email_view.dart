@@ -37,27 +37,20 @@ class LoginEmail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  visibleKeyboard
-                      ? SizedBox(height: Sizing.blockSizeVertical * 3)
-                      : SizedBox(height: Sizing.blockSizeVertical * 9),
-                  visibleKeyboard
-                      ? Text(
-                          't',
-                          style: TextStyle(
-                              fontSize: Sizing.fontSize * 17.5,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w900),
-                        )
-                      : Text(
-                          't',
-                          style: TextStyle(
-                              fontSize: Sizing.fontSize * 35,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w900),
-                        ),
-                  visibleKeyboard
-                      ? SizedBox(height: Sizing.blockSizeVertical * 9)
-                      : SizedBox(height: Sizing.blockSizeVertical * 43.5),
+                  SizedBox(
+                      height:
+                          Sizing.blockSizeVertical * (visibleKeyboard ? 3 : 9)),
+                  Text(
+                    'c',
+                    style: TextStyle(
+                        fontSize:
+                            Sizing.fontSize * (visibleKeyboard ? 17.5 : 35),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(
+                      height: Sizing.blockSizeVertical *
+                          (visibleKeyboard ? 9 : 43.5)),
                   SizedBox(
                     width: Sizing.blockSize * 84,
                     child: LoginTextField(

@@ -23,7 +23,7 @@ class LoginEmailSplash extends StatelessWidget {
                         children: [
                           SizedBox(height: Sizing.blockSizeVertical * 9),
                           Text(
-                            't',
+                            'c',
                             style: TextStyle(
                                 fontSize: Sizing.fontSize * 35,
                                 color: Colors.white,
