@@ -25,7 +25,7 @@ class ForgotPassword extends StatelessWidget {
                 children: [
                   SizedBox(width: Sizing.blockSize * 28.5),
                   Text(
-                    't',
+                    'c',
                     style: TextStyle(
                         fontSize: Sizing.fontSize * 16.25,
                         color: Colors.white,
