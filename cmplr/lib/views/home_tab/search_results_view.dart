@@ -197,22 +197,28 @@ class SearchResultsView extends StatelessWidget {
                     ),
                     // TODO: Fix this
                     Container(
-                      child: PostFeed(),
+                      child: PostFeed(
+                        postFeedTypePage: 'dashboard',
+                      ),
                       constraints: BoxConstraints(
                           maxHeight: Sizing.blockSizeVertical * 200),
                     ),
                   ],
                 ),
               ),
-              PostFeed(),
-              PostFeed(),
+              PostFeed(
+                postFeedTypePage: 'dashboard',
+              ),
+              PostFeed(
+                postFeedTypePage: 'dashboard',
+              ),
               SizedBox(
                 height: Sizing.blockSizeVertical * 50,
                 child: ListView(
                   itemExtent: Sizing.blockSizeVertical * 53.85,
                   scrollDirection: Axis.vertical,
                   children: controller.getTopBlogs(Sizing.blockSize * 98,
-                      Sizing.blockSizeVertical * 70, false),
+                      Sizing.blockSizeVertical * 68, false),
                 ),
               ),
             ],
