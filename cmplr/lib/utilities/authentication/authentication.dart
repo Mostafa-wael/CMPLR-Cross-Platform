@@ -28,7 +28,6 @@ class Authentication {
         userCredential = await auth.signInWithPopup(authProvider);
 
         user = userCredential.user;
-        print(user);
       } catch (e) {
         print(e);
       }
@@ -47,6 +46,9 @@ class Authentication {
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
+
+        print('weam is <3');
+        print(googleSignInAuthentication.accessToken);
 
         try {
           final UserCredential userCredential;

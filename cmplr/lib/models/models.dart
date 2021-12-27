@@ -6,3 +6,5 @@ export 'pages_model/home_tab/notes/notes_model.dart';
 export 'pages_model/home_tab/write_post_model.dart';
 export 'pages_model/home_tab/reblog_model.dart';
 export 'pages_model/home_tab/notes/user_note.dart';
+export 'Utilities/share_model.dart';
+export 'pages_model/explore_tab/search_model.dart';

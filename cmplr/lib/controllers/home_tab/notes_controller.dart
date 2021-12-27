@@ -1,10 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../controllers.dart';
+import '../../views/home_tab/reblog_screen.dart';
+import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../models/models.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import '../../models/models.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_ticket_provider_mixin.dart';
 
 class NotesController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -48,6 +52,8 @@ class NotesController extends GetxController
 
   RxBool get reblogsWithComments => _reblogsWithComments;
 
+  PostItem? postItem;
+
   @override
   void onInit() {
     _tabController = TabController(length: 3, vsync: this);
@@ -65,6 +71,7 @@ class NotesController extends GetxController
           : _focusCommentTextField.value = false;
     });
 
+    postItem = Get.arguments;
     super.onInit();
   }
 
@@ -125,10 +132,9 @@ class NotesController extends GetxController
         0,
         UserNote(
             noteType: 'reply',
-            blogName: 'current-user',
+            blogName: GetStorage().read('blog_name'),
             avatarShape: 'circle',
-            avatarURL:
-                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            avatarURL: GetStorage().read('avatar'),
             followed: false.obs,
             postReply: commentTextFieldController.text));
     commentTextFieldController.text = '';
@@ -155,5 +161,12 @@ class NotesController extends GetxController
 
   void closeNotesScreen() {
     Get.back();
+  }
+
+  void reblogFromNotes() {
+    // ignore: omit_local_variable_types
+    final ReblogController reblogController = Get.find<ReblogController>();
+    reblogController.setPost(postItem!);
+    Get.to(const ReblogView());
   }
 }

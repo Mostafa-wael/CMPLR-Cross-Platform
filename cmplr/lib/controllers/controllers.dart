@@ -17,3 +17,7 @@ export 'home_tab/write_post_controller.dart';
 // Utilities
 export 'utilities/post_item_controller.dart';
 export 'utilities/post_feed_controller.dart';
+export 'utilities/hashtag_posts_controller.dart';
+
+export 'explore_tab/search_controller.dart';
+export 'explore_tab/try_these_posts_controller.dart';

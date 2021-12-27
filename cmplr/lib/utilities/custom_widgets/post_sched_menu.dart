@@ -2,7 +2,24 @@ import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/controllers.dart';
 
-Widget postOption(String optionText, IconData icon, bool activated, onTap) {
+class PostOptions {
+  // postNow
+  static const postNow = 'publish';
+
+  static const schedule = 'schedule';
+
+  // saveAsDraft
+  static const String saveAsDraft = 'draft';
+  // postPrivately
+  static const String postPrivately = 'private';
+  // shareToTwitter // Not in the backend
+
+  static const String shareToTwitter =
+      'THIS SHOULDN\'T BE HERE, IT\'S NOT THE BACKEND\'S RESPONSIBILITY';
+}
+
+Widget postOption(String optionText, IconData icon, bool activated, onTap,
+    {String? subtext}) {
   return Material(
     child: InkWell(
       child: Padding(
@@ -22,212 +39,42 @@ Widget postOption(String optionText, IconData icon, bool activated, onTap) {
                   width: Sizing.blockSize * 2,
                 ),
                 SizedBox(width: Sizing.blockSize * 2),
-                Text(
-                  optionText,
-                  style: TextStyle(
-                    fontSize: Sizing.fontSize * 4,
-                    fontWeight: FontWeight.w400,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      optionText,
+                      style: TextStyle(
+                        fontSize: Sizing.fontSize * 4,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    if (subtext != null) Text(subtext),
+                  ],
                 )
               ],
             ),
-            activated
-                ? Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Icon(
-                        Icons.circle_outlined,
-                        size: Sizing.blockSize * 7.25,
-                        color: Colors.blue,
-                      ),
-                      Icon(
-                        Icons.circle,
-                        size: Sizing.blockSize * 5,
-                        color: Colors.blue,
-                      ),
-                    ],
-                  )
-                : Icon(
-                    Icons.circle_outlined,
-                    size: Sizing.blockSize * 7.25,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  Icons.circle_outlined,
+                  size: Sizing.blockSize * 7.25,
+                  color: Colors.blue,
+                ),
+                if (activated)
+                  Icon(
+                    Icons.circle,
+                    size: Sizing.blockSize * 5,
+                    color: Colors.blue,
                   ),
+              ],
+            )
           ],
         ),
       ),
       onTap: onTap,
     ),
-  );
-}
-
-Widget scheduleOption(bool activated, controller, context) {
-  return Material(
-    child: activated
-        ? Column(
-            children: [
-              InkWell(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Sizing.blockSize * 2, 0, Sizing.blockSize * 3, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              width: Sizing.blockSize,
-                            ),
-                            const Icon(Icons.schedule),
-                            SizedBox(
-                              width: Sizing.blockSize * 2,
-                            ),
-                            SizedBox(width: Sizing.blockSize * 2),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Schedule',
-                                  style: TextStyle(
-                                    fontSize: Sizing.fontSize * 4,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  controller.date,
-                                  style: TextStyle(
-                                      fontSize: Sizing.fontSize * 3,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.grey),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Icon(
-                              Icons.circle_outlined,
-                              size: Sizing.blockSize * 7.25,
-                              color: Colors.blue,
-                            ),
-                            Icon(
-                              Icons.circle,
-                              size: Sizing.blockSize * 5,
-                              color: Colors.blue,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    controller.setPostOption(PostOptions.schedule);
-                  }),
-              SizedBox(height: Sizing.blockSizeVertical * 1.5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.transparent),
-                    onPressed: () {
-                      controller.setDateTime(context);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.date.split('at')[0],
-                          style: TextStyle(
-                            fontSize: Sizing.fontSize * 3.75,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(
-                          width: Sizing.blockSize,
-                        ),
-                        const Icon(Icons.arrow_drop_down_outlined)
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: Sizing.blockSize * 8),
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.transparent),
-                    onPressed: () {
-                      controller.setTimeOfDay(context);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.date.split('at')[1],
-                          style: TextStyle(
-                            fontSize: Sizing.fontSize * 3.75,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(
-                          width: Sizing.blockSize,
-                        ),
-                        const Icon(Icons.arrow_drop_down_outlined)
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          )
-        : InkWell(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  Sizing.blockSize * 2, 0, Sizing.blockSize * 3, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: Sizing.blockSize,
-                      ),
-                      const Icon(Icons.schedule),
-                      SizedBox(
-                        width: Sizing.blockSize * 2,
-                      ),
-                      SizedBox(width: Sizing.blockSize * 2),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Schedule',
-                            style: TextStyle(
-                              fontSize: Sizing.fontSize * 4,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            controller.date,
-                            style: TextStyle(
-                                fontSize: Sizing.fontSize * 3,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Icon(
-                    Icons.circle_outlined,
-                    size: Sizing.blockSize * 7.25,
-                  ),
-                ],
-              ),
-            ),
-            onTap: () {
-              controller.setPostOption(PostOptions.schedule);
-            }),
   );
 }
 
@@ -255,15 +102,10 @@ Widget shareToTwitter(bool activated, controller) {
                 )
               ],
             ),
-            activated
-                ? Icon(
-                    Icons.toggle_on_outlined,
-                    size: Sizing.blockSize * 7.25,
-                  )
-                : Icon(
-                    Icons.toggle_off_outlined,
-                    size: Sizing.blockSize * 7.25,
-                  ),
+            Icon(
+              activated ? Icons.toggle_on_outlined : Icons.toggle_off_outlined,
+              size: Sizing.blockSize * 7.25,
+            )
           ],
         ),
       ),
@@ -272,4 +114,67 @@ Widget shareToTwitter(bool activated, controller) {
       },
     ),
   );
+}
+
+Widget scheduleOption(bool activated, WritePostController controller, context) {
+  return Material(
+      child: Column(
+    children: [
+      postOption('Schedule', Icons.access_time, activated, () {
+        controller.setPostOption(PostOptions.schedule);
+      }, subtext: controller.date),
+      SizedBox(height: Sizing.blockSizeVertical * 1.5),
+      if (activated)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.transparent),
+              onPressed: () {
+                controller.setDateTime(context);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.date.split('at')[0],
+                    style: TextStyle(
+                      fontSize: Sizing.fontSize * 3.75,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    width: Sizing.blockSize,
+                  ),
+                  const Icon(Icons.arrow_drop_down_outlined)
+                ],
+              ),
+            ),
+            SizedBox(width: Sizing.blockSize * 8),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.transparent),
+              onPressed: () {
+                controller.setTimeOfDay(context);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.date.split('at')[1],
+                    style: TextStyle(
+                      fontSize: Sizing.fontSize * 3.75,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    width: Sizing.blockSize,
+                  ),
+                  const Icon(Icons.arrow_drop_down_outlined)
+                ],
+              ),
+            ),
+          ],
+        ),
+    ],
+  ));
 }

@@ -1,3 +1,10 @@
+import 'dart:io';
+import 'dart:ui';
+
+import 'views/profile/create_new_tumblr.dart';
+
+import 'utilities/user.dart';
+
 import 'controllers/controllers.dart';
 import 'models/models.dart';
 
@@ -9,13 +16,38 @@ import 'cmplr_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'views/blog/screens/visitor_blog.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:flutter_driver/driver_extension.dart';
+
 import 'views/views.dart';
 import './routes.dart';
 
 // import 'package:flutter_driver/driver_extension.dart';
 
+// Activates swipe controls for web
+// Since flutter web doesn't allow shift+scroll for horizontal scrolling
+class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 Future<void> main() async {
+  // enableFlutterDriverExtension();
+
+  HttpOverrides.global = MyHttpOverrides();
+
   await PersistentStorage.initStorage();
 
   // Clears all persistent data based on a flag
@@ -27,7 +59,9 @@ Future<void> main() async {
   Get.put(ReblogController(const ReblogModel()));
   Get.put(WritePostController(const WritePostModel()));
 
-  // enableFlutterDriverExtension();
+  // Prepares any GetStorage fields we are supposed to have when we're logged in
+  if (Flags.mock) User.prepareMockData();
+
   runApp(const CMPLR());
   //runApp(const VisitorBlog());
 }
@@ -40,6 +74,7 @@ class CMPLR extends StatelessWidget {
   Widget build(BuildContext context) {
     final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
     return GetMaterialApp(
+      scrollBehavior: MouseAndTourchScrollBehaviour(),
       debugShowCheckedModeBanner: false,
       home: PersistentStorage.isLoggedIn ?? false
           ? const MasterPage() /*const MasterPage()*/

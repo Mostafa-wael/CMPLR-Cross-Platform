@@ -51,6 +51,8 @@ class LoginController extends GetxController {
 
   List errors = [];
 
+  FocusNode passwordFocusNode = FocusNode();
+
   /// This method navigates from the first login screen
   /// to the email login screen. It does this by first
   /// navigating to a splash screen for 0.5 seconds then
@@ -73,11 +75,10 @@ class LoginController extends GetxController {
 
   /// This method navigates from the email login screen to
   /// a screen where the user can click the 'Enter Password' button
-  Future<bool> tryLogin() async {
-    var successful = Future.value(false);
-
+  Future<List> tryLogin() async {
     errors = await _model.checkEmailPasswordCombination(
         emailController.text, passwordController.text);
+
     if (errors.isEmpty) {
       // Log in
       PersistentStorage.changeLoggedIn(true);
@@ -86,11 +87,15 @@ class LoginController extends GetxController {
         const MasterPage(),
         transition: Transition.rightToLeft,
       );
-      successful = Future.value(true);
     }
 
     update();
-    return successful;
+    return errors;
+  }
+
+  Future<void> focusOnPassword() async {
+    await Future.delayed(const Duration(milliseconds: 2000))
+        .then((value) => passwordFocusNode.requestFocus());
   }
 
   /// This method navigates to the last screen in the login with email process
@@ -103,9 +108,11 @@ class LoginController extends GetxController {
         const LoginEmailPassword(),
         transition: Transition.downToUp,
         routeName: Routes.loginEmailPassword,
-      );
-      update();
+      )!
+          .then((value) => focusOnPassword());
     }
+
+    update();
   }
 
   // This method navigates from the email login screen to

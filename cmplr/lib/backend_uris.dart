@@ -35,16 +35,21 @@ class PostURIs {
 }
 
 class GetURIs {
+  // FIXME: Replace the URI when the back implements this
+  static const String getSuggestedTags = '/tags';
+
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
 
   static String getGetBlogInfo(String blogID) => '/blog/$blogID/info';
 
   static const String getTagsForPosts = '/get_tags_for_posts';
-  static const String postFollow = 'CHANGE THIS';
-  static const String postStuff = 'CHANGE THISS';
+  static const String postFollowing = '/user/dashboard';
+  static const String postStuff =
+      '/user/recommended-blogs'; // FIXME: Check this
   static const String notes = '/notes';
 
+  static const String recommendedSearchQueries = '/search_bar';
   // TODO: Add the remaining get request URIS
 
 }

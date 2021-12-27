@@ -6,10 +6,17 @@ import 'package:get/get.dart';
 
 class PostFeedController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final ModelPostsFeed model = ModelPostsFeed();
-
+  late ModelPostsFeed model;
+  var postFeedType;
   bool _dataReloaded = false;
   RxBool isLoading = true.obs;
+
+  PostFeedController({required String postFeedTypeFeed}) {
+    postFeedType = postFeedTypeFeed;
+    print('in the controller, postFeedType is $postFeedType');
+    model = ModelPostsFeed(postFeedTypeContoller: postFeedTypeFeed);
+  }
+
   bool get dataReloaded => _dataReloaded;
   List<PostItem> posts = [];
 
@@ -19,14 +26,11 @@ class PostFeedController extends GetxController
   }
 
   Future<void> updatePosts() async {
-    try {
-      isLoading(true);
-      final newPosts = await model.getNewPosts();
-      posts += newPosts;
-    } finally {
-      isLoading(false);
-      _dataReloaded = true;
-      update();
-    }
+    print('in the controller, updatePosts, postFeedType is $postFeedType');
+    var newPosts = await model.getNewPosts(postFeedTypeContoller: postFeedType);
+    newPosts += posts; // So that new posts are added at the top
+    posts = newPosts;
+    _dataReloaded = true;
+    update();
   }
 }

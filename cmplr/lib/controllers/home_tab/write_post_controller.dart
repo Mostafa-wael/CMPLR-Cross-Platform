@@ -1,45 +1,40 @@
+import 'dart:convert';
+
+import '../../backend_uris.dart';
+import '../../utilities/custom_widgets/post_sched_menu.dart';
+
 import '../../models/cmplr_service.dart';
-
 import '../../utilities/sizing/sizing.dart';
-
 import '../../models/models.dart';
-// import 'package:metadata_fetch/metadata_fetch.dart';
-
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:get_storage/get_storage.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
-
-class PostOptions {
-  // postNow
-  static const postNow = 'published';
-  // schedule
-  static const String schedule = 'scheduled';
-  // saveAsDraft
-  static const String saveAsDraft = 'draft';
-  // postPrivately
-  static const String postPrivately = 'private';
-  // shareToTwitter // Not in the backend
-
-  static const String shareToTwitter =
-      'THIS SHOULDN\'T BE HERE, IT\'S NOT THE BACKEND\'S RESPONSIBILITY';
-}
+import 'package:flutter/services.dart';
 
 class WritePostController extends GetxController {
+  HtmlEditorController editorController = HtmlEditorController();
   String _currentPostOption = PostOptions.postNow;
-
-  String _date = '';
-  DateTime _dateTime = DateTime.now();
-  TimeOfDay _timeOfDay = TimeOfDay.now();
-  final _currentDate = DateTime.now();
 
   bool _bold = false;
   bool _italic = false;
   bool _strikethrough = false;
+
+  String _date = DateTime.now().toString();
+  DateTime _dateTime = DateTime.now();
+  TimeOfDay _timeOfDay = TimeOfDay.now();
+  final _currentDate = DateTime.now();
+
+  final _model;
+
+  var tagsFocusNode;
 
   final allColors = [
     Colors.white,
@@ -63,47 +58,57 @@ class WritePostController extends GetxController {
 
   // TODO: Change default color according to theme
   int _currentColor = 0;
-  final _userName = 'Username';
-  final _userAvatar = 'lib/utilities/assets/logo/logo_icon.png';
+
+  TextEditingController textController = TextEditingController();
 
   PostItem? post;
-
-  final _model;
-
   bool tagsAlwaysVisible = false;
 
   bool showTags(context) =>
       MediaQuery.of(context).viewInsets.bottom == 0 || tagsAlwaysVisible;
 
-  final TextEditingController textController = TextEditingController();
-
   // List<TextField> urls = [];
   // List<TextEditingController> urlControllers = [];
-
   // List<Widget> previews = [];
 
-  String get userName => _userName;
+  List<String> tags = [];
+  List suggestedTags = [];
+  TextEditingController tagsEditingController = TextEditingController();
 
-  String get userAvatar => _userAvatar;
+  String postType = 'text';
 
   Color get currentColor => allColors[_currentColor];
 
-  Future<void> changeColor(int colorIndex) async {
+  String get date => _date;
+
+  double get postHeight => post != null ? Sizing.blockSizeVertical * 27 : 0;
+
+  double get editorHeight => Sizing.blockSizeVertical * 82 - postHeight;
+
+  bool get bold => _bold;
+
+  bool get italic => _italic;
+
+  bool get strikethough => _strikethrough;
+
+  String get currentPostOption => _currentPostOption;
+
+  void changeColor(int colorIndex) {
     _currentColor = colorIndex;
     update();
   }
 
-  Future<void> toggleBold() async {
+  void toggleBold() {
     _bold = !_bold;
     update();
   }
 
-  Future<void> toggleItalic() async {
+  void toggleItalic() {
     _italic = !_italic;
     update();
   }
 
-  Future<void> toggleStrikethrough() async {
+  void toggleStrikethrough() {
     _strikethrough = !_strikethrough;
     update();
   }
@@ -114,7 +119,7 @@ class WritePostController extends GetxController {
       return Text(
         'Reblog',
         style: TextStyle(
-          fontSize: Sizing.fontSize * 4.2,
+          fontSize: Sizing.fontSize * 3.5,
           fontWeight: FontWeight.w400,
         ),
       );
@@ -123,27 +128,33 @@ class WritePostController extends GetxController {
       return Text(
         'Post',
         style: TextStyle(
-          fontSize: Sizing.fontSize * 4.2,
+          fontSize: Sizing.fontSize * 3.5,
           fontWeight: FontWeight.w400,
         ),
       );
   }
 
-  bool get bold => _bold;
-
-  bool get italic => _italic;
-
-  bool get strikethough => _strikethrough;
-
-  String get currentPostOption => _currentPostOption;
-
-  String get date => _date;
+  void setPost(PostItem postItem) {
+    post = postItem;
+    update();
+  }
 
   WritePostController(this._model) {
     initializeDateFormatting();
     final date_1 = DateFormat.MMMEd().format(_dateTime);
     final date_2 = DateFormat.jm().format(_dateTime);
-    _date = '${date_1}at ${date_2}';
+    _date = '${date_1} at  ${date_2}';
+
+    update();
+  }
+
+  bool isActivated(String option) {
+    return _currentPostOption == option;
+  }
+
+  void setPostOption(String option) {
+    _currentPostOption = option;
+    update();
   }
 
   Future<void> setDateTime(BuildContext context) async {
@@ -182,15 +193,6 @@ class WritePostController extends GetxController {
     }
   }
 
-  bool isActivated(String option) {
-    return _currentPostOption == option;
-  }
-
-  Future<void> setPostOption(String option) async {
-    _currentPostOption = option;
-    update();
-  }
-
   // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   // void addLink() {
   //   Future<Metadata?>? fut;
@@ -216,19 +218,26 @@ class WritePostController extends GetxController {
 
   // TODO: Show the created or reblogged post somewhere?
   Future<bool> postOrReblog() async {
-    final postText = prepareText();
+    final postText = await editorController.getText();
+
+    // TODO: get the real blog name
+    final blogName = GetStorage().read('blog_name') ?? 'tarek';
 
     final http.Response response;
     if (_model is WritePostModel)
       response = await _model.createPost(
-          content: postText,
-          state: _currentPostOption,
-          publishOn: _date,
-          tags: '',
-          date: DateTime.now().toString(),
-          isPrivate: _currentPostOption == PostOptions.postPrivately);
+        postText,
+        blogName,
+        postType,
+        _currentPostOption,
+        tags,
+      );
     else if (_model is ReblogModel)
-      response = await _model.reblogPost();
+      response = await _model.reblogPost(
+        post?.postID,
+        post?.reblogKey,
+        postText,
+      );
     else
       throw Exception('Unsupported model');
 
@@ -236,6 +245,7 @@ class WritePostController extends GetxController {
   }
 
   // wrap text in needed tags and return it
+  // To be removed
   String prepareText() {
     // Split into 3 part so we can insert the color more easily
     final tags = [
@@ -271,6 +281,33 @@ class WritePostController extends GetxController {
       }
     }
     return postText;
+  }
+
+  void onTagsSheetOpen() async {
+    await CMPLRService.get(GetURIs.getSuggestedTags, {})
+        .then((http.Response value) {
+      if (value.statusCode == CMPLRService.requestSuccess) {
+        suggestedTags = jsonDecode(value.body)['response']['tags'];
+        update();
+      } else
+        _showToast('Error occured while fetching suggested tags :(');
+    });
+  }
+
+  void onTagEnter(String tag) {
+    tags.add(tag);
+    update();
+  }
+
+  void onTagDeleted(String tag) {
+    tags.remove(tag);
+    update();
+  }
+
+  void onSuggestionChoosen(String suggestion) {
+    suggestedTags.remove(suggestion);
+    tags.add(suggestion);
+    update();
   }
 }
 

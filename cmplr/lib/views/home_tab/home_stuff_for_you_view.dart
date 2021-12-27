@@ -8,6 +8,7 @@ class HomeStuffForYou extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PostFeed();
+    print('Stuff for you');
+    return PostFeed(postFeedTypePage: 'recommended-blogs');
   }
 }

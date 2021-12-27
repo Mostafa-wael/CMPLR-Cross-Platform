@@ -1,3 +1,6 @@
+import 'package:get_storage/get_storage.dart';
+
+import 'reblog_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,48 +14,7 @@ import '../../models/models.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
-
-// This preserves the scroll state of the list view,
-// It is used due to this issue in Getx: https://github.com/jonataslaw/getx/issues/822
-class KeepAliveWrapper extends StatefulWidget {
-  final Widget child;
-
-  const KeepAliveWrapper({Key? key, required this.child}) : super(key: key);
-
-  @override
-  __KeepAliveWrapperState createState() => __KeepAliveWrapperState();
-}
-
-class __KeepAliveWrapperState extends State<KeepAliveWrapper>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return widget.child;
-  }
-
-  @override
-  bool get wantKeepAlive => true;
-}
-
-class RefreshWidget extends StatefulWidget {
-  final Widget child;
-  final Future Function() onRefresh;
-  const RefreshWidget({
-    Key? key,
-    required this.onRefresh,
-    required this.child,
-  }) : super(key: key);
-  @override
-  _RefreshWidgetState createState() => _RefreshWidgetState();
-}
-
-class _RefreshWidgetState extends State<RefreshWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return RefreshIndicator(child: widget.child, onRefresh: widget.onRefresh);
-  }
-}
+import '../../utilities/custom_widgets/custom_widgets.dart';
 
 class Notes extends StatelessWidget {
   Notes({Key? key}) : super(key: key);
@@ -75,7 +37,7 @@ class Notes extends StatelessWidget {
                 splashRadius: Sizing.blockSize * 7.5,
               ),
               title: Text(
-                '${Get.arguments} notes',
+                '${controller.postItem?.numNotes} notes',
                 style: const TextStyle(color: Colors.white),
               ),
               actions: [
@@ -243,14 +205,17 @@ class Notes extends StatelessWidget {
                                     onTap: () {
                                       controller.addStringToComment('@');
                                     },
-                                    child: 'square' == 'circle'
+                                    child: GetStorage().read('avatar_shape') ==
+                                            'circle'
                                         ? CircleAvatar(
-                                            backgroundColor: Colors.red,
+                                            backgroundImage: NetworkImage(
+                                                GetStorage().read('avatar')),
                                             radius: Sizing.blockSize * 3.4,
                                           )
                                         : GFAvatar(
                                             shape: GFAvatarShape.square,
-                                            backgroundColor: Colors.red,
+                                            backgroundImage: NetworkImage(
+                                                GetStorage().read('avatar')),
                                             size: Sizing.blockSize * 4.6,
                                           ),
                                   ),
@@ -537,7 +502,10 @@ class Notes extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.more_horiz,
                     color: Theme.of(context).primaryColor),
-                onPressed: () {},
+                onPressed: () {
+                  getReblogsWithCommentsModalSheet(
+                      context, note.blogName, note.postReply);
+                },
               )
             ],
           ),
@@ -563,7 +531,7 @@ class Notes extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    print('Reblog button pressed');
+                    controller.reblogFromNotes();
                   },
                   child: Container(
                       height: Sizing.blockSizeVertical * 6.75,
@@ -578,6 +546,7 @@ class Notes extends StatelessWidget {
                             color: Colors.lightBlue),
                       ))),
                 )),
+            // TODO: Might change this to 'go to user profile'
             Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -790,13 +759,12 @@ class Notes extends StatelessWidget {
       BuildContext context, String blogName, String comment) {
     return showModalBottomSheet(
         constraints: BoxConstraints(
-            maxHeight: blogName == 'current-user'
+            maxHeight: blogName == GetStorage().read('blog_name')
                 ? Sizing.blockSizeVertical * 15
                 : Sizing.blockSizeVertical * 30),
         context: context,
         builder: (BuildContext context) {
-          // Change this later
-          if (blogName == 'current-user') {
+          if (blogName == GetStorage().read('blog_name')) {
             return GetBuilder<NotesController>(
                 builder: (controller) => Column(
                       children: [
@@ -947,6 +915,50 @@ class Notes extends StatelessWidget {
                       ],
                     ),
                   ));
+        });
+  }
+
+  Future<void> getReblogsWithCommentsModalSheet(
+      BuildContext context, String blogName, String comment) {
+    return showModalBottomSheet(
+        constraints: BoxConstraints(maxHeight: Sizing.blockSizeVertical * 30),
+        context: context,
+        builder: (BuildContext context) {
+          if (blogName == GetStorage().read('blog_name')) {
+            return GetBuilder<NotesController>(
+                builder: (NotesController controller) => Column(
+                      children: [
+                        buildModalSheetTile('Reblog', () {
+                          controller.reblogFromNotes();
+                        }),
+
+                        // TODO: Might change this to 'go to user profile'
+                        buildModalSheetTile('View Post', () {
+                          print('view post');
+                        }),
+                      ],
+                    ));
+          } else {
+            return GetBuilder<NotesController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Reblog', () {
+                          print('reblog');
+                        }),
+                        buildModalSheetTile('View Post', () {
+                          print('view post');
+                        }),
+                        buildModalSheetTile('Report', () {
+                          print('Report');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Block ' + blogName, () {
+                          print('Block');
+                          Get.back();
+                        }),
+                      ],
+                    ));
+          }
         });
   }
 }
