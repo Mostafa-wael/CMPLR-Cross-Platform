@@ -23,6 +23,7 @@ class WritePostOrReblog extends StatelessWidget {
     return GetBuilder<WritePostController>(
       builder: (WritePostController controller) => SafeArea(
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             toolbarHeight: Sizing.blockSizeVertical * 9,
             leading: IconButton(
@@ -49,7 +50,7 @@ class WritePostOrReblog extends StatelessWidget {
                 builder: (WritePostController controller) => Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                      //TODO: Make the color according to thetme
+                      //TODO: Make the color according to the;me
                       color: Colors.white,
                       onPressed: () {
                         showModalBottomSheet(
@@ -177,6 +178,7 @@ class WritePostOrReblog extends StatelessWidget {
                             profilePhoto: controller.post!.profilePhoto,
                             showBottomBar: false,
                             isLiked: controller.post!.isLiked,
+                            isMine: controller.post!.isMine,
                           ),
                         ),
                       ),
@@ -201,6 +203,7 @@ class WritePostOrReblog extends StatelessWidget {
                           final base64Image =
                               '''<img src="data:image/${file.extension};base64,$base64Data" data-filename="${file.name}" width="${Sizing.blockSize * 80}"/>''';
                           controller.editorController.insertHtml(base64Image);
+                          controller.postType = 'photos';
                         } else if ({InsertFileType.video, InsertFileType.audio}
                             .contains(type)) {
                           // Do nothing
@@ -230,101 +233,195 @@ class WritePostOrReblog extends StatelessWidget {
                         IconButton(
                             icon: const Icon(Icons.tag),
                             onPressed: () {
+                              controller.onTagsSheetOpen();
                               showModalBottomSheet(
+                                isScrollControlled: true,
                                 context: context,
-                                constraints: BoxConstraints(
-                                    // TODO: Make this variable
-                                    // according to schedule
-                                    maxHeight: Sizing.blockSizeVertical * 30),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       Sizing.blockSize * 5),
                                 ),
                                 builder: (BuildContext context) {
                                   return GetBuilder<WritePostController>(
-                                      builder: (controller) => Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                  height:
-                                                      Sizing.blockSizeVertical *
-                                                          3),
-                                              Container(
-                                                width: Sizing.blockSize * 12,
-                                                height: Sizing.blockSize * 1,
-                                                //TODO: Link this to theme
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey,
-                                                    borderRadius: BorderRadius
-                                                        .all(Radius.circular(
-                                                            Sizing.blockSize))),
-                                              ),
-                                              SizedBox(
-                                                  height:
-                                                      Sizing.blockSizeVertical *
-                                                          3),
-                                              Stack(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Add tags',
-                                                        style: TextStyle(
-                                                          fontSize:
-                                                              Sizing.fontSize *
-                                                                  4.5,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                          right:
-                                                              Sizing.blockSize *
-                                                                  4,
-                                                        ),
-                                                        child: InkWell(
-                                                          child: Text(
-                                                            'Done',
-                                                            style: TextStyle(
-                                                              fontSize: Sizing
-                                                                      .fontSize *
-                                                                  4,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color:
-                                                                  Colors.blue,
-                                                            ),
-                                                          ),
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
+                                    builder: (controller) =>
+                                        SingleChildScrollView(
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
                                                 height:
                                                     Sizing.blockSizeVertical *
-                                                        3,
+                                                        3),
+                                            Container(
+                                              width: Sizing.blockSize * 12,
+                                              height: Sizing.blockSize * 1,
+                                              //TODO: Link this to theme
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius: BorderRadius
+                                                      .all(Radius.circular(
+                                                          Sizing.blockSize))),
+                                            ),
+                                            SizedBox(
+                                                height:
+                                                    Sizing.blockSizeVertical *
+                                                        3),
+                                            Stack(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Add tags',
+                                                      style: TextStyle(
+                                                        fontSize:
+                                                            Sizing.fontSize *
+                                                                4.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        right:
+                                                            Sizing.blockSize *
+                                                                4,
+                                                      ),
+                                                      child: InkWell(
+                                                        child: Text(
+                                                          'Done',
+                                                          style: TextStyle(
+                                                            fontSize: Sizing
+                                                                    .fontSize *
+                                                                4,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Colors.blue,
+                                                          ),
+                                                        ),
+                                                        onTap: () {
+                                                          Get.back();
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height:
+                                                  Sizing.blockSizeVertical * 3,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical:
+                                                      Sizing.blockSizeVertical *
+                                                          1,
+                                                  horizontal:
+                                                      Sizing.blockSize * 3),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  TextField(
+                                                    controller: controller
+                                                        .tagsEditingController,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                            hintText:
+                                                                'Enter a tag!'),
+                                                    onEditingComplete: () {
+                                                      controller.onTagEnter(
+                                                          controller
+                                                              .tagsEditingController
+                                                              .text);
+                                                      controller
+                                                          .tagsEditingController
+                                                          .clear();
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    height: Sizing
+                                                            .blockSizeVertical *
+                                                        7,
+                                                    child: ListView.builder(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount: controller
+                                                            .tags.length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          final tagName =
+                                                              controller
+                                                                  .tags[index];
+                                                          return Chip(
+                                                            label:
+                                                                Text(tagName),
+                                                            deleteIcon:
+                                                                const Icon(Icons
+                                                                    .cancel),
+                                                            // Remove from suggestions and add to included
+                                                            onDeleted: () {
+                                                              controller
+                                                                  .onTagDeleted(
+                                                                      tagName);
+                                                            },
+                                                          );
+                                                        }),
+                                                  ),
+                                                  SizedBox(
+                                                    height: Sizing
+                                                            .blockSizeVertical *
+                                                        7,
+                                                    child: ListView.builder(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      itemCount: controller
+                                                          .suggestedTags.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        final tagName = controller
+                                                                .suggestedTags[
+                                                            index];
+                                                        return Chip(
+                                                          label: Text(tagName),
+                                                          deleteIcon:
+                                                              const Icon(
+                                                                  Icons.add),
+                                                          // Remove from suggestions and add to included
+                                                          onDeleted: () {
+                                                            controller
+                                                                .onSuggestionChoosen(
+                                                                    tagName);
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              addTags()
-                                            ],
-                                          ));
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             })
@@ -389,34 +486,5 @@ class WritePostOrReblog extends StatelessWidget {
               ),
       ],
     );
-  }
-
-  Widget addTags() {
-    return Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: Sizing.blockSizeVertical * 1,
-            horizontal: Sizing.blockSize * 3),
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          SizedBox(
-              height: Sizing.blockSizeVertical * 5, child: const TextField()),
-          SizedBox(
-              height: Sizing.blockSizeVertical * 10,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: Sizing.blockSizeVertical,
-                    horizontal: Sizing.blockSize),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    const Chip(label: Text('Bruh')),
-                    const Chip(label: Text('AAAAA')),
-                    const Chip(label: Text('PAIN')),
-                    const Chip(label: Text('MAKE')),
-                    const Chip(label: Text('IT')),
-                    const Chip(label: Text('STOP')),
-                  ],
-                ),
-              )),
-        ]));
   }
 }

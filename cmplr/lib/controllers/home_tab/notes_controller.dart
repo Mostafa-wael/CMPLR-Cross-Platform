@@ -154,7 +154,7 @@ class NotesController extends GetxController
 
   // This fetches the data once again
   Future<void> refreshScreen() async {
-    notes = await notesModel.getNotes();
+    notes = await notesModel.getNotes(postItem!.postID);
     dataReloaded = true;
     update();
   }

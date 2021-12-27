@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes
+// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes, no_duplicate_case_values
 
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../backend_uris.dart';
@@ -897,8 +896,7 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  //static const String apiIp = 'http://a667-41-44-141-19.ngrok.io/api';
-  static const String apiIp = 'https://beta.cmplr.tech/';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1096,11 +1094,13 @@ class CMPLRService {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
 
-      return http.Response(
-          jsonEncode(notesMockData['response']), requestSuccess);
+      return http.Response(jsonEncode(notesMockData), requestSuccess);
     } else {
-      return http.Response(
-          jsonEncode(notesMockData['response']), requestSuccess);
+      //${params['post_id']}
+      // TODO: change the 11
+      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+
+      return http.get(uri, headers: getHeader);
     }
   }
 

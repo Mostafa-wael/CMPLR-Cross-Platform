@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import '../../backend_uris.dart';
 import '../../utilities/custom_widgets/post_sched_menu.dart';
 
 import '../../models/cmplr_service.dart';
@@ -14,6 +17,7 @@ import 'package:intl/intl.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 
 class WritePostController extends GetxController {
   HtmlEditorController editorController = HtmlEditorController();
@@ -29,6 +33,8 @@ class WritePostController extends GetxController {
   final _currentDate = DateTime.now();
 
   final _model;
+
+  var tagsFocusNode;
 
   final allColors = [
     Colors.white,
@@ -61,11 +67,15 @@ class WritePostController extends GetxController {
   bool showTags(context) =>
       MediaQuery.of(context).viewInsets.bottom == 0 || tagsAlwaysVisible;
 
-  List<TextField> urls = [];
-  List<TextEditingController> urlControllers = [];
-  List<Widget> previews = [];
+  // List<TextField> urls = [];
+  // List<TextEditingController> urlControllers = [];
+  // List<Widget> previews = [];
 
   List<String> tags = [];
+  List suggestedTags = [];
+  TextEditingController tagsEditingController = TextEditingController();
+
+  String postType = 'text';
 
   Color get currentColor => allColors[_currentColor];
 
@@ -134,6 +144,7 @@ class WritePostController extends GetxController {
     final date_1 = DateFormat.MMMEd().format(_dateTime);
     final date_2 = DateFormat.jm().format(_dateTime);
     _date = '${date_1} at  ${date_2}';
+
     update();
   }
 
@@ -211,14 +222,13 @@ class WritePostController extends GetxController {
 
     // TODO: get the real blog name
     final blogName = GetStorage().read('blog_name') ?? 'tarek';
-    const type = 'text';
 
     final http.Response response;
     if (_model is WritePostModel)
       response = await _model.createPost(
         postText,
         blogName,
-        type,
+        postType,
         _currentPostOption,
         tags,
       );
@@ -235,6 +245,7 @@ class WritePostController extends GetxController {
   }
 
   // wrap text in needed tags and return it
+  // To be removed
   String prepareText() {
     // Split into 3 part so we can insert the color more easily
     final tags = [
@@ -270,6 +281,33 @@ class WritePostController extends GetxController {
       }
     }
     return postText;
+  }
+
+  void onTagsSheetOpen() async {
+    await CMPLRService.get(GetURIs.getSuggestedTags, {})
+        .then((http.Response value) {
+      if (value.statusCode == CMPLRService.requestSuccess) {
+        suggestedTags = jsonDecode(value.body)['response']['tags'];
+        update();
+      } else
+        _showToast('Error occured while fetching suggested tags :(');
+    });
+  }
+
+  void onTagEnter(String tag) {
+    tags.add(tag);
+    update();
+  }
+
+  void onTagDeleted(String tag) {
+    tags.remove(tag);
+    update();
+  }
+
+  void onSuggestionChoosen(String suggestion) {
+    suggestedTags.remove(suggestion);
+    tags.add(suggestion);
+    update();
   }
 }
 

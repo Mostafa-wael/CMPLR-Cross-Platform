@@ -35,13 +35,16 @@ class PostURIs {
 }
 
 class GetURIs {
+  // FIXME: Replace the URI when the back implements this
+  static const String getSuggestedTags = '/tags';
+
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
 
   static const String getTagsForPosts = '/get_tags_for_posts';
   static const String postFollowing = '/user/dashboard';
   static const String postStuff =
-      '/user/recommended-blogs'; // FIXME: Check this
+      '/user/dashboard'; // TODO: add the correct route
   static const String notes = '/notes';
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';
