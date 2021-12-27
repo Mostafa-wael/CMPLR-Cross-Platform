@@ -13,6 +13,7 @@ export 'home_tab/notes_controller.dart';
 export 'home_tab/home_controller.dart';
 export 'home_tab/reblog_controller.dart';
 export 'home_tab/write_post_controller.dart';
+export 'profile_tab/profile_controller.dart';
 
 // Utilities
 export 'utilities/post_item_controller.dart';

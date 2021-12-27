@@ -872,6 +872,23 @@ class CMPLRService {
         'Ac Milan',
       ]
     },
+    GetURIs.blogInfo: {
+      "meta": {"status": 200, "msg": "Success"},
+      "response": {
+        "blog_id": 1,
+        "blog_name": "yousef",
+        "title": "untitled",
+        "avatar":
+            "https://assets.tumblr.com/images/default_avatar/cone_closed_128.png",
+        "avatar_shape": "circle",
+        "header image":
+            "https://assets.tumblr.com/images/default_header/optica_pattern_02_640.png?_v=b976ee00195b1b7806c94ae285ca46a7",
+        "description": "Test",
+        "background_color": "white",
+        "url": "http://cmplr/1/info", // TODO: Check this
+        "last_update": "2021-12-27T13:50:56.980364Z",
+      }
+    }
   };
 
   static const requestSuccess = 200;
@@ -880,7 +897,8 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'http://a667-41-44-141-19.ngrok.io/api';
+  //static const String apiIp = 'http://a667-41-44-141-19.ngrok.io/api';
+  static const String apiIp = 'https://beta.cmplr.tech/';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -925,6 +943,8 @@ class CMPLRService {
         return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
+      case GetURIs.blogInfo:
+        return getBlogInfo(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1055,6 +1075,17 @@ class CMPLRService {
       await Future.delayed(const Duration(milliseconds: 1500));
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), res['meta']['status_code']);
+    } else {
+      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getBlogInfo(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), 200);
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }

@@ -53,7 +53,7 @@ class MasterPageController extends GetxController {
   /// Replaces the extra signup pages with the proper pages upong login.
   void logIn() {
     pages[2] = const Center(child: Text('Activity'));
-    pages[3] = const Center(child: Text('Profile'));
+    pages[3] = const ProfileView();
   }
 
   /// Shows either the activity or profile page depending on where the user
