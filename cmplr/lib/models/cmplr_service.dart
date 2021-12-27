@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../backend_uris.dart';
@@ -880,7 +879,7 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'http://a667-41-44-141-19.ngrok.io/api';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -925,8 +924,6 @@ class CMPLRService {
         return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
-      case GetURIs.getSuggestedTags:
-        return getSuggestedTags(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1067,11 +1064,13 @@ class CMPLRService {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
 
-      return http.Response(
-          jsonEncode(notesMockData['response']), requestSuccess);
+      return http.Response(jsonEncode(notesMockData), requestSuccess);
     } else {
-      return http.Response(
-          jsonEncode(notesMockData['response']), requestSuccess);
+      //${params['post_id']}
+      // TODO: change the 11
+      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+
+      return http.get(uri, headers: getHeader);
     }
   }
 
@@ -1090,11 +1089,8 @@ class CMPLRService {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), insertSuccess));
     } else
-      return http.post(
-        Uri.parse(apiIp + backendURI),
-        headers: postHeader,
-        body: jsonEncode(params),
-      );
+      return http.post(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
   }
 
   static Future<http.Response> getRecommendedSearchQueries(
@@ -1111,26 +1107,6 @@ class CMPLRService {
           jsonEncode(_mockData[GetURIs.recommendedSearchQueries]
               ['recommended_search_queries']),
           requestSuccess);
-    }
-  }
-
-  // FIXME: Figure out how the backend really returns the data
-  static Future<http.Response> getSuggestedTags(
-      String backendURI, Map params) async {
-    if (Flags.mock) {
-      await Future.delayed(const Duration(milliseconds: 200));
-
-      return Future.value(http.Response(
-          jsonEncode(
-            {
-              'response': {
-                'tags': ['CMPLR', 'is', 'the', 'best!']
-              }
-            },
-          ),
-          requestSuccess));
-    } else {
-      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
   }
 }

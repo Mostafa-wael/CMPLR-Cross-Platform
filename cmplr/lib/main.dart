@@ -74,8 +74,9 @@ class CMPLR extends StatelessWidget {
       scrollBehavior: MouseAndTourchScrollBehaviour(),
       debugShowCheckedModeBanner: false,
       home: PersistentStorage.isLoggedIn ?? false
-          ? const MasterPage() /*const MasterPage()*/
-          : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
+          ? const SignupOrLoginScreen()
+          : const MasterPage() /*const MasterPage()*/
+      /*SignupOrLoginScreen()*/,
       theme: themes[1],
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
