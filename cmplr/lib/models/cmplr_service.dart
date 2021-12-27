@@ -1194,9 +1194,7 @@ class CMPLRService {
 
       return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
     } else {
-      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
-
-      return http.get(uri, headers: getHeader);
+      return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
     }
   }
 }

@@ -233,7 +233,7 @@ class ProfileSearch extends StatelessWidget {
                         icon: const Icon(Icons.person),
                         onSelected: (String choice) {
                           print(choice);
-                          popupMenuChoiceAction(choice, index);
+                          popupMenuChoiceAction(choice, index, context);
                         },
                         itemBuilder: (context) {
                           return controller.popupMenuChoices.map((choice) {
@@ -277,10 +277,11 @@ class ProfileSearch extends StatelessWidget {
     );
   }
 
-  void popupMenuChoiceAction(String choice, int index) {
+  void popupMenuChoiceAction(String choice, int index, BuildContext context) {
     switch (choice) {
       case 'Share':
         {
+          controller.share(context, controller.followingBlogs![index].blogURL);
           break;
         }
       case 'Get notifications':

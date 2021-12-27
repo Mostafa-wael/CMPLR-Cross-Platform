@@ -12,13 +12,11 @@ class NotesModel {
     final response =
         await CMPLRService.getNotes('/post/notes', {'post_id': postID});
     final responseBody = jsonDecode(response.body);
-    print(responseBody);
-    print(responseBody[0]['total_likes']);
-    var totalNotes = int.parse(responseBody[0]['total_likes'].toString()) +
-        int.parse(responseBody[0]['total_reblogs'].toString()) +
-        int.parse(responseBody[0]['total_replys'].toString());
+    var totalNotes = int.parse(responseBody['total_likes'].toString()) +
+        int.parse(responseBody['total_reblogs'].toString()) +
+        int.parse(responseBody['total_replys'].toString());
     for (var i = 0; i < totalNotes; i++) {
-      notes.add(UserNote.fromJson(responseBody[0]['notes'][i]));
+      notes.add(UserNote.fromJson(responseBody['notes'][i]));
     }
     print(notes.length);
     var _comments = <UserNote>[];

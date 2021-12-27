@@ -5,6 +5,7 @@ class Blog {
   final avatarShape;
   final blogName;
   final profileTitle;
+  final blogURL;
   RxBool following = true.obs;
 
   Blog(
@@ -12,6 +13,7 @@ class Blog {
       this.avatarShape,
       this.blogName,
       this.profileTitle,
+      this.blogURL,
       required this.following});
 
   factory Blog.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class Blog {
         avatarShape: json['avatar_shape'],
         blogName: json['blog_name'],
         profileTitle: json['title'],
+        blogURL: json['blog_url'],
         following: followingValue);
   }
 }

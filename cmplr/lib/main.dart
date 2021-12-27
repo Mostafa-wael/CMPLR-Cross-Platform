@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'views/profile_tab/create_new_tumblr.dart';
-
 import 'utilities/user.dart';
 
 import 'controllers/controllers.dart';
@@ -19,13 +17,13 @@ import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_driver/driver_extension.dart';
 
+// Activates swipe controls for web
+// Since flutter web doesn't allow shift+scroll for horizontal scrolling
 import 'views/views.dart';
 import './routes.dart';
 
 // import 'package:flutter_driver/driver_extension.dart';
 
-// Activates swipe controls for web
-// Since flutter web doesn't allow shift+scroll for horizontal scrolling
 class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
@@ -63,7 +61,6 @@ Future<void> main() async {
   if (Flags.mock) User.prepareMockData();
 
   runApp(const CMPLR());
-  //runApp(const VisitorBlog());
 }
 
 class CMPLR extends StatelessWidget {

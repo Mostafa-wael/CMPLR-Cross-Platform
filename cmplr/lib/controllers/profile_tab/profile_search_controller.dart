@@ -1,3 +1,5 @@
+import 'package:share_plus/share_plus.dart';
+
 import '../../views/views.dart';
 import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
 import '../../utilities/custom_widgets/top_blogs_element.dart';
@@ -66,5 +68,9 @@ class ProfileSearchController extends GetxController
 
   void closeSearchPage() {
     Get.back();
+  }
+
+  Future<void> share(BuildContext context, String postText) async {
+    await Share.share(postText);
   }
 }

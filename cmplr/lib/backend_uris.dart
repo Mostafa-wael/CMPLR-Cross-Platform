@@ -45,6 +45,7 @@ class GetURIs {
   static const String postFollowing = '/user/dashboard';
   static const String postStuff =
       '/user/dashboard'; // TODO: add the correct route
+  static const String hashtagPosts = '/post/tagged';
   static const String notes = '/notes';
 
   static const String recommendedSearchQueries = '/search_bar';
