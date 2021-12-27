@@ -25,6 +25,7 @@ class PostItem extends StatelessWidget {
   final int numNotes;
   final List<dynamic> hashtags;
   final bool showBottomBar;
+  final bool isMine;
   RxBool isLiked = false.obs;
 
   PostItem(
@@ -37,6 +38,7 @@ class PostItem extends StatelessWidget {
       required this.numNotes,
       required this.profilePhoto,
       required this.showBottomBar,
+      required this.isMine,
       required this.isLiked})
       : super(key: key);
   final controller = Get.put(PostItemController());
@@ -190,6 +192,7 @@ class PostItem extends StatelessWidget {
     final isLikedValue =
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
     return PostItem(
+      isMine: json['post']['is_mine'],
       postData: json['post']['content'],
       postID: "$json['post']['post_id']",
       reblogKey: "$json['post']['post_id']",

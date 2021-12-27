@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import '../../utilities/sizing/sizing.dart';
+import '../../backend_uris.dart';
 
 /// The home screen, it has 2 tabs: Following and stuff for you
 class HomeStuffForYou extends StatelessWidget {
@@ -9,6 +9,6 @@ class HomeStuffForYou extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Stuff for you');
-    return PostFeed(postFeedTypePage: 'recommended-blogs');
+    return PostFeed(postFeedTypePage: GetURIs.postStuff);
   }
 }

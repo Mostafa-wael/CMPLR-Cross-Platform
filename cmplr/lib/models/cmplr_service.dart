@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes
+// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes,
+// no_duplicate_case_values
 
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:get/get_connect.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:get_storage/get_storage.dart';
 
 import '../backend_uris.dart';
@@ -103,7 +105,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "BCAkeGl4zX",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -127,7 +130,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "HqQeXGEuJp",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -151,7 +155,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "xlfsmD2x3H",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -175,7 +180,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "LFyeAIKqW8",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -199,7 +205,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "RmM28BSiHQ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -223,7 +230,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "p4Djf0ywSZ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -247,7 +255,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "P7qx8ZqDQI",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -271,7 +280,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "FQIgIPyCiV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -295,7 +305,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "NOGX1jppnV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -319,7 +330,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nK304kfDiW",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -343,7 +355,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "O6HYTGpTIJ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -367,7 +380,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nFfU3WfQT1",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -391,7 +405,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "cZtZZkfI1I",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -415,7 +430,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:26:29 UTC",
               "source_content": null,
               "tags": [],
-              "is_liked": true
+              "is_liked": true,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -439,7 +455,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:33:07 UTC",
               "source_content": null,
               "tags": ["hi", "bye"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -474,7 +491,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "BCAkeGl4zX",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -498,7 +516,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "HqQeXGEuJp",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -522,7 +541,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "xlfsmD2x3H",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -546,7 +566,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "LFyeAIKqW8",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -570,7 +591,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "RmM28BSiHQ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -594,7 +616,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "p4Djf0ywSZ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -618,7 +641,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "P7qx8ZqDQI",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -642,7 +666,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "FQIgIPyCiV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -666,7 +691,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "NOGX1jppnV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -690,7 +716,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nK304kfDiW",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -714,7 +741,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "O6HYTGpTIJ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -738,7 +766,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nFfU3WfQT1",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -762,7 +791,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "cZtZZkfI1I",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -786,7 +816,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:26:29 UTC",
               "source_content": null,
               "tags": [],
-              "is_liked": true
+              "is_liked": true,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -810,7 +841,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:33:07 UTC",
               "source_content": null,
               "tags": ["hi", "bye"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -873,6 +905,23 @@ class CMPLRService {
         'Ac Milan',
       ]
     },
+    GetURIs.blogInfo: {
+      "meta": {"status": 200, "msg": "Success"},
+      "response": {
+        "blog_id": 1,
+        "blog_name": "yousef",
+        "title": "untitled",
+        "avatar":
+            "https://assets.tumblr.com/images/default_avatar/cone_closed_128.png",
+        "avatar_shape": "circle",
+        "header image":
+            "https://assets.tumblr.com/images/default_header/optica_pattern_02_640.png?_v=b976ee00195b1b7806c94ae285ca46a7",
+        "description": "Test",
+        "background_color": "white",
+        "url": "http://cmplr/1/info", // TODO: Check this
+        "last_update": "2021-12-27T13:50:56.980364Z",
+      }
+    }
   };
 
   static const requestSuccess = 200;
@@ -881,7 +930,7 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'http://a667-41-44-141-19.ngrok.io/api';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -922,12 +971,13 @@ class CMPLRService {
     switch (route) {
       case GetURIs.postFollowing:
         return getPosts(route, params);
+      // ignore: no_duplicate_case_values
       case GetURIs.postStuff:
         return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
-      case GetURIs.getSuggestedTags:
-        return getSuggestedTags(route, params);
+      case GetURIs.blogInfo:
+        return getBlogInfo(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1063,16 +1113,29 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getBlogInfo(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), 200);
+    } else {
+      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
   // ToDo: should be a Get request
   static Future<http.Response> getNotes(String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
 
-      return http.Response(
-          jsonEncode(notesMockData['response']), requestSuccess);
+      return http.Response(jsonEncode(notesMockData), requestSuccess);
     } else {
-      return http.Response(
-          jsonEncode(notesMockData['response']), requestSuccess);
+      //${params['post_id']}
+      // TODO: change the 11
+      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+
+      return http.get(uri, headers: getHeader);
     }
   }
 
@@ -1095,11 +1158,8 @@ class CMPLRService {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), insertSuccess));
     } else
-      return http.post(
-        Uri.parse(apiIp + backendURI),
-        headers: postHeader,
-        body: jsonEncode(params),
-      );
+      return http.post(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
   }
 
   static Future<http.Response> getRecommendedSearchQueries(
@@ -1116,26 +1176,6 @@ class CMPLRService {
           jsonEncode(_mockData[GetURIs.recommendedSearchQueries]
               ['recommended_search_queries']),
           requestSuccess);
-    }
-  }
-
-  // FIXME: Figure out how the backend really returns the data
-  static Future<http.Response> getSuggestedTags(
-      String backendURI, Map params) async {
-    if (Flags.mock) {
-      await Future.delayed(const Duration(milliseconds: 200));
-
-      return Future.value(http.Response(
-          jsonEncode(
-            {
-              'response': {
-                'tags': ['CMPLR', 'is', 'the', 'best!']
-              }
-            },
-          ),
-          requestSuccess));
-    } else {
-      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
   }
 }

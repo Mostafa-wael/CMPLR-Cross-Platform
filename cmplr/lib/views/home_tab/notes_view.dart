@@ -59,7 +59,7 @@ class Notes extends StatelessWidget {
   Widget getBody(BuildContext context) {
     if (!controller.dataReloaded) {
       return FutureBuilder(
-          future: controller.notesModel.getNotes(),
+          future: controller.notesModel.getNotes(controller.postItem!.postID),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               controller.notes = snapshot.data ?? [];
