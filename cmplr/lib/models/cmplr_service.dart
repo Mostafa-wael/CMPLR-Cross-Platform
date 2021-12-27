@@ -925,6 +925,8 @@ class CMPLRService {
         return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
+      case GetURIs.getSuggestedTags:
+        return getSuggestedTags(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1088,8 +1090,11 @@ class CMPLRService {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), insertSuccess));
     } else
-      return http.post(Uri.parse(apiIp + backendURI),
-          headers: postHeader, body: jsonEncode(params));
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
   }
 
   static Future<http.Response> getRecommendedSearchQueries(
@@ -1106,6 +1111,26 @@ class CMPLRService {
           jsonEncode(_mockData[GetURIs.recommendedSearchQueries]
               ['recommended_search_queries']),
           requestSuccess);
+    }
+  }
+
+  // FIXME: Figure out how the backend really returns the data
+  static Future<http.Response> getSuggestedTags(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      return Future.value(http.Response(
+          jsonEncode(
+            {
+              'response': {
+                'tags': ['CMPLR', 'is', 'the', 'best!']
+              }
+            },
+          ),
+          requestSuccess));
+    } else {
+      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
   }
 }

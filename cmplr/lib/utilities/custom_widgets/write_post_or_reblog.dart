@@ -15,14 +15,14 @@ import 'package:get/get.dart';
 class WritePostOrReblog extends StatelessWidget {
   final model;
   final WritePostController controller;
-  const WritePostOrReblog(this.model, this.controller, {Key? key})
-      : super(key: key);
+  const WritePostOrReblog(this.model, this.controller, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<WritePostController>(
       builder: (WritePostController controller) => SafeArea(
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             toolbarHeight: Sizing.blockSizeVertical * 9,
             leading: IconButton(
@@ -49,7 +49,7 @@ class WritePostOrReblog extends StatelessWidget {
                 builder: (WritePostController controller) => Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                      //TODO: Make the color according to thetme
+                      //TODO: Make the color according to the;me
                       color: Colors.white,
                       onPressed: () {
                         showModalBottomSheet(
@@ -58,64 +58,49 @@ class WritePostOrReblog extends StatelessWidget {
                               // TODO: Make this variable according to schedule
                               maxHeight: Sizing.blockSizeVertical * 60),
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(Sizing.blockSize * 5),
+                            borderRadius: BorderRadius.circular(Sizing.blockSize * 5),
                           ),
                           builder: (BuildContext context) {
                             return GetBuilder<WritePostController>(
                                 builder: (controller) => Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        SizedBox(
-                                            height:
-                                                Sizing.blockSizeVertical * 3),
+                                        SizedBox(height: Sizing.blockSizeVertical * 3),
                                         Container(
                                           width: Sizing.blockSize * 12,
                                           height: Sizing.blockSize * 1,
                                           //TODO: Link this to theme
                                           decoration: BoxDecoration(
                                               color: Colors.grey,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                      Sizing.blockSize))),
+                                              borderRadius: BorderRadius.all(Radius.circular(Sizing.blockSize))),
                                         ),
-                                        SizedBox(
-                                            height:
-                                                Sizing.blockSizeVertical * 3),
+                                        SizedBox(height: Sizing.blockSizeVertical * 3),
                                         // Menu name and done button
                                         Stack(
                                           children: [
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   'Post options',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        Sizing.fontSize * 4.5,
+                                                    fontSize: Sizing.fontSize * 4.5,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                              mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right:
-                                                          Sizing.blockSize * 4),
+                                                  padding: EdgeInsets.only(right: Sizing.blockSize * 4),
                                                   child: InkWell(
                                                     child: Text(
                                                       'Done',
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            Sizing.fontSize * 4,
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                        fontSize: Sizing.fontSize * 4,
+                                                        fontWeight: FontWeight.w400,
                                                         color: Colors.blue,
                                                       ),
                                                     ),
@@ -141,9 +126,7 @@ class WritePostOrReblog extends StatelessWidget {
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(Sizing.blockSizeVertical * 4),
               child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: Sizing.blockSizeVertical,
-                      horizontal: Sizing.blockSize * 4),
+                  padding: EdgeInsets.symmetric(vertical: Sizing.blockSizeVertical, horizontal: Sizing.blockSize * 4),
                   child: UserNameAvatar()),
             ),
             backgroundColor: Colors.transparent,
@@ -163,10 +146,8 @@ class WritePostOrReblog extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(Sizing.blockSize * 3),
                         child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.grey,
-                                  width: Sizing.blockSize / 20)),
+                          decoration:
+                              BoxDecoration(border: Border.all(color: Colors.grey, width: Sizing.blockSize / 20)),
                           child: PostItem(
                             postData: controller.post!.postData,
                             postID: controller.post!.postID,
@@ -189,20 +170,16 @@ class WritePostOrReblog extends StatelessWidget {
                 child: HtmlEditor(
                   otherOptions: OtherOptions(height: controller.editorHeight),
                   htmlEditorOptions: const HtmlEditorOptions(
-                      shouldEnsureVisible: true,
-                      adjustHeightForKeyboard: true,
-                      hint: 'Add something, if you\'d line'),
+                      shouldEnsureVisible: true, adjustHeightForKeyboard: true, hint: 'Add something, if you\'d line'),
                   htmlToolbarOptions: HtmlToolbarOptions(
-                      mediaUploadInterceptor:
-                          (PlatformFile file, InsertFileType type) async {
+                      mediaUploadInterceptor: (PlatformFile file, InsertFileType type) async {
                         if (type == InsertFileType.image) {
-                          final base64Data =
-                              base64.encode(file.bytes!).toString();
+                          final base64Data = base64.encode(file.bytes!).toString();
                           final base64Image =
                               '''<img src="data:image/${file.extension};base64,$base64Data" data-filename="${file.name}" width="${Sizing.blockSize * 80}"/>''';
                           controller.editorController.insertHtml(base64Image);
-                        } else if ({InsertFileType.video, InsertFileType.audio}
-                            .contains(type)) {
+                          controller.postType = 'photos';
+                        } else if ({InsertFileType.video, InsertFileType.audio}.contains(type)) {
                           // Do nothing
                         }
                         return false;
@@ -212,119 +189,140 @@ class WritePostOrReblog extends StatelessWidget {
                       defaultToolbarButtons: [
                         const StyleButtons(),
                         const FontSettingButtons(fontSizeUnit: false),
-                        const FontButtons(
-                            subscript: false,
-                            superscript: false,
-                            underline: false,
-                            clearAll: false),
+                        const FontButtons(subscript: false, superscript: false, underline: false, clearAll: false),
                         const ColorButtons(highlightColor: false),
                         const InsertButtons(
-                            link: true,
-                            picture: true,
-                            video: true,
-                            hr: false,
-                            table: false,
-                            audio: false)
+                            link: true, picture: true, video: true, hr: false, table: false, audio: false)
                       ],
                       customToolbarButtons: [
                         IconButton(
                             icon: const Icon(Icons.tag),
                             onPressed: () {
+                              controller.onTagsSheetOpen();
                               showModalBottomSheet(
+                                isScrollControlled: true,
                                 context: context,
-                                constraints: BoxConstraints(
-                                    // TODO: Make this variable
-                                    // according to schedule
-                                    maxHeight: Sizing.blockSizeVertical * 30),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      Sizing.blockSize * 5),
+                                  borderRadius: BorderRadius.circular(Sizing.blockSize * 5),
                                 ),
                                 builder: (BuildContext context) {
                                   return GetBuilder<WritePostController>(
-                                      builder: (controller) => Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                  height:
-                                                      Sizing.blockSizeVertical *
-                                                          3),
-                                              Container(
-                                                width: Sizing.blockSize * 12,
-                                                height: Sizing.blockSize * 1,
-                                                //TODO: Link this to theme
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey,
-                                                    borderRadius: BorderRadius
-                                                        .all(Radius.circular(
-                                                            Sizing.blockSize))),
-                                              ),
-                                              SizedBox(
-                                                  height:
-                                                      Sizing.blockSizeVertical *
-                                                          3),
-                                              Stack(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Add tags',
-                                                        style: TextStyle(
-                                                          fontSize:
-                                                              Sizing.fontSize *
-                                                                  4.5,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                    builder: (controller) => SingleChildScrollView(
+                                      child: Container(
+                                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: Sizing.blockSizeVertical * 3),
+                                            Container(
+                                              width: Sizing.blockSize * 12,
+                                              height: Sizing.blockSize * 1,
+                                              //TODO: Link this to theme
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius: BorderRadius.all(Radius.circular(Sizing.blockSize))),
+                                            ),
+                                            SizedBox(height: Sizing.blockSizeVertical * 3),
+                                            Stack(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Add tags',
+                                                      style: TextStyle(
+                                                        fontSize: Sizing.fontSize * 4.5,
+                                                        fontWeight: FontWeight.w500,
                                                       ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                          right:
-                                                              Sizing.blockSize *
-                                                                  4,
-                                                        ),
-                                                        child: InkWell(
-                                                          child: Text(
-                                                            'Done',
-                                                            style: TextStyle(
-                                                              fontSize: Sizing
-                                                                      .fontSize *
-                                                                  4,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color:
-                                                                  Colors.blue,
-                                                            ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        right: Sizing.blockSize * 4,
+                                                      ),
+                                                      child: InkWell(
+                                                        child: Text(
+                                                          'Done',
+                                                          style: TextStyle(
+                                                            fontSize: Sizing.fontSize * 4,
+                                                            fontWeight: FontWeight.w400,
+                                                            color: Colors.blue,
                                                           ),
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
                                                         ),
+                                                        onTap: () {
+                                                          Get.back();
+                                                        },
                                                       ),
-                                                    ],
-                                                  )
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: Sizing.blockSizeVertical * 3,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: Sizing.blockSizeVertical * 1,
+                                                  horizontal: Sizing.blockSize * 3),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  TextField(
+                                                    controller: controller.tagsEditingController,
+                                                    decoration: const InputDecoration(hintText: 'Enter a tag!'),
+                                                    onEditingComplete: () {
+                                                      controller.onTagEnter(controller.tagsEditingController.text);
+                                                      controller.tagsEditingController.clear();
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    height: Sizing.blockSizeVertical * 7,
+                                                    child: ListView.builder(
+                                                        scrollDirection: Axis.horizontal,
+                                                        itemCount: controller.tags.length,
+                                                        itemBuilder: (BuildContext context, int index) {
+                                                          final tagName = controller.tags[index];
+                                                          return Chip(
+                                                            label: Text(tagName),
+                                                            deleteIcon: const Icon(Icons.cancel),
+                                                            // Remove from suggestions and add to included
+                                                            onDeleted: () {
+                                                              controller.onTagDeleted(tagName);
+                                                            },
+                                                          );
+                                                        }),
+                                                  ),
+                                                  SizedBox(
+                                                    height: Sizing.blockSizeVertical * 7,
+                                                    child: ListView.builder(
+                                                      scrollDirection: Axis.horizontal,
+                                                      itemCount: controller.suggestedTags.length,
+                                                      itemBuilder: (BuildContext context, int index) {
+                                                        final tagName = controller.suggestedTags[index];
+                                                        return Chip(
+                                                          label: Text(tagName),
+                                                          deleteIcon: const Icon(Icons.add),
+                                                          // Remove from suggestions and add to included
+                                                          onDeleted: () {
+                                                            controller.onSuggestionChoosen(tagName);
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height:
-                                                    Sizing.blockSizeVertical *
-                                                        3,
-                                              ),
-                                              addTags()
-                                            ],
-                                          ));
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             })
@@ -350,14 +348,11 @@ class WritePostOrReblog extends StatelessWidget {
         SizedBox(
           height: Sizing.blockSizeVertical * 3,
         ),
-        postOption(
-            'Post Now', Icons.edit, controller.isActivated(PostOptions.postNow),
-            () {
+        postOption('Post Now', Icons.edit, controller.isActivated(PostOptions.postNow), () {
           controller.setPostOption(PostOptions.postNow);
         }),
         SizedBox(height: Sizing.blockSizeVertical * 3),
-        postOption('Save as draft', Icons.drafts_outlined,
-            controller.isActivated(PostOptions.saveAsDraft), () {
+        postOption('Save as draft', Icons.drafts_outlined, controller.isActivated(PostOptions.saveAsDraft), () {
           controller.setPostOption(PostOptions.saveAsDraft);
         }),
         SizedBox(height: Sizing.blockSizeVertical * 3),
@@ -378,8 +373,7 @@ class WritePostOrReblog extends StatelessWidget {
           },
         ),
         SizedBox(height: Sizing.blockSizeVertical * 3),
-        controller.isActivated(PostOptions.saveAsDraft) ||
-                controller.isActivated(PostOptions.postPrivately)
+        controller.isActivated(PostOptions.saveAsDraft) || controller.isActivated(PostOptions.postPrivately)
             ? Container()
             : shareToTwitter(
                 controller.isActivated(
@@ -389,34 +383,5 @@ class WritePostOrReblog extends StatelessWidget {
               ),
       ],
     );
-  }
-
-  Widget addTags() {
-    return Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: Sizing.blockSizeVertical * 1,
-            horizontal: Sizing.blockSize * 3),
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          SizedBox(
-              height: Sizing.blockSizeVertical * 5, child: const TextField()),
-          SizedBox(
-              height: Sizing.blockSizeVertical * 10,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: Sizing.blockSizeVertical,
-                    horizontal: Sizing.blockSize),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    const Chip(label: Text('Bruh')),
-                    const Chip(label: Text('AAAAA')),
-                    const Chip(label: Text('PAIN')),
-                    const Chip(label: Text('MAKE')),
-                    const Chip(label: Text('IT')),
-                    const Chip(label: Text('STOP')),
-                  ],
-                ),
-              )),
-        ]));
   }
 }
