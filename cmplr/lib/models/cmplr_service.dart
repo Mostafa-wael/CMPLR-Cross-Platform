@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes
+// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes, no_duplicate_case_values
 
 import 'dart:async';
 import 'dart:convert';
