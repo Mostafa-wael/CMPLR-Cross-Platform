@@ -92,7 +92,7 @@ class BlogController extends GetxController {
       */
 
       final response =
-          await CMPLRService.getBlogInfo1(GetURIs.getGetBlogInfo(blogName));
+          await CMPLRService.getBlogInfo(GetURIs.getBlogInfo(blogName), {});
 
       blogInfo = BlogInfo.fromJson(json.decode(response.body)).obs;
     } finally {

@@ -1,6 +1,6 @@
 import '../views/activity/activity_view.dart';
 
-import '../views/home_tab/explore_screen.dart';
+import '../views/explore_tab/explore_screen.dart';
 
 import '../views/views.dart';
 import 'package:flutter/material.dart';

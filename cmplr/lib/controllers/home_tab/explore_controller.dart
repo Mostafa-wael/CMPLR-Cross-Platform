@@ -1,6 +1,6 @@
 import '../../views/views.dart';
 
-import '../../views/home_tab/search_results_view.dart';
+import '../../views/explore_tab/search_results_view.dart';
 
 import '../../views/utilities/hashtag_posts_view.dart';
 import '../../utilities/custom_widgets/trending_row.dart';

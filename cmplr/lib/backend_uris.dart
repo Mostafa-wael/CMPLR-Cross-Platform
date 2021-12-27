@@ -41,17 +41,17 @@ class GetURIs {
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
 
-  static String getGetBlogInfo(String blogID) => '/blog/$blogID/info';
-
   static const String getTagsForPosts = '/get_tags_for_posts';
   static const String postFollowing = '/user/dashboard';
   static const String postStuff =
       '/user/dashboard'; // TODO: add the correct route
+  static const String hashtagPosts = '/post/tagged';
   static const String notes = '/notes';
 
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';
   static String getBlogInfo(String blogId) => '/blog' + blogId + '/info';
+  static const String followingBlogs = '/user/following';
 
   // TODO: Add the remaining get request URIS
 

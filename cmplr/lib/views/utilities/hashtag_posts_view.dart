@@ -1,3 +1,4 @@
+import '../../backend_uris.dart';
 import 'package:get/get.dart';
 
 import '../../utilities/functions.dart';
@@ -162,8 +163,12 @@ class HashtagPosts extends StatelessWidget {
                   child: TabBarView(
                     controller: controller.tabController,
                     children: <Widget>[
-                      PostFeed(),
-                      PostFeed(),
+                      PostFeed(
+                          postFeedTypePage: GetURIs.hashtagPosts +
+                              '?tag=${controller.tagName}'),
+                      PostFeed(
+                          postFeedTypePage: GetURIs.hashtagPosts +
+                              '?tag=${controller.tagName}'),
                     ],
                   ),
                 ),
