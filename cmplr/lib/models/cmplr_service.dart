@@ -921,7 +921,19 @@ class CMPLRService {
         "url": "http://cmplr/1/info", // TODO: Check this
         "last_update": "2021-12-27T13:50:56.980364Z",
       }
-    }
+    },
+    GetURIs.followingBlogs: {
+      'blogs': [
+        {
+          'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
+          'avatar':
+              'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+          'avatar_shape': 'circle',
+          'blog_name': 'Mostafa',
+          'title': 'Mohamed'
+        }
+      ],
+    },
   };
 
   static const requestSuccess = 200;
@@ -1139,10 +1151,6 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> getBlogInfo(String endpoint) async {
-    return http.get(Uri.parse(endpoint));
-  }
-
   static Future<http.Response> createPost(String backendURI, Map params) {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), insertSuccess));
@@ -1176,6 +1184,19 @@ class CMPLRService {
           jsonEncode(_mockData[GetURIs.recommendedSearchQueries]
               ['recommended_search_queries']),
           requestSuccess);
+    }
+  }
+
+  static Future<http.Response> getFollowingBlogs(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+
+      return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+
+      return http.get(uri, headers: getHeader);
     }
   }
 }
