@@ -29,3 +29,5 @@ export 'utilities/hashtag_posts_view.dart';
 
 export 'explore_tab/search_bar_view.dart';
 export 'explore_tab/try_these_posts_view.dart';
+
+export 'profile_tab/profile_search_view.dart';

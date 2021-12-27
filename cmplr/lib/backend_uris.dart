@@ -47,6 +47,7 @@ class GetURIs {
       '/user/recommended-blogs'; // FIXME: Check this
   static const String notes = '/notes';
   static const String recommendedSearchQueries = '/search_bar';
+  static const String followedBlogs = '/user/following';
   // TODO: Add the remaining get request URIS
 
 }

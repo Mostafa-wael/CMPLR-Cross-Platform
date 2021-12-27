@@ -872,6 +872,19 @@ class CMPLRService {
         'Ac Milan',
       ]
     },
+
+    GetURIs.followedBlogs: {
+      'blogs': [
+        {
+          'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
+          'avatar':
+              'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+          'avatar_shape': 'circle',
+          'blog_name': 'Mostafa',
+          'title': 'Mohamed'
+        }
+      ],
+    },
   };
 
   static const requestSuccess = 200;
@@ -1131,6 +1144,19 @@ class CMPLRService {
           requestSuccess));
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getFollowingBlogs(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+
+      return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+
+      return http.get(uri, headers: getHeader);
     }
   }
 }
