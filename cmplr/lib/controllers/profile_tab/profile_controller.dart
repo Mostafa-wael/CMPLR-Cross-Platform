@@ -1,3 +1,4 @@
+import '../../views/views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,6 +28,19 @@ class ProfileController extends GetxController {
   dynamic get backgroundColor => _backgroundColor;
   dynamic get url => _url;
 
+  var allowSubmissions = false;
+  var ask = false;
+  var useMedia = false;
+  var topPosts = false;
+  var optimizeVideo = false;
+  var showUploadProg = false;
+  var disableDoubleTapToLike = false;
+
+  Future<void> goToSettings() async {
+    Get.to(const ProfileSettingsView());
+    update();
+  }
+
   Future<void> getBlogInfo() async {
     blogInfo = await _model.getBlogInfo();
     _blogTitle = blogInfo['title'];
@@ -41,6 +55,51 @@ class ProfileController extends GetxController {
 
   Future<void> share(BuildContext context) async {
     await Share.share(_url);
+    update();
+  }
+
+  Future<void> goBack() async {
+    Get.back();
+    update();
+  }
+
+  Future<void> toggleSubmissions() async {
+    allowSubmissions = !allowSubmissions;
+    update();
+  }
+
+  Future<void> toggleUseMedia() async {
+    useMedia = !useMedia;
+    update();
+  }
+
+  Future<void> toggleAsk() async {
+    ask = !ask;
+    update();
+  }
+
+  Future<void> toggleShowTopPosts() async {
+    topPosts = !topPosts;
+    update();
+  }
+
+  Future<void> toggleDisableDoubleTapToLike() async {
+    disableDoubleTapToLike = !disableDoubleTapToLike;
+    update();
+  }
+
+  Future<void> toggleOptimizeVids() async {
+    optimizeVideo = !optimizeVideo;
+    update();
+  }
+
+  Future<void> toggleShowUploadProg() async {
+    showUploadProg = !showUploadProg;
+    update();
+  }
+
+  Future<void> goToAccountSettings() async {
+    Get.to(const AccountSettingsView());
     update();
   }
 }
