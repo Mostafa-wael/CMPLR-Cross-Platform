@@ -26,6 +26,7 @@ class ProfileView extends StatelessWidget {
                         (BuildContext context, bool innerBoxIsScrolled) {
                       return <Widget>[
                         SliverAppBar(
+                          pinned: true,
                           expandedHeight: Sizing.blockSizeVertical * 50,
                           flexibleSpace: FlexibleSpaceBar(
                             collapseMode: CollapseMode.pin,
@@ -79,28 +80,45 @@ class ProfileView extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          IconButton(
-                                            icon: const Icon(Icons.search),
-                                            onPressed: () {},
-                                          ),
-                                          IconButton(
-                                            icon: const Icon(Icons.color_lens),
-                                            onPressed: () {},
-                                          ),
-                                          IconButton(
-                                            icon: const Icon(Icons.share),
-                                            onPressed: () {},
-                                          ),
-                                          IconButton(
-                                            icon: const Icon(Icons.settings),
-                                            onPressed: () {},
-                                          ),
-                                        ],
+                                      Material(
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            IconButton(
+                                              icon: const Icon(Icons.search),
+                                              onPressed: () {},
+                                            ),
+                                            IconButton(
+                                              icon:
+                                                  const Icon(Icons.color_lens),
+                                              onPressed: () {},
+                                            ),
+                                            IconButton(
+                                              icon: const Icon(Icons.share),
+                                              onPressed: () {},
+                                            ),
+                                            IconButton(
+                                              icon: const Icon(Icons.settings),
+                                              onPressed: () {},
+                                            ),
+                                          ],
+                                        ),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        controller.blogTitle,
+                                        style: TextStyle(
+                                          fontSize: Sizing.fontSize * 7,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
