@@ -24,6 +24,8 @@ export 'home_tab/reblog_screen.dart';
 export 'home_tab/write_post_view.dart';
 export 'home_tab/search_results_view.dart';
 export 'profile_tab/profile_view.dart';
+export 'profile_tab/profile_settings_view.dart';
+export 'profile_tab/account_settings_view.dart';
 
 // Utilites
 export 'utilities/hashtag_posts_view.dart';

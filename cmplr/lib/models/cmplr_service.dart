@@ -1139,7 +1139,7 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> getBlogInfo(String endpoint) async {
+  static Future<http.Response> getBlogInfo1(String endpoint) async {
     return http.get(Uri.parse(endpoint));
   }
 
