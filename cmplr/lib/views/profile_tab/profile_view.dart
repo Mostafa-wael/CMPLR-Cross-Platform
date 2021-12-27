@@ -26,7 +26,6 @@ class ProfileView extends StatelessWidget {
                         (BuildContext context, bool innerBoxIsScrolled) {
                       return <Widget>[
                         SliverAppBar(
-                          pinned: true,
                           expandedHeight: Sizing.blockSizeVertical * 50,
                           flexibleSpace: FlexibleSpaceBar(
                             collapseMode: CollapseMode.pin,
@@ -97,7 +96,9 @@ class ProfileView extends StatelessWidget {
                                             ),
                                             IconButton(
                                               icon: const Icon(Icons.share),
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                controller.share(context);
+                                              },
                                             ),
                                             IconButton(
                                               icon: const Icon(Icons.settings),
@@ -109,17 +110,33 @@ class ProfileView extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Center(
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        controller.blogTitle,
-                                        style: TextStyle(
-                                          fontSize: Sizing.fontSize * 7,
-                                          fontWeight: FontWeight.bold,
+                                Positioned.fill(
+                                  top: Sizing.blockSizeVertical * 38,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          controller.blogTitle,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: Sizing.fontSize * 7,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      )
-                                    ],
+                                        SizedBox(
+                                            height:
+                                                Sizing.blockSizeVertical * 0.5),
+                                        Text(
+                                          controller.description,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: Sizing.fontSize * 3.5,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

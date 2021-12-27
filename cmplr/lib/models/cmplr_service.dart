@@ -1,4 +1,5 @@
-// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes, no_duplicate_case_values
+// ignore_for_file: prefer_single_quotes, unnecessary_string_escapes,
+// no_duplicate_case_values
 
 import 'dart:async';
 import 'dart:convert';
@@ -101,7 +102,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "BCAkeGl4zX",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -125,7 +127,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "HqQeXGEuJp",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -149,7 +152,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "xlfsmD2x3H",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -173,7 +177,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "LFyeAIKqW8",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -197,7 +202,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "RmM28BSiHQ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -221,7 +227,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "p4Djf0ywSZ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -245,7 +252,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "P7qx8ZqDQI",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -269,7 +277,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "FQIgIPyCiV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -293,7 +302,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "NOGX1jppnV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -317,7 +327,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nK304kfDiW",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -341,7 +352,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "O6HYTGpTIJ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -365,7 +377,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nFfU3WfQT1",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -389,7 +402,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "cZtZZkfI1I",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -413,7 +427,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:26:29 UTC",
               "source_content": null,
               "tags": [],
-              "is_liked": true
+              "is_liked": true,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -437,7 +452,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:33:07 UTC",
               "source_content": null,
               "tags": ["hi", "bye"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -472,7 +488,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "BCAkeGl4zX",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -496,7 +513,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "HqQeXGEuJp",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -520,7 +538,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "xlfsmD2x3H",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -544,7 +563,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "LFyeAIKqW8",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -568,7 +588,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "RmM28BSiHQ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -592,7 +613,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "p4Djf0ywSZ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -616,7 +638,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "P7qx8ZqDQI",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -640,7 +663,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "FQIgIPyCiV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -664,7 +688,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "NOGX1jppnV",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -688,7 +713,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nK304kfDiW",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -712,7 +738,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "O6HYTGpTIJ",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -736,7 +763,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "nFfU3WfQT1",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 7,
@@ -760,7 +788,8 @@ class CMPLRService {
               "date": "Monday, 20-Dec-21 19:39:59 UTC",
               "source_content": "cZtZZkfI1I",
               "tags": ["summer", "winter"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 5,
@@ -784,7 +813,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:26:29 UTC",
               "source_content": null,
               "tags": [],
-              "is_liked": true
+              "is_liked": true,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -808,7 +838,8 @@ class CMPLRService {
               "date": "Tuesday, 21-Dec-21 21:33:07 UTC",
               "source_content": null,
               "tags": ["hi", "bye"],
-              "is_liked": false
+              "is_liked": false,
+              "is_mine": false,
             },
             "blog": {
               "blog_id": 17,
@@ -937,6 +968,7 @@ class CMPLRService {
     switch (route) {
       case GetURIs.postFollowing:
         return getPosts(route, params);
+      // ignore: no_duplicate_case_values
       case GetURIs.postStuff:
         return getPosts(route, params);
       case GetURIs.notes:

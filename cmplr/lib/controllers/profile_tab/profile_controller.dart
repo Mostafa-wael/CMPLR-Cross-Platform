@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/models.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ProfileController extends GetxController {
   final _model =
@@ -36,5 +37,10 @@ class ProfileController extends GetxController {
     _description = blogInfo['description'];
     _backgroundColor = blogInfo['background_color'];
     _url = blogInfo['url'];
+  }
+
+  Future<void> share(BuildContext context) async {
+    await Share.share(_url);
+    update();
   }
 }
