@@ -1,6 +1,5 @@
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../user.dart';
 import 'user_name_avatar.dart';
 
 import '../sizing/sizing.dart';

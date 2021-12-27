@@ -10,7 +10,6 @@ import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../routes.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../user.dart';
 
 class PostItemController extends GetxController {
   //final _followers = ;

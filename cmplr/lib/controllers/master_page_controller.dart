@@ -1,3 +1,5 @@
+import '../views/activity/activity_view.dart';
+
 import '../views/home_tab/explore_screen.dart';
 
 import '../views/views.dart';
@@ -52,7 +54,7 @@ class MasterPageController extends GetxController {
 
   /// Replaces the extra signup pages with the proper pages upong login.
   void logIn() {
-    pages[2] = const Center(child: Text('Activity'));
+    pages[2] = const ActivityView();
     pages[3] = const Center(child: Text('Profile'));
   }
 
