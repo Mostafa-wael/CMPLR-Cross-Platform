@@ -22,3 +22,5 @@ export 'utilities/hashtag_posts_controller.dart';
 
 export 'explore_tab/search_controller.dart';
 export 'explore_tab/try_these_posts_controller.dart';
+
+export 'profile_tab/profile_search_controller.dart';
