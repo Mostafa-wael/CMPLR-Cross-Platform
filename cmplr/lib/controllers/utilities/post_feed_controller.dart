@@ -9,6 +9,7 @@ class PostFeedController extends GetxController
   final ModelPostsFeed model = ModelPostsFeed();
 
   bool _dataReloaded = false;
+  RxBool isLoading = true.obs;
   bool get dataReloaded => _dataReloaded;
   List<PostItem> posts = [];
 
@@ -18,9 +19,14 @@ class PostFeedController extends GetxController
   }
 
   Future<void> updatePosts() async {
-    final newPosts = await model.getNewPosts();
-    posts += newPosts;
-    _dataReloaded = true;
-    update();
+    try {
+      isLoading(true);
+      final newPosts = await model.getNewPosts();
+      posts += newPosts;
+    } finally {
+      isLoading(false);
+      _dataReloaded = true;
+      update();
+    }
   }
 }

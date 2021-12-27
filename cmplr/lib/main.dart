@@ -9,6 +9,7 @@ import 'cmplr_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'views/blog/screens/visitor_blog.dart';
 import 'views/views.dart';
 import './routes.dart';
 
@@ -28,6 +29,7 @@ Future<void> main() async {
 
   // enableFlutterDriverExtension();
   runApp(const CMPLR());
+  //runApp(const VisitorBlog());
 }
 
 class CMPLR extends StatelessWidget {

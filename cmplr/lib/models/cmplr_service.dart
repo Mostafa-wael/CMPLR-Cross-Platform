@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:get/get_connect.dart';
+
 import '../backend_uris.dart';
 
 import '../flags.dart';
@@ -331,5 +333,9 @@ class CMPLRService {
       return http.Response(
           jsonEncode(notesMockData['response']), requestSuccess);
     }
+  }
+
+  static Future<http.Response> getBlogInfo(String endpoint) async {
+    return http.get(Uri.parse(endpoint));
   }
 }

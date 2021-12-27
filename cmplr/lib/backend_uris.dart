@@ -38,10 +38,13 @@ class GetURIs {
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
 
+  static String getGetBlogInfo(String blogID) => '/blog/$blogID/info';
+
   static const String getTagsForPosts = '/get_tags_for_posts';
   static const String postFollow = 'CHANGE THIS';
   static const String postStuff = 'CHANGE THISS';
   static const String notes = '/notes';
+
   // TODO: Add the remaining get request URIS
 
 }
