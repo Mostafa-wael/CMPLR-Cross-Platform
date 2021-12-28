@@ -174,8 +174,6 @@ class ActivityActivityController extends GetxController {
     return listView;
   }
 
-  void fetchNotifications() async {}
-
   List<Widget> getFilters(context) {
     final filters = <Widget>[];
 
@@ -271,6 +269,13 @@ class ActivityActivityController extends GetxController {
     'Posts you missed': true,
     'New group blog members': true
   };
+
+  void fetchNotifications() async {
+    final response =
+        await ActivityActivityModel.getActivityNotifications(filterTypes);
+    print(response);
+    return response;
+  }
 }
 
 class CustomFilters extends StatelessWidget {
