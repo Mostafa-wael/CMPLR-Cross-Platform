@@ -35,34 +35,233 @@ class ProfileView extends StatelessWidget {
                             collapseMode: CollapseMode.pin,
                             background: Stack(
                               children: [
-                                FadeInImage.assetNetwork(
-                                  placeholder:
-                                      'lib/utilities/assets/logo/logo_icon.png',
-                                  image: controller.headerImage,
-                                  fit: BoxFit.cover,
+                                GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        context: context,
+                                        constraints: BoxConstraints(
+                                          maxHeight:
+                                              Sizing.blockSizeVertical * 10,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                Sizing.blockSize * 5)),
+                                        builder: (BuildContext context) {
+                                          return Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                              Sizing.blockSize * 4,
+                                              0,
+                                              0,
+                                              0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {},
+                                                  child: SizedBox(
+                                                    width:
+                                                        Sizing.blockSize * 100,
+                                                    height: Sizing
+                                                            .blockSizeVertical *
+                                                        5,
+                                                    child: const Text(
+                                                        'Change your header'
+                                                        ' image'),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  onTap: () {},
+                                                  child: SizedBox(
+                                                    width:
+                                                        Sizing.blockSize * 100,
+                                                    height: Sizing
+                                                            .blockSizeVertical *
+                                                        5,
+                                                    child: const Text(
+                                                      'view your header'
+                                                      ' image',
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder:
+                                        'lib/utilities/assets/logo/logo_icon.png',
+                                    image: controller.headerImage,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Positioned(
                                   top: Sizing.blockSizeVertical * 24,
                                   left: Sizing.blockSize * 40,
-                                  child:
-                                      (controller.blogAvatarShape == 'circle')
-                                          ? ClipOval(
-                                              child: FadeInImage.assetNetwork(
-                                                placeholder:
-                                                    'lib/utilities/assets/logo/logo_icon.png',
-                                                image: controller.blogAvatar,
-                                                height: Sizing.blockSize * 20,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            )
-                                          : ClipRect(
-                                              child: FadeInImage.assetNetwork(
-                                                placeholder:
-                                                    'lib/utilities/assets/logo/logo_icon.png',
-                                                image: controller.blogAvatar,
-                                                fit: BoxFit.cover,
-                                              ),
+                                  child: (controller.blogAvatarShape ==
+                                          'circle')
+                                      ? InkWell(
+                                          onTap: () {
+                                            showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                context: context,
+                                                constraints: BoxConstraints(
+                                                  maxHeight:
+                                                      Sizing.blockSizeVertical *
+                                                          10,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Sizing.blockSize *
+                                                                5)),
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                      Sizing.blockSize * 4,
+                                                      0,
+                                                      0,
+                                                      0,
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () {},
+                                                          child: SizedBox(
+                                                            width: Sizing
+                                                                    .blockSize *
+                                                                100,
+                                                            height: Sizing
+                                                                    // ignore: lines_longer_than_80_chars
+                                                                    .blockSizeVertical *
+                                                                5,
+                                                            child: const Text(
+                                                                'Change your'
+                                                                ' Avatar'),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {},
+                                                          child: SizedBox(
+                                                            width: Sizing
+                                                                    .blockSize *
+                                                                100,
+                                                            height: Sizing
+                                                                    // ignore: lines_longer_than_80_chars
+                                                                    .blockSizeVertical *
+                                                                5,
+                                                            child: const Text(
+                                                              'View your'
+                                                              ' Avatar',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          child: ClipOval(
+                                            child: FadeInImage.assetNetwork(
+                                              placeholder:
+                                                  'lib/utilities/assets/logo/logo_icon.png',
+                                              image: controller.blogAvatar,
+                                              height: Sizing.blockSize * 20,
+                                              fit: BoxFit.cover,
                                             ),
+                                          ),
+                                        )
+                                      : InkWell(
+                                          onTap: () {
+                                            showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                context: context,
+                                                constraints: BoxConstraints(
+                                                  maxHeight:
+                                                      Sizing.blockSizeVertical *
+                                                          10,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Sizing.blockSize *
+                                                                5)),
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                      Sizing.blockSize * 4,
+                                                      0,
+                                                      0,
+                                                      0,
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () {},
+                                                          child: SizedBox(
+                                                            width: Sizing
+                                                                    .blockSize *
+                                                                100,
+                                                            height: Sizing
+                                                                    // ignore: lines_longer_than_80_chars
+                                                                    .blockSizeVertical *
+                                                                5,
+                                                            child: const Text(
+                                                                'Change your'
+                                                                ' Avatar'),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {},
+                                                          child: SizedBox(
+                                                            width: Sizing
+                                                                    .blockSize *
+                                                                100,
+                                                            height: Sizing
+                                                                    // ignore: lines_longer_than_80_chars
+                                                                    .blockSizeVertical *
+                                                                5,
+                                                            child: const Text(
+                                                              'View your'
+                                                              ' Avatar',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          child: ClipRect(
+                                            child: FadeInImage.assetNetwork(
+                                              placeholder:
+                                                  'lib/utilities/assets/logo/logo_icon.png',
+                                              image: controller.blogAvatar,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(

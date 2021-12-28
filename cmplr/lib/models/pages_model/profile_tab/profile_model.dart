@@ -21,4 +21,13 @@ class ModelProfile {
   }
 
   Future<void> putTheme() async {}
+
+  Future<dynamic> putBlogSettings(backgroundColor, title, desc) async {
+    final response = await CMPLRService.put('/blog/ /settings/save', {
+      'blog_title': title,
+      'background_color': backgroundColor,
+      'blog_description': desc,
+    });
+    return response;
+  }
 }

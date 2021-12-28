@@ -12,6 +12,7 @@ export 'login_and_sign/signup_or_login_view.dart';
 export 'login_and_sign/forgot_password_view.dart';
 export 'login_and_sign/post_forgot_password_view.dart';
 export 'login_and_sign/signup_email_or_google_view.dart';
+export 'login_and_sign/login_signup_age_google.dart';
 
 // Master
 export 'master_page.dart';

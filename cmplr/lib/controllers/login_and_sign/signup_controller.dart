@@ -12,13 +12,6 @@ import '../../utilities/authentication/authentication.dart';
 class SignupController extends GetxController {
   /// Navigates to the page where the user can enter their age
   /// and continue the signup process
-  Future<void> signUpEmail() async {
-    Get.to(
-      const SignupAge(),
-      transition: Transition.rightToLeft,
-    );
-    update();
-  }
 
   /// handles signing up using google
   /// this function uses firebase for

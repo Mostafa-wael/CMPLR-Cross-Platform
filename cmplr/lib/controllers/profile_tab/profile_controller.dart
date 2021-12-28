@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/models.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -44,6 +45,11 @@ class ProfileController extends GetxController
     'indigo': Colors.indigo,
   };
 
+  var _pickedHeader;
+  var _pickedAvatar;
+
+  final ImagePicker _picker = ImagePicker();
+
   dynamic get blogName => _blogName;
   dynamic get blogTitle => _blogTitle;
   dynamic get blogAvatar => _blogAvatar;
@@ -77,6 +83,11 @@ class ProfileController extends GetxController
     'Report',
     'Unfollow'
   ];
+
+  void pickHeader() async {
+    _pickedHeader = await _picker.pickImage(source: ImageSource.gallery);
+    print(_pickedHeader);
+  }
 
   Future<void> getBlogInfo() async {
     blogInfo = await _model.getBlogInfo();
@@ -160,7 +171,13 @@ class ProfileController extends GetxController
   }
 
   Future<void> saveEdits() async {
-    // TODO: send request to back with changes if they implement it
+    final response = await _model.putBlogSettings(
+      _currentColor,
+      titleController.text,
+      descCrontroller.text,
+    );
+
+    getBlogInfo();
     Get.back();
     update();
   }

@@ -943,8 +943,9 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  //static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  //static const String apiIp = 'http://c389-156-215-230-231.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -973,6 +974,10 @@ class CMPLRService {
         return createPost(backendURI, params);
       case PostURIs.reblog:
         return reblogPost(backendURI, params);
+      case PostURIs.loginGoogle:
+        return loginWithGoogle(backendURI, params);
+      case PostURIs.signupGoogle:
+        return signupWithGoogle(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1015,9 +1020,28 @@ class CMPLRService {
         return putUserTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
+      case PutURIs.saveBlogSettings:
+        return putBlogSettings(
+            route.split(' ')[0] +
+                GetStorage().read('user')['primary_blog_id'].toString() +
+                route.split(' ')[1],
+            params);
 
       default:
         throw Exception('Invalid request backendURI');
+    }
+  }
+
+  static Future<http.Response> signupWithGoogle(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
     }
   }
 
@@ -1052,6 +1076,19 @@ class CMPLRService {
 
       final responseCode = bothFree ? insertSuccess : invalidData;
       return http.Response(jsonEncode(response), responseCode);
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
+    }
+  }
+
+  static Future<http.Response> loginWithGoogle(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response(jsonEncode({}), 200);
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),
@@ -1106,6 +1143,17 @@ class CMPLRService {
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
       return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+    }
+  }
+
+  static Future<http.Response> putBlogSettings(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      // TODO: Change theme
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      return http.put(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
     }
   }
 
@@ -1184,7 +1232,7 @@ class CMPLRService {
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1000));
-      final res = await _mockData[backendURI];
+      final res = await _mockData['/blog/info'];
       return http.Response(jsonEncode(res), 200);
     } else {
       // ignore: prefer_final_locals

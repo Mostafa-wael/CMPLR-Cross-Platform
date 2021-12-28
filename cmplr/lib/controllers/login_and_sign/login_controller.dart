@@ -1,3 +1,5 @@
+import 'package:get_storage/get_storage.dart';
+
 import '../../utilities/authentication/authentication.dart';
 
 import '../../models/persistent_storage_api.dart';
@@ -38,6 +40,8 @@ class LoginController extends GetxController {
 
   // tracks whether the email is a valid login email (registered)
   bool _validLoginEmail = false;
+
+  var _googleToken;
 
   bool get validLoginEmail => _validLoginEmail;
 
@@ -192,21 +196,60 @@ class LoginController extends GetxController {
   }
 
   /// This method handles logging in with google
-  Future<void> loginGoogle(BuildContext context) async {
+  Future<List> loginGoogle(BuildContext context) async {
     await Authentication.initializeFirebase();
-    User? user;
-    user = await Authentication.signInWithGoogle(context: context);
-    if (user != null) {
+    _googleToken = await Authentication.signInWithGoogle(context: context);
+    final response = await _model.loginGoogle(_googleToken);
+    if (response.isEmpty) {
+      // Log in
       PersistentStorage.changeLoggedIn(true);
+
       Get.offAll(
         const MasterPage(),
         transition: Transition.rightToLeft,
-        routeName: Routes.masterPage,
-        arguments: user,
       );
-    } else {
-      _showToast('Failed to Login, please try again');
+    } else if (response[0] == 'you should register first')
+      Get.to(const LoginSignupAgeGoogle());
+
+    update();
+    return response;
+    // if (user != null) {
+    //   PersistentStorage.changeLoggedIn(true);
+    //   Get.offAll(
+    //     const MasterPage(),
+    //     transition: Transition.rightToLeft,
+    //     routeName: Routes.masterPage,
+    //     arguments: user,
+    //   );
+    // } else {
+    //   _showToast('Failed to Login, please try again');
+    // }
+  }
+
+  Future<void> signUpEmail() async {
+    Get.to(
+      const SignupAge(),
+      transition: Transition.rightToLeft,
+    );
+    update();
+  }
+
+  Future<List> signupGoogle(BuildContext context) async {
+    await Authentication.initializeFirebase();
+    final response = await _model.signupGoogle(
+        _googleToken, ageController.text, signupGoogleController.text);
+    if (response.isEmpty) {
+      // Log in
+      PersistentStorage.changeLoggedIn(true);
+
+      Get.offAll(
+        const MasterPage(),
+        transition: Transition.rightToLeft,
+      );
     }
+
+    update();
+    return response;
   }
 
   /// This method toggles the visibility of the password text field
@@ -239,6 +282,89 @@ class LoginController extends GetxController {
   //   }
   //   update();
   // }
+
+  final signupGoogleController = TextEditingController();
+
+  final _ageController = TextEditingController();
+
+  // focus controller for the age text field
+  final _focusNode = FocusNode();
+
+  // the color of 'next' button (it changes with the input of the text field)
+  int _nextButtonColor = 0xFF015887;
+
+  // determine whether the 'next' button is activated or not
+  bool _nextButtonActivated = false;
+
+  // the button which clears the age text field
+  bool _showClearButton = false;
+
+  // determines whether the screen is loading or not
+  bool _isLoading = false;
+
+  // getters for class attributes
+  TextEditingController get ageController => _ageController;
+
+  int get nextButtonColor => _nextButtonColor;
+
+  bool get nextButtonActivated => _nextButtonActivated;
+
+  bool get showClearButton => _showClearButton;
+
+  bool get isLoading => _isLoading;
+
+  FocusNode get focusNode => _focusNode;
+
+  /// This function is called whenever the age changes,
+  /// It handles the different scenarios of the age text field
+  void ageFieldChanged() {
+    // empty text field
+    if (_ageController.text == '') {
+      _showClearButton = false;
+      _nextButtonColor = 0xFF015887;
+      _nextButtonActivated = false;
+    } else {
+      _showClearButton = true;
+      final age = int.parse(_ageController.text);
+
+      // age constraints
+      if (age < 15 || age > 120) {
+        _nextButtonColor = 0xFF015887;
+        _nextButtonActivated = false;
+      } else {
+        _nextButtonColor = 0xFF00B7FE;
+        _nextButtonActivated = true;
+      }
+    }
+    update();
+  }
+
+  /// This is called when the user presses on 'next' button, it sets the screen
+  /// status to be 'loading' so that the progress indicator appears and if the
+  /// entered age is appropriate, it redirects the user to the next screen
+  void nextButtonPressed() async {
+    if (_nextButtonActivated) {
+      _isLoading = true;
+      _focusNode.unfocus();
+      update();
+
+      //TODO: communicate with the API instead of delay
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (int.parse(ageController.text) < 13) {
+        _isLoading = false;
+        _showToast('Minor hiccup. Try again.');
+      } else {
+        GetStorage().write('age', ageController.text);
+        Get.offNamed(Routes.signupPreferencesScreen);
+      }
+      update();
+    }
+  }
+
+  void closeAgeScreen() {
+    Get.back();
+  }
 }
 
 void _showToast(String message) => Fluttertoast.showToast(

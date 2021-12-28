@@ -12,8 +12,8 @@ class SignupEmailOrGoogle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SignupController>(
-      init: SignupController(),
+    return GetBuilder<LoginController>(
+      init: LoginController(),
       builder: (controller) => Scaffold(
         body: Stack(
           children: [
@@ -59,7 +59,7 @@ class SignupEmailOrGoogle extends StatelessWidget {
                     key: const ValueKey('signUp_withGmail'),
                     text: 'Sign up with Google',
                     onTap: () {
-                      controller.signUpGoogle(context);
+                      controller.loginGoogle(context);
                     },
                   ),
                 ],
