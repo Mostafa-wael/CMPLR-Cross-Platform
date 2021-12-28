@@ -1,3 +1,6 @@
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+
 import '../functions.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -81,7 +84,7 @@ class PostItem extends StatelessWidget {
       trailing: IconButton(
         icon: const Icon(Icons.more_horiz, color: Colors.grey),
         onPressed: () {
-          controller.openMoreOptions();
+          getPostModalSheet(context);
           print('More Options clicked');
         },
       ),
@@ -185,6 +188,75 @@ class PostItem extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+
+  Future<void> getPostModalSheet(BuildContext context) {
+    return showModalBottomSheet(
+        constraints: BoxConstraints(
+            maxHeight: isMine == true
+                ? Sizing.blockSizeVertical * 22.5
+                : Sizing.blockSizeVertical * 30),
+        context: context,
+        builder: (BuildContext context) {
+          if (isMine) {
+            return GetBuilder<PostItemController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Pin post', () {
+                          print('Pin post');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Mute notifications', () {
+                          print('Mute notifications');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Copy link', () {
+                          print('Copy link');
+                          Get.back();
+                        }),
+                      ],
+                    ));
+          } else {
+            return GetBuilder<PostItemController>(
+                builder: (controller) => Column(
+                      children: [
+                        buildModalSheetTile('Report sensitive content', () {
+                          print('Report sensitive content');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Report spam', () {
+                          print('Report spam');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Report something else', () {
+                          print('Report something else');
+                          Get.back();
+                        }),
+                        buildModalSheetTile('Copy link', () {
+                          print('Copy link');
+                          Get.back();
+                        }),
+                      ],
+                    ));
+          }
+        });
+  }
+
+  Widget buildModalSheetTile(String text, var onTapFunction) {
+    return InkWell(
+      onTap: onTapFunction,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(Sizing.blockSize * 2.91, 0, 0, 0),
+        height: Sizing.blockSizeVertical * 7,
+        width: Sizing.width,
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              text,
+              style: TextStyle(fontSize: Sizing.blockSize * 3.89),
+            )),
+      ),
     );
   }
 
