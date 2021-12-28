@@ -240,6 +240,7 @@ class ProfileSearch extends StatelessWidget {
                                 popupMenuChoiceAction(choice, index, context);
                               },
                               itemBuilder: (context) {
+                                FocusScope.of(context).unfocus();
                                 return controller.popupMenuChoices
                                     .map((choice) {
                                   return PopupMenuItem<String>(
