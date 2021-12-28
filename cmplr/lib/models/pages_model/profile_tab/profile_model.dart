@@ -9,8 +9,16 @@ class ModelProfile {
   ModelProfile({required this.blogId}) {}
 
   Future<dynamic> getBlogInfo() async {
-    final response = await CMPLRService.get('blog/info', {});
+    final response = await CMPLRService.get('/blog/info', {});
     final responseBody = jsonDecode(response.body);
     return responseBody['response'];
   }
+
+  Future<dynamic> getTheme() async {
+    final response = await CMPLRService.get('/user_theme', {});
+    final responseBody = jsonDecode(response.body);
+    return responseBody['response'];
+  }
+
+  Future<void> putTheme() async {}
 }
