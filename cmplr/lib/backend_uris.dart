@@ -39,6 +39,8 @@ class GetURIs {
   static const String getSuggestedTags = '/tags';
 
   static const String activityNotifications = '/notifications';
+  static String getActivityNotifications(String blogName) =>
+      '/blog/' + blogName + '/notifications';
 
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
@@ -50,6 +52,8 @@ class GetURIs {
       '/user/dashboard'; // TODO: add the correct route
   static const String hashtagPosts = '/post/tagged';
   static const String notes = '/notes';
+
+  static const String followedTags = '/following/tags';
 
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';
