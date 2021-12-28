@@ -1,3 +1,4 @@
+import '../../utilities/user.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'reblog_screen.dart';
@@ -208,14 +209,14 @@ class Notes extends StatelessWidget {
                                     child: GetStorage().read('avatar_shape') ==
                                             'circle'
                                         ? CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                GetStorage().read('avatar')),
+                                            backgroundImage:
+                                                NetworkImage(User.avatarURL),
                                             radius: Sizing.blockSize * 3.4,
                                           )
                                         : GFAvatar(
                                             shape: GFAvatarShape.square,
-                                            backgroundImage: NetworkImage(
-                                                GetStorage().read('avatar')),
+                                            backgroundImage:
+                                                NetworkImage(User.avatarURL),
                                             size: Sizing.blockSize * 4.6,
                                           ),
                                   ),
@@ -759,12 +760,12 @@ class Notes extends StatelessWidget {
       BuildContext context, String blogName, String comment) {
     return showModalBottomSheet(
         constraints: BoxConstraints(
-            maxHeight: blogName == GetStorage().read('blog_name')
+            maxHeight: blogName == User.blogName
                 ? Sizing.blockSizeVertical * 15
                 : Sizing.blockSizeVertical * 30),
         context: context,
         builder: (BuildContext context) {
-          if (blogName == GetStorage().read('blog_name')) {
+          if (blogName == User.blogName) {
             return GetBuilder<NotesController>(
                 builder: (controller) => Column(
                       children: [
@@ -924,7 +925,7 @@ class Notes extends StatelessWidget {
         constraints: BoxConstraints(maxHeight: Sizing.blockSizeVertical * 30),
         context: context,
         builder: (BuildContext context) {
-          if (blogName == GetStorage().read('blog_name')) {
+          if (blogName == User.blogName) {
             return GetBuilder<NotesController>(
                 builder: (NotesController controller) => Column(
                       children: [

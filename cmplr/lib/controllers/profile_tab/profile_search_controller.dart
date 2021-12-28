@@ -35,6 +35,8 @@ class ProfileSearchController extends GetxController
 
   List<Blog>? followingBlogs;
 
+  List<RxBool>? showProfiles;
+
   // getters for class attributes
   TextEditingController get searchBarController => _searchBarController;
 
@@ -64,13 +66,22 @@ class ProfileSearchController extends GetxController
     } else {
       showClearSearchBarIcon.value = true;
     }
+    if (followingBlogs != null) {
+      for (var i = 0; i < followingBlogs!.length; i++) {
+        if (!followingBlogs![i].blogName.contains(_searchBarController.text)) {
+          showProfiles![i].value = false;
+        } else {
+          showProfiles![i].value = true;
+        }
+      }
+    }
   }
 
   void closeSearchPage() {
     Get.back();
   }
 
-  Future<void> share(BuildContext context, String postText) async {
-    await Share.share(postText);
+  Future<void> share(BuildContext context, String blogURL) async {
+    await Share.share(blogURL);
   }
 }

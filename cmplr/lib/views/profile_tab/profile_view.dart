@@ -87,7 +87,9 @@ class ProfileView extends StatelessWidget {
                                           children: [
                                             IconButton(
                                               icon: const Icon(Icons.search),
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Get.to(ProfileSearch());
+                                              },
                                             ),
                                             IconButton(
                                               icon:
