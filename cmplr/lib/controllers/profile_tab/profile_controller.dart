@@ -85,7 +85,7 @@ class ProfileController extends GetxController
     _blogAvatar = blogInfo['avatar'];
     _blogAvatarShape = blogInfo['avatar_shape'];
     _headerImage = blogInfo['header_image'];
-    _description = blogInfo['description'];
+    _description = blogInfo['description'] ?? '';
     _backgroundColor = clrs[blogInfo['background_color']];
     _url = blogInfo['url'];
   }
