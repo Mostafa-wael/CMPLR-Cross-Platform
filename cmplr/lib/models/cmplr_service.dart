@@ -945,8 +945,9 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  //static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'http://c389-156-215-230-231.ngrok.io/api';
+
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -980,7 +981,8 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> get(String route, Map params) async {
+  static Future<http.Response> get(
+      String route, Map<String, dynamic> params) async {
     // Switch case since we might need to send requests with different
     // content types
 
@@ -1002,6 +1004,8 @@ class CMPLRService {
             params);
       case GetURIs.userTheme:
         return getUserTheme(route, params);
+      case GetURIs.activityNotifications:
+        return getActivityNotifications(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1015,8 +1019,6 @@ class CMPLRService {
     switch (route) {
       case PutURIs.userTheme:
         return putUserTheme(route, params);
-      case GetURIs.activityNotifications:
-        return getActivityNotifications(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1260,13 +1262,26 @@ class CMPLRService {
   }
 
   static Future<http.Response> getActivityNotifications(
-      String backendURI, Map params) async {
+      String backendURI, Map<String, dynamic> params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       return Future.value(http.Response(jsonEncode({}), invalidData));
     } else {
-      return http.post(Uri.parse(apiIp + backendURI),
-          headers: postHeader, body: jsonEncode(params));
+      // final queryParams = Uri(queryParameters: params).query;
+      // final uri = Uri.parse(apiIp + backendURI).replace(query: queryParams);
+
+      final noHttp = apiIp
+          .replaceFirst('http://', '')
+          .replaceFirst('https://', '')
+          .replaceFirst('/api', '');
+
+      final uri =
+          Uri.http(noHttp, '/api/' + backendURI.replaceFirst('/', ''), params);
+
+      return http.get(
+        uri,
+        headers: getHeader,
+      );
     }
   }
 }

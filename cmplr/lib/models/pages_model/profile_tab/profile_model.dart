@@ -9,7 +9,7 @@ class ModelProfile {
   ModelProfile({required this.blogId}) {}
 
   Future<dynamic> getBlogInfo() async {
-    final response = await CMPLRService.get('/blog/info', {});
+    final response = await CMPLRService.get(GetURIs.blogInfo, {});
     final responseBody = jsonDecode(response.body);
     return responseBody['response'];
   }

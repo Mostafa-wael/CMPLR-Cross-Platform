@@ -52,9 +52,9 @@ class GetURIs {
   static const String notes = '/notes';
 
   static const String recommendedSearchQueries = '/search_bar';
-  static const String blogInfo = '/blog/info';
+  static const String blogInfo = 'blog/info';
+  static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
   static const String userTheme = '/user_theme';
-  static String getBlogInfo(String blogId) => '/blog' + blogId + '/info';
   static const String followingBlogs = '/user/following';
 
   // TODO: Add the remaining get request URIS
