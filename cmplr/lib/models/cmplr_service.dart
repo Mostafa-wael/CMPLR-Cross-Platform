@@ -937,6 +937,158 @@ class CMPLRService {
         },
       ],
     },
+    GetURIs.conversationMessages: {
+      "messages": [
+        {
+          "id": 5007,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "1",
+          "is_read": true,
+          "created_at": "2021-12-27T17:38:18.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5006,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hola",
+          "is_read": true,
+          "created_at": "2021-12-27T17:33:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5005,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:33:49.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5004,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:28:06.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5003,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:27:02.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5002,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:26:26.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5001,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:24:29.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 4717,
+          "from_blog_id": "4",
+          "to_blog_id": "10",
+          "content": "Repellendus enim fugiat.",
+          "is_read": true,
+          "created_at": "2021-12-25T22:44:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 4701,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "Quis esse incidunt reiciendis voluptates.",
+          "is_read": true,
+          "created_at": "2021-12-25T22:44:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 4779,
+          "from_blog_id": "4",
+          "to_blog_id": "10",
+          "content": "Voluptatem quo ex aut sed tenetur.",
+          "is_read": true,
+          "created_at": "2021-12-25T22:44:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        }
+      ],
+      "blog_data": {
+        "blog_id": "10",
+        "blog_name": "eius",
+        "url": "http:\/\/localhost:8000\/api\/blog\/eius",
+        "title": "Susanna Cummings",
+        "avatar":
+            "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+        "avatar_shape": "circle"
+      },
+      "next_url":
+          "http:\/\/127.0.0.1:8000\/api\/messaging\/conversation\/10\/4?page=2",
+      "total": 111,
+      "current_page": 1,
+      "messages_per_page": 10
+    },
+    GetURIs.conversationsList: [
+      {
+        "from_blog_id": "10",
+        "to_blog_id": "4",
+        "content": "hi",
+        "is_read": false,
+        "blog_data": {
+          "blog_id": "4",
+          "blog_name": "eius",
+          "blog_url": "http:\/\/localhost:8000\/api\/blog\/eius",
+          "avatar":
+              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+          "avatar_shape": "circle"
+        }
+      },
+      {
+        "from_blog_id": "10",
+        "to_blog_id": "5",
+        "content": "Similique provident est.",
+        "is_read": false,
+        "blog_data": {
+          "blog_id": "5",
+          "blog_name": "incidunt",
+          "blog_url": "http:\/\/localhost:8000\/api\/blog\/incidunt",
+          "avatar":
+              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+          "avatar_shape": "circle"
+        }
+      },
+      {
+        "from_blog_id": "2",
+        "to_blog_id": "10",
+        "content": "Doloremque dolorem et alias.",
+        "is_read": false,
+        "blog_data": {
+          "blog_id": "2",
+          "blog_name": "impedit",
+          "blog_url": "http:\/\/localhost:8000\/api\/blog\/impedit",
+          "avatar":
+              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+          "avatar_shape": "circle"
+        }
+      },
+    ]
   };
 
   static const requestSuccess = 200;
@@ -944,9 +1096,9 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  //static const String apiIp = 'https://www.cmplr.tech/api';
+  // static const String apiIp = 'https://www.cmplr.tech/api';
   static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  // static const String apiIp = 'http://c1ba-197-46-249-92.ngrok.io/api';
+  // static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -975,15 +1127,12 @@ class CMPLRService {
         return createPost(backendURI, params);
       case PostURIs.reblog:
         return reblogPost(backendURI, params);
-      case '/user/post/reply':
-        return postReply(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
   }
 
-  static Future<http.Response> get(
-      String route, Map<String, dynamic> params) async {
+  static Future<http.Response> get(String route, Map params) async {
     // Switch case since we might need to send requests with different
     // content types
 
@@ -998,11 +1147,17 @@ class CMPLRService {
       case GetURIs.notes:
         return getNotes(route, params);
       case GetURIs.blogInfo:
-        return getBlogInfo(route, params);
+        return getBlogInfo(
+            '/blog/' +
+                GetStorage().read('user')['primary_blog_id'].toString() +
+                '/info',
+            params);
       case GetURIs.userTheme:
         return getUserTheme(route, params);
-      case GetURIs.activityNotifications:
-        return getActivityNotifications(route, params);
+      case GetURIs.conversationsList:
+        return getConversationsList(route, params);
+      case GetURIs.conversationMessages:
+        return getConversationMessages(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1016,6 +1171,8 @@ class CMPLRService {
     switch (route) {
       case PutURIs.userTheme:
         return putUserTheme(route, params);
+      case GetURIs.activityNotifications:
+        return getActivityNotifications(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1106,12 +1263,7 @@ class CMPLRService {
       var tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
-      return http.get(
-          Uri.parse(apiIp +
-              '/blog/' +
-              GetStorage().read('user')['primary_blog_id'].toString() +
-              '/info'),
-          headers: tempHeader);
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
     }
   }
 
@@ -1186,6 +1338,33 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getConversationsList(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI + '/' + params['me']);
+
+      return http.get(uri, headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getConversationMessages(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+    } else {
+      return http.get(
+          Uri.parse(
+              apiIp + backendURI + '/' + params['me'] + '/' + params['me']),
+          headers: getHeader);
+    }
+  }
+
   static Future<http.Response> getBlogInfo(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1210,30 +1389,9 @@ class CMPLRService {
     } else {
       //${params['post_id']}
       // TODO: change the 11
-      final uri = Uri.parse(apiIp + backendURI)
-          .replace(query: 'post_id=${params['post_id']}');
+      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
 
       return http.get(uri, headers: getHeader);
-    }
-  }
-
-  static Future<http.Response> postReply(String backendURI, Map params) async {
-    if (Flags.mock) {
-      final uri = Uri.parse(apiIp + backendURI)
-          .replace(query: 'post_id=61')
-          .replace(query: 'reply_text=test');
-      return http.get(uri, headers: getHeader);
-    } else {
-      final uri = Uri.parse(apiIp + backendURI);
-
-      final req = await http.post(uri,
-          headers: getHeader,
-          body: jsonEncode(<String, String>{
-            'post_id': params['post_id'],
-            'reply_text': params['reply_text']
-          }));
-      final x = req.statusCode;
-      return req;
     }
   }
 
@@ -1285,26 +1443,13 @@ class CMPLRService {
   }
 
   static Future<http.Response> getActivityNotifications(
-      String backendURI, Map<String, dynamic> params) async {
+      String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       return Future.value(http.Response(jsonEncode({}), invalidData));
     } else {
-      // final queryParams = Uri(queryParameters: params).query;
-      // final uri = Uri.parse(apiIp + backendURI).replace(query: queryParams);
-
-      final noHttp = apiIp
-          .replaceFirst('http://', '')
-          .replaceFirst('https://', '')
-          .replaceFirst('/api', '');
-
-      final uri = Uri.http(noHttp,
-          '/api' + GetURIs.getActivityNotifications(User.blogName), params);
-
-      return http.get(
-        uri,
-        headers: getHeader,
-      );
+      return http.post(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
     }
   }
 }
