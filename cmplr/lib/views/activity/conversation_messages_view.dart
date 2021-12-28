@@ -16,6 +16,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   bool _isLoading = true;
+  final _textController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -91,6 +92,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           Expanded(
             child: TextField(
+              controller: _textController,
               textCapitalization: TextCapitalization.sentences,
               onChanged: (value) {},
               decoration: const InputDecoration.collapsed(
@@ -102,7 +104,9 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: const Icon(Icons.send),
             iconSize: 25.0,
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              print(_textController.text);
+            },
           ),
         ],
       ),
