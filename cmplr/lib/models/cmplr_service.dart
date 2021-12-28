@@ -4,6 +4,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import '../utilities/user.dart';
 import 'package:get/get_connect.dart';
 import 'package:flutter/foundation.dart';
 
@@ -942,7 +943,9 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'http://c389-156-215-230-231.ngrok.io/api';
+
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -976,7 +979,8 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> get(String route, Map params) async {
+  static Future<http.Response> get(
+      String route, Map<String, dynamic> params) async {
     // Switch case since we might need to send requests with different
     // content types
 
@@ -1134,7 +1138,9 @@ class CMPLRService {
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), 200);
     } else {
-      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+      return http.get(
+          Uri.parse(apiIp + GetURIs.getBlogInfo(User.userMap['id'].toString())),
+          headers: getHeader);
     }
   }
 
@@ -1201,13 +1207,26 @@ class CMPLRService {
   }
 
   static Future<http.Response> getActivityNotifications(
-      String backendURI, Map params) async {
+      String backendURI, Map<String, dynamic> params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       return Future.value(http.Response(jsonEncode({}), invalidData));
     } else {
-      return http.post(Uri.parse(apiIp + backendURI),
-          headers: postHeader, body: jsonEncode(params));
+      // final queryParams = Uri(queryParameters: params).query;
+      // final uri = Uri.parse(apiIp + backendURI).replace(query: queryParams);
+
+      final noHttp = apiIp
+          .replaceFirst('http://', '')
+          .replaceFirst('https://', '')
+          .replaceFirst('/api', '');
+
+      final uri =
+          Uri.http(noHttp, '/api/' + backendURI.replaceFirst('/', ''), params);
+
+      return http.get(
+        uri,
+        headers: getHeader,
+      );
     }
   }
 }

@@ -29,7 +29,8 @@ class ModelEmailPasswordNameAfterSignup {
     );
     var errors = [];
 
-    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
+    final Map responseMap =
+        jsonDecode(utf8.decode(response.bodyBytes))['response'];
     // Check response for errors
     if (response.statusCode != CMPLRService.insertSuccess) {
       // Error should be a map with at most? 3 keys:

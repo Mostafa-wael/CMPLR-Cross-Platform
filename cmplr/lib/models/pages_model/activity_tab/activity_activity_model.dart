@@ -6,7 +6,8 @@ class ActivityActivityModel {
   static dynamic getActivityNotifications(List<String> filterTypes) async {
     final response = await CMPLRService.get(
       GetURIs.activityNotifications,
-      {'blog-identifier': User.userMap['id'], 'type': filterTypes},
+      {'blog-identifier': User.userMap['id'].toString(), 'type': filterTypes},
     );
+    return response;
   }
 }

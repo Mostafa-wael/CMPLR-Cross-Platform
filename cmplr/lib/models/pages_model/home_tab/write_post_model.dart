@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 import '../../../backend_uris.dart';
 import '../../cmplr_service.dart';
@@ -9,7 +11,7 @@ class WritePostModel {
   // Sends the required parameters to the backend
   // Receives a unique post id in return.
   // Note that all the parameters mentioned in the API are required
-  Future<int?> createPost(
+  Future<http.Response> createPost(
     String content,
     String blogName,
     String type, // text, photos, video, audio, quotes, chats
@@ -30,9 +32,9 @@ class WritePostModel {
 
     // TODO: Check if the response decodes successfully
     if (response.statusCode == CMPLRService.insertSuccess) {
-      final responseBody = jsonDecode(response.body)['response'];
-      return responseBody['post_id'];
+      final responseBody = jsonDecode(response.body);
+      return responseBody;
     } else
-      return null;
+      return http.Response(jsonEncode({}), response.statusCode);
   }
 }
