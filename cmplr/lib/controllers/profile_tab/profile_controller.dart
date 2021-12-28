@@ -1,3 +1,9 @@
+import '../../models/cmplr_service.dart';
+
+import '../../utilities/user.dart';
+
+import '../../cmplr_theme.dart';
+
 import '../../views/views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,7 +73,8 @@ class ProfileController extends GetxController
   var optimizeVideo = false;
   var showUploadProg = false;
   var disableDoubleTapToLike = false;
-  var systemDefault, trueBlue, darkMode;
+  bool trueBlue = false;
+  bool darkMode = false;
 
   List<Blog>? followingBlogs;
 
@@ -170,15 +177,16 @@ class ProfileController extends GetxController
     update();
   }
 
-  Future<void> saveEdits() async {
+  Future<void> saveEdits(visibleKeyboard) async {
     final response = await _model.putBlogSettings(
-      _currentColor,
+      nameClrs[_currentColor],
       titleController.text,
       descCrontroller.text,
     );
 
     getBlogInfo();
     Get.back();
+    if (visibleKeyboard) Get.back();
     update();
   }
 
@@ -186,10 +194,48 @@ class ProfileController extends GetxController
     followingBlogs = await _searchModel.getFollowingBlogs();
   }
 
-  // Future<void> setSystemDefaults() async {
-  //   systemDefault = true;
-  //   trueBlue = false;
-  //   darkMode = false;
-  //   update();
-  // }
+  Future<void> setTrueBlue() async {
+    final response = await _model.putTheme('trueBlue');
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      Get.changeThemeMode(ThemeMode.light);
+      User.userMap['theme'] = 'trueBlue';
+      trueBlue = true;
+      darkMode = false;
+      update();
+    }
+  }
+
+  Future<void> setDarkMode() async {
+    final response = await _model.putTheme('darkMode');
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      User.userMap['theme'] = 'darkMode';
+      trueBlue = false;
+      darkMode = true;
+      Get.changeThemeMode(ThemeMode.dark);
+      update();
+    }
+  }
+
+  Future<void> goToColorPalette() async {
+    Get.to(const ColorPaletteView());
+    update();
+  }
+
+  static var nameClrs = {
+    Colors.white: 'white',
+    Colors.black: 'black',
+    Colors.green: 'green',
+    Colors.blue: 'blue',
+    Colors.red: 'red',
+    Colors.yellow: 'yellow',
+    Colors.grey: 'grey',
+    Colors.brown: 'brown',
+    Colors.pink: 'pink',
+    Colors.teal: 'teal',
+    Colors.cyan: 'cyan',
+    Colors.orange: 'orange',
+    Colors.amber: 'amber',
+    Colors.purple: 'purple',
+    Colors.indigo: 'indigo',
+  };
 }

@@ -12,6 +12,7 @@ class EditProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return GetBuilder<ProfileController>(
       init: ProfileController(),
       builder: (controller) => FutureBuilder(
@@ -88,7 +89,8 @@ class EditProfileView extends StatelessWidget {
                                         color: Colors.transparent,
                                         child: InkWell(
                                           onTap: () {
-                                            controller.saveEdits();
+                                            controller
+                                                .saveEdits(visibleKeyboard);
                                           },
                                           child: Text(
                                             'Save',

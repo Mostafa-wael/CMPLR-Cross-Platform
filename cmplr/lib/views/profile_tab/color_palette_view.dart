@@ -32,27 +32,19 @@ class ColorPaletteView extends StatelessWidget {
             SettingsSection(
               tiles: [
                 SettingsTile.switchTile(
-                  title: 'System Default',
-                  subtitle: 'Use device settings.',
-                  switchValue: controller.optimizeVideo,
-                  onToggle: (bool value) {
-                    controller.toggleOptimizeVids();
-                  },
-                ),
-                SettingsTile.switchTile(
                   title: 'True Blue',
                   subtitle: 'Tried and true default cmplr blue.',
-                  switchValue: controller.optimizeVideo,
+                  switchValue: controller.trueBlue,
                   onToggle: (bool value) {
-                    controller.toggleOptimizeVids();
+                    controller.setTrueBlue();
                   },
                 ),
                 SettingsTile.switchTile(
                   title: 'Dark Mode',
                   subtitle: 'Turn down the lights.',
-                  switchValue: controller.optimizeVideo,
+                  switchValue: controller.darkMode,
                   onToggle: (bool value) {
-                    controller.toggleOptimizeVids();
+                    controller.setDarkMode();
                   },
                 ),
               ],

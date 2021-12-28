@@ -945,9 +945,9 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  //static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
-  //static const String apiIp = 'http://c389-156-215-230-231.ngrok.io/api';
+  static const String apiIp = 'http://ca24-156-223-170-167.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1023,13 +1023,13 @@ class CMPLRService {
 
     switch (route) {
       case PutURIs.userTheme:
-        return putUserTheme(route, params);
+        return putTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
       case PutURIs.saveBlogSettings:
         return putBlogSettings(
             route.split(' ')[0] +
-                GetStorage().read('user')['primary_blog_id'].toString() +
+                GetStorage().read('user')['blog_name'].toString() +
                 route.split(' ')[1],
             params);
 
@@ -1163,18 +1163,15 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> putUserTheme(
-      String backendURI, Map params) async {
+  static Future<http.Response> putTheme(String backendURI, Map params) async {
     if (Flags.mock) {
       // TODO: Change theme
       return http.Response(jsonEncode({}), 200);
     } else {
       // ignore: prefer_final_locals
       var tempHeader = getHeader;
-      if (tempHeader['Authorization'] == 'Bearer null')
-        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
       return http.put(Uri.parse(apiIp + backendURI),
-          headers: tempHeader, body: jsonEncode(params));
+          headers: postHeader, body: jsonEncode(params));
     }
   }
 
