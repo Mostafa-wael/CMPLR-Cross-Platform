@@ -53,7 +53,7 @@ class BlogController extends GetxController {
   /// }
   /// );
   /// ```
-  Future fetchBlogInfo(String blogName) async {
+  Future fetchBlogInfo(String blogId) async {
     try {
       isBlogInfoLoading(true);
       /*
@@ -92,7 +92,7 @@ class BlogController extends GetxController {
       */
 
       final response =
-          await CMPLRService.getBlogInfo(GetURIs.getBlogInfo(blogName), {});
+          await CMPLRService.getBlogInfo(GetURIs.getBlogInfo(blogId), {});
 
       blogInfo = BlogInfo.fromJson(json.decode(response.body)).obs;
     } finally {

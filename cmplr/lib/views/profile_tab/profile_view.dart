@@ -26,6 +26,7 @@ class ProfileView extends StatelessWidget {
                         (BuildContext context, bool innerBoxIsScrolled) {
                       return <Widget>[
                         SliverAppBar(
+                          backgroundColor: controller.backgroundColor,
                           expandedHeight: Sizing.blockSizeVertical * 50,
                           flexibleSpace: FlexibleSpaceBar(
                             collapseMode: CollapseMode.pin,
@@ -92,7 +93,9 @@ class ProfileView extends StatelessWidget {
                                             IconButton(
                                               icon:
                                                   const Icon(Icons.color_lens),
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                controller.goToEdit();
+                                              },
                                             ),
                                             IconButton(
                                               icon: const Icon(Icons.share),
@@ -124,6 +127,11 @@ class ProfileView extends StatelessWidget {
                                           style: TextStyle(
                                             fontSize: Sizing.fontSize * 7,
                                             fontWeight: FontWeight.bold,
+                                            color:
+                                                (controller.backgroundColor ==
+                                                        Colors.white)
+                                                    ? Colors.black
+                                                    : Colors.white,
                                           ),
                                         ),
                                         SizedBox(
@@ -135,6 +143,11 @@ class ProfileView extends StatelessWidget {
                                           style: TextStyle(
                                             fontSize: Sizing.fontSize * 3.5,
                                             fontWeight: FontWeight.w400,
+                                            color:
+                                                (controller.backgroundColor ==
+                                                        Colors.white)
+                                                    ? Colors.black
+                                                    : Colors.white,
                                           ),
                                         ),
                                       ],
@@ -145,24 +158,40 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           forceElevated: innerBoxIsScrolled,
-                          bottom: const TabBar(
+                          bottom: TabBar(
+                            indicatorColor:
+                                (controller.backgroundColor == Colors.blue)
+                                    ? Colors.black
+                                    : Colors.blue,
                             tabs: <Tab>[
                               Tab(
                                 child: Text(
                                   'Posts',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: (controller.backgroundColor ==
+                                              Colors.blue)
+                                          ? Colors.white
+                                          : Colors.blue),
                                 ),
                               ),
                               Tab(
                                 child: Text(
                                   'Likes',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: (controller.backgroundColor ==
+                                              Colors.blue)
+                                          ? Colors.white
+                                          : Colors.blue),
                                 ),
                               ),
                               Tab(
                                 child: Text(
                                   'Following',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: (controller.backgroundColor ==
+                                              Colors.blue)
+                                          ? Colors.white
+                                          : Colors.blue),
                                 ),
                               ),
                             ],
