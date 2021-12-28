@@ -21,6 +21,11 @@ class TextOnImage extends StatelessWidget {
   BorderRadius? borderRadius = BorderRadius.circular(Sizing.blockSize);
   double fontSize = Sizing.blockSizeVertical * 2;
 
+  /// Contains whatever extra data the widget needs to work in specific contexts
+  ///
+  /// Helps keep the widget generic by making the data more dynamic.
+  Map? otherData;
+
   TextOnImage({
     required this.width,
     required this.height,
@@ -32,6 +37,7 @@ class TextOnImage extends StatelessWidget {
     this.fontSizeScale = 1,
     this.maxTextRows = 1,
     this.gestureDetectorKey,
+    this.otherData,
     Key? key,
   }) : super(key: key);
 

@@ -16,8 +16,12 @@ import 'package:flutter/material.dart';
 class ActivityActivityController extends GetxController {
   // Small variables
   int currChosenFilter = 0;
+
+  // TODO: Convert all rows to CheckboxListTile and SwitchListTile
+  // and remove these
   final iconPadding =
       EdgeInsets.only(right: Sizing.blockSize * 4, left: Sizing.blockSize * 2);
+
   final rowPadding =
       EdgeInsets.symmetric(vertical: Sizing.blockSizeVertical * 2);
 
@@ -26,6 +30,7 @@ class ActivityActivityController extends GetxController {
   var modalSheet;
   var context;
 
+  /// Fetch some notifications on page creation
   ActivityActivityController() {
     fetchNotifications();
   }
@@ -174,6 +179,7 @@ class ActivityActivityController extends GetxController {
     return listView;
   }
 
+  /// Converts the list of filters to widgets
   List<Widget> getFilters(context) {
     final filters = <Widget>[];
 
@@ -273,8 +279,6 @@ class ActivityActivityController extends GetxController {
   void fetchNotifications() async {
     final response =
         await ActivityActivityModel.getActivityNotifications(filterTypes);
-    print(response);
-    return response;
   }
 }
 

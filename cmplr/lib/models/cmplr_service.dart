@@ -996,11 +996,7 @@ class CMPLRService {
       case GetURIs.notes:
         return getNotes(route, params);
       case GetURIs.blogInfo:
-        return getBlogInfo(
-            '/blog/' +
-                GetStorage().read('user')['primary_blog_id'].toString() +
-                '/info',
-            params);
+        return getBlogInfo(route, params);
       case GetURIs.userTheme:
         return getUserTheme(route, params);
       case GetURIs.activityNotifications:
@@ -1108,7 +1104,12 @@ class CMPLRService {
       var tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
-      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      return http.get(
+          Uri.parse(apiIp +
+              '/blog/' +
+              GetStorage().read('user')['primary_blog_id'].toString() +
+              '/info'),
+          headers: tempHeader);
     }
   }
 
@@ -1275,8 +1276,8 @@ class CMPLRService {
           .replaceFirst('https://', '')
           .replaceFirst('/api', '');
 
-      final uri =
-          Uri.http(noHttp, '/api/' + backendURI.replaceFirst('/', ''), params);
+      final uri = Uri.http(noHttp,
+          '/api' + GetURIs.getActivityNotifications(User.blogName), params);
 
       return http.get(
         uri,
