@@ -14,7 +14,7 @@ class _ConversationsListState extends State<ConversationsList> {
   @override
   void initState() {
     super.initState();
-    ModelChatModule.getConversationMessages().then((dummy) => {
+    ModelChatModule.getConversationsList().then((dummy) => {
           setState(() {
             _isLoading = false;
           })
@@ -46,10 +46,11 @@ class _ConversationsListState extends State<ConversationsList> {
                   topRight: Radius.circular(30.0),
                 ),
                 child: ListView.builder(
-                  itemCount: ModelChatModule.chats.length,
+                  itemCount: ModelChatModule.conversationsList.length,
                   itemBuilder: (BuildContext context, int index) {
                     // ignore: omit_local_variable_types
-                    final Message chat = ModelChatModule.chats[index];
+                    final Message chat =
+                        ModelChatModule.conversationsList[index];
                     return GestureDetector(
                       onTap: () => Navigator.push(
                         context,

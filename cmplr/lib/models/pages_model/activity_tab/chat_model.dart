@@ -2,6 +2,8 @@
 // ignore_for_file: non_constant_identifier_names, prefer_equal_for_default_values, prefer_single_quotes, unnecessary_string_escapes
 import 'dart:math';
 
+import '../../../utilities/user.dart';
+
 import '../../cmplr_service.dart';
 
 import '../../../utilities/custom_widgets/post_item.dart';
@@ -51,7 +53,7 @@ class Message {
           )
         : Message(
             sender: ChatUser(
-              blog_id: int.parse(json['messages'][0]['from_blog_id']),
+              blog_id: 0,
               blog_url: json['blog_data']['url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],
@@ -63,33 +65,31 @@ class Message {
 }
 
 class ModelChatModule {
-  static final messages = <Message>[];
-  static final chats = <Message>[];
+  static final conversationsList = <Message>[];
+  static final conversationMessages = <Message>[];
 
-  ModelChatModule() {
-    print('Crateed ModelChatModule');
-  }
   static Future<void> getConversationsList() async {
-    // the chat menu from outside
-    final response = await CMPLRService.get(GetURIs.conversationsList, {});
+    // the chat menu from outside -> URI: messaging
+    final response = await CMPLRService.get(
+        GetURIs.conversationsList, {'me': User.userMap['id'].toString()});
     final responseBody = jsonDecode(response.body);
-    print('get messages');
-    for (var i = 0; i < responseBody['responseBody'].length; i++) {
-      messages.add(
-        Message.fromJson(json: responseBody['responseBody'][i], outOrIn: true),
+    print('get chat list');
+    for (var i = 0; i < responseBody.length; i++) {
+      conversationsList.add(
+        Message.fromJson(json: responseBody[i], outOrIn: true),
       );
     }
   }
 
   static Future<void> getConversationMessages() async {
-    // inside the chat itself
-    final response = await CMPLRService.get(GetURIs.conversationMessages, {});
+    // inside the chat itself -> URI: conversation
+    final response = await CMPLRService.get(
+        GetURIs.conversationMessages, {'me': User.userMap['id'].toString()});
     final responseBody = jsonDecode(response.body);
-    print('get chats');
-    for (var i = 0; i < responseBody['responseBody']['messages'].length; i++) {
-      chats.add(
-        Message.fromJson(
-            json: responseBody['responseBody'], outOrIn: false, index: i),
+    print('get chats message');
+    for (var i = 0; i < responseBody['messages'].length; i++) {
+      conversationMessages.add(
+        Message.fromJson(json: responseBody, outOrIn: false, index: i),
       );
     }
   }

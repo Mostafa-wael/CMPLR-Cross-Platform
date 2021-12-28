@@ -938,160 +938,157 @@ class CMPLRService {
       ],
     },
     GetURIs.conversationMessages: {
-      'responseBody': {
-        "messages": [
-          {
-            "id": 5007,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "1",
-            "is_read": true,
-            "created_at": "2021-12-27T17:38:18.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 5006,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "hola",
-            "is_read": true,
-            "created_at": "2021-12-27T17:33:50.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 5005,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "hi",
-            "is_read": true,
-            "created_at": "2021-12-27T17:33:49.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 5004,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "hi",
-            "is_read": true,
-            "created_at": "2021-12-27T17:28:06.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 5003,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "hi",
-            "is_read": true,
-            "created_at": "2021-12-27T17:27:02.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 5002,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "hi",
-            "is_read": true,
-            "created_at": "2021-12-27T17:26:26.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 5001,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "hi",
-            "is_read": true,
-            "created_at": "2021-12-27T17:24:29.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 4717,
-            "from_blog_id": "4",
-            "to_blog_id": "10",
-            "content": "Repellendus enim fugiat.",
-            "is_read": true,
-            "created_at": "2021-12-25T22:44:50.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 4701,
-            "from_blog_id": "10",
-            "to_blog_id": "4",
-            "content": "Quis esse incidunt reiciendis voluptates.",
-            "is_read": true,
-            "created_at": "2021-12-25T22:44:50.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          },
-          {
-            "id": 4779,
-            "from_blog_id": "4",
-            "to_blog_id": "10",
-            "content": "Voluptatem quo ex aut sed tenetur.",
-            "is_read": true,
-            "created_at": "2021-12-25T22:44:50.000000Z",
-            "updated_at": "2021-12-27T17:44:42.000000Z"
-          }
-        ],
-        "blog_data": {
-          "blog_name": "eius",
-          "url": "http:\/\/localhost:8000\/api\/blog\/eius",
-          "title": "Susanna Cummings",
-          "avatar":
-              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
-          "avatar_shape": "circle"
-        },
-        "next_url":
-            "http:\/\/127.0.0.1:8000\/api\/messaging\/conversation\/10\/4?page=2",
-        "total": 111,
-        "current_page": 1,
-        "messages_per_page": 10
-      }
-    },
-    GetURIs.conversationsList: {
-      'responseBody': [
+      "messages": [
         {
+          "id": 5007,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "1",
+          "is_read": true,
+          "created_at": "2021-12-27T17:38:18.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5006,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hola",
+          "is_read": true,
+          "created_at": "2021-12-27T17:33:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5005,
           "from_blog_id": "10",
           "to_blog_id": "4",
           "content": "hi",
-          "is_read": false,
-          "blog_data": {
-            "blog_id": "4",
-            "blog_name": "eius",
-            "blog_url": "http:\/\/localhost:8000\/api\/blog\/eius",
-            "avatar":
-                "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
-            "avatar_shape": "circle"
-          }
+          "is_read": true,
+          "created_at": "2021-12-27T17:33:49.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
         },
         {
+          "id": 5004,
           "from_blog_id": "10",
-          "to_blog_id": "5",
-          "content": "Similique provident est.",
-          "is_read": false,
-          "blog_data": {
-            "blog_id": "5",
-            "blog_name": "incidunt",
-            "blog_url": "http:\/\/localhost:8000\/api\/blog\/incidunt",
-            "avatar":
-                "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
-            "avatar_shape": "circle"
-          }
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:28:06.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
         },
         {
-          "from_blog_id": "2",
-          "to_blog_id": "10",
-          "content": "Doloremque dolorem et alias.",
-          "is_read": false,
-          "blog_data": {
-            "blog_id": "2",
-            "blog_name": "impedit",
-            "blog_url": "http:\/\/localhost:8000\/api\/blog\/impedit",
-            "avatar":
-                "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
-            "avatar_shape": "circle"
-          }
+          "id": 5003,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:27:02.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
         },
-      ]
-    }
+        {
+          "id": 5002,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:26:26.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 5001,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "hi",
+          "is_read": true,
+          "created_at": "2021-12-27T17:24:29.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 4717,
+          "from_blog_id": "4",
+          "to_blog_id": "10",
+          "content": "Repellendus enim fugiat.",
+          "is_read": true,
+          "created_at": "2021-12-25T22:44:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 4701,
+          "from_blog_id": "10",
+          "to_blog_id": "4",
+          "content": "Quis esse incidunt reiciendis voluptates.",
+          "is_read": true,
+          "created_at": "2021-12-25T22:44:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        },
+        {
+          "id": 4779,
+          "from_blog_id": "4",
+          "to_blog_id": "10",
+          "content": "Voluptatem quo ex aut sed tenetur.",
+          "is_read": true,
+          "created_at": "2021-12-25T22:44:50.000000Z",
+          "updated_at": "2021-12-27T17:44:42.000000Z"
+        }
+      ],
+      "blog_data": {
+        "blog_id": "10",
+        "blog_name": "eius",
+        "url": "http:\/\/localhost:8000\/api\/blog\/eius",
+        "title": "Susanna Cummings",
+        "avatar":
+            "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+        "avatar_shape": "circle"
+      },
+      "next_url":
+          "http:\/\/127.0.0.1:8000\/api\/messaging\/conversation\/10\/4?page=2",
+      "total": 111,
+      "current_page": 1,
+      "messages_per_page": 10
+    },
+    GetURIs.conversationsList: [
+      {
+        "from_blog_id": "10",
+        "to_blog_id": "4",
+        "content": "hi",
+        "is_read": false,
+        "blog_data": {
+          "blog_id": "4",
+          "blog_name": "eius",
+          "blog_url": "http:\/\/localhost:8000\/api\/blog\/eius",
+          "avatar":
+              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+          "avatar_shape": "circle"
+        }
+      },
+      {
+        "from_blog_id": "10",
+        "to_blog_id": "5",
+        "content": "Similique provident est.",
+        "is_read": false,
+        "blog_data": {
+          "blog_id": "5",
+          "blog_name": "incidunt",
+          "blog_url": "http:\/\/localhost:8000\/api\/blog\/incidunt",
+          "avatar":
+              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+          "avatar_shape": "circle"
+        }
+      },
+      {
+        "from_blog_id": "2",
+        "to_blog_id": "10",
+        "content": "Doloremque dolorem et alias.",
+        "is_read": false,
+        "blog_data": {
+          "blog_id": "2",
+          "blog_name": "impedit",
+          "blog_url": "http:\/\/localhost:8000\/api\/blog\/impedit",
+          "avatar":
+              "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+          "avatar_shape": "circle"
+        }
+      },
+    ]
   };
 
   static const requestSuccess = 200;
@@ -1099,9 +1096,9 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  //static const String apiIp = 'https://www.cmplr.tech/api';
-  //static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  // static const String apiIp = 'https://www.cmplr.tech/api';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  // static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1348,10 +1345,9 @@ class CMPLRService {
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), requestSuccess);
     } else {
-      await Future.delayed(const Duration(milliseconds: 1500));
-      final res = await _mockData[backendURI];
-      return http.Response(jsonEncode(res), requestSuccess);
-      // return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+      final uri = Uri.parse(apiIp + backendURI + '/' + params['me']);
+
+      return http.get(uri, headers: getHeader);
     }
   }
 
@@ -1362,10 +1358,10 @@ class CMPLRService {
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), requestSuccess);
     } else {
-      await Future.delayed(const Duration(milliseconds: 1500));
-      final res = await _mockData[backendURI];
-      return http.Response(jsonEncode(res), requestSuccess);
-      // return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+      return http.get(
+          Uri.parse(
+              apiIp + backendURI + '/' + params['me'] + '/' + params['me']),
+          headers: getHeader);
     }
   }
 

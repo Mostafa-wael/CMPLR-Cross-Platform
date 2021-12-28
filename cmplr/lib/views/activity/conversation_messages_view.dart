@@ -20,7 +20,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    ModelChatModule.getConversationsList().then((dummy) => {
+    ModelChatModule.getConversationMessages().then((dummy) => {
           setState(() {
             _isLoading = false;
           })
@@ -168,10 +168,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: ListView.builder(
                           reverse: true,
                           padding: const EdgeInsets.only(top: 15.0),
-                          itemCount: ModelChatModule.messages.length,
+                          itemCount:
+                              ModelChatModule.conversationMessages.length,
                           itemBuilder: (BuildContext context, int index) {
                             final Message message =
-                                ModelChatModule.messages[index];
+                                ModelChatModule.conversationMessages[index];
                             final bool isMe =
                                 message.sender.blog_id == User.userMap['id'];
                             return _buildMessage(message, isMe);
