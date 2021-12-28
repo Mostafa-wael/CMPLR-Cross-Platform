@@ -1,3 +1,6 @@
+import 'package:getwidget/getwidget.dart';
+
+import '../../models/models.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:get/get.dart';
@@ -209,9 +212,31 @@ class ProfileView extends StatelessWidget {
                         Container(
                           color: Colors.red,
                         ),
-                        Container(
-                          color: Colors.green,
-                        ),
+                        FutureBuilder(
+                            future: controller.getFollowingBlogs(),
+                            builder: (context, AsyncSnapshot snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return ListView.builder(
+                                    itemCount:
+                                        controller.followingBlogs!.length,
+                                    itemBuilder: (context, index) {
+                                      return buildBlogsListTile(
+                                          controller.followingBlogs![index],
+                                          index,
+                                          context,
+                                          controller);
+                                    });
+                              } else {
+                                return const Expanded(
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                );
+                              }
+                            }),
                       ],
                     ),
                   ),
@@ -226,5 +251,153 @@ class ProfileView extends StatelessWidget {
             }
           }),
     );
+  }
+
+  Widget buildBlogsListTile(Blog blog, int index, BuildContext context,
+      ProfileController controller) {
+    return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: () {
+        print('User profile tapped');
+      },
+      child: Container(
+        height: Sizing.blockSizeVertical * 9.75,
+        padding: EdgeInsets.fromLTRB(
+            Sizing.blockSize * 3.71,
+            Sizing.blockSizeVertical * 1.5,
+            Sizing.blockSize * 1.24,
+            Sizing.blockSizeVertical * 1.5),
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                blog.avatarShape == 'circle'
+                    ? CircleAvatar(
+                        backgroundImage: NetworkImage(blog.avatarURL),
+                        radius: Sizing.blockSize * 4.45,
+                      )
+                    : GFAvatar(
+                        backgroundImage: NetworkImage(blog.avatarURL),
+                        shape: GFAvatarShape.square,
+                        backgroundColor: Colors.white,
+                        size: Sizing.blockSize * 5.9,
+                      ),
+                SizedBox(width: Sizing.blockSize * 3.71),
+                SizedBox(
+                  width: Sizing.blockSize * 55.6,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        blog.blogName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: Sizing.blockSize * 4.2,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                      Text(
+                        blog.profileTitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: Sizing.blockSize * 4.2,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: Sizing.blockSize * 5.9),
+              ],
+            ),
+            Positioned(
+              child: Obx(
+                () => Center(
+                  child: controller.followingBlogs![index].following.value
+                      ? PopupMenuButton(
+                          icon: const Icon(Icons.person),
+                          onSelected: (choice) {
+                            print(choice);
+                            popupMenuChoiceAction(
+                                choice, index, context, controller);
+                          },
+                          itemBuilder: (context) {
+                            return controller.popupMenuChoices.map((choice) {
+                              return PopupMenuItem<String>(
+                                value: choice,
+                                child: Text(choice),
+                              );
+                            }).toList();
+                          },
+                        )
+                      : Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              print('Follow button pressed');
+                              controller.followingBlogs![index].following
+                                  .value = true;
+                            },
+                            child: Container(
+                              height: Sizing.blockSizeVertical * 6.75,
+                              padding: EdgeInsets.fromLTRB(
+                                  Sizing.blockSize * 2.5,
+                                  0,
+                                  Sizing.blockSize * 2.5,
+                                  0),
+                              child: Center(
+                                child: Text(
+                                  'Follow',
+                                  style: TextStyle(
+                                      fontSize: Sizing.blockSize * 4.65,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.lightBlue),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                ),
+              ),
+              right: 0,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void popupMenuChoiceAction(
+      choice, int index, BuildContext context, ProfileController controller) {
+    switch (choice) {
+      case 'Share':
+        {
+          controller.shareFollowing(
+              context, controller.followingBlogs![index].blogURL);
+          break;
+        }
+      case 'Get notifications':
+        {
+          break;
+        }
+      case 'Block':
+        {
+          break;
+        }
+      case 'Report':
+        {
+          break;
+        }
+      case 'Unfollow':
+        {
+          print(index);
+          controller.followingBlogs![index].following.value = false;
+          break;
+        }
+    }
   }
 }

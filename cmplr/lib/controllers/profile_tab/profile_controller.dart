@@ -5,9 +5,12 @@ import 'package:get_storage/get_storage.dart';
 import '../../models/models.dart';
 import 'package:share_plus/share_plus.dart';
 
-class ProfileController extends GetxController {
+class ProfileController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final _model =
       ModelProfile(blogId: GetStorage().read('user')['primary_blog_id']);
+
+  final _searchModel = ProfileSearchModel();
 
   final titleController = TextEditingController();
   final descCrontroller = TextEditingController();
@@ -60,10 +63,20 @@ class ProfileController extends GetxController {
   var disableDoubleTapToLike = false;
   var systemDefault, trueBlue, darkMode;
 
+  List<Blog>? followingBlogs;
+
   Future<void> goToSettings() async {
     Get.to(const ProfileSettingsView());
     update();
   }
+
+  final List popupMenuChoices = [
+    'Share',
+    'Get notifications',
+    'Block',
+    'Report',
+    'Unfollow'
+  ];
 
   Future<void> getBlogInfo() async {
     blogInfo = await _model.getBlogInfo();
@@ -79,6 +92,11 @@ class ProfileController extends GetxController {
 
   Future<void> share(BuildContext context) async {
     await Share.share(_url);
+    update();
+  }
+
+  Future<void> shareFollowing(BuildContext context, String blogURL) async {
+    await Share.share(blogURL);
     update();
   }
 
@@ -145,6 +163,10 @@ class ProfileController extends GetxController {
     // TODO: send request to back with changes if they implement it
     Get.back();
     update();
+  }
+
+  Future<void> getFollowingBlogs() async {
+    followingBlogs = await _searchModel.getFollowingBlogs();
   }
 
   // Future<void> setSystemDefaults() async {
