@@ -945,7 +945,7 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'https://beta.cmplr.tech/api';
   // static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',

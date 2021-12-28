@@ -48,11 +48,10 @@ class ModelEmailPasswordNameAfterSignup {
       return errors;
     } else {
       if (!Flags.mock) {
-        final userDetails = responseMap['response'];
         User.storeUserData(
-          userDetails['blog_name'],
-          userDetails['token'],
-          userDetails['user'],
+          responseMap['blog_name'],
+          responseMap['token'],
+          responseMap['user'],
         );
       }
       return [];
