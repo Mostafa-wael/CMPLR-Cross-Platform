@@ -937,7 +937,7 @@ class CMPLRService {
         },
       ],
     },
-    GetURIs.conversation: {
+    GetURIs.conversationMessages: {
       'responseBody': {
         "messages": [
           {
@@ -1046,7 +1046,7 @@ class CMPLRService {
         "messages_per_page": 10
       }
     },
-    GetURIs.messaging: {
+    GetURIs.conversationsList: {
       'responseBody': [
         {
           "from_blog_id": "10",
@@ -1157,10 +1157,10 @@ class CMPLRService {
             params);
       case GetURIs.userTheme:
         return getUserTheme(route, params);
-      case GetURIs.messaging:
-        return getMessaging(route, params);
-      case GetURIs.conversation:
-        return getConversation(route, params);
+      case GetURIs.conversationsList:
+        return getConversationsList(route, params);
+      case GetURIs.conversationMessages:
+        return getConversationMessages(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1341,25 +1341,31 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> getMessaging(
+  static Future<http.Response> getConversationsList(
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), requestSuccess);
     } else {
-      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+      // return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
   }
 
-  static Future<http.Response> getConversation(
+  static Future<http.Response> getConversationMessages(
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), requestSuccess);
     } else {
-      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+      // return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
   }
 

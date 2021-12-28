@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'chat/recent_chats.dart';
+import 'conversations_list_view.dart';
 
 class ActivityMessages extends StatelessWidget {
   const ActivityMessages({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const RecentChats();
+    return const ConversationsList();
   }
 }

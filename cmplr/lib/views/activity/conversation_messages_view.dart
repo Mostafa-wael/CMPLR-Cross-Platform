@@ -1,10 +1,11 @@
 // ignore_for_file: omit_local_variable_types
 
+import '../../utilities/user.dart';
 import 'package:flutter/material.dart';
-import 'message_model.dart';
+import '../../models/pages_model/activity_tab/chat_model.dart';
 
 class ChatScreen extends StatefulWidget {
-  final User user;
+  final ChatUser user;
 
   // ignore: use_key_in_widget_constructors
   const ChatScreen({required this.user});
@@ -14,6 +15,17 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  bool _isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    ModelChatModule.getConversationsList().then((dummy) => {
+          setState(() {
+            _isLoading = false;
+          })
+        });
+  }
+
   Widget _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       margin: isMe
@@ -64,7 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Container _buildMessageComposer() {
+  Widget _buildMessageComposer() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 70.0,
@@ -99,8 +111,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ModelChatModule.getMessages();
-    ModelChatModule.getConversations();
     return Scaffold(
       backgroundColor: Colors.cyan,
       appBar: AppBar(
@@ -129,34 +139,43 @@ class _ChatScreenState extends State<ChatScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
           children: <Widget>[
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.cyan,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
+            _isLoading
+                ? const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.purple,
+                      ),
+                    ),
+                  )
+                : Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.cyan,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.0),
+                          topRight: Radius.circular(30.0),
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30.0),
+                          topRight: Radius.circular(30.0),
+                        ),
+                        child: ListView.builder(
+                          reverse: true,
+                          padding: const EdgeInsets.only(top: 15.0),
+                          itemCount: ModelChatModule.messages.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final Message message =
+                                ModelChatModule.messages[index];
+                            final bool isMe =
+                                message.sender.blog_id == User.userMap['id'];
+                            return _buildMessage(message, isMe);
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
-                  child: ListView.builder(
-                    reverse: true,
-                    padding: const EdgeInsets.only(top: 15.0),
-                    itemCount: ModelChatModule.messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final Message message = ModelChatModule.messages[index];
-                      final bool isMe =
-                          message.sender.blog_id == currentUser.blog_id;
-                      return _buildMessage(message, isMe);
-                    },
-                  ),
-                ),
-              ),
-            ),
             _buildMessageComposer(),
           ],
         ),
