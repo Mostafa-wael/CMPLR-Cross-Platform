@@ -4,6 +4,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import '../utilities/user.dart';
 import 'package:get/get_connect.dart';
 import 'package:flutter/foundation.dart';
 
@@ -931,7 +932,7 @@ class CMPLRService {
           'avatar_shape': 'circle',
           'blog_name': 'Mostafa',
           'title': 'Mohamed'
-        }
+        },
       ],
     },
   };
@@ -942,7 +943,8 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  //static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -986,10 +988,31 @@ class CMPLRService {
       // ignore: no_duplicate_case_values
       case GetURIs.postStuff:
         return getPosts(route, params);
+      case GetURIs.trendingPosts:
+        return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
       case GetURIs.blogInfo:
-        return getBlogInfo(route, params);
+        return getBlogInfo(
+            '/blog/' +
+                GetStorage().read('user')['primary_blog_id'].toString() +
+                '/info',
+            params);
+      case GetURIs.userTheme:
+        return getUserTheme(route, params);
+
+      default:
+        throw Exception('Invalid request backendURI');
+    }
+  }
+
+  static Future<http.Response> put(String route, Map params) async {
+    // Switch case since we might need to send requests with different
+    // content types
+
+    switch (route) {
+      case PutURIs.userTheme:
+        return putUserTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
 
@@ -1071,6 +1094,36 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getUserTheme(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      final res = User.userMap['theme'];
+      return http.Response(jsonEncode(res), 200);
+    } else {
+      // ignore: prefer_final_locals
+      var tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+    }
+  }
+
+  static Future<http.Response> putUserTheme(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      // TODO: Change theme
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      // ignore: prefer_final_locals
+      var tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.put(Uri.parse(apiIp + backendURI),
+          headers: tempHeader, body: jsonEncode(params));
+    }
+  }
+
   static Future<http.Response> askBlog(String backendURI, Map param) {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), 201));
@@ -1134,7 +1187,11 @@ class CMPLRService {
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), 200);
     } else {
-      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+      // ignore: prefer_final_locals
+      var tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
     }
   }
 

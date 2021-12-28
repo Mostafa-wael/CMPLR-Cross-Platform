@@ -52,12 +52,14 @@ class ModelEmailPasswordLogin {
       if (errors.isEmpty) errors.add('Internal server error');
       return errors;
     } else {
-      if (!Flags.mock)
+      if (!Flags.mock) {
+        final userDetails = responseMap['response'];
         User.storeUserData(
-          responseMap['blog_name'],
-          responseMap['token'],
-          responseMap['user'],
+          userDetails['blog_name'],
+          userDetails['token'],
+          userDetails['user'],
         );
+      }
       return [];
     }
   }
