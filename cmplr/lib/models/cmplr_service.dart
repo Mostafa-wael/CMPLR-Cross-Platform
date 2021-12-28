@@ -946,7 +946,7 @@ class CMPLRService {
 
   //static const String apiIp = 'https://www.cmplr.tech/api';
   static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  // static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  // static const String apiIp = 'http://c1ba-197-46-249-92.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -975,6 +975,8 @@ class CMPLRService {
         return createPost(backendURI, params);
       case PostURIs.reblog:
         return reblogPost(backendURI, params);
+      case '/user/post/reply':
+        return postReply(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1211,6 +1213,26 @@ class CMPLRService {
           .replace(query: 'post_id=${params['post_id']}');
 
       return http.get(uri, headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> postReply(String backendURI, Map params) async {
+    if (Flags.mock) {
+      final uri = Uri.parse(apiIp + backendURI)
+          .replace(query: 'post_id=61')
+          .replace(query: 'reply_text=test');
+      return http.get(uri, headers: getHeader);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'post_id': params['post_id'],
+            'reply_text': params['reply_text']
+          }));
+      final x = req.statusCode;
+      return req;
     }
   }
 

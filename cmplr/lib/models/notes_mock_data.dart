@@ -11,8 +11,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -23,8 +24,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -35,8 +37,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'square',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'Xz'
+      'blog_title': 'Mohamed',
+      'content': 'Xz',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -47,11 +50,12 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
+      'blog_title': 'Mohamed',
       'content': 'This is a post reply. This is a post reply. This is a post'
           'reply. This is a post reply. This is a post reply.'
           'This is a post reply. This is a post reply.'
-          'This is a post reply.'
+          'This is a post reply.',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -62,8 +66,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -74,8 +79,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -86,8 +92,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -98,8 +105,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -110,8 +118,9 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'content': 'This is a post reply'
+      'blog_title': 'Mohamed',
+      'content': 'This is a post reply',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -122,8 +131,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'true',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -134,8 +143,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -146,8 +155,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -158,8 +167,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -170,8 +179,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -182,8 +191,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -194,8 +203,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -206,8 +215,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -218,8 +227,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -230,8 +239,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -242,8 +251,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed',
-      'followed': 'false',
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -254,7 +263,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed'
+      'blog_title': 'Mohamed',
+      'follower': true,
     },
     {
       'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
@@ -265,7 +275,8 @@ final notesMockData = {
           'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
       'avatar_shape': 'circle',
       'blog_name': 'Mostafa',
-      'profile_title': 'Mohamed'
+      'blog_title': 'Mohamed',
+      'follower': true,
     }
   ],
   'total_likes': 12,
