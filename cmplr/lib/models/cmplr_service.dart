@@ -990,6 +990,8 @@ class CMPLRService {
         return getNotes(route, params);
       case GetURIs.blogInfo:
         return getBlogInfo(route, params);
+      case GetURIs.activityNotifications:
+        return getActivityNotifications(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1195,6 +1197,17 @@ class CMPLRService {
       return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
     } else {
       return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
+    }
+  }
+
+  static Future<http.Response> getActivityNotifications(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      return Future.value(http.Response(jsonEncode({}), invalidData));
+    } else {
+      return http.post(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
     }
   }
 }
