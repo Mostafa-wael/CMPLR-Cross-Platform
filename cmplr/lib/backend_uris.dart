@@ -38,6 +38,8 @@ class GetURIs {
   // FIXME: Replace the URI when the back implements this
   static const String getSuggestedTags = '/tags';
 
+  static const String activityNotifications = '/notifications';
+
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
 

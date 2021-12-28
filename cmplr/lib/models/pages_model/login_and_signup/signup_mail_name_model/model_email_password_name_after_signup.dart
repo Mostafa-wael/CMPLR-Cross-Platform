@@ -49,10 +49,9 @@ class ModelEmailPasswordNameAfterSignup {
       if (!Flags.mock) {
         final userDetails = responseMap['response'];
         User.storeUserData(
-          userDetails['blog_name'],
-          userDetails['user']['avatar'],
-          userDetails['token'],
-          userDetails['user'],
+          responseMap['blog_name'],
+          responseMap['token'],
+          responseMap['user'],
         );
       }
       return [];

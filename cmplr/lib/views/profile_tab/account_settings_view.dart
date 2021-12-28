@@ -93,9 +93,8 @@ class AccountSettingsView extends StatelessWidget {
                 ),
                 SettingsTile.switchTile(
                   title: 'Show upload progress',
-                  subtitle:
-                      // ignore: lines_longer_than_80_chars
-                      'This lets you know when your post has uploaded successfully',
+                  subtitle: 'This lets you know when your post has uploaded'
+                      ' successfully',
                   switchValue: controller.showUploadProg,
                   onToggle: (bool value) {
                     controller.toggleShowUploadProg();
