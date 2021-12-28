@@ -1,3 +1,5 @@
+import '../../backend_uris.dart';
+import '../../models/cmplr_service.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import '../../utilities/custom_widgets/activity_filter_row.dart';
@@ -19,9 +21,17 @@ class ActivityActivityController extends GetxController {
   final rowPadding =
       EdgeInsets.symmetric(vertical: Sizing.blockSizeVertical * 2);
 
-  List<String> filterTypes = [];
+  List<String> filterTypes = ['all'];
 
-  void filterChosen(int newFilterIndex) {
+  var modalSheet;
+  var context;
+
+  ActivityActivityController() {
+    fetchNotifications();
+  }
+
+  // FIXME: Update the modalsheet in place
+  void filterChosen(context, int newFilterIndex) {
     activityFilters[currChosenFilter]['color'] = Colors.white;
     currChosenFilter = newFilterIndex;
     filterTypes =
@@ -29,102 +39,142 @@ class ActivityActivityController extends GetxController {
     activityFilters[newFilterIndex]['color'] = Colors.lightBlue;
     Get.back();
     update();
+
+    if (activityFilters[newFilterIndex]['rowText'] == 'Custom') {
+      final listView = customFilterChosen(context, this);
+      update();
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Sizing.blockSize * 5),
+        ),
+        builder: (context) => GetBuilder<ActivityActivityController>(
+          builder: (controller) => Column(
+            children: [
+              SizedBox(height: Sizing.blockSizeVertical * 3),
+              Container(
+                width: Sizing.blockSize * 12,
+                height: Sizing.blockSize * 1,
+                //TODO: Link this to theme
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(Sizing.blockSize))),
+              ),
+              SizedBox(height: Sizing.blockSizeVertical * 3),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Sizing.blockSize * 6,
+                        vertical: Sizing.blockSizeVertical * 2),
+                    child: Text('Filter by',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizing.fontSize * 5)),
+                  )),
+              Container(
+                height: Sizing.blockSize * 0.2,
+                //TODO: Link this to theme
+                color: Colors.grey[800],
+              ),
+              Expanded(
+                child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: Sizing.blockSize * 4),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: listView,
+                    )),
+              ),
+            ],
+          ),
+        ),
+      );
+      update();
+    }
   }
 
-  void customFilterChosen(context) {
+  /// Traverses the custom filters tree and builds it
+  List<Widget> customFilterChosen(context, controller) {
     Get.back();
 
     final listView = <Widget>[];
-
     customFilters.forEach((key, value) {
       if (value is Map) {
-        value = value as Map;
-
-        listView.add(Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: Sizing.blockSize * 4,
-              vertical: Sizing.blockSizeVertical * 1),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              key,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Switch(
-              value: value['chosen'],
-              onChanged: (bool b) {},
-            )
-          ]),
+        // Add the parent option and set it to whatever switch value the user
+        // chose
+        listView.add(SwitchListTile(
+          value: value['chosen'],
+          onChanged: (newVal) {
+            final valMap = value as Map;
+            valMap['chosen'] = newVal;
+            controller.update();
+          },
+          title: Text(
+            key,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: Sizing.fontSize * 4),
+          ),
         ));
+
+        // If chosen, view children too
+        if (value['chosen']) {
+          final childHorizontalPadding =
+              EdgeInsets.symmetric(horizontal: Sizing.blockSize * 8);
+
+          for (final child in value['children']) {
+            listView.add(Padding(
+              padding: childHorizontalPadding,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      child[0],
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: Sizing.fontSize * 4),
+                    ),
+                    Checkbox(
+                      value: child[1],
+                      onChanged: (bool? b) {
+                        child[1] = b;
+                        controller.update();
+                      },
+                    )
+                  ]),
+            ));
+          }
+        }
       } else if (value is bool) {
         listView.add(Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: Sizing.blockSize * 4,
-              vertical: Sizing.blockSizeVertical * 1),
+            horizontal: Sizing.blockSize * 4,
+          ),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
               key,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: Sizing.fontSize * 4),
             ),
             Checkbox(
               value: value,
-              onChanged: (bool? b) {},
+              onChanged: (bool? b) {
+                value = b ?? false;
+                controller.update();
+              },
             )
           ]),
         ));
       }
     });
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Sizing.blockSize * 5),
-      ),
-      builder: (context) => Column(
-        children: [
-          SizedBox(height: Sizing.blockSizeVertical * 3),
-          Container(
-            width: Sizing.blockSize * 12,
-            height: Sizing.blockSize * 1,
-            //TODO: Link this to theme
-            decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius:
-                    BorderRadius.all(Radius.circular(Sizing.blockSize))),
-          ),
-          SizedBox(height: Sizing.blockSizeVertical * 3),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Sizing.blockSize * 6,
-                    vertical: Sizing.blockSizeVertical * 2),
-                child: Text('Filter by',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: Sizing.fontSize * 5)),
-              )),
-          Container(
-            height: Sizing.blockSize * 0.2,
-            //TODO: Link this to theme
-            color: Colors.grey[800],
-          ),
-          ListView.builder(
-              itemCount: listView.length,
-              itemBuilder: (BuildContext context, int index) => listView[index])
-        ],
-      ),
-    );
-
-    // print(filterTypes);
-    print('KAK');
+    return listView;
   }
 
-  void fetchNotifications() async {
-    ActivityActivityModel.getActivityNotifications(filterTypes);
-  }
+  void fetchNotifications() async {}
 
   List<Widget> getFilters(context) {
     final filters = <Widget>[];
@@ -134,9 +184,7 @@ class ActivityActivityController extends GetxController {
       filters.add(ActivityFilterRow(
           icon: e['icon'],
           rowText: e['rowText'],
-          onTap: () => e['custom'] as bool
-              ? customFilterChosen(context)
-              : filterChosen(i),
+          onTap: () => filterChosen(context, i),
           iconPadding: iconPadding,
           rowPadding: rowPadding,
           color: e['color']));
@@ -146,7 +194,6 @@ class ActivityActivityController extends GetxController {
   }
 
   // Long variables
-
   /// Holds the various filter options, their back end filter types,
   /// Their current color, their icon, and whether they're the custom
   /// option or not.
@@ -154,36 +201,31 @@ class ActivityActivityController extends GetxController {
     {
       'icon': Icons.bolt,
       'rowText': 'All Activity',
-      'filterTypes': ['all'],
-      'custom': false,
+      'filterTypes': <String>['all'],
       'color': Colors.white
     },
     {
       'icon': Icons.alternate_email,
       'rowText': 'Mentions',
-      'filterTypes': ['mention_in_reply', 'mention_in_post'],
-      'custom': false,
+      'filterTypes': <String>['mention_in_reply', 'mention_in_post'],
       'color': Colors.white
     },
     {
       'icon': Icons.loop,
       'rowText': 'Reblogs',
-      'filterTypes': ['reblog_naked', 'reblog_with_content'],
-      'custom': false,
+      'filterTypes': <String>['reblog_naked', 'reblog_with_content'],
       'color': Colors.white
     },
     {
       'icon': Icons.chat_bubble,
       'rowText': 'Replies',
-      'filterTypes': ['reply'],
-      'custom': false,
+      'filterTypes': <String>['reply'],
       'color': Colors.white
     },
     {
       'icon': Icons.tune,
       'rowText': 'Custom',
-      'filterTypes': [],
-      'custom': true,
+      'filterTypes': <String>[],
       'color': Colors.white
     }
   ];
@@ -193,28 +235,49 @@ class ActivityActivityController extends GetxController {
   final customFilters = {
     'Mentions': {
       'chosen': true,
-      'Mentions in a post': true,
-      'Mentions in a reply': true,
+      'children': [
+        ['Mentions in a post', true],
+        ['Mentions in a reply', true]
+      ]
     },
     'Reblogs': {
       'chosen': true,
-      'Reblogs with comment': true,
-      'Reblogs without comment': true,
+      'children': [
+        ['Reblogs with comment', true],
+        ['Reblogs without comment', true]
+      ]
     },
     'New followers': true,
     'Likes': true,
     'Replies': true,
-    'Asks': {'chosen': true, 'Received a new ask': true, 'Ask answered': true},
+    'Asks': {
+      'chosen': true,
+      'children': [
+        ['Received a new ask', true],
+        ['Ask answered', true]
+      ]
+    },
     'Note subscriptions': true,
     'Content Flagging': {
       'chosen': true,
-      'Post flagged': true,
-      'Appeal accepted': true,
-      'Appeal rejected': true,
-      'Spam reported': true
+      'children': [
+        ['Post flagged', true],
+        ['Appeal accepted', true],
+        ['Appeal rejected', true],
+        ['Spam reported', true],
+      ]
     },
     'Your GIF used in a post': true,
     'Posts you missed': true,
     'New group blog members': true
   };
+}
+
+class CustomFilters extends StatelessWidget {
+  const CustomFilters({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
