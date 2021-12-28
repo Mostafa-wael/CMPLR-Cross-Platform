@@ -99,6 +99,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ModelChatModule.getMessages();
+    ModelChatModule.getConversations();
     return Scaffold(
       backgroundColor: Colors.cyan,
       appBar: AppBar(
@@ -144,9 +146,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: ListView.builder(
                     reverse: true,
                     padding: const EdgeInsets.only(top: 15.0),
-                    itemCount: messages.length,
+                    itemCount: ModelChatModule.messages.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final Message message = messages[index];
+                      final Message message = ModelChatModule.messages[index];
                       final bool isMe =
                           message.sender.blog_id == currentUser.blog_id;
                       return _buildMessage(message, isMe);

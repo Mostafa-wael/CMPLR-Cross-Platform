@@ -1,5 +1,12 @@
 // ignore: lines_longer_than_80_chars
 // ignore_for_file: non_constant_identifier_names, prefer_equal_for_default_values, prefer_single_quotes, unnecessary_string_escapes
+import 'dart:math';
+
+import '../../../models/cmplr_service.dart';
+
+import '../../../utilities/custom_widgets/post_item.dart';
+import '../../../backend_uris.dart';
+import 'dart:convert';
 
 class User {
   final int blog_id;
@@ -52,6 +59,38 @@ class Message {
             text: json['messages'][index]['content'],
             isRead: json['messages'][index]['is_read'],
           );
+  }
+}
+
+class ModelChatModule {
+  static final messages = <Message>[];
+  static final chats = <Message>[];
+
+  ModelChatModule() {
+    print('Crateed ModelChatModule');
+  }
+  static Future<void> getMessages() async {
+    final response = await CMPLRService.get(GetURIs.messaging, {});
+    final responseBody = jsonDecode(response.body);
+    print('get messages from ');
+    print(responseBody['responseBody']['blog_data']['blog_name']);
+    for (var i = 0; i < responseBody['responseBody'].length; i++) {
+      messages.add(
+        Message.fromJson(json: responseBody['responseBody'][i], outOrIn: true),
+      );
+    }
+  }
+
+  static Future<void> getConversations() async {
+    final response = await CMPLRService.get(GetURIs.conversation, {});
+    final responseBody = jsonDecode(response.body);
+    print('get chats');
+    for (var i = 0; i < responseBody['responseBody']['messages'].length; i++) {
+      chats.add(
+        Message.fromJson(
+            json: responseBody['responseBody'], outOrIn: false, index: i),
+      );
+    }
   }
 }
 
@@ -110,6 +149,7 @@ final Map<String, dynamic> messaging = {
     },
   ]
 };
+
 // EXAMPLE CHATS ON HOME SCREEN
 List<Message> chats = [
   Message.fromJson(json: messaging['responseBody'][0], outOrIn: true),
@@ -226,10 +266,3 @@ final Map<String, dynamic> conversation = {
     "messages_per_page": 10
   }
 };
-// EXAMPLE MESSAGES IN CHAT SCREEN
-final messages = <Message>[
-  Message.fromJson(
-      json: conversation['responseBody'], outOrIn: false, index: 0),
-  Message.fromJson(
-      json: conversation['responseBody'], outOrIn: false, index: 1),
-];

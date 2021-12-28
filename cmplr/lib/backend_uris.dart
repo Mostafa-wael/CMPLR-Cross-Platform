@@ -56,6 +56,8 @@ class GetURIs {
   static const String userTheme = '/user_theme';
   static String getBlogInfo(String blogId) => '/blog' + blogId + '/info';
   static const String followingBlogs = '/user/following';
+  static const String messaging = 'vhange this';
+  static const String conversation = 'change this';
 
   // TODO: Add the remaining get request URIS
 

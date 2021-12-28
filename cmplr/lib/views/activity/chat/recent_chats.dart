@@ -7,6 +7,7 @@ class RecentChats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ModelChatModule.getConversations();
     return Expanded(
       child: Container(
         decoration: const BoxDecoration(
@@ -22,10 +23,10 @@ class RecentChats extends StatelessWidget {
             topRight: Radius.circular(30.0),
           ),
           child: ListView.builder(
-            itemCount: chats.length,
+            itemCount: ModelChatModule.chats.length,
             itemBuilder: (BuildContext context, int index) {
               // ignore: omit_local_variable_types
-              final Message chat = chats[index];
+              final Message chat = ModelChatModule.chats[index];
               return GestureDetector(
                 onTap: () => Navigator.push(
                   context,
