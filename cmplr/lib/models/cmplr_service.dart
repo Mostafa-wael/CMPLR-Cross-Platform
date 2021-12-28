@@ -25,12 +25,14 @@ class CMPLRService {
       'jimbo@cmprl.cum',
       'wael@bekes.net',
       'gendy@cmplr.eg',
+      'mock',
     },
     'passwords': {
       '12345678',
       'hey12345',
       'sad43210',
       'Anime6420',
+      'mock',
     },
     'names': {'burh', 'nerd', 'kak', 'AAA'}
   };
@@ -932,7 +934,7 @@ class CMPLRService {
           'avatar_shape': 'circle',
           'blog_name': 'Mostafa',
           'title': 'Mohamed'
-        }
+        },
       ],
     },
   };
@@ -990,12 +992,33 @@ class CMPLRService {
       // ignore: no_duplicate_case_values
       case GetURIs.postStuff:
         return getPosts(route, params);
+      case GetURIs.trendingPosts:
+        return getPosts(route, params);
       case GetURIs.notes:
         return getNotes(route, params);
       case GetURIs.blogInfo:
-        return getBlogInfo(route, params);
+        return getBlogInfo(
+            '/blog/' +
+                GetStorage().read('user')['primary_blog_id'].toString() +
+                '/info',
+            params);
+      case GetURIs.userTheme:
+        return getUserTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
+
+      default:
+        throw Exception('Invalid request backendURI');
+    }
+  }
+
+  static Future<http.Response> put(String route, Map params) async {
+    // Switch case since we might need to send requests with different
+    // content types
+
+    switch (route) {
+      case PutURIs.userTheme:
+        return putUserTheme(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1075,6 +1098,36 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getUserTheme(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      final res = User.userMap['theme'];
+      return http.Response(jsonEncode(res), 200);
+    } else {
+      // ignore: prefer_final_locals
+      var tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+    }
+  }
+
+  static Future<http.Response> putUserTheme(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      // TODO: Change theme
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      // ignore: prefer_final_locals
+      var tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.put(Uri.parse(apiIp + backendURI),
+          headers: tempHeader, body: jsonEncode(params));
+    }
+  }
+
   static Future<http.Response> askBlog(String backendURI, Map param) {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), 201));
@@ -1138,9 +1191,11 @@ class CMPLRService {
       final res = await _mockData[backendURI];
       return http.Response(jsonEncode(res), 200);
     } else {
-      return http.get(
-          Uri.parse(apiIp + GetURIs.getBlogInfo(User.userMap['id'].toString())),
-          headers: getHeader);
+      // ignore: prefer_final_locals
+      var tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
     }
   }
 

@@ -45,6 +45,7 @@ class GetURIs {
 
   static const String getTagsForPosts = '/get_tags_for_posts';
   static const String postFollowing = '/user/dashboard';
+  static const String trendingPosts = '/trending/posts';
   static const String postStuff =
       '/user/dashboard'; // TODO: add the correct route
   static const String hashtagPosts = '/post/tagged';
@@ -53,6 +54,7 @@ class GetURIs {
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';
   static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
+  static const String userTheme = '/user_theme';
   static const String followingBlogs = '/user/following';
 
   // TODO: Add the remaining get request URIS
@@ -61,7 +63,7 @@ class GetURIs {
 
 class PutURIs {
   // TODO: Add the remaining put request URIS
-
+  static const String userTheme = '/user_theme';
 }
 
 class DeleteURIs {
