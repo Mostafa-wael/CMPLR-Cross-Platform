@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:get_storage/get_storage.dart';
+
 import 'utilities/user.dart';
 
 import 'controllers/controllers.dart';
@@ -70,13 +72,15 @@ class CMPLR extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
+
     return GetMaterialApp(
       scrollBehavior: MouseAndTourchScrollBehaviour(),
       debugShowCheckedModeBanner: false,
       home: PersistentStorage.isLoggedIn ?? false
           ? const MasterPage() /*const MasterPage()*/
           : const SignupOrLoginScreen() /*SignupOrLoginScreen()*/,
-      theme: Get.isDarkMode ? themes[1] : themes[0],
+      theme: themes[0],
+      darkTheme: themes[1],
       getPages: getLoginAndSignPages + getHomeScreenPages,
     );
   }

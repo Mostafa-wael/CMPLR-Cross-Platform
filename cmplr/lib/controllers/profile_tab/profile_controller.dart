@@ -35,7 +35,6 @@ class ProfileController extends GetxController
       _headerImage,
       _url;
   var _currentColor;
-  var _headerUrl, _avatarUrl;
 
   static const clrs = {
     'white': Colors.white,
@@ -58,6 +57,8 @@ class ProfileController extends GetxController
   var _pickedHeader;
   var _pickedAvatar;
   var loaded = 0;
+  var _extension;
+  var _newHeaderUrl, _newAvatarUrl;
 
   void incLoaded() {
     loaded++;
@@ -82,8 +83,8 @@ class ProfileController extends GetxController
   var optimizeVideo = false;
   var showUploadProg = false;
   var disableDoubleTapToLike = false;
-  bool trueBlue = false;
-  bool darkMode = false;
+  bool trueBlue = User.userMap['theme'] == 'trueBlue';
+  bool darkMode = User.userMap['theme'] != 'trueBlue';
 
   List<Blog>? followingBlogs;
 
@@ -185,32 +186,60 @@ class ProfileController extends GetxController
     update();
   }
 
-  void pickHeader() async {
+  Future<void> pickHeader() async {
     _pickedHeader =
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
-    _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
-    _pickedHeader = base64Encode(_pickedHeader);
+    if (_pickedHeader != null) {
+      _extension = _pickedHeader.name.split('.')[1];
+      _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
+      final temp = base64Encode(_pickedHeader);
+      _pickedHeader = 'data:image/${_extension};base64,' + temp.toString();
+    }
+  }
+
+  Future<void> pickAvatar() async {
+    _pickedAvatar =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (_pickedAvatar != null) {
+      _extension = _pickedAvatar.name.split('.')[1];
+      _pickedAvatar = File(_pickedAvatar.path).readAsBytesSync();
+      final temp = base64Encode(_pickedAvatar);
+      _pickedAvatar = 'data:image/${_extension};base64,' + temp.toString();
+    }
   }
 
   Future<dynamic> getImgUrl(bool header) async {
     final response;
     if (header)
-      response = _model.uploadImg(_pickedHeader);
+      response = await _model.uploadImg(_pickedHeader);
     else
-      response = _model.uploadImg(_pickedAvatar);
+      response = await _model.uploadImg(_pickedAvatar);
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
+    if (header)
+      _newHeaderUrl = responseMap['response']['url'];
+    else
+      _newAvatarUrl = responseMap['response']['url'];
+    final response1 = await saveEdits(false);
   }
 
   Future<void> saveEdits(visibleKeyboard) async {
     final response = await _model.putBlogSettings(
-      nameClrs[_currentColor],
-      titleController.text,
-      descCrontroller.text,
+      nameClrs[_currentColor ?? _backgroundColor],
+      titleController.text == '' ? _blogTitle : titleController.text,
+      descCrontroller.text == '' ? description : descCrontroller.text,
+      _newHeaderUrl ?? _headerImage,
+      _newAvatarUrl ?? _blogAvatar,
     );
 
-    getBlogInfo();
+    await getBlogInfo();
     Get.back();
     if (visibleKeyboard) Get.back();
     update();
+    _newHeaderUrl = _headerImage;
+    _newAvatarUrl = _blogAvatar;
+    _currentColor = _backgroundColor;
+    titleController.text = _blogTitle;
+    descCrontroller.text = _description;
   }
 
   Future<void> getFollowingBlogs() async {

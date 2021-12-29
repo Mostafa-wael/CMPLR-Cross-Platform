@@ -26,18 +26,21 @@ class ModelProfile {
     return response;
   }
 
-  Future<dynamic> putBlogSettings(backgroundColor, title, desc) async {
+  Future<dynamic> putBlogSettings(
+      backgroundColor, title, desc, headerUrl, avatarUrl) async {
     final response = await CMPLRService.put('/blog/ /settings/save', {
       'blog_title': title,
       'background_color': backgroundColor,
       'description': desc,
+      'avatar': avatarUrl,
+      'header_image': headerUrl,
     });
     return response;
   }
 
   Future<dynamic> uploadImg(img) async {
-    final response = await CMPLRService.post(
-        PostURIs.imgUpload, {'image': 'data:image/jpg:based64,' + img});
+    final response =
+        await CMPLRService.post(PostURIs.imgUpload, {'image': img});
     return response;
   }
 }

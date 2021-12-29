@@ -30,6 +30,7 @@ class ProfileView extends StatelessWidget {
                         (BuildContext context, bool innerBoxIsScrolled) {
                       return <Widget>[
                         SliverAppBar(
+                          stretch: true,
                           backgroundColor: controller.backgroundColor,
                           expandedHeight: Sizing.blockSizeVertical * 50,
                           flexibleSpace: FlexibleSpaceBar(
@@ -63,8 +64,9 @@ class ProfileView extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 InkWell(
-                                                  onTap: () {
-                                                    controller.pickHeader();
+                                                  onTap: () async {
+                                                    await controller
+                                                        .pickHeader();
                                                     controller.getImgUrl(true);
                                                   },
                                                   child: SizedBox(
@@ -143,9 +145,12 @@ class ProfileView extends StatelessWidget {
                                                               .start,
                                                       children: [
                                                         InkWell(
-                                                          onTap: () {
+                                                          onTap: () async {
+                                                            await controller
+                                                                .pickAvatar();
                                                             controller
-                                                                .pickHeader();
+                                                                .getImgUrl(
+                                                                    false);
                                                           },
                                                           child: SizedBox(
                                                             width: Sizing
