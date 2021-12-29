@@ -1,4 +1,7 @@
 // ignore_for_file: omit_local_variable_types
+import 'dart:convert';
+import 'dart:math';
+import '../../models/pages_model/activity_tab/pusher.dart';
 
 import '../../utilities/user.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +18,41 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  void bindEvent(String channelName) async {
+    await initPusher();
+    pusher.connect();
+    channel = pusher.subscribe(channelName);
+    // ignore: use_raw_strings, prefer_single_quotes
+    await channel.bind("App\\Events\\MessageSent", (final last) {
+      final data = last!.data.toString();
+      final encodedRes = jsonDecode(data);
+      print('Pusher is Called');
+
+      ModelChatModule.conversationMessages.add(Message(
+        sender: ChatUser(
+          blog_id: int.parse(encodedRes['sender_id']),
+          blog_url: '',
+          blog_name: '',
+          avatar: '',
+        ),
+        text: encodedRes['message']['content'],
+        isRead: encodedRes['message']['is_read'],
+      ));
+      setState(() {});
+    });
+  }
+
   bool _isLoading = true;
   final _textController = TextEditingController();
   @override
   void initState() {
+    final first = min(int.parse(User.userMap['primary_blog_id'].toString()),
+        widget.user.blog_id);
+    final second = max(int.parse(User.userMap['primary_blog_id'].toString()),
+        widget.user.blog_id);
+    print('chat-' + first.toString() + '-' + second.toString());
+
+    bindEvent('chat-' + first.toString() + '-' + second.toString());
     super.initState();
     ModelChatModule.getConversationMessages(widget.user.blog_id)
         .then((dummy) => {
@@ -107,7 +141,9 @@ class _ChatScreenState extends State<ChatScreen> {
             color: Colors.white,
             onPressed: () {
               print(_textController.text);
-              ModelChatModule.sendMessage(_textController.text);
+              ModelChatModule.sendMessage(
+                  widget.user.blog_id, _textController.text);
+              _textController.text = '';
             },
           ),
         ],
