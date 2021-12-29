@@ -234,7 +234,7 @@ class ProfileController extends GetxController
       descCrontroller.text == '' ? description : descCrontroller.text,
       _newHeaderUrl ?? _headerImage,
       _newAvatarUrl ?? _blogAvatar,
-      titleController.text == '' ? _blogName : titleController.text,
+      changeNameController.text == '' ? _blogName : changeNameController.text,
     );
 
     await getBlogInfo();
