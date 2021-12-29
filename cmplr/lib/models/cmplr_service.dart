@@ -1096,8 +1096,8 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  // static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/';
+  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
   // static const String apiIp = 'https://75fe-41-34-251-247.ngrok.io/api';`
@@ -1487,14 +1487,16 @@ class CMPLRService {
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1000));
-      final res = await _mockData['/blog/info'];
+      final res = await _mockData[GetURIs.blogInfo];
       return http.Response(jsonEncode(res), 200);
     } else {
       // ignore: prefer_final_locals
       var tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
-      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      final ret =
+          await http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      return ret;
     }
   }
 
