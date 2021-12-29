@@ -31,6 +31,7 @@ class PostURIs {
       '/blog' + blogId + '/subscription';
   static String getAddTagsToPost(String blogID) =>
       '/' + blogID + '/add_tags_to_posts';
+  static const String imgUpload = '/base64image_upload';
 
   // TODO: Add the remaining post request URIS
 }
@@ -57,6 +58,8 @@ class GetURIs {
   static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
   static const String userTheme = '/user_theme';
   static const String followingBlogs = '/user/following';
+  static const String postByName = '/posts/view/';
+  static const String userLikes = '/user/likes';
 
   // TODO: Add the remaining get request URIS
 

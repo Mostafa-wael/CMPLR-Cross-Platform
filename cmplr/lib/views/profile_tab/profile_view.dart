@@ -1,3 +1,4 @@
+import '../../backend_uris.dart';
 import 'package:getwidget/getwidget.dart';
 
 import '../../models/models.dart';
@@ -62,7 +63,10 @@ class ProfileView extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    controller.pickHeader();
+                                                    controller.getImgUrl(true);
+                                                  },
                                                   child: SizedBox(
                                                     width:
                                                         Sizing.blockSize * 100,
@@ -139,7 +143,10 @@ class ProfileView extends StatelessWidget {
                                                               .start,
                                                       children: [
                                                         InkWell(
-                                                          onTap: () {},
+                                                          onTap: () {
+                                                            controller
+                                                                .pickHeader();
+                                                          },
                                                           child: SizedBox(
                                                             width: Sizing
                                                                     .blockSize *
@@ -405,11 +412,11 @@ class ProfileView extends StatelessWidget {
                     },
                     body: TabBarView(
                       children: <Widget>[
-                        Container(
-                          color: Colors.blue,
+                        PostFeed(
+                          postFeedTypePage: GetURIs.postByName,
                         ),
-                        Container(
-                          color: Colors.red,
+                        PostFeed(
+                          postFeedTypePage: GetURIs.userLikes,
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),

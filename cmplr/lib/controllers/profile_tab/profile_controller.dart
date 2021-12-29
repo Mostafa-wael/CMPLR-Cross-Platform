@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import '../../models/cmplr_service.dart';
 
 import '../../utilities/user.dart';
@@ -32,6 +35,7 @@ class ProfileController extends GetxController
       _headerImage,
       _url;
   var _currentColor;
+  var _headerUrl, _avatarUrl;
 
   static const clrs = {
     'white': Colors.white,
@@ -53,6 +57,11 @@ class ProfileController extends GetxController
 
   var _pickedHeader;
   var _pickedAvatar;
+  var loaded = 0;
+
+  void incLoaded() {
+    loaded++;
+  }
 
   final ImagePicker _picker = ImagePicker();
 
@@ -90,11 +99,6 @@ class ProfileController extends GetxController
     'Report',
     'Unfollow'
   ];
-
-  void pickHeader() async {
-    _pickedHeader = await _picker.pickImage(source: ImageSource.gallery);
-    print(_pickedHeader);
-  }
 
   Future<void> getBlogInfo() async {
     blogInfo = await _model.getBlogInfo();
@@ -175,6 +179,21 @@ class ProfileController extends GetxController
   Future<void> changeColor(String key) async {
     _currentColor = clrs[key];
     update();
+  }
+
+  void pickHeader() async {
+    _pickedHeader =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
+    _pickedHeader = base64Encode(_pickedHeader);
+  }
+
+  Future<dynamic> getImgUrl(bool header) async {
+    final response;
+    if (header)
+      response = _model.uploadImg(_pickedHeader);
+    else
+      response = _model.uploadImg(_pickedAvatar);
   }
 
   Future<void> saveEdits(visibleKeyboard) async {

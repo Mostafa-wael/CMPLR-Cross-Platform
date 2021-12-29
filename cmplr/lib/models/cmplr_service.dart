@@ -947,7 +947,8 @@ class CMPLRService {
   //static const String apiIp = 'https://www.cmplr.tech/api';
   //static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
-  static const String apiIp = 'http://ca24-156-223-170-167.ngrok.io/api';
+  //static const String apiIp = 'http://ca24-156-223-170-167.ngrok.io/api';
+  static const String apiIp = 'http://c389-156-215-230-231.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -980,6 +981,8 @@ class CMPLRService {
         return loginWithGoogle(backendURI, params);
       case PostURIs.signupGoogle:
         return signupWithGoogle(backendURI, params);
+      case PostURIs.imgUpload:
+        return uploadImg(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1010,6 +1013,11 @@ class CMPLRService {
         return getUserTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
+      case GetURIs.postByName:
+        return getPostByName(
+            route + GetStorage().read('user')['blog_name'], params);
+      case GetURIs.userLikes:
+        return getUserLikes(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1228,6 +1236,41 @@ class CMPLRService {
       return http.Response(jsonEncode(res), res['meta']['status_code']);
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getPostByName(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), res['meta']['status_code']);
+    } else {
+      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getUserLikes(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), res['meta']['status_code']);
+    } else {
+      final tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+    }
+  }
+
+  static Future<http.Response> uploadImg(String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      // ignore: prefer_final_locals
+      return http.post(Uri.parse(apiIp + backendURI), headers: postHeader);
     }
   }
 

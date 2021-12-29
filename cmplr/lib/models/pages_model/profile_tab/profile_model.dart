@@ -15,13 +15,14 @@ class ModelProfile {
   }
 
   Future<dynamic> getTheme() async {
-    final response = await CMPLRService.get('/user_theme', {});
+    final response = await CMPLRService.get(GetURIs.userTheme, {});
     final responseBody = jsonDecode(response.body);
     return responseBody['response'];
   }
 
   Future<dynamic> putTheme(theme) async {
-    final response = await CMPLRService.put('/user_theme', {'theme': theme});
+    final response =
+        await CMPLRService.put(GetURIs.userTheme, {'theme': theme});
     return response;
   }
 
@@ -31,6 +32,12 @@ class ModelProfile {
       'background_color': backgroundColor,
       'description': desc,
     });
+    return response;
+  }
+
+  Future<dynamic> uploadImg(img) async {
+    final response = await CMPLRService.post(
+        PostURIs.imgUpload, {'image': 'data:image/jpg:based64,' + img});
     return response;
   }
 }
