@@ -1,9 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
+
+import '../../models/cmplr_service.dart';
+
+import '../../utilities/user.dart';
+
+import '../../cmplr_theme.dart';
+
 import '../../views/views.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/models.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -25,6 +35,7 @@ class ProfileController extends GetxController
       _headerImage,
       _url;
   var _currentColor;
+  var _headerUrl, _avatarUrl;
 
   static const clrs = {
     'white': Colors.white,
@@ -44,6 +55,16 @@ class ProfileController extends GetxController
     'indigo': Colors.indigo,
   };
 
+  var _pickedHeader;
+  var _pickedAvatar;
+  var loaded = 0;
+
+  void incLoaded() {
+    loaded++;
+  }
+
+  final ImagePicker _picker = ImagePicker();
+
   dynamic get blogName => _blogName;
   dynamic get blogTitle => _blogTitle;
   dynamic get blogAvatar => _blogAvatar;
@@ -61,7 +82,8 @@ class ProfileController extends GetxController
   var optimizeVideo = false;
   var showUploadProg = false;
   var disableDoubleTapToLike = false;
-  var systemDefault, trueBlue, darkMode;
+  bool trueBlue = false;
+  bool darkMode = false;
 
   List<Blog>? followingBlogs;
 
@@ -163,9 +185,31 @@ class ProfileController extends GetxController
     update();
   }
 
-  Future<void> saveEdits() async {
-    // TODO: send request to back with changes if they implement it
+  void pickHeader() async {
+    _pickedHeader =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
+    _pickedHeader = base64Encode(_pickedHeader);
+  }
+
+  Future<dynamic> getImgUrl(bool header) async {
+    final response;
+    if (header)
+      response = _model.uploadImg(_pickedHeader);
+    else
+      response = _model.uploadImg(_pickedAvatar);
+  }
+
+  Future<void> saveEdits(visibleKeyboard) async {
+    final response = await _model.putBlogSettings(
+      nameClrs[_currentColor],
+      titleController.text,
+      descCrontroller.text,
+    );
+
+    getBlogInfo();
     Get.back();
+    if (visibleKeyboard) Get.back();
     update();
   }
 
@@ -173,10 +217,48 @@ class ProfileController extends GetxController
     followingBlogs = await _searchModel.getFollowingBlogs();
   }
 
-  // Future<void> setSystemDefaults() async {
-  //   systemDefault = true;
-  //   trueBlue = false;
-  //   darkMode = false;
-  //   update();
-  // }
+  Future<void> setTrueBlue() async {
+    final response = await _model.putTheme('trueBlue');
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      Get.changeThemeMode(ThemeMode.light);
+      User.userMap['theme'] = 'trueBlue';
+      trueBlue = true;
+      darkMode = false;
+      update();
+    }
+  }
+
+  Future<void> setDarkMode() async {
+    final response = await _model.putTheme('darkMode');
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      User.userMap['theme'] = 'darkMode';
+      trueBlue = false;
+      darkMode = true;
+      Get.changeThemeMode(ThemeMode.dark);
+      update();
+    }
+  }
+
+  Future<void> goToColorPalette() async {
+    Get.to(const ColorPaletteView());
+    update();
+  }
+
+  static var nameClrs = {
+    Colors.white: 'white',
+    Colors.black: 'black',
+    Colors.green: 'green',
+    Colors.blue: 'blue',
+    Colors.red: 'red',
+    Colors.yellow: 'yellow',
+    Colors.grey: 'grey',
+    Colors.brown: 'brown',
+    Colors.pink: 'pink',
+    Colors.teal: 'teal',
+    Colors.cyan: 'cyan',
+    Colors.orange: 'orange',
+    Colors.amber: 'amber',
+    Colors.purple: 'purple',
+    Colors.indigo: 'indigo',
+  };
 }

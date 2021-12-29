@@ -32,6 +32,7 @@ dependencies:
   flutter_html:
   settings_ui:
   html:
+  image_picker: 
   # Original package is old and has dependency issues
   # Using fork for now
   # flutter_link_preview:

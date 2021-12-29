@@ -13,6 +13,7 @@ class PostURIs {
 
   static const String reblog = '/posts/reblog';
   static const String post = '/posts';
+  static const String signupGoogle = '/google/signup';
 
   // URIs just for the switch case.
   // To get the real URI, use the help functions below.
@@ -21,7 +22,7 @@ class PostURIs {
   static const String submitPost = '/blog/submit';
   static const String subscribeBlog = '/blog/subscribe';
   static const String addTagsToPost = '/add_tags_to_posts';
-
+  static const String loginGoogle = '/google/login';
   // Helper functions
   static String getAskBlog(String blogId) => '/blog' + blogId + '/ask';
   static String getBlockBlog(String blogId) => '/blog' + blogId + '/block';
@@ -30,6 +31,7 @@ class PostURIs {
       '/blog' + blogId + '/subscription';
   static String getAddTagsToPost(String blogID) =>
       '/' + blogID + '/add_tags_to_posts';
+  static const String imgUpload = '/base64image_upload';
 
   // TODO: Add the remaining post request URIS
 }
@@ -64,6 +66,8 @@ class GetURIs {
   static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
   static const String userTheme = '/user_theme';
   static const String followingBlogs = '/user/following';
+  static const String postByName = '/posts/view/';
+  static const String userLikes = '/user/likes';
   static const String conversationsList = '/blog/messaging';
   static const String conversationMessages = '/messaging/conversation';
 
@@ -74,6 +78,7 @@ class GetURIs {
 class PutURIs {
   // TODO: Add the remaining put request URIS
   static const String userTheme = '/user_theme';
+  static const String saveBlogSettings = '/blog/ /settings/save';
 }
 
 class DeleteURIs {

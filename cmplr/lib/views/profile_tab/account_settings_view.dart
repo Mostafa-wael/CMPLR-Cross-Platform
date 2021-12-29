@@ -16,7 +16,6 @@ class AccountSettingsView extends StatelessWidget {
             // TODO, let this depend on theme
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.white,
             ),
             onPressed: () {
               controller.goBack();
@@ -69,7 +68,9 @@ class AccountSettingsView extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: 'Color palette',
-                  onPressed: (BuildContext context) {},
+                  onPressed: (BuildContext context) {
+                    controller.goToColorPalette();
+                  },
                 ),
               ],
             ),

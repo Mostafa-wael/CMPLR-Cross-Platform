@@ -1096,9 +1096,11 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  // static const String apiIp = 'https://www.cmplr.tech/api';
+  //static const String apiIp = 'https://www.cmplr.tech/api';
   static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  // static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
+  //static const String apiIp = 'http://ca24-156-223-170-167.ngrok.io/api';
+  //static const String apiIp = 'http://c389-156-215-230-231.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1127,6 +1129,12 @@ class CMPLRService {
         return createPost(backendURI, params);
       case PostURIs.reblog:
         return reblogPost(backendURI, params);
+      case PostURIs.loginGoogle:
+        return loginWithGoogle(backendURI, params);
+      case PostURIs.signupGoogle:
+        return signupWithGoogle(backendURI, params);
+      case PostURIs.imgUpload:
+        return uploadImg(backendURI, params);
       case '/user/post/reply':
         return postReply(backendURI, params);
       default:
@@ -1158,6 +1166,11 @@ class CMPLRService {
         return getUserTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
+      case GetURIs.postByName:
+        return getPostByName(
+            route + GetStorage().read('user')['blog_name'], params);
+      case GetURIs.userLikes:
+        return getUserLikes(route, params);
       case GetURIs.tagsYouFollow:
         return getTagsYouFollow(route);
       case GetURIs.checkOutTheseTags:
@@ -1176,18 +1189,38 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> put(String route, Map params) async {
+  static Future<http.Response> put(
+      String route, Map<String, dynamic> params) async {
     // Switch case since we might need to send requests with different
     // content types
 
     switch (route) {
       case PutURIs.userTheme:
-        return putUserTheme(route, params);
+        return putTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
+      case PutURIs.saveBlogSettings:
+        return putBlogSettings(
+            route.split(' ')[0] +
+                GetStorage().read('user')['blog_name'].toString() +
+                route.split(' ')[1],
+            params);
 
       default:
         throw Exception('Invalid request backendURI');
+    }
+  }
+
+  static Future<http.Response> signupWithGoogle(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
     }
   }
 
@@ -1222,6 +1255,19 @@ class CMPLRService {
 
       final responseCode = bothFree ? insertSuccess : invalidData;
       return http.Response(jsonEncode(response), responseCode);
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
+    }
+  }
+
+  static Future<http.Response> loginWithGoogle(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response(jsonEncode({}), 200);
     } else {
       return http.post(
         Uri.parse(apiIp + backendURI),
@@ -1284,18 +1330,26 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> putUserTheme(
+  static Future<http.Response> putBlogSettings(
       String backendURI, Map params) async {
+    if (Flags.mock) {
+      // TODO: Change theme
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      return http.put(Uri.parse(apiIp + backendURI),
+          headers: postHeader, body: jsonEncode(params));
+    }
+  }
+
+  static Future<http.Response> putTheme(String backendURI, Map params) async {
     if (Flags.mock) {
       // TODO: Change theme
       return http.Response(jsonEncode({}), 200);
     } else {
       // ignore: prefer_final_locals
       var tempHeader = getHeader;
-      if (tempHeader['Authorization'] == 'Bearer null')
-        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
       return http.put(Uri.parse(apiIp + backendURI),
-          headers: tempHeader, body: jsonEncode(params));
+          headers: postHeader, body: jsonEncode(params));
     }
   }
 
@@ -1368,6 +1422,17 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getPostByName(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), res['meta']['status_code']);
+    } else {
+      return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
   static Future<http.Response> getConversationMessages(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1382,11 +1447,33 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getUserLikes(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      final tempHeader = getHeader;
+      if (tempHeader['Authorization'] == 'Bearer null')
+        tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+    }
+  }
+
+  static Future<http.Response> uploadImg(String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      // ignore: prefer_final_locals
+      return http.post(Uri.parse(apiIp + backendURI), headers: postHeader);
+    }
+  }
+
   static Future<http.Response> getBlogInfo(
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1000));
-      final res = await _mockData[backendURI];
+      final res = await _mockData['/blog/info'];
       return http.Response(jsonEncode(res), 200);
     } else {
       // ignore: prefer_final_locals
