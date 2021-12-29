@@ -81,7 +81,16 @@ class ProfileView extends StatelessWidget {
                                                   ),
                                                 ),
                                                 InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    Get.to(FadeInImage
+                                                        .assetNetwork(
+                                                      placeholder:
+                                                          'lib/utilities/assets/logo/logo_icon.png',
+                                                      image: controller
+                                                          .headerImage,
+                                                      fit: BoxFit.fitWidth,
+                                                    ));
+                                                  },
                                                   child: SizedBox(
                                                     width:
                                                         Sizing.blockSize * 100,
@@ -166,7 +175,17 @@ class ProfileView extends StatelessWidget {
                                                           ),
                                                         ),
                                                         InkWell(
-                                                          onTap: () {},
+                                                          onTap: () {
+                                                            Get.to(FadeInImage
+                                                                .assetNetwork(
+                                                              placeholder:
+                                                                  'lib/utilities/assets/logo/logo_icon.png',
+                                                              image: controller
+                                                                  .blogAvatar,
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                            ));
+                                                          },
                                                           child: SizedBox(
                                                             width: Sizing
                                                                     .blockSize *
@@ -192,6 +211,7 @@ class ProfileView extends StatelessWidget {
                                                   'lib/utilities/assets/logo/logo_icon.png',
                                               image: controller.blogAvatar,
                                               height: Sizing.blockSize * 20,
+                                              width: Sizing.blockSize * 20,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
