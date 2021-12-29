@@ -316,17 +316,18 @@ class EditProfileView extends StatelessWidget {
                     },
                     body: TabBarView(
                       children: <Widget>[
-                        PostFeed(
-                          postFeedTypePage: GetURIs.postByName,
+                        Container(
+                          color: Colors.red,
                         ),
-                        PostFeed(
-                          postFeedTypePage: GetURIs.userLikes,
+                        Container(
+                          color: Colors.green,
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),
                             builder: (context, AsyncSnapshot snapshot) {
                               if (snapshot.connectionState ==
-                                  ConnectionState.done) {
+                                      ConnectionState.done ||
+                                  controller.loaded == 0) {
                                 return ListView.builder(
                                     itemCount:
                                         controller.followingBlogs!.length,

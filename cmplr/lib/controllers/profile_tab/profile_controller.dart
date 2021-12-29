@@ -58,6 +58,7 @@ class ProfileController extends GetxController
   var _pickedHeader;
   var _pickedAvatar;
   var loaded = 0;
+  var _extension;
 
   void incLoaded() {
     loaded++;
@@ -185,11 +186,13 @@ class ProfileController extends GetxController
     update();
   }
 
-  void pickHeader() async {
+  Future<void> pickHeader() async {
     _pickedHeader =
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    _extension = _pickedHeader.name.split('.')[1];
     _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
-    _pickedHeader = base64Encode(_pickedHeader);
+    final temp = base64Encode(_pickedHeader);
+    _pickedHeader = 'data:image/${_extension};base64,' + temp.toString();
   }
 
   Future<dynamic> getImgUrl(bool header) async {
@@ -207,7 +210,7 @@ class ProfileController extends GetxController
       descCrontroller.text,
     );
 
-    getBlogInfo();
+    await getBlogInfo();
     Get.back();
     if (visibleKeyboard) Get.back();
     update();

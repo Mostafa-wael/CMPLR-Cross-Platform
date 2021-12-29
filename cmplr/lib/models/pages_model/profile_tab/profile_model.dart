@@ -36,8 +36,8 @@ class ModelProfile {
   }
 
   Future<dynamic> uploadImg(img) async {
-    final response = await CMPLRService.post(
-        PostURIs.imgUpload, {'image': 'data:image/jpg:based64,' + img});
+    final response =
+        await CMPLRService.post(PostURIs.imgUpload, {'image': img});
     return response;
   }
 }

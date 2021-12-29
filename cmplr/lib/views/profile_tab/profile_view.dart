@@ -63,8 +63,9 @@ class ProfileView extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 InkWell(
-                                                  onTap: () {
-                                                    controller.pickHeader();
+                                                  onTap: () async {
+                                                    await controller
+                                                        .pickHeader();
                                                     controller.getImgUrl(true);
                                                   },
                                                   child: SizedBox(
