@@ -15,12 +15,11 @@ class HashtagPostsController extends GetxController
   TabController? _tabController;
   TabController? get tabController => _tabController;
 
-  String tagName;
-
-  HashtagPostsController(this.tagName) {}
+  late String tagName;
 
   @override
   void onInit() {
+    tagName = Get.arguments;
     hashtagFollowed = false.obs;
     _tabController = TabController(length: 2, vsync: this);
     super.onInit();

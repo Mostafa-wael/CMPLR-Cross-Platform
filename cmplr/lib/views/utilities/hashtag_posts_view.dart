@@ -39,7 +39,7 @@ class HashtagPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: HashtagPostsController(Get.arguments),
+      init: HashtagPostsController(),
       builder: (HashtagPostsController controller) => Scaffold(
         // FIXME: pass tags to the write post controller
         floatingActionButton: FloatingActionButton(
