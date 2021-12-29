@@ -269,7 +269,7 @@ class PostItem extends StatelessWidget {
       postID: json['post']['post_id'].toString(),
       reblogKey: "$json['post']['post_id']",
       numNotes: json['post']['notes_count'],
-      hashtags: json['post']['tags'],
+      hashtags: json['post']['tags'] ?? [],
       name: json['blog']['blog_name'],
       profilePhoto: json['blog']['avatar'],
       showBottomBar: true,
