@@ -20,11 +20,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    ModelChatModule.getConversationMessages().then((dummy) => {
-          setState(() {
-            _isLoading = false;
-          })
-        });
+    ModelChatModule.getConversationMessages(widget.user.blog_id)
+        .then((dummy) => {
+              setState(() {
+                _isLoading = false;
+              })
+            });
   }
 
   Widget _buildMessage(Message message, bool isMe) {
@@ -106,6 +107,7 @@ class _ChatScreenState extends State<ChatScreen> {
             color: Colors.white,
             onPressed: () {
               print(_textController.text);
+              ModelChatModule.sendMessage(_textController.text);
             },
           ),
         ],
@@ -175,8 +177,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ModelChatModule.conversationMessages[index];
                             final bool isMe = message.sender.blog_id ==
                                 User.userMap['primary_blog_id'];
-                            print('User Blog ID');
-                            print(User.userMap['id']);
                             return _buildMessage(message, isMe);
                           },
                         ),

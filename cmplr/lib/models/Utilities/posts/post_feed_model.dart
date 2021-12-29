@@ -7,8 +7,10 @@ import 'dart:convert';
 
 class ModelPostsFeed {
   var postFeedType = '';
-  ModelPostsFeed({required String postFeedTypeContoller}) {
+  String? tag;
+  ModelPostsFeed({required String postFeedTypeContoller, String? tag}) {
     postFeedType = postFeedTypeContoller;
+    this.tag = tag;
     print('in the model, postFeedType is $postFeedType');
   }
   Future<List<PostItem>> getNewPosts(
@@ -16,14 +18,21 @@ class ModelPostsFeed {
     postFeedType =
         postFeedTypeContoller != '' ? postFeedTypeContoller : postFeedType;
     final posts = <PostItem>[];
-    final response = await CMPLRService.get(postFeedType, {});
+    final response = await CMPLRService.get(postFeedType, {'tag': tag});
     if (response.statusCode == CMPLRService.requestSuccess) {
       final responseBody = jsonDecode(response.body);
       // print('model, $postFeedType posts from json');
       // print(responseBody['posts_per_page']);
-      for (var i = 0; i < responseBody['response']['post'].length; i++) {
-        posts.add(PostItem.fromJson(responseBody['response']['post'][i]));
+      if (tag == null && postFeedTypeContoller != GetURIs.hashtagPosts) {
+        for (var i = 0; i < responseBody['response']['post'].length; i++) {
+          posts.add(PostItem.fromJson(responseBody['response']['post'][i]));
+        }
+      } else {
+        for (var i = 0; i < responseBody['post'].length; i++) {
+          posts.add(PostItem.fromJson(responseBody['post'][i]));
+        }
       }
+
       print('model, $postFeedType posts list');
       print(posts.length);
       return posts;

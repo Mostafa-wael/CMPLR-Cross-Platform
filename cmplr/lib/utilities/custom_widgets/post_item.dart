@@ -1,3 +1,4 @@
+import '../../views/utilities/hashtag_posts_view.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
@@ -114,6 +115,7 @@ class PostItem extends StatelessWidget {
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 print(hashtag);
+                Get.to(const HashtagPosts(), arguments: hashtag);
               }),
       );
       hashtagsWidget.add(

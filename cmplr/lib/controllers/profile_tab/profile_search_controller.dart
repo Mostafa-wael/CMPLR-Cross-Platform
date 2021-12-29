@@ -66,13 +66,24 @@ class ProfileSearchController extends GetxController
     } else {
       showClearSearchBarIcon.value = true;
     }
-    if (followingBlogs != null) {
-      for (var i = 0; i < followingBlogs!.length; i++) {
-        if (!followingBlogs![i].blogName.contains(_searchBarController.text)) {
-          showProfiles![i].value = false;
-        } else {
-          showProfiles![i].value = true;
+  }
+
+  void submitSearchQuery() {
+    if (_tabIndex == 1) {
+      if (followingBlogs != null) {
+        for (var i = 0; i < followingBlogs!.length; i++) {
+          print(_searchBarController.text);
+          if (!followingBlogs![i]
+              .blogName
+              .contains(_searchBarController.text)) {
+            showProfiles![i].value = false;
+            // print(followingBlogs![i].blogName + ' false');
+          } else {
+            // print(followingBlogs![i].blogName + ' true');
+            showProfiles![i].value = true;
+          }
         }
+        update();
       }
     }
   }
