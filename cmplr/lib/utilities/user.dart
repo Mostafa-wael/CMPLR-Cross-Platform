@@ -27,7 +27,7 @@ class User {
       'user',
       {
         'id': 11,
-        'email': 'yousif.lasheen60@gmail.com',
+        'email': 'tarek@cmplr.com',
         'email_verified_at': null,
         'age': 21,
         'default_post_format': null,
@@ -42,7 +42,7 @@ class User {
         'include_followed_tags': true,
         'conversational_notification': true,
         'filtered_content': null,
-        'theme': null,
+        'theme': 'trueBlue',
         'primary_blog_id': 11,
         'blog_name': 'yousif',
         'avatar':

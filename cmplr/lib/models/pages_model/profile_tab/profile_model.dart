@@ -1,4 +1,3 @@
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'dart:convert';
 import '../../../backend_uris.dart';
 

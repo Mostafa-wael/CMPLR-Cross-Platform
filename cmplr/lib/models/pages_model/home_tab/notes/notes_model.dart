@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import '../../../../backend_uris.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../cmplr_service.dart';
 import 'user_note.dart';

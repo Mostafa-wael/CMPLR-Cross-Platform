@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:get_storage/get_storage.dart';
-
 import 'utilities/user.dart';
 
 import 'controllers/controllers.dart';
@@ -15,9 +13,6 @@ import 'cmplr_theme.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_driver/driver_extension.dart';
 
 // Activates swipe controls for web
 // Since flutter web doesn't allow shift+scroll for horizontal scrolling

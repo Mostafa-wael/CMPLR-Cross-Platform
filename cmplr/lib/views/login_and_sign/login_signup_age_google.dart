@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,11 +7,6 @@ import '../../utilities/sizing/sizing.dart';
 
 class LoginSignupAgeGoogle extends StatelessWidget {
   const LoginSignupAgeGoogle({Key? key}) : super(key: key);
-
-  static const _privacyPolicyURL = 'https://www.tumblr.com/privacy';
-
-  static const _termsOfServiceURL = 'https://www.tumblr.com'
-      '/policy/en/terms-of-service';
 
   @override
   Widget build(BuildContext context) {

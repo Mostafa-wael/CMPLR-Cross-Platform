@@ -1,4 +1,3 @@
-import 'package:get_storage/get_storage.dart';
 import '../home_tab/write_post_controller.dart';
 import '../../views/home_tab/write_post_view.dart';
 
@@ -15,12 +14,11 @@ class HashtagPostsController extends GetxController
   TabController? _tabController;
   TabController? get tabController => _tabController;
 
-  String tagName;
-
-  HashtagPostsController(this.tagName) {}
+  late String tagName;
 
   @override
   void onInit() {
+    tagName = Get.arguments;
     hashtagFollowed = false.obs;
     _tabController = TabController(length: 2, vsync: this);
     super.onInit();

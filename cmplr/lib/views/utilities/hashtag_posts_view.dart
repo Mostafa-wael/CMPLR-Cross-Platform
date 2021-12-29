@@ -1,18 +1,13 @@
 import '../../backend_uris.dart';
 import 'package:get/get.dart';
 
-import '../../utilities/functions.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../home_tab/write_post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../models/models.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
@@ -39,7 +34,7 @@ class HashtagPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: HashtagPostsController(Get.arguments),
+      init: HashtagPostsController(),
       builder: (HashtagPostsController controller) => Scaffold(
         // FIXME: pass tags to the write post controller
         floatingActionButton: FloatingActionButton(

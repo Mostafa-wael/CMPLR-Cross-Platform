@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import '../../../utilities/custom_widgets/post_item.dart';
 import '../../../backend_uris.dart';
 import '../../cmplr_service.dart';

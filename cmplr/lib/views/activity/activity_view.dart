@@ -3,11 +3,8 @@ import '../profile_tab/account_settings_view.dart';
 import '../../controllers/activity/activity_activity_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import '../../routes.dart';
 import './activity_activity.dart';
 import './activity_messages.dart';
-import '../../utilities/user.dart';
 
 const List<Tab> _tabs = [Tab(text: 'Activity'), Tab(text: 'Messages')];
 List<Widget> _views = [

@@ -1,12 +1,10 @@
 // ignore: lines_longer_than_80_chars
 // ignore_for_file: non_constant_identifier_names, prefer_equal_for_default_values, prefer_single_quotes, unnecessary_string_escapes
-import 'dart:math';
 
 import '../../../utilities/user.dart';
 
 import '../../cmplr_service.dart';
 
-import '../../../utilities/custom_widgets/post_item.dart';
 import '../../../backend_uris.dart';
 import 'dart:convert';
 
