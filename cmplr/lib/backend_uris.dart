@@ -14,6 +14,7 @@ class PostURIs {
   static const String reblog = '/posts/reblog';
   static const String post = '/posts';
   static const String signupGoogle = '/google/signup';
+  static const String postReply = '/user/post/reply';
 
   // URIs just for the switch case.
   // To get the real URI, use the help functions below.

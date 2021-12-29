@@ -5,6 +5,7 @@ class UserNote {
   final avatarURL;
   final avatarShape;
   final blogName;
+  final blogURL;
   final profileTitle;
   final postReply;
   RxBool followed = false.obs;
@@ -14,6 +15,7 @@ class UserNote {
       this.avatarURL,
       this.avatarShape,
       this.blogName,
+      this.blogURL,
       this.profileTitle,
       this.postReply,
       required this.followed});
@@ -25,6 +27,7 @@ class UserNote {
       avatarURL: json['avatar'],
       avatarShape: json['avatar_shape'],
       blogName: json['blog_name'],
+      blogURL: json['blog_url'],
       profileTitle: json['blog_title'],
       postReply: json['content'],
       followed: followedValue,

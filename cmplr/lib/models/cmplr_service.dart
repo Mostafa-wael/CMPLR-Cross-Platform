@@ -1135,7 +1135,7 @@ class CMPLRService {
         return signupWithGoogle(backendURI, params);
       case PostURIs.imgUpload:
         return uploadImg(backendURI, params);
-      case '/user/post/reply':
+      case PostURIs.postReply:
         return postReply(backendURI, params);
       default:
         throw Exception('Invalid request route');
@@ -1559,21 +1559,23 @@ class CMPLRService {
 
   static Future<http.Response> postReply(String backendURI, Map params) async {
     if (Flags.mock) {
-      final uri = Uri.parse(apiIp + backendURI)
-          .replace(query: 'post_id=61')
-          .replace(query: 'reply_text=test');
-      return http.get(uri, headers: getHeader);
-    } else {
       final uri = Uri.parse(apiIp + backendURI);
 
-      final req = await http.post(uri,
+      return http.post(uri,
           headers: getHeader,
           body: jsonEncode(<String, String>{
             'post_id': params['post_id'],
             'reply_text': params['reply_text']
           }));
-      final x = req.statusCode;
-      return req;
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      return http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'post_id': params['post_id'],
+            'reply_text': params['reply_text']
+          }));
     }
   }
 
