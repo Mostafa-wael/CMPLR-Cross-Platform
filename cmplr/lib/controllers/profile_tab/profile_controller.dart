@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../../utilities/functions.dart';
+
 import '../../models/cmplr_service.dart';
 
 import '../../utilities/user.dart';
@@ -85,11 +87,17 @@ class ProfileController extends GetxController
   var disableDoubleTapToLike = false;
   bool trueBlue = User.userMap['theme'] == 'trueBlue';
   bool darkMode = User.userMap['theme'] != 'trueBlue';
+  TextEditingController changeNameController = TextEditingController();
 
   List<Blog>? followingBlogs;
 
   Future<void> goToSettings() async {
     Get.to(const ProfileSettingsView());
+    update();
+  }
+
+  Future<void> goToChangeName() async {
+    Get.to(const ChangeNameView());
     update();
   }
 
@@ -222,13 +230,14 @@ class ProfileController extends GetxController
     final response1 = await saveEdits(false);
   }
 
-  Future<void> saveEdits(visibleKeyboard) async {
+  Future<dynamic> saveEdits(visibleKeyboard) async {
     final response = await _model.putBlogSettings(
       nameClrs[_currentColor ?? _backgroundColor],
       titleController.text == '' ? _blogTitle : titleController.text,
       descCrontroller.text == '' ? description : descCrontroller.text,
       _newHeaderUrl ?? _headerImage,
       _newAvatarUrl ?? _blogAvatar,
+      changeNameController.text == '' ? _blogName : changeNameController.text,
     );
 
     await getBlogInfo();
@@ -240,6 +249,11 @@ class ProfileController extends GetxController
     _currentColor = _backgroundColor;
     titleController.text = _blogTitle;
     descCrontroller.text = _description;
+    changeNameController.text = _blogName;
+
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    return responseMap['response'];
   }
 
   Future<void> getFollowingBlogs() async {
@@ -250,6 +264,7 @@ class ProfileController extends GetxController
     final response = await _model.putTheme('trueBlue');
     if (response.statusCode == CMPLRService.requestSuccess) {
       Get.changeThemeMode(ThemeMode.light);
+      Get.changeTheme(CMPLRTheme.trueBlue());
       User.userMap['theme'] = 'trueBlue';
       trueBlue = true;
       darkMode = false;
@@ -264,6 +279,7 @@ class ProfileController extends GetxController
       trueBlue = false;
       darkMode = true;
       Get.changeThemeMode(ThemeMode.dark);
+      Get.changeTheme(CMPLRTheme.darkTheme());
       update();
     }
   }

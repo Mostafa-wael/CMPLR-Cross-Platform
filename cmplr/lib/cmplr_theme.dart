@@ -63,8 +63,17 @@ class CMPLRTheme {
         primaryColor: Colors.black,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+          ),
+          toolbarTextStyle: TextStyle(
+            color: Colors.black,
+          ),
           foregroundColor: Colors.white,
           backgroundColor: Color.fromARGB(0xFF, 0, 26, 53),
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
@@ -85,8 +94,17 @@ class CMPLRTheme {
         primaryColor: Colors.white,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+          ),
+          toolbarTextStyle: TextStyle(
+            color: Colors.white,
+          ),
           foregroundColor: Colors.black,
           backgroundColor: Colors.black,
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           foregroundColor: Colors.white,

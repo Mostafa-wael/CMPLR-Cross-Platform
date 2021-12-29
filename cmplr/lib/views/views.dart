@@ -29,6 +29,7 @@ export 'profile_tab/profile_settings_view.dart';
 export 'profile_tab/account_settings_view.dart';
 export 'profile_tab/edit_profile_view.dart';
 export 'profile_tab/color_palette_view.dart';
+export 'profile_tab/change_name_view.dart';
 
 // Utilites
 export 'utilities/hashtag_posts_view.dart';

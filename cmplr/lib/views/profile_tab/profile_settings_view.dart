@@ -55,7 +55,9 @@ class ProfileSettingsView extends StatelessWidget {
               tiles: [
                 SettingsTile(
                   title: 'Change Name',
-                  onPressed: (BuildContext context) {},
+                  onPressed: (BuildContext context) {
+                    controller.goToChangeName();
+                  },
                 ),
                 SettingsTile(
                   title: 'Pages',
