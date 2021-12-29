@@ -35,8 +35,6 @@ class PostURIs {
   static String getAddTagsToPost(String blogID) =>
       '/' + blogID + '/add_tags_to_posts';
   static const String imgUpload = '/base64image_upload';
-
-  // TODO: Add the remaining post request URIS
 }
 
 class GetURIs {
@@ -54,8 +52,7 @@ class GetURIs {
   static const String getTagsForPosts = '/get_tags_for_posts';
   static const String postFollowing = '/user/dashboard';
   static const String trendingPosts = '/trending/posts';
-  static const String postStuff =
-      '/user/dashboard'; // TODO: add the correct route
+  static const String postStuff = '/user/dashboard';
   static const String hashtagPosts = '/post/tagged';
   static const String notes = '/post/notes';
 
@@ -73,13 +70,9 @@ class GetURIs {
   static const String userLikes = '/user/likes';
   static const String conversationsList = '/blog/messaging';
   static const String conversationMessages = '/messaging/conversation';
-
-  // TODO: Add the remaining get request URIS
-
 }
 
 class PutURIs {
-  // TODO: Add the remaining put request URIS
   static const String userTheme = '/user_theme';
   static const String saveBlogSettings = '/blog/ /settings/save';
 }
