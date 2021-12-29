@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../../views/profile_tab/change_name_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../models/cmplr_service.dart';
@@ -24,6 +25,7 @@ class ProfileController extends GetxController
 
   final titleController = TextEditingController();
   final descCrontroller = TextEditingController();
+  final changeNameController = TextEditingController();
 
   var blogInfo,
       _blogName,
@@ -232,6 +234,7 @@ class ProfileController extends GetxController
       descCrontroller.text == '' ? description : descCrontroller.text,
       _newHeaderUrl ?? _headerImage,
       _newAvatarUrl ?? _blogAvatar,
+      titleController.text == '' ? _blogName : titleController.text,
     );
 
     await getBlogInfo();
@@ -243,6 +246,12 @@ class ProfileController extends GetxController
     _currentColor = _backgroundColor;
     titleController.text = _blogTitle;
     descCrontroller.text = _description;
+    titleController.text = _blogName;
+  }
+
+  Future<void> goToChangeName(visibleKeyboard) async {
+    Get.to(const ChangeNameView());
+    update();
   }
 
   Future<void> getFollowingBlogs() async {
