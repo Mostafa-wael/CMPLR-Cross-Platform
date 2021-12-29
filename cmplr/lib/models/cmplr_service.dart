@@ -25,7 +25,7 @@ class CMPLRService {
       'jimbo@cmprl.cum',
       'wael@bekes.net',
       'gendy@cmplr.eg',
-      'mock',
+      'mock@cmplr.com',
     },
     'passwords': {
       '12345678',
@@ -942,7 +942,7 @@ class CMPLRService {
         {
           "id": 5007,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "1",
           "is_read": true,
           "created_at": "2021-12-27T17:38:18.000000Z",
@@ -950,8 +950,8 @@ class CMPLRService {
         },
         {
           "id": 5006,
-          "from_blog_id": "10",
-          "to_blog_id": "4",
+          "from_blog_id": "11",
+          "to_blog_id": "10",
           "content": "hola",
           "is_read": true,
           "created_at": "2021-12-27T17:33:50.000000Z",
@@ -960,7 +960,7 @@ class CMPLRService {
         {
           "id": 5005,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "hi",
           "is_read": true,
           "created_at": "2021-12-27T17:33:49.000000Z",
@@ -969,7 +969,7 @@ class CMPLRService {
         {
           "id": 5004,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "hi",
           "is_read": true,
           "created_at": "2021-12-27T17:28:06.000000Z",
@@ -978,7 +978,7 @@ class CMPLRService {
         {
           "id": 5003,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "hi",
           "is_read": true,
           "created_at": "2021-12-27T17:27:02.000000Z",
@@ -987,7 +987,7 @@ class CMPLRService {
         {
           "id": 5002,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "hi",
           "is_read": true,
           "created_at": "2021-12-27T17:26:26.000000Z",
@@ -996,7 +996,7 @@ class CMPLRService {
         {
           "id": 5001,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "hi",
           "is_read": true,
           "created_at": "2021-12-27T17:24:29.000000Z",
@@ -1004,7 +1004,7 @@ class CMPLRService {
         },
         {
           "id": 4717,
-          "from_blog_id": "4",
+          "from_blog_id": "11",
           "to_blog_id": "10",
           "content": "Repellendus enim fugiat.",
           "is_read": true,
@@ -1014,7 +1014,7 @@ class CMPLRService {
         {
           "id": 4701,
           "from_blog_id": "10",
-          "to_blog_id": "4",
+          "to_blog_id": "11",
           "content": "Quis esse incidunt reiciendis voluptates.",
           "is_read": true,
           "created_at": "2021-12-25T22:44:50.000000Z",
@@ -1022,7 +1022,7 @@ class CMPLRService {
         },
         {
           "id": 4779,
-          "from_blog_id": "4",
+          "from_blog_id": "11",
           "to_blog_id": "10",
           "content": "Voluptatem quo ex aut sed tenetur.",
           "is_read": true,
@@ -1047,7 +1047,7 @@ class CMPLRService {
     },
     GetURIs.conversationsList: [
       {
-        "from_blog_id": "10",
+        "from_blog_id": "12",
         "to_blog_id": "4",
         "content": "hi",
         "is_read": false,
@@ -1135,7 +1135,7 @@ class CMPLRService {
         return signupWithGoogle(backendURI, params);
       case PostURIs.imgUpload:
         return uploadImg(backendURI, params);
-      case '/user/post/reply':
+      case PostURIs.postReply:
         return postReply(backendURI, params);
       default:
         throw Exception('Invalid request route');
@@ -1205,6 +1205,17 @@ class CMPLRService {
                 GetStorage().read('user')['blog_name'].toString() +
                 route.split(' ')[1],
             params);
+
+      default:
+        throw Exception('Invalid request backendURI');
+    }
+  }
+
+  static Future<http.Response> delete(
+      String route, Map<String, dynamic> params) async {
+    switch (route) {
+      case DeleteURIs.unfollowBlog:
+        return unfollowBlog(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1494,7 +1505,8 @@ class CMPLRService {
     } else {
       //${params['post_id']}
       // TODO: change the 11
-      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+      final uri = Uri.parse(apiIp + backendURI)
+          .replace(query: 'post_id=${params['post_id']}');
 
       return http.get(uri, headers: getHeader);
     }
@@ -1558,23 +1570,49 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> postReply(String backendURI, Map params) async {
+  static Future<http.Response> followBlog(String backendURI, Map params) async {
     if (Flags.mock) {
-      final uri = Uri.parse(apiIp + backendURI)
-          .replace(query: 'post_id=61')
-          .replace(query: 'reply_text=test');
-      return http.get(uri, headers: getHeader);
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
     } else {
       final uri = Uri.parse(apiIp + backendURI);
 
-      final req = await http.post(uri,
+      return http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'blogName': params['blogName'],
+          }));
+    }
+  }
+
+  static Future<http.Response> unfollowBlog(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.delete(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'blogName': params['blogName'],
+          }));
+      final x = req.statusCode;
+      return req;
+    }
+  }
+
+  static Future<http.Response> postReply(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      return http.post(uri,
           headers: getHeader,
           body: jsonEncode(<String, String>{
             'post_id': params['post_id'],
             'reply_text': params['reply_text']
           }));
-      final x = req.statusCode;
-      return req;
     }
   }
 

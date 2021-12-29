@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_locals
 
 import 'dart:convert';
+import '../../../../backend_uris.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../cmplr_service.dart';
@@ -10,7 +11,7 @@ class NotesModel {
   Future<List<List<UserNote>>> getNotes(String postID) async {
     final notes = <UserNote>[];
     final response =
-        await CMPLRService.getNotes('/post/notes', {'post_id': postID});
+        await CMPLRService.getNotes(GetURIs.notes, {'post_id': postID});
     final responseBody = jsonDecode(response.body);
     var totalNotes = int.parse(responseBody['total_likes'].toString()) +
         int.parse(responseBody['total_reblogs'].toString()) +
@@ -52,6 +53,15 @@ class NotesModel {
 
   Future<void> submitComment(String postID, String comment) async {
     await CMPLRService.postReply(
-        '/user/post/reply', {'post_id': postID, 'reply_text': comment});
+        PostURIs.postReply, {'post_id': postID, 'reply_text': comment});
+  }
+
+  Future<void> followBlog(String blogName) async {
+    await CMPLRService.followBlog(PostURIs.followBlog, {'blogName': blogName});
+  }
+
+  Future<void> unfollowBlog(String blogName) async {
+    await CMPLRService.unfollowBlog(
+        DeleteURIs.unfollowBlog, {'blogName': blogName});
   }
 }

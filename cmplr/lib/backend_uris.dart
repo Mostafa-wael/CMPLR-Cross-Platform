@@ -14,6 +14,8 @@ class PostURIs {
   static const String reblog = '/posts/reblog';
   static const String post = '/posts';
   static const String signupGoogle = '/google/signup';
+  static const String postReply = '/user/post/reply';
+  static const String followBlog = '/user/follow';
 
   // URIs just for the switch case.
   // To get the real URI, use the help functions below.
@@ -54,7 +56,7 @@ class GetURIs {
   static const String postStuff =
       '/user/dashboard'; // TODO: add the correct route
   static const String hashtagPosts = '/post/tagged';
-  static const String notes = '/notes';
+  static const String notes = '/post/notes';
 
   static const String tagsYouFollow = '/following/tags';
   static const String checkOutTheseTags = '/recommended/tags';
@@ -82,6 +84,5 @@ class PutURIs {
 }
 
 class DeleteURIs {
-  // TODO: Add the remaining delete request URIS
-
+  static const String unfollowBlog = '/user/follow';
 }

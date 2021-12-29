@@ -65,21 +65,22 @@ class ExploreController extends GetxController {
     //                                int,    string,   string,  string arr
     final tagsYouFollow = await ExploreModel.getTagsYouFollow();
     final tyfWidgets = <Widget>[];
-    for (final tag in tagsYouFollow) {
+    for (var i = 0; i < tagsYouFollow.length; i++) {
+      final tag = tagsYouFollow[i];
       final otherData = Map.from(tag);
-      final List postViews = tag['posts_views'];
-      final testId = tag.containsKey('test_id') ? tag['test_id'] : -1;
+      // final List postViews = tag['posts_views'];
+      // final testId = tag.containsKey('test_id') ? tag['test_id'] : -1;
 
       tyfWidgets.add(TextOnImage(
         otherData: otherData,
-        gestureDetectorKey: ValueKey('TagsYouFollow${testId}'),
+        gestureDetectorKey: ValueKey('TagsYouFollow${i}'),
         width: Sizing.blockSize * elementWidthPercentage,
         height: tagsYouFollowHeight,
-        backgroundURL: postViews[Random().nextInt(postViews.length)],
-        text: tag['tag_name'],
+        backgroundURL: placeHolderImgUrl,
+        text: tag['name'],
         borderRadius: BorderRadius.circular(Sizing.blockSize),
         onTap: () {
-          Get.to(const HashtagPosts(), arguments: tag['tag_name']);
+          Get.to(const HashtagPosts(), arguments: tag['name']);
         },
       ));
     }
@@ -267,6 +268,7 @@ class ExploreController extends GetxController {
             width: Sizing.blockSize * elementWidthPercentage,
             height: tagsYouFollowHeight,
             backgroundURL: img,
+            dimImage: false,
             borderRadius: BorderRadius.circular(Sizing.blockSize),
           ),
         );
