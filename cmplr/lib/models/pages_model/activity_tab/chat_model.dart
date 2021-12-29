@@ -53,7 +53,7 @@ class Message {
           )
         : Message(
             sender: ChatUser(
-              blog_id: 0,
+              blog_id: json['messages'][index]['from_blog_id'],
               blog_url: json['blog_data']['url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],
@@ -85,12 +85,17 @@ class ModelChatModule {
     }
   }
 
-  static Future<void> getConversationMessages() async {
+  static Future<void> getConversationMessages(int other_blog_id) async {
     // inside the chat itself -> URI: conversation
-    final response = await CMPLRService.get(GetURIs.conversationMessages,
-        {'me': User.userMap['primary_blog_id'].toString()});
+    final response = await CMPLRService.get(GetURIs.conversationMessages, {
+      'me': User.userMap['primary_blog_id'].toString(),
+      'to': other_blog_id.toString()
+    });
     final responseBody = jsonDecode(response.body);
     print('get chats message');
+    print('primary_blog_id and the other');
+    print(User.userMap['primary_blog_id'].toString());
+    print(other_blog_id.toString());
     if (response.statusCode == CMPLRService.requestSuccess) {
       for (var i = 0; i < responseBody['messages'].length; i++) {
         conversationMessages.add(

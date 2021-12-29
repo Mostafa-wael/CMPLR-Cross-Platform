@@ -1455,7 +1455,7 @@ class CMPLRService {
     } else {
       return http.get(
           Uri.parse(
-              apiIp + backendURI + '/' + params['me'] + '/' + params['me']),
+              apiIp + backendURI + '/' + params['me'] + '/' + params['to']),
           headers: getHeader);
     }
   }
