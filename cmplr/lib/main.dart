@@ -72,13 +72,7 @@ class CMPLR extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themes = <ThemeData>[CMPLRTheme.trueBlue(), CMPLRTheme.darkTheme()];
-    if (GetStorage().read('user') != null) {
-      Get.changeThemeMode(GetStorage().read('user')['theme'] == 'trueBlue'
-          ? ThemeMode.light
-          : ThemeMode.dark);
-    } else {
-      Get.changeThemeMode(ThemeMode.system);
-    }
+
     return GetMaterialApp(
       scrollBehavior: MouseAndTourchScrollBehaviour(),
       debugShowCheckedModeBanner: false,

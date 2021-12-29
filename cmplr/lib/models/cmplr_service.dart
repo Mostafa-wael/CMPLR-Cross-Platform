@@ -1578,7 +1578,11 @@ class CMPLRService {
   }
 
   static Future<http.Response> getTagsYouFollow(String backendURI) {
-    return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    // ignore: prefer_final_locals
+    var tempHeader = getHeader;
+    if (tempHeader['Authorization'] == 'Bearer null')
+      tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
+    return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
   }
 
   static Future<http.Response> getCheckoutTheseTags(String backendURI) {

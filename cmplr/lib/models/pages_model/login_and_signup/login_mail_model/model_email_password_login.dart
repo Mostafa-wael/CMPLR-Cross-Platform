@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import '../../../../flags.dart';
 import '../../../../utilities/user.dart';
 import '../../../../backend_uris.dart';
 import '../../../cmplr_service.dart';
 import '../../../../utilities/functions.dart';
+import 'package:flutter/material.dart';
 
 class ModelEmailPasswordLogin {
   Future<List> signupGoogle(token, age, username) async {
@@ -38,6 +41,9 @@ class ModelEmailPasswordLogin {
           userDetails['token'],
           userDetails['user'],
         );
+        Get.changeThemeMode(userDetails['user']['theme'] == 'trueBlue'
+            ? ThemeMode.light
+            : ThemeMode.dark);
       }
       return [];
     }
@@ -81,6 +87,9 @@ class ModelEmailPasswordLogin {
           userDetails['token'],
           userDetails['user'],
         );
+        Get.changeThemeMode(userDetails['user']['theme'] == 'trueBlue'
+            ? ThemeMode.light
+            : ThemeMode.dark);
       }
       return [];
     }
@@ -138,6 +147,9 @@ class ModelEmailPasswordLogin {
           userDetails['token'],
           userDetails['user'],
         );
+        Get.changeThemeMode(userDetails['user']['theme'] == 'trueBlue'
+            ? ThemeMode.light
+            : ThemeMode.dark);
       }
       return [];
     }

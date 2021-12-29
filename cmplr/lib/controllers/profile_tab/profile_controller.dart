@@ -83,8 +83,8 @@ class ProfileController extends GetxController
   var optimizeVideo = false;
   var showUploadProg = false;
   var disableDoubleTapToLike = false;
-  bool trueBlue = false;
-  bool darkMode = false;
+  bool trueBlue = User.userMap['theme'] == 'trueBlue';
+  bool darkMode = User.userMap['theme'] != 'trueBlue';
 
   List<Blog>? followingBlogs;
 
@@ -189,10 +189,12 @@ class ProfileController extends GetxController
   Future<void> pickHeader() async {
     _pickedHeader =
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
-    _extension = _pickedHeader.name.split('.')[1];
-    _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
-    final temp = base64Encode(_pickedHeader);
-    _pickedHeader = 'data:image/${_extension};base64,' + temp.toString();
+    if (_pickedHeader != null) {
+      _extension = _pickedHeader.name.split('.')[1];
+      _pickedHeader = File(_pickedHeader.path).readAsBytesSync();
+      final temp = base64Encode(_pickedHeader);
+      _pickedHeader = 'data:image/${_extension};base64,' + temp.toString();
+    }
   }
 
   Future<dynamic> getImgUrl(bool header) async {

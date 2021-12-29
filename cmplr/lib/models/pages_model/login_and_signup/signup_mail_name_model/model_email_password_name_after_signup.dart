@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../flags.dart';
@@ -6,6 +7,7 @@ import '../../../../utilities/user.dart';
 import '../../../../backend_uris.dart';
 import '../../../../utilities/functions.dart';
 import '../../../cmplr_service.dart';
+import 'package:flutter/material.dart';
 
 class ModelEmailPasswordNameAfterSignup {
   Future<List> checkEmailPasswordName(
@@ -53,6 +55,9 @@ class ModelEmailPasswordNameAfterSignup {
           responseMap['token'],
           responseMap['user'],
         );
+        Get.changeThemeMode(responseMap['user']['theme'] == 'trueBlue'
+            ? ThemeMode.light
+            : ThemeMode.dark);
       }
       return [];
     }
