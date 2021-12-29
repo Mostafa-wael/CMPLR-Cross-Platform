@@ -254,9 +254,11 @@ class ProfileSearch extends StatelessWidget {
                               color: Colors.transparent,
                               child: InkWell(
                                   onTap: () {
-                                    print('Follow button pressed');
                                     controller.followingBlogs![index].following
                                         .value = true;
+                                    controller.profileSearchModel.followBlog(
+                                        controller
+                                            .followingBlogs![index].blogName);
                                   },
                                   child: Container(
                                     height: Sizing.blockSizeVertical * 6.75,
@@ -306,6 +308,8 @@ class ProfileSearch extends StatelessWidget {
         {
           print(index);
           controller.followingBlogs![index].following.value = false;
+          controller.profileSearchModel
+              .unfollowBlog(controller.followingBlogs![index].blogName);
           break;
         }
     }

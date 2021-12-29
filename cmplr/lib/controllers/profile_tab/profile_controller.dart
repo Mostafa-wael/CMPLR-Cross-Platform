@@ -20,7 +20,7 @@ class ProfileController extends GetxController
   final _model =
       ModelProfile(blogId: GetStorage().read('user')['primary_blog_id']);
 
-  final _searchModel = ProfileSearchModel();
+  final searchModel = ProfileSearchModel();
 
   final titleController = TextEditingController();
   final descCrontroller = TextEditingController();
@@ -243,7 +243,7 @@ class ProfileController extends GetxController
   }
 
   Future<void> getFollowingBlogs() async {
-    followingBlogs = await _searchModel.getFollowingBlogs();
+    followingBlogs = await searchModel.getFollowingBlogs();
   }
 
   Future<void> setTrueBlue() async {
