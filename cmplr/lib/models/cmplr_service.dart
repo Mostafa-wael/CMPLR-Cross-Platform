@@ -25,7 +25,7 @@ class CMPLRService {
       'jimbo@cmprl.cum',
       'wael@bekes.net',
       'gendy@cmplr.eg',
-      'mock',
+      'mock@cmplr.com',
     },
     'passwords': {
       '12345678',
