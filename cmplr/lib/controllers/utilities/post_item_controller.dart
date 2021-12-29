@@ -1,3 +1,6 @@
+import '../../backend_uris.dart';
+
+import '../../models/cmplr_service.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
@@ -9,10 +12,6 @@ import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PostItemController extends GetxController {
-  //final _followers = ;
-
-  bool lovedPost = false;
-
   void openNotes(PostItem postItem) {
     Get.toNamed(Routes.notes, arguments: postItem);
   }
@@ -48,7 +47,13 @@ class PostItemController extends GetxController {
     // Get.toNamed(Routes.openProfile);
   }
 
-  void loveClicked() {
+  void loveClicked(bool lovedPost, String postID) async {
+    print('Post ID: ' + postID);
+    if (lovedPost) {
+      await CMPLRService.likePost(PostURIs.likePost, {'id': postID});
+    } else {
+      await CMPLRService.unlikePost(DeleteURIs.unlikePost, {'id': postID});
+    }
     // TODO: send post request to '/user/like/ with post_id and reblog_key
   }
 }

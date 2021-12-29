@@ -16,6 +16,7 @@ class PostURIs {
   static const String signupGoogle = '/google/signup';
   static const String postReply = '/user/post/reply';
   static const String followBlog = '/user/follow';
+  static const String likePost = '/user/like';
   static const String sendMessage = '/messaging/conversation';
 
   // URIs just for the switch case.
@@ -80,4 +81,5 @@ class PutURIs {
 
 class DeleteURIs {
   static const String unfollowBlog = '/user/follow';
+  static const String unlikePost = '/user/unlike';
 }

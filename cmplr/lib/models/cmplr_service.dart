@@ -1903,6 +1903,20 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> likePost(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      return http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'id': params['id'],
+          }));
+    }
+  }
+
   static Future<http.Response> unfollowBlog(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1915,7 +1929,21 @@ class CMPLRService {
           body: jsonEncode(<String, String>{
             'blogName': params['blogName'],
           }));
-      final x = req.statusCode;
+      return req;
+    }
+  }
+
+  static Future<http.Response> unlikePost(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.delete(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'id': params['id'],
+          }));
       return req;
     }
   }
