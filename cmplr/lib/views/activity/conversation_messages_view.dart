@@ -28,16 +28,18 @@ class _ChatScreenState extends State<ChatScreen> {
       final encodedRes = jsonDecode(data);
       print('Pusher is Called');
 
-      ModelChatModule.conversationMessages.add(Message(
-        sender: ChatUser(
-          blog_id: int.parse(encodedRes['sender_id']),
-          blog_url: '',
-          blog_name: '',
-          avatar: '',
-        ),
-        text: encodedRes['message']['content'],
-        isRead: encodedRes['message']['is_read'],
-      ));
+      ModelChatModule.conversationMessages.insert(
+          0,
+          Message(
+            sender: ChatUser(
+              blog_id: int.parse(encodedRes['sender_id']),
+              blog_url: '',
+              blog_name: '',
+              avatar: '',
+            ),
+            text: encodedRes['message']['content'],
+            isRead: encodedRes['message']['is_read'],
+          ));
       setState(() {});
     });
   }
