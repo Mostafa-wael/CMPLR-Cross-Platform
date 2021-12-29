@@ -118,7 +118,7 @@ class ProfileSearch extends StatelessWidget {
                       padding: EdgeInsets.all(Sizing.blockSize * 4.5),
                       child: Text(
                         'Posts a lot about',
-                        style: TextStyle(fontSize: Sizing.blockSize * 4.5),
+                        style: TextStyle(fontSize: Sizing.fontSize * 4.5),
                       ),
                     ),
                     Obx(() => Padding(
