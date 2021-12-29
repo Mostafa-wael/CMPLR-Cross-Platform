@@ -55,4 +55,13 @@ class NotesModel {
     await CMPLRService.postReply(
         PostURIs.postReply, {'post_id': postID, 'reply_text': comment});
   }
+
+  Future<void> followBlog(String blogName) async {
+    await CMPLRService.followBlog(PostURIs.followBlog, {'blogName': blogName});
+  }
+
+  Future<void> unfollowBlog(String blogName) async {
+    await CMPLRService.unfollowBlog(
+        DeleteURIs.unfollowBlog, {'blogName': blogName});
+  }
 }

@@ -1211,6 +1211,17 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> delete(
+      String route, Map<String, dynamic> params) async {
+    switch (route) {
+      case DeleteURIs.unfollowBlog:
+        return unfollowBlog(route, params);
+
+      default:
+        throw Exception('Invalid request backendURI');
+    }
+  }
+
   static Future<http.Response> signupWithGoogle(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1493,7 +1504,8 @@ class CMPLRService {
     } else {
       //${params['post_id']}
       // TODO: change the 11
-      final uri = Uri.parse(apiIp + backendURI).replace(query: 'post_id=11');
+      final uri = Uri.parse(apiIp + backendURI)
+          .replace(query: 'post_id=${params['post_id']}');
 
       return http.get(uri, headers: getHeader);
     }
@@ -1557,16 +1569,40 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> postReply(String backendURI, Map params) async {
+  static Future<http.Response> followBlog(String backendURI, Map params) async {
     if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
       final uri = Uri.parse(apiIp + backendURI);
 
       return http.post(uri,
           headers: getHeader,
           body: jsonEncode(<String, String>{
-            'post_id': params['post_id'],
-            'reply_text': params['reply_text']
+            'blogName': params['blogName'],
           }));
+    }
+  }
+
+  static Future<http.Response> unfollowBlog(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.delete(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'blogName': params['blogName'],
+          }));
+      final x = req.statusCode;
+      return req;
+    }
+  }
+
+  static Future<http.Response> postReply(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
     } else {
       final uri = Uri.parse(apiIp + backendURI);
 
