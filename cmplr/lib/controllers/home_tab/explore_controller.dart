@@ -20,7 +20,7 @@ class ExploreController extends GetxController {
   static const elementWidthPercentage = 30.0;
   final scrollController = ScrollController();
   final tagsYouFollowHeight = Sizing.blockSizeVertical * 10.0;
-  final checkOutTheseTagsHeight = Sizing.blockSizeVertical * 20;
+  final checkOutTheseTagsHeight = Sizing.blockSizeVertical * 21;
   final checkOutTheseBlogsHeight = Sizing.blockSizeVertical * 20;
   final blogImgRadius = Sizing.blockSize * 5;
   final blogNameCenterHeightFactor = 0.6;
@@ -174,56 +174,51 @@ class ExploreController extends GetxController {
   }
 
   List<Widget> getTrending() {
-    if (Flags.mock) {
-      final trendingRows = <TrendingRow>[];
+    final trendingRows = <TrendingRow>[];
 
-      for (final Map item in trendingNowMockData) {
-        final trendingTags = <Widget>[];
-        final trendingPosts = <Widget>[];
+    for (final Map item in trendingNowMockData) {
+      final trendingTags = <Widget>[];
+      final trendingPosts = <Widget>[];
 
-        for (final trendTag in item['trend_tags']) {
-          trendingTags.add(Padding(
-            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-            child: Text(trendTag),
-          ));
-        }
-
-        final double width = Sizing.blockSize * 20,
-            height = Sizing.blockSizeVertical * 2;
-
-        const maxTextRows = 3;
-
-        for (final Map trendPost in item['trend_posts']) {
-          String? text = null, imgURL = null;
-
-          if (trendPost.containsKey('img_url') && !trendPost['img_url'].isEmpty)
-            imgURL = trendPost['img_url'];
-          else if (trendPost.containsKey('text') && !trendPost['text'].isEmpty)
-            text = trendPost['text'];
-
-          trendingPosts.add(TextOnImage(
-            width: width,
-            height: height,
-            text: text,
-            backgroundURL: imgURL,
-            maxTextRows: maxTextRows,
-          ));
-        }
-
-        trendingRows.add(TrendingRow(
-          rowNum: item['trend_number'],
-          trendName: item['trend_name'],
-          trendTags: trendingTags,
-          trendPosts: trendingPosts,
-          circleColor: clrs[math.Random().nextInt(clrs.length)],
+      for (final trendTag in item['trend_tags']) {
+        trendingTags.add(Padding(
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+          child: Text(trendTag),
         ));
       }
 
-      return trendingRows;
-    } else
+      final double width = Sizing.blockSize * 20,
+          height = Sizing.blockSizeVertical * 2;
 
-      // TODO: API Integration
-      return [];
+      const maxTextRows = 3;
+
+      for (final Map trendPost in item['trend_posts']) {
+        String? text = null, imgURL = null;
+
+        if (trendPost.containsKey('img_url') && !trendPost['img_url'].isEmpty)
+          imgURL = trendPost['img_url'];
+        else if (trendPost.containsKey('text') && !trendPost['text'].isEmpty)
+          text = trendPost['text'];
+
+        trendingPosts.add(TextOnImage(
+          width: width,
+          height: height,
+          text: text,
+          backgroundURL: imgURL,
+          maxTextRows: maxTextRows,
+        ));
+      }
+
+      trendingRows.add(TrendingRow(
+        rowNum: item['trend_number'],
+        trendName: item['trend_name'],
+        trendTags: trendingTags,
+        trendPosts: trendingPosts,
+        circleColor: clrs[math.Random().nextInt(clrs.length)],
+      ));
+    }
+
+    return trendingRows;
   }
 
   bool handleScrollNotification(ScrollNotification notification) {

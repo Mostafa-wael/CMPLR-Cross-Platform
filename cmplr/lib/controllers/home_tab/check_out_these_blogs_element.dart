@@ -1,3 +1,6 @@
+import '../../views/blog/screens/visitor_blog.dart';
+import 'package:get/get.dart';
+
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
@@ -108,7 +111,8 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
                 ),
               )),
           onTap: () {
-            // FIXME: Go blog
+            Get.to(
+                VisitorBlog(blogId: otherData?['blog_id']?.toString() ?? ''));
           },
         ));
   }

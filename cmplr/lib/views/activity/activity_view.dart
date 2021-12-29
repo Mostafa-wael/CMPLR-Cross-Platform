@@ -1,5 +1,10 @@
+import '../profile_tab/account_settings_view.dart';
+
+import '../../controllers/activity/activity_activity_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
+import '../../routes.dart';
 import './activity_activity.dart';
 import './activity_messages.dart';
 import '../../utilities/user.dart';
@@ -14,7 +19,11 @@ List<DropdownMenuItem<String>> moreItems = <DropdownMenuItem<String>>[
   DropdownMenuItem(
     child: TextButton(
       onPressed: () {
-        // TODO: refresh the selected page
+        final activityActivityController =
+            Get.find<ActivityActivityController>();
+        activityActivityController.fetchNotifications();
+
+        // TODO: refresh messages
       },
       child: const Text('Refresh'),
     ),
@@ -23,7 +32,7 @@ List<DropdownMenuItem<String>> moreItems = <DropdownMenuItem<String>>[
   DropdownMenuItem(
     child: TextButton(
       onPressed: () {
-        // TODO: Go to settings
+        Get.to(const AccountSettingsView());
       },
       child: const Text('Settings'),
     ),

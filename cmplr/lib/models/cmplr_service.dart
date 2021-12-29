@@ -1098,8 +1098,8 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  // static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/';
+  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
   // static const String apiIp = 'https://75fe-41-34-251-247.ngrok.io/api';`
@@ -1189,7 +1189,8 @@ class CMPLRService {
         return getTryThesePosts(route);
       case GetURIs.followingBlogs:
         return getFollowingBlogs(route, params);
-
+      case GetURIs.hashtagPosts:
+        return getHashtagPosts(route, params);
       default:
         throw Exception('Invalid request backendURI');
     }
@@ -1426,6 +1427,19 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getHashtagPosts(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI + '?tag=${params['tag']}');
+
+      return http.get(uri, headers: getHeader);
+    }
+  }
+
   static Future<http.Response> getConversationsList(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1514,7 +1528,9 @@ class CMPLRService {
       var tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
-      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      final ret =
+          await http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      return ret;
     }
   }
 
