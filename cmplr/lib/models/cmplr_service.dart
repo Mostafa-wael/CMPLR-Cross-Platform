@@ -1401,6 +1401,8 @@ class CMPLRService {
         return postReply(backendURI, params);
       case PostURIs.sendMessage:
         return sendMessage(backendURI, params);
+      case PostURIs.followBlog:
+        return followBlog(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
