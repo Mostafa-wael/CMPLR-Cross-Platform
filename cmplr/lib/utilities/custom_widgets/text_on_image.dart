@@ -1,12 +1,14 @@
 import 'dart:developer';
 import 'dart:typed_data';
 
+import '../../flags.dart';
+
 import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 class TextOnImage extends StatelessWidget {
-  final backgroundURL;
-  final text;
+  String? backgroundURL;
+  String? text;
   final width;
   final height;
   final gestureDetectorKey;
@@ -58,7 +60,7 @@ class TextOnImage extends StatelessWidget {
                     if (backgroundURL != null)
                       FadeInImage.assetNetwork(
                         placeholder: 'lib/utilities/assets/logo/logo_icon.png',
-                        image: backgroundURL,
+                        image: backgroundURL ?? placeHolderImgUrl,
                         fit: BoxFit.cover,
                       ),
                     if (dimImage)
@@ -70,7 +72,7 @@ class TextOnImage extends StatelessWidget {
                         padding: const EdgeInsets.all(4.0),
                         child: Center(
                           child: Text(
-                            text,
+                            text!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: maxTextRows,
                             softWrap: true,

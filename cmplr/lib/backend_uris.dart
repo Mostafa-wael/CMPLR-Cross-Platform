@@ -57,6 +57,7 @@ class GetURIs {
   static const String tagsYouFollow = '/following/tags';
   static const String checkOutTheseTags = '/recommended/tags';
   static const String checkOutTheseBlogs = '/recommended/blogs';
+  static const String tryThesePosts = '/recommended/posts';
 
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';

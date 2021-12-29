@@ -1168,6 +1168,8 @@ class CMPLRService {
         return getConversationsList(route, params);
       case GetURIs.conversationMessages:
         return getConversationMessages(route, params);
+      case GetURIs.tryThesePosts:
+        return getTryThesePosts(route);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1497,6 +1499,10 @@ class CMPLRService {
   }
 
   static Future<http.Response> getCheckoutTheseBlogs(String backendURI) {
+    return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+  }
+
+  static Future<http.Response> getTryThesePosts(String backendURI) {
     return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -46,6 +48,21 @@ class ExploreModel {
         return bodyMap['response']['blogs'];
       } else
         return [];
+    }
+  }
+
+  static Future<List> getTryThesePosts() async {
+    if (Flags.mock) {
+      return Future.delayed(
+          const Duration(seconds: 3), () => tryThesePostsMockData);
+    } else {
+      final rawResponse = await CMPLRService.get(GetURIs.tryThesePosts, {});
+      if (rawResponse.statusCode == CMPLRService.requestSuccess) {
+        final bodyMap = jsonDecode(rawResponse.body) as Map;
+        return bodyMap['response']['post'];
+      } else {
+        return [];
+      }
     }
   }
 
@@ -118,7 +135,6 @@ class ExploreModel {
       ],
       'tag_name': 'Test tag',
       'tag_slug': 'Test tag',
-      'tag_url': 'https://www.tumblr.com',
     },
     {
       'test_id': 3,
@@ -129,7 +145,6 @@ class ExploreModel {
       ],
       'tag_name': 'Test tag',
       'tag_slug': 'Test tag',
-      'tag_url': 'https://www.tumblr.com',
     },
   ];
 
@@ -185,6 +200,257 @@ class ExploreModel {
           'https://64.media.tumblr.com/8ed48312e7af1551b5750278439cbd3d/fdced055d48f80f2-ed/s2048x3072_c0,7692,100000,88064/46ed7e90fcea44eaae57e3e550e31791f262fd5e.jpg',
       'description': null,
       'background_color': 'white',
+    },
+  ];
+
+  static final tryThesePostsMockData = [
+    {
+      'post': {
+        'post_id': 9,
+        'type': 'text',
+        'state': 'publish',
+        'title': null,
+        'content':
+            '<img src=\'https://64.media.tumblr.com/7a9525e72f6cbcb7075588984f3389ae/b9bba28b99b572fc-29/s400x600/ddccd44807f1491258124b8acf4748b62632fdd7.jpg\'> <h1>Come on!\' So they sat down.</h1><p>Qui aut iste natus. Ipsum possimus enim veniam. Consequuntur accusamus aspernatur animi unde ab quos voluptas. Culpa neque autem fugit asperiores sequi.</p><p>Nisi in eaque amet in asperiores non. Qui minus voluptatem nostrum voluptates minima. Magni voluptatem eos sed dolor tenetur quis.</p><p>Animi iure sapiente debitis. Perspiciatis tempora saepe totam aperiam et. Voluptatum illo nam sit quidem. Qui molestiae dignissimos unde qui.</p><p>Occaecati occaecati suscipit illo aut eos esse aut. Suscipit suscipit dolorem autem alias sed vel. Aperiam molestiae ad aut voluptas commodi architecto. Et rerum ab dicta sit est.</p><p>Accusamus aut quaerat sequi ex. Fuga porro non qui perferendis. Ad ut ut fuga quibusdam fuga. Et consequuntur nobis adipisci.</p>',
+        'date': 'Tuesday, 28-Dec-21 13:38:46 UTC',
+        'source_content': '5BQwPuLuSb',
+        'tags': ['summer', 'winter'],
+        'is_liked': false,
+        'notes_count': 21,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 7,
+        'blog_name': 'quia',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      },
+    },
+    {
+      'post': {
+        'post_id': 73,
+        'type': 'text',
+        'state': 'publish',
+        'title': null,
+        'content':
+            '<img src=\'https://64.media.tumblr.com/234c2c6770d789e37b8eeaa797a8f60d/3271277c18d42cad-0e/s400x600/145f521c44bdb261fda331f004fb8f6c2e34520f.png\'>',
+        'date': 'Tuesday, 28-Dec-21 19:58:41 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 0,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 20,
+        'blog_name': 'xaaq',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      },
+    },
+    {
+      'post': {
+        'post_id': 49,
+        'type': 'audio',
+        'state': 'publish',
+        'title': null,
+        'content':
+            '<h1>Alice, \'it\'ll never do to.</h1><p>Vel est perferendis similique. Ea animi ea et quia. Aut temporibus iste sit rerum molestiae sit.</p><p>Et animi modi maxime quas libero. Cupiditate eum quia debitis aut omnis. Enim voluptatem aut facere cumque in.</p><p>Libero velit voluptatum delectus recusandae consequatur accusantium. Vitae consequuntur ratione error unde quia dolor delectus.</p><p>Repellendus et in ullam perferendis velit suscipit repellendus. Autem minima perspiciatis architecto adipisci et perferendis sit. Sit placeat iure dicta officia.</p><p>Ipsa doloremque voluptas eligendi voluptatem ipsam aut doloribus. At eum rem accusantium. Officiis est modi recusandae sunt exercitationem repudiandae fugit. Rem veniam doloremque rerum sit.</p>',
+        'date': 'Tuesday, 28-Dec-21 13:38:46 UTC',
+        'source_content': 'nviht0voNY',
+        'tags': ['summer', 'winter'],
+        'is_liked': false,
+        'notes_count': 18,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 3,
+        'blog_name': 'sed',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      }
+    },
+    {
+      'post': {
+        'post_id': 66,
+        'type': 'text',
+        'state': 'publish',
+        'title': 'faw',
+        'content':
+            'gwaaa<img src=\'https://cmplrserver.s3.eu-west-2.amazonaws.com/images/1640715915_17_Killua-Featured.jpg\'>',
+        'date': 'Tuesday, 28-Dec-21 18:25:24 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 2,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 17,
+        'blog_name': 'de7kuuuuu',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      }
+    },
+    {
+      'post': {
+        'post_id': 60,
+        'type': 'text',
+        'state': 'publish',
+        'title': 'الزعامة اتنين',
+        'content':
+            '<img src=\'https://cmplrserver.s3.eu-west-2.amazonaws.com/images/1640714114_16_DhAcqQcW0AAL8CG.jpg\'>',
+        'date': 'Tuesday, 28-Dec-21 17:55:21 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 3,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 16,
+        'blog_name': '3bhamed',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      },
+    },
+    {
+      'post': {
+        'post_id': 1212,
+        'type': 'text',
+        'state': 'publish',
+        'title': 'faw',
+        'content':
+            'gwaaa<img src=\'https://64.media.tumblr.com/1ee268f86e5e7b896526c5bb2630e22f/d45ecdd0931c6bbe-1c/s400x600/b9c2b59abb9df9a535c27dcce9a31e0dd575cc90.jpg\'>',
+        'date': 'Tuesday, 28-Dec-21 18:25:24 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 23,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 9809,
+        'blog_name': 'KAK',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      }
+    },
+    {
+      'post': {
+        'post_id': 6126,
+        'type': 'text',
+        'state': 'publish',
+        'title': 'faw',
+        'content':
+            'gwaaa<img src=\'https://64.media.tumblr.com/194e199bff1b21ca401eabd12d974d8a/cbda3ca550417d25-c4/s400x600/017b70610453f07003c0b5be7e5096087072e8e8.jpg\'>',
+        'date': 'Tuesday, 28-Dec-21 18:25:24 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 2,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 11287,
+        'blog_name': 'Please Help',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      }
+    },
+    {
+      'post': {
+        'post_id': 213166,
+        'type': 'text',
+        'state': 'publish',
+        'title': 'faw',
+        'content':
+            'gwaaa<img src=\'https://64.media.tumblr.com/1e8434b79a91d952441723e2a79199f1/4ba5b7fbe0ab7855-56/s400x600/1be0bb6b2b18cee3e5ed2e955d3797897cb34b81.gifv\'>',
+        'date': 'Tuesday, 28-Dec-21 18:25:24 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 2,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 12137,
+        'blog_name': 'Suffering',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      }
+    },
+    {
+      'post': {
+        'post_id': 2166,
+        'type': 'text',
+        'state': 'publish',
+        'title': 'faw',
+        'content':
+            'gwaaa<img src=\'https://64.media.tumblr.com/c4cc9af07e29af7310cf0e152cfa88f8/21614c182a3165eb-64/s400x600/b2ec067085ff125fa6faffc4ab8dc169a2a17acf.gifv\'>',
+        'date': 'Tuesday, 28-Dec-21 18:25:24 UTC',
+        'source_content': null,
+        'tags': [],
+        'is_liked': false,
+        'notes_count': 2,
+        'is_mine': false
+      },
+      'blog': {
+        'blog_id': 137,
+        'blog_name': '"Engineering"',
+        'avatar':
+            'https://assets.tumblr.com/images/default_avatar/cone_closed_128.png',
+        'avatar_shape': 'circle',
+        'replies': 'everyone',
+        'follower': false
+      }
+    },
+  ];
+
+  static final thingsWeCareAboutMockData = [
+    {
+      'background_url':
+          'https://64.media.tumblr.com/fc312aa74bcd0a17b25b934c91e8308d/ccc4e7351a7303c7-8f/s400x600/a450f7061efad2ccba0aed2f6bf0e12b4bb34424.jpg',
+      'tag_name': 'Kot',
+    },
+    {
+      'background_url':
+          'https://64.media.tumblr.com/3f4815d42f2b66b895ec291cc3713c50/fc6dc77e7398caa9-1f/s250x400/183391398d073f7b6f925a42cfe39a474e25d5f2.gifv',
+      'tag_name': 'Linux',
+    },
+    {
+      'background_url':
+          'https://64.media.tumblr.com/14639d89ae7f5aaac8357693f42af78b/e1666fecb49ab382-8f/s400x600/bd15b7568b38d44ea5450050da0b9b868a420238.jpg',
+      'tag_name': 'Jetstream Sam',
+    },
+    {
+      'background_url':
+          'https://64.media.tumblr.com/3e4b9f462786881d444afbc75bd6800f/7417c9c24e07a800-dc/s400x600/2792e14ba44adaf1fdb704be21996ac54527a6c8.png',
+      'tag_name': '2B',
     },
   ];
 }
