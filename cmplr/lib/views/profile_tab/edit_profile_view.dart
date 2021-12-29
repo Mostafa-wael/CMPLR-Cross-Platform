@@ -238,34 +238,6 @@ class EditProfileView extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            width: Sizing.blockSize * 25,
-                                            height:
-                                                Sizing.blockSizeVertical * 2.5,
-                                            decoration: BoxDecoration(
-                                                color: (controller
-                                                            .backgroundColor ==
-                                                        Colors.blue)
-                                                    ? Colors.grey
-                                                    : Colors.blue,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(
-                                                        Sizing.blockSize * 2))),
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child: Text(
-                                                'Accent',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: (controller
-                                                                // ignore: lines_longer_than_80_chars
-                                                                .backgroundColor ==
-                                                            Colors.white)
-                                                        ? Colors.black
-                                                        : Colors.white),
-                                              ),
-                                            ),
-                                          ),
                                         ],
                                       )),
                                 ),
@@ -316,11 +288,11 @@ class EditProfileView extends StatelessWidget {
                     },
                     body: TabBarView(
                       children: <Widget>[
-                        Container(
-                          color: Colors.red,
+                        PostFeed(
+                          postFeedTypePage: GetURIs.postByName,
                         ),
-                        Container(
-                          color: Colors.green,
+                        PostFeed(
+                          postFeedTypePage: GetURIs.userLikes,
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),

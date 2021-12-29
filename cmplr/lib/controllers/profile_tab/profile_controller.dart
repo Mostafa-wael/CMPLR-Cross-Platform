@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../models/cmplr_service.dart';
 
 import '../../utilities/user.dart';
@@ -215,11 +217,15 @@ class ProfileController extends GetxController
     else
       response = await _model.uploadImg(_pickedAvatar);
     final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
-    if (header)
-      _newHeaderUrl = responseMap['response']['url'];
-    else
-      _newAvatarUrl = responseMap['response']['url'];
-    final response1 = await saveEdits(false);
+    if (responseMap.containsKey('error')) {
+      _showToast('Failed to upload image, please try again');
+    } else {
+      if (response.statusCode != 400) if (header)
+        _newHeaderUrl = responseMap['response']['url'];
+      else
+        _newAvatarUrl = responseMap['response']['url'];
+      final response1 = await saveEdits(false);
+    }
   }
 
   Future<void> saveEdits(visibleKeyboard) async {
@@ -291,3 +297,12 @@ class ProfileController extends GetxController
     Colors.indigo: 'indigo',
   };
 }
+
+void _showToast(String message) => Fluttertoast.showToast(
+      msg: message,
+      fontSize: 16,
+      gravity: ToastGravity.BOTTOM,
+      textColor: Colors.white,
+      backgroundColor: const Color(0xFF4E4F53),
+      timeInSecForIosWeb: 1,
+    );
