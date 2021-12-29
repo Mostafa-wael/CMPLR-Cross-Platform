@@ -101,7 +101,7 @@ class ExploreScreen extends StatelessWidget {
                         height: controller.tagsYouFollowHeight,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
-                          children: controller.getTagsYouFollow(),
+                          children: controller.tagsYouFollow,
                         ),
                       )
                     ],
@@ -125,7 +125,7 @@ class ExploreScreen extends StatelessWidget {
                           height: controller.checkOutTheseTagsHeight,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: controller.getCheckOutTheseTags(),
+                            children: controller.checkOutTheseTags,
                           ))
                     ],
                   ),

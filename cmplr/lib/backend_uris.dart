@@ -42,6 +42,9 @@ class GetURIs {
 
   static const String activityNotifications = '/notifications';
 
+  static String getActivityNotifications(String blogName) =>
+      '/blog/' + blogName + '/notifications';
+
   static String getGetTagsForPosts(String blogID) =>
       '/' + blogID + '/get_tags_for_posts';
 
@@ -53,6 +56,10 @@ class GetURIs {
   static const String hashtagPosts = '/post/tagged';
   static const String notes = '/notes';
 
+  static const String tagsYouFollow = '/following/tags';
+  static const String checkOutTheseTags = '/recommended/tags';
+  static const String checkOutTheseBlogs = '/recommended/blogs';
+
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';
   static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
@@ -60,6 +67,8 @@ class GetURIs {
   static const String followingBlogs = '/user/following';
   static const String postByName = '/posts/view/';
   static const String userLikes = '/user/likes';
+  static const String conversationsList = '/blog/messaging';
+  static const String conversationMessages = '/messaging/conversation';
 
   // TODO: Add the remaining get request URIS
 

@@ -1,3 +1,4 @@
+import '../../utilities/user.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../controllers.dart';
@@ -121,20 +122,22 @@ class NotesController extends GetxController
     commentTextFieldChanged(commentTextFieldController.text);
   }
 
-  void commentSubmitted() {
+  void commentSubmitted() async {
     /*
     1- Send a post request to submit the comment
     2- Update the current comments list
     3- Timeless refresh so that the comment appears
     */
     // Replace the following data with the current user data
+    await notesModel.submitComment(
+        postItem!.postID, commentTextFieldController.text);
     notes![0].insert(
         0,
         UserNote(
             noteType: 'reply',
             blogName: GetStorage().read('blog_name'),
             avatarShape: 'circle',
-            avatarURL: GetStorage().read('avatar'),
+            avatarURL: User.avatarURL,
             followed: false.obs,
             postReply: commentTextFieldController.text));
     commentTextFieldController.text = '';

@@ -11,11 +11,11 @@ class CheckOutTheseTagsElement extends StatelessWidget {
   var tagName;
   var imgOneURL;
   var imgTwoURL;
-  var tagURL;
   var widgetColor;
   var followed;
 
   var gestureDetectorKey;
+  Map? otherData;
 
   CheckOutTheseTagsElement(
       {required this.width,
@@ -24,10 +24,10 @@ class CheckOutTheseTagsElement extends StatelessWidget {
       required this.tagName,
       required this.imgOneURL,
       required this.imgTwoURL,
-      required this.tagURL,
       required this.widgetColor,
       required this.followed,
       this.gestureDetectorKey,
+      this.otherData,
       Key? key})
       : super(key: key);
 

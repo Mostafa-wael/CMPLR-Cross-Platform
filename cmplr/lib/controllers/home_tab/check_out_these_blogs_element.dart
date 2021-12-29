@@ -8,27 +8,27 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
   final blogName;
   final blogImgURL;
   final blogBgURL;
-  final blogURL;
   final blogImgRadius;
   final blogImgCenterHeightFactor;
   final widgetColor;
 
   var gestureDetectorKey;
+  Map? otherData;
 
-  CheckOutTheseBlogsElement(
-      {required this.width,
-      required this.height,
-      required this.borderRadius,
-      required this.blogName,
-      required this.blogImgURL,
-      required this.blogBgURL,
-      required this.blogURL,
-      required this.blogImgRadius,
-      required this.blogImgCenterHeightFactor,
-      required this.widgetColor,
-      this.gestureDetectorKey,
-      Key? key})
-      : super(key: key);
+  CheckOutTheseBlogsElement({
+    required this.width,
+    required this.height,
+    required this.borderRadius,
+    required this.blogName,
+    required this.blogImgURL,
+    required this.blogBgURL,
+    required this.blogImgRadius,
+    required this.blogImgCenterHeightFactor,
+    required this.widgetColor,
+    this.gestureDetectorKey,
+    this.otherData,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

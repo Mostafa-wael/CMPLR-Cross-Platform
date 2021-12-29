@@ -49,4 +49,9 @@ class NotesModel {
     classifiedNotes.add(_likes);
     return classifiedNotes;
   }
+
+  Future<void> submitComment(String postID, String comment) async {
+    await CMPLRService.postReply(
+        '/user/post/reply', {'post_id': postID, 'reply_text': comment});
+  }
 }

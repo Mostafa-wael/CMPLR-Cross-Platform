@@ -32,8 +32,7 @@ class WritePostModel {
 
     // TODO: Check if the response decodes successfully
     if (response.statusCode == CMPLRService.insertSuccess) {
-      final responseBody = jsonDecode(response.body);
-      return responseBody;
+      return response;
     } else
       return http.Response(jsonEncode({}), response.statusCode);
   }

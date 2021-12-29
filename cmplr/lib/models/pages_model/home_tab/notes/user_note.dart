@@ -19,15 +19,13 @@ class UserNote {
       required this.followed});
 
   factory UserNote.fromJson(Map<String, dynamic> json) {
-    // ignore: avoid_bool_literals_in_conditional_expressions
-    // final followedValue = json['followed'] == 'true' ? true.obs : false.obs;
-    final followedValue = true.obs;
+    final followedValue = json['follower'] == true ? true.obs : false.obs;
     return UserNote(
       noteType: json['type'],
       avatarURL: json['avatar'],
       avatarShape: json['avatar_shape'],
       blogName: json['blog_name'],
-      profileTitle: 'Mohamed',
+      profileTitle: json['blog_title'],
       postReply: json['content'],
       followed: followedValue,
     );

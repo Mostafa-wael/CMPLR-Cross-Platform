@@ -102,14 +102,18 @@ class ProfileController extends GetxController
 
   Future<void> getBlogInfo() async {
     blogInfo = await _model.getBlogInfo();
-    _blogTitle = blogInfo['title'];
-    _blogName = blogInfo['blog_name'];
-    _blogAvatar = blogInfo['avatar'];
-    _blogAvatarShape = blogInfo['avatar_shape'];
-    _headerImage = blogInfo['header_image'];
-    _description = blogInfo['description'] ?? '';
-    _backgroundColor = clrs[blogInfo['background_color']];
-    _url = blogInfo['url'];
+    if (blogInfo != null) {
+      _blogTitle = blogInfo['title'];
+      _blogName = blogInfo['blog_name'];
+      _blogAvatar = blogInfo['avatar'];
+      _blogAvatarShape = blogInfo['avatar_shape'];
+      _headerImage =
+          blogInfo['header_image'] ?? 'https://via.placeholder.com/150';
+      _description = blogInfo['description'] ?? '';
+      _backgroundColor = clrs[blogInfo['background_color']];
+      _url = blogInfo['url'];
+    } else
+      throw Exception('Null blog info');
   }
 
   Future<void> share(BuildContext context) async {
