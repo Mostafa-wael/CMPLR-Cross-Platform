@@ -1,6 +1,3 @@
-import '../../utilities/user.dart';
-
-import '../../models/models.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
@@ -13,8 +10,6 @@ import 'package:share_plus/share_plus.dart';
 
 class PostItemController extends GetxController {
   //final _followers = ;
-
-  final _shareModel = ShareModel();
 
   bool lovedPost = false;
 

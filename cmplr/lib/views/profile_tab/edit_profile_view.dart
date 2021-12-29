@@ -4,11 +4,9 @@ import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import '../../backend_uris.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import '../../views/views.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({Key? key}) : super(key: key);

@@ -5,8 +5,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import '../utilities/user.dart';
-import 'package:get/get_connect.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:get_storage/get_storage.dart';
 

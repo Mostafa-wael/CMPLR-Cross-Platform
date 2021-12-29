@@ -1,5 +1,4 @@
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import 'package:flutter/gestures.dart';
 
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
