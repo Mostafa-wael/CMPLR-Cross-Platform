@@ -115,7 +115,7 @@ class VisitorBlog extends StatelessWidget {
       backgroundColor:
           blogController.scrolledDown.value ? Colors.black : Colors.transparent,
       title: Text(
-        blogController.blogInfo!.value.name!,
+        blogController.blogInfo?.value.name ?? '',
         style: const TextStyle(color: Colors.white),
       ),
       leading: IconButton(

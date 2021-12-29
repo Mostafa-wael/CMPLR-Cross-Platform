@@ -1,3 +1,5 @@
+import '../../flags.dart';
+
 import '../../backend_uris.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -289,7 +291,8 @@ class ProfileView extends StatelessWidget {
                                             child: FadeInImage.assetNetwork(
                                               placeholder:
                                                   'lib/utilities/assets/logo/logo_icon.png',
-                                              image: controller.blogAvatar,
+                                              image: controller.blogAvatar ??
+                                                  placeHolderImgUrl,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -308,7 +311,7 @@ class ProfileView extends StatelessWidget {
                                       GestureDetector(
                                         onTap: () {},
                                         child: Text(
-                                          controller.blogName,
+                                          controller.blogName ?? '',
                                           style: TextStyle(
                                             fontSize: Sizing.fontSize * 3.5,
                                           ),
@@ -358,7 +361,7 @@ class ProfileView extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Text(
-                                          controller.blogTitle,
+                                          controller.blogTitle ?? '',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: Sizing.fontSize * 7,

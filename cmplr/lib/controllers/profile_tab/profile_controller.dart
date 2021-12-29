@@ -115,8 +115,7 @@ class ProfileController extends GetxController
       _description = blogInfo['description'] ?? '';
       _backgroundColor = clrs[blogInfo['background_color']];
       _url = blogInfo['url'];
-    } else
-      throw Exception('Null blog info');
+    }
   }
 
   Future<void> share(BuildContext context) async {

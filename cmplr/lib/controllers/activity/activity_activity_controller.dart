@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../backend_uris.dart';
 import '../../models/cmplr_service.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
@@ -16,6 +18,8 @@ import 'package:flutter/material.dart';
 class ActivityActivityController extends GetxController {
   // Small variables
   int currChosenFilter = 0;
+  List notifications = [];
+  List notificationWidgets = [];
 
   // TODO: Convert all rows to CheckboxListTile and SwitchListTile
   // and remove these
@@ -277,8 +281,18 @@ class ActivityActivityController extends GetxController {
   };
 
   void fetchNotifications() async {
-    final response =
-        await ActivityActivityModel.getActivityNotifications(filterTypes);
+    Timer.periodic(const Duration(seconds: 1), (timer) async {
+      notifications =
+          await ActivityActivityModel.getActivityNotifications(filterTypes);
+      updateNotifications();
+    });
+  }
+
+  void updateNotifications() {
+    print(notifications);
+    notifications.forEach((notif) {
+      print(notif);
+    });
   }
 }
 

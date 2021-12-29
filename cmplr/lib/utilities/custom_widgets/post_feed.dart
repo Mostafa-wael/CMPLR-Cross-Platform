@@ -9,10 +9,11 @@ class PostFeed extends StatelessWidget {
   var physics;
   var controller;
   var postType = '';
-  PostFeed({Key? key, postFeedTypePage}) : super(key: key) {
+  PostFeed({Key? key, postFeedTypePage, tag}) : super(key: key) {
     postType = postFeedTypePage ?? '';
     print('in the view, Post Type is $postType');
-    controller = Get.put(PostFeedController(postFeedTypeFeed: postType));
+    controller =
+        Get.put(PostFeedController(postFeedTypeFeed: postType, tag: tag));
   }
 
   @override
