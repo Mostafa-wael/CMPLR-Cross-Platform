@@ -173,8 +173,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             final Message message =
                                 ModelChatModule.conversationMessages[index];
-                            final bool isMe =
-                                message.sender.blog_id == User.userMap['id'];
+                            final bool isMe = message.sender.blog_id ==
+                                User.userMap['primary_blog_id'];
                             print('User Blog ID');
                             print(User.userMap['id']);
                             return _buildMessage(message, isMe);

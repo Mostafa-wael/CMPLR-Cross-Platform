@@ -43,7 +43,7 @@ class Message {
     return outOrIn // out -> outside the chat, in -> inside the chat
         ? Message(
             sender: ChatUser(
-              blog_id: int.parse(json['blog_data']['blog_id']),
+              blog_id: json['blog_data']['blog_id'],
               blog_url: json['blog_data']['blog_url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],
@@ -70,27 +70,33 @@ class ModelChatModule {
 
   static Future<void> getConversationsList() async {
     // the chat menu from outside -> URI: messaging
-    final response = await CMPLRService.get(
-        GetURIs.conversationsList, {'me': User.userMap['id'].toString()});
+    final response = await CMPLRService.get(GetURIs.conversationsList,
+        {'me': User.userMap['primary_blog_id'].toString()});
+    print('primary_blog_id');
+    print(User.userMap['primary_blog_id'].toString());
     final responseBody = jsonDecode(response.body);
     print('get chat list');
-    for (var i = 0; i < responseBody.length; i++) {
-      conversationsList.add(
-        Message.fromJson(json: responseBody[i], outOrIn: true),
-      );
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      for (var i = 0; i < responseBody.length; i++) {
+        conversationsList.add(
+          Message.fromJson(json: responseBody[i], outOrIn: true),
+        );
+      }
     }
   }
 
   static Future<void> getConversationMessages() async {
     // inside the chat itself -> URI: conversation
-    final response = await CMPLRService.get(
-        GetURIs.conversationMessages, {'me': User.userMap['id'].toString()});
+    final response = await CMPLRService.get(GetURIs.conversationMessages,
+        {'me': User.userMap['primary_blog_id'].toString()});
     final responseBody = jsonDecode(response.body);
     print('get chats message');
-    for (var i = 0; i < responseBody['messages'].length; i++) {
-      conversationMessages.add(
-        Message.fromJson(json: responseBody, outOrIn: false, index: i),
-      );
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      for (var i = 0; i < responseBody['messages'].length; i++) {
+        conversationMessages.add(
+          Message.fromJson(json: responseBody, outOrIn: false, index: i),
+        );
+      }
     }
   }
 }
