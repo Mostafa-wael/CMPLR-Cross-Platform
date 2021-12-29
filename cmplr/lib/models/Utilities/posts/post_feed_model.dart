@@ -17,14 +17,17 @@ class ModelPostsFeed {
         postFeedTypeContoller != '' ? postFeedTypeContoller : postFeedType;
     final posts = <PostItem>[];
     final response = await CMPLRService.get(postFeedType, {});
-    final responseBody = jsonDecode(response.body);
-    // print('model, $postFeedType posts from json');
-    // print(responseBody['posts_per_page']);
-    for (var i = 0; i < responseBody['response']['post'].length; i++) {
-      posts.add(PostItem.fromJson(responseBody['response']['post'][i]));
-    }
-    print('model, $postFeedType posts list');
-    print(posts.length);
-    return posts;
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      final responseBody = jsonDecode(response.body);
+      // print('model, $postFeedType posts from json');
+      // print(responseBody['posts_per_page']);
+      for (var i = 0; i < responseBody['response']['post'].length; i++) {
+        posts.add(PostItem.fromJson(responseBody['response']['post'][i]));
+      }
+      print('model, $postFeedType posts list');
+      print(posts.length);
+      return posts;
+    } else
+      return [];
   }
 }
