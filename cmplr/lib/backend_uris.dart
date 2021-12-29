@@ -16,6 +16,7 @@ class PostURIs {
   static const String signupGoogle = '/google/signup';
   static const String postReply = '/user/post/reply';
   static const String followBlog = '/user/follow';
+  static const String sendMessage = '/messaging/conversation';
 
   // URIs just for the switch case.
   // To get the real URI, use the help functions below.

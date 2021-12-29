@@ -43,7 +43,7 @@ class Message {
     return outOrIn // out -> outside the chat, in -> inside the chat
         ? Message(
             sender: ChatUser(
-              blog_id: int.parse(json['blog_data']['blog_id']),
+              blog_id: json['blog_data']['blog_id'],
               blog_url: json['blog_data']['blog_url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],
@@ -53,7 +53,7 @@ class Message {
           )
         : Message(
             sender: ChatUser(
-              blog_id: 0,
+              blog_id: json['messages'][index]['from_blog_id'],
               blog_url: json['blog_data']['url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],
@@ -70,27 +70,43 @@ class ModelChatModule {
 
   static Future<void> getConversationsList() async {
     // the chat menu from outside -> URI: messaging
-    final response = await CMPLRService.get(
-        GetURIs.conversationsList, {'me': User.userMap['id'].toString()});
+    final response = await CMPLRService.get(GetURIs.conversationsList,
+        {'me': User.userMap['primary_blog_id'].toString()});
+    print('primary_blog_id');
+    print(User.userMap['primary_blog_id'].toString());
     final responseBody = jsonDecode(response.body);
     print('get chat list');
-    for (var i = 0; i < responseBody.length; i++) {
-      conversationsList.add(
-        Message.fromJson(json: responseBody[i], outOrIn: true),
-      );
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      for (var i = 0; i < responseBody.length; i++) {
+        conversationsList.add(
+          Message.fromJson(json: responseBody[i], outOrIn: true),
+        );
+      }
     }
   }
 
-  static Future<void> getConversationMessages() async {
+  static Future<void> getConversationMessages(int other_blog_id) async {
     // inside the chat itself -> URI: conversation
-    final response = await CMPLRService.get(
-        GetURIs.conversationMessages, {'me': User.userMap['id'].toString()});
+    final response = await CMPLRService.get(GetURIs.conversationMessages, {
+      'me': User.userMap['primary_blog_id'].toString(),
+      'to': other_blog_id.toString()
+    });
     final responseBody = jsonDecode(response.body);
     print('get chats message');
-    for (var i = 0; i < responseBody['messages'].length; i++) {
-      conversationMessages.add(
-        Message.fromJson(json: responseBody, outOrIn: false, index: i),
-      );
+    print('primary_blog_id and the other');
+    print(User.userMap['primary_blog_id'].toString());
+    print(other_blog_id.toString());
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      for (var i = 0; i < responseBody['messages'].length; i++) {
+        conversationMessages.add(
+          Message.fromJson(json: responseBody, outOrIn: false, index: i),
+        );
+      }
     }
+  }
+
+  static Future<void> sendMessage(String message) async {
+    final response = await CMPLRService.sendMessage(
+        PostURIs.sendMessage, {'Content': message});
   }
 }
