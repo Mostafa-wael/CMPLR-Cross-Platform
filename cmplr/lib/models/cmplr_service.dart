@@ -1127,6 +1127,8 @@ class CMPLRService {
         return createPost(backendURI, params);
       case PostURIs.reblog:
         return reblogPost(backendURI, params);
+      case '/user/post/reply':
+        return postReply(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1263,7 +1265,12 @@ class CMPLRService {
       var tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
-      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      return http.get(
+          Uri.parse(apiIp +
+              '/blog/' +
+              GetStorage().read('user')['primary_blog_id'].toString() +
+              '/info'),
+          headers: tempHeader);
     }
   }
 
@@ -1450,6 +1457,26 @@ class CMPLRService {
     } else {
       return http.post(Uri.parse(apiIp + backendURI),
           headers: postHeader, body: jsonEncode(params));
+    }
+  }
+
+  static Future<http.Response> postReply(String backendURI, Map params) async {
+    if (Flags.mock) {
+      final uri = Uri.parse(apiIp + backendURI)
+          .replace(query: 'post_id=61')
+          .replace(query: 'reply_text=test');
+      return http.get(uri, headers: getHeader);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'post_id': params['post_id'],
+            'reply_text': params['reply_text']
+          }));
+      final x = req.statusCode;
+      return req;
     }
   }
 }
