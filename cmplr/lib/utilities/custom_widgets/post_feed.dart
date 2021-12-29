@@ -10,7 +10,7 @@ class PostFeed extends StatelessWidget {
   var controller;
   var postType = '';
   PostFeed({Key? key, postFeedTypePage}) : super(key: key) {
-    postType = postFeedTypePage;
+    postType = postFeedTypePage ?? '';
     print('in the view, Post Type is $postType');
     controller = Get.put(PostFeedController(postFeedTypeFeed: postType));
   }

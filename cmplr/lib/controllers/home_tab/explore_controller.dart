@@ -1,18 +1,11 @@
-import 'dart:convert';
 import 'dart:math';
+import 'package:html/parser.dart' as parser;
 
 import '../../models/pages_model/explore_tab/explore_model.dart';
-
-import '../../models/cmplr_service.dart';
-
-import '../../backend_uris.dart';
 import '../../views/views.dart';
-
 import '../../views/explore_tab/search_results_view.dart';
-
 import '../../views/utilities/hashtag_posts_view.dart';
 import '../../utilities/custom_widgets/trending_row.dart';
-
 import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
 import '../../utilities/custom_widgets/text_on_image.dart';
 import '../../utilities/sizing/sizing.dart';
@@ -35,11 +28,20 @@ class ExploreController extends GetxController {
   var tagsYouFollow = <Widget>[];
   var checkOutTheseTags = <Widget>[];
   var checkOutTheseBlogs = <Widget>[];
+  Widget tryThesePosts = Container();
+  var thingsWeCareAbout = <Widget>[];
 
-  ExploreController() {
+  void initLists() async {
     getTagsYouFollow();
     getCheckOutTheseBlogs();
-    getCheckOutTheseTags();
+    checkOutTheseTags = await getCheckOutTheseTags('cott');
+    thingsWeCareAbout = await getCheckOutTheseTags('twca');
+
+    getTryThesePostsGrid();
+  }
+
+  ExploreController() {
+    initLists();
   }
 
   Widget? getAppBarBackground() {
@@ -85,41 +87,60 @@ class ExploreController extends GetxController {
     update();
   }
 
-  void getCheckOutTheseTags() async {
+  Future<List<Widget>> getCheckOutTheseTags(String type) async {
     const widthPercentage = 30, borderRadiusFactor = 1;
     final checkOutTheseTags = await ExploreModel.getCheckOutTheseTags();
     final cottWidgets = <Widget>[];
 
-    var colorIndex = 0;
-    for (final cott in checkOutTheseTags) {
-      final otherData = Map.from(cott);
-      final List postViews = cott['posts_views'];
-      final testId =
-          cott.containsKey('test_id') ? cott['test_id'] : Random().nextInt(16);
-      var imgOneUrl, imgTwoUrl;
+    if (type == 'cott') {
+      var colorIndex = 0;
+      for (final cott in checkOutTheseTags) {
+        final otherData = Map.from(cott);
+        final List postViews = cott['posts_views'];
+        final testId = cott.containsKey('test_id')
+            ? cott['test_id']
+            : Random().nextInt(16);
+        var imgOneUrl, imgTwoUrl;
 
-      if (postViews.length > 0) {
-        imgOneUrl = postViews[Random().nextInt(postViews.length)];
-        imgTwoUrl = postViews[Random().nextInt(postViews.length)];
-      } else {
-        imgOneUrl = placeHolderImgUrl;
-        imgTwoUrl = placeHolderImgUrl;
+        if (postViews.length > 0) {
+          imgOneUrl = postViews[Random().nextInt(postViews.length)];
+          imgTwoUrl = postViews[Random().nextInt(postViews.length)];
+        } else {
+          imgOneUrl = placeHolderImgUrl;
+          imgTwoUrl = placeHolderImgUrl;
+        }
+
+        cottWidgets.add(CheckOutTheseTagsElement(
+            otherData: otherData,
+            gestureDetectorKey: ValueKey('CheckOutTheseTags${testId}'),
+            width: Sizing.blockSize * widthPercentage,
+            height: checkOutTheseTagsHeight,
+            borderRadius: Sizing.blockSize * borderRadiusFactor,
+            imgOneURL: imgOneUrl,
+            imgTwoURL: imgTwoUrl,
+            tagName: cott['tag_name'],
+            followed: false,
+            widgetColor: clrs[(colorIndex++ % clrs.length)]));
       }
-
-      cottWidgets.add(CheckOutTheseTagsElement(
-          otherData: otherData,
-          gestureDetectorKey: ValueKey('CheckOutTheseTags${testId}'),
-          width: Sizing.blockSize * widthPercentage,
-          height: checkOutTheseTagsHeight,
-          borderRadius: Sizing.blockSize * borderRadiusFactor,
-          imgOneURL: imgOneUrl,
-          imgTwoURL: imgTwoUrl,
-          tagName: cott['tag_name'],
-          followed: false,
-          widgetColor: clrs[(colorIndex++ % clrs.length)]));
+    } else if (type == 'twca') {
+      for (var i = 0; i < checkOutTheseTags.length; i++) {
+        final twca = checkOutTheseTags[i];
+        cottWidgets.add(
+          TextOnImage(
+            gestureDetectorKey: ValueKey('ThingsWeCareAbout$i'),
+            backgroundURL: twca['background_url'],
+            text: twca['tag_name'],
+            width: Sizing.blockSize * 30,
+            height: tagsYouFollowHeight,
+            borderRadius: BorderRadius.circular(Sizing.blockSize),
+            onTap: () {
+              Get.to(const HashtagPosts(), arguments: twca['tag_name']);
+            },
+          ),
+        );
+      }
     }
-    this.checkOutTheseTags = cottWidgets;
-    update();
+    return cottWidgets;
   }
 
   void getCheckOutTheseBlogs() async {
@@ -216,64 +237,93 @@ class ExploreController extends GetxController {
     return false;
   }
 
-  Widget getTryThesePostsGrid() {
-    if (Flags.mock) {
-      final ttpList = <Widget>[];
+  void getTryThesePostsGrid() async {
+    final tryThesePosts = await ExploreModel.getTryThesePosts();
+    final ttpWidgets = <Widget>[];
 
-      //
-      for (final ttp in tryThesePostsMockData) {
-        ttpList.add(
+    //
+    for (var i = 0; i < min(9, tryThesePosts.length); i++) {
+      final ttp = tryThesePosts[i];
+      final content = ttp['post']['content'];
+      final document = parser.parse(content);
+
+      final imageElements = document.getElementsByTagName('img');
+
+      /* 
+         ttpWidgets.add(
           FadeInImage.assetNetwork(
             placeholder:
                 placeHolders[math.Random().nextInt(placeHolders.length)],
             image: ttp,
             fit: BoxFit.cover,
           ),
-        );
-      }
-      return GestureDetector(
-        key: const ValueKey('TryThesePostsGrid'),
-        child: GridView.count(
-          padding: EdgeInsets.zero,
-          primary: false,
-          shrinkWrap: true,
-          crossAxisCount: 3,
-          semanticChildCount: 9,
-          children: ttpList,
-        ),
-        onTap: goToTryThesePosts,
-      );
-    } else
-      // TODO: API Integration
-      return Container(
-        decoration: const BoxDecoration(color: Colors.red),
-      );
-  }
+        );*/
 
-  List<Widget> getThingsWeCareAbout() {
-    if (Flags.mock) {
-      final twcaList = <Widget>[];
-      for (var i = 0; i < thingsWeCareAboutMockData.length; i++) {
-        final twca = thingsWeCareAboutMockData[i];
-        twcaList.add(
+      if (imageElements.length > 0) {
+        final img = imageElements[0].attributes['src'];
+
+        ttpWidgets.add(
           TextOnImage(
-            gestureDetectorKey: ValueKey('ThingsWeCareAbout$i'),
-            backgroundURL: twca['background_url'],
-            text: twca['tag_name'],
-            width: Sizing.blockSize * 30,
+            width: Sizing.blockSize * elementWidthPercentage,
             height: tagsYouFollowHeight,
+            backgroundURL: img,
             borderRadius: BorderRadius.circular(Sizing.blockSize),
-            onTap: () {
-              Get.to(const HashtagPosts(), arguments: twca['tag_name']);
-            },
+          ),
+        );
+      } else {
+        final withoutHtmlTags =
+            parser.parse(document.body?.text).documentElement?.text;
+        ttpWidgets.add(
+          TextOnImage(
+            width: Sizing.blockSize * elementWidthPercentage,
+            height: tagsYouFollowHeight,
+            maxTextRows: 3,
+            text: withoutHtmlTags,
+            borderRadius: BorderRadius.circular(Sizing.blockSize),
           ),
         );
       }
-      return twcaList;
-    } else
-      // TODO: API Integration
-      return [];
+    }
+    this.tryThesePosts = GestureDetector(
+      key: const ValueKey('TryThesePostsGrid'),
+      child: GridView.count(
+        padding: EdgeInsets.zero,
+        primary: false,
+        shrinkWrap: true,
+        crossAxisCount: 3,
+        semanticChildCount: 9,
+        children: ttpWidgets,
+      ),
+      onTap: goToTryThesePosts,
+    );
+    update();
   }
+
+  // List<Widget> getThingsWeCareAbout() {
+  //   // if (Flags.mock) {
+  //   //   final twcaList = <Widget>[];
+  //   //   for (var i = 0; i < thingsWeCareAboutMockData.length; i++) {
+  //   //     final twca = thingsWeCareAboutMockData[i];
+  //   //     twcaList.add(
+  //   //       TextOnImage(
+  //   //         gestureDetectorKey: ValueKey('ThingsWeCareAbout$i'),
+  //   //         backgroundURL: twca['background_url'],
+  //   //         text: twca['tag_name'],
+  //   //         width: Sizing.blockSize * 30,
+  //   //         height: tagsYouFollowHeight,
+  //   //         borderRadius: BorderRadius.circular(Sizing.blockSize),
+  //   //         onTap: () {
+  //   //           Get.to(const HashtagPosts(), arguments: twca['tag_name']);
+  //   //         },
+  //   //       ),
+  //   //     );
+  //   //   }
+  //   //   return twcaList;
+  //   // } else
+  //   //   // TODO: API Integration
+  //   //   return [];
+  //   // return [];
+  // }
 
   final clrs = [
     Colors.red,
@@ -414,41 +464,6 @@ class ExploreController extends GetxController {
         },
       ]
     }
-  ];
-
-  final tryThesePostsMockData = [
-    'https://64.media.tumblr.com/7a9525e72f6cbcb7075588984f3389ae/b9bba28b99b572fc-29/s400x600/ddccd44807f1491258124b8acf4748b62632fdd7.jpg',
-    'https://64.media.tumblr.com/234c2c6770d789e37b8eeaa797a8f60d/3271277c18d42cad-0e/s400x600/145f521c44bdb261fda331f004fb8f6c2e34520f.png',
-    'https://64.media.tumblr.com/4daa6e52e4dc2b63cc0c3b540f957641/ab1aace2e41fb5ac-90/s400x600/dde36aaf01e8aa94e21a867eb3bc56170f69b74e.jpg',
-    'https://64.media.tumblr.com/3e3f88a2e60e0bd79356e9e43b851103/db19d029dc0afce8-68/s250x250_c1/d3eb64499af22377b6154f45f5c6a1f60a2de05d.gifv',
-    'https://64.media.tumblr.com/65212a35471940e78b6fb6f5d1d8fb03/1c40f364748bca0c-46/s400x600/63c58f39b7de3d35106befd601aed4fb56352eed.png',
-    'https://64.media.tumblr.com/1ee268f86e5e7b896526c5bb2630e22f/d45ecdd0931c6bbe-1c/s400x600/b9c2b59abb9df9a535c27dcce9a31e0dd575cc90.jpg',
-    'https://64.media.tumblr.com/194e199bff1b21ca401eabd12d974d8a/cbda3ca550417d25-c4/s400x600/017b70610453f07003c0b5be7e5096087072e8e8.jpg',
-    'https://64.media.tumblr.com/1e8434b79a91d952441723e2a79199f1/4ba5b7fbe0ab7855-56/s400x600/1be0bb6b2b18cee3e5ed2e955d3797897cb34b81.gifv',
-    'https://64.media.tumblr.com/c4cc9af07e29af7310cf0e152cfa88f8/21614c182a3165eb-64/s400x600/b2ec067085ff125fa6faffc4ab8dc169a2a17acf.gifv',
-  ];
-
-  final thingsWeCareAboutMockData = [
-    {
-      'background_url':
-          'https://64.media.tumblr.com/fc312aa74bcd0a17b25b934c91e8308d/ccc4e7351a7303c7-8f/s400x600/a450f7061efad2ccba0aed2f6bf0e12b4bb34424.jpg',
-      'tag_name': 'Kot',
-    },
-    {
-      'background_url':
-          'https://64.media.tumblr.com/3f4815d42f2b66b895ec291cc3713c50/fc6dc77e7398caa9-1f/s250x400/183391398d073f7b6f925a42cfe39a474e25d5f2.gifv',
-      'tag_name': 'Linux',
-    },
-    {
-      'background_url':
-          'https://64.media.tumblr.com/14639d89ae7f5aaac8357693f42af78b/e1666fecb49ab382-8f/s400x600/bd15b7568b38d44ea5450050da0b9b868a420238.jpg',
-      'tag_name': 'Jetstream Sam',
-    },
-    {
-      'background_url':
-          'https://64.media.tumblr.com/3e4b9f462786881d444afbc75bd6800f/7417c9c24e07a800-dc/s400x600/2792e14ba44adaf1fdb704be21996ac54527a6c8.png',
-      'tag_name': '2B',
-    },
   ];
 
   void goToTryThesePosts() {

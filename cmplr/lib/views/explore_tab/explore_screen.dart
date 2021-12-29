@@ -167,7 +167,7 @@ class ExploreScreen extends StatelessWidget {
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(Sizing.blockSize * 2),
-                      child: controller.getTryThesePostsGrid(),
+                      child: controller.tryThesePosts,
                     ),
                     Column(
                       children: [
@@ -189,7 +189,7 @@ class ExploreScreen extends StatelessWidget {
                           height: controller.tagsYouFollowHeight,
                           child: ListView(
                               scrollDirection: Axis.horizontal,
-                              children: controller.getThingsWeCareAbout()),
+                              children: controller.thingsWeCareAbout),
                         ),
                         const TrendingNow()
                       ],
