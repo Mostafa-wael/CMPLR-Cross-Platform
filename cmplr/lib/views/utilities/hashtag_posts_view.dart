@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import '../../models/cmplr_service.dart';
+
 import '../../backend_uris.dart';
 import 'package:get/get.dart';
 
@@ -48,127 +52,147 @@ class HashtagPosts extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
         ),
-        body: ExtendedNestedScrollView(
-            headerSliverBuilder: (context, f) {
-              return <Widget>[
-                SliverAppBar(
-                  backgroundColor:
-                      Theme.of(context).appBarTheme.backgroundColor,
-                  pinned: true,
-                  leading: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.share,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        controller.showShareMenu(context);
-                      },
-                    ),
-                  ],
-                  expandedHeight: Sizing.blockSizeVertical * 32.7,
-                  title: Text(
-                    controller.tagName,
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  flexibleSpace: FlexibleSpaceBar(
-                      background: Stack(children: [
-                    Stack(fit: StackFit.expand, children: <Widget>[
-                      Image.network(
-                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ]),
-                    Positioned(
-                      child: Row(
-                        children: [
-                          Obx(() => ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                    primary: Colors.purple),
-                                child: controller.hashtagFollowed.value
-                                    ? const Text('Unfollow')
-                                    : const Text('Follow'),
-                                onPressed: () {
-                                  controller.followHashtagButtonPressed();
-                                },
-                              )),
-                          SizedBox(
-                            width: Sizing.blockSize * 2,
+        body: FutureBuilder(
+            future:
+                CMPLRService.get(GetURIs.tagInfo, {'tag': controller.tagName}),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                final response = jsonDecode(snapshot.data.body) ?? [];
+                controller.hashtagFollowed.value = response['is_follower'];
+                controller.tagAvatar = response['tag_avatar'];
+                return ExtendedNestedScrollView(
+                  headerSliverBuilder: (context, f) {
+                    return <Widget>[
+                      SliverAppBar(
+                        backgroundColor:
+                            Theme.of(context).appBarTheme.backgroundColor,
+                        pinned: true,
+                        leading: IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: const StadiumBorder(),
-                                primary: Colors.purple),
-                            child: const Text('New Post'),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                        actions: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.share,
+                              color: Colors.white,
+                            ),
                             onPressed: () {
-                              controller.writePostWithTag();
+                              controller.showShareMenu(context);
                             },
                           ),
                         ],
+                        expandedHeight: Sizing.blockSizeVertical * 32.7,
+                        title: Text(
+                          '#' + controller.tagName,
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        flexibleSpace: FlexibleSpaceBar(
+                            background: Stack(children: [
+                          Stack(fit: StackFit.expand, children: <Widget>[
+                            Image.network(
+                              controller.tagAvatar ??
+                                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ]),
+                          Positioned(
+                            child: Row(
+                              children: [
+                                Obx(() => ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          shape: const StadiumBorder(),
+                                          primary: Colors.purple),
+                                      child: controller.hashtagFollowed.value
+                                          ? const Text('Unfollow')
+                                          : const Text('Follow'),
+                                      onPressed: () {
+                                        controller.followHashtagButtonPressed();
+                                      },
+                                    )),
+                                SizedBox(
+                                  width: Sizing.blockSize * 2,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape: const StadiumBorder(),
+                                      primary: Colors.purple),
+                                  child: const Text('New Post'),
+                                  onPressed: () {
+                                    controller.writePostWithTag();
+                                  },
+                                ),
+                              ],
+                            ),
+                            bottom: Sizing.blockSizeVertical * 7.32,
+                            left: Sizing.blockSize * 4.86,
+                          ),
+                        ])),
+                        bottom: CustomAppBar(
+                          height: Sizing.blockSizeVertical * 7.5,
+                          child: Material(
+                            color: Colors.purple,
+                            child: InkWell(
+                              onTap: () {},
+                              child: TabBar(
+                                controller: controller.tabController,
+                                labelColor: Colors.white,
+                                unselectedLabelColor: Colors.grey,
+                                indicatorColor: Colors.white,
+                                tabs: [
+                                  const Tab(
+                                    child: Center(
+                                        child: Text(
+                                      'Recent',
+                                    )),
+                                  ),
+                                  const Tab(
+                                    child: Center(
+                                        child: Text(
+                                      'Top',
+                                    )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      bottom: Sizing.blockSizeVertical * 7.32,
-                      left: Sizing.blockSize * 4.86,
-                    ),
-                  ])),
-                  bottom: CustomAppBar(
-                    height: Sizing.blockSizeVertical * 7.5,
-                    child: Material(
-                      color: Colors.purple,
-                      child: InkWell(
-                        onTap: () {},
-                        child: TabBar(
+                    ];
+                  },
+                  body: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: TabBarView(
                           controller: controller.tabController,
-                          labelColor: Colors.white,
-                          unselectedLabelColor: Colors.grey,
-                          indicatorColor: Colors.white,
-                          tabs: [
-                            const Tab(
-                              child: Center(
-                                  child: Text(
-                                'Recent',
-                              )),
-                            ),
-                            const Tab(
-                              child: Center(
-                                  child: Text(
-                                'Top',
-                              )),
-                            ),
+                          children: <Widget>[
+                            PostFeed(
+                                postFeedTypePage: GetURIs.hashtagPosts,
+                                tag: controller.tagName),
+                            PostFeed(
+                                postFeedTypePage: GetURIs.hashtagPosts,
+                                tag: controller.tagName),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ];
-            },
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  child: TabBarView(
-                    controller: controller.tabController,
-                    children: <Widget>[
-                      PostFeed(
-                          postFeedTypePage: GetURIs.hashtagPosts,
-                          tag: controller.tagName),
-                      PostFeed(
-                          postFeedTypePage: GetURIs.hashtagPosts,
-                          tag: controller.tagName),
                     ],
                   ),
-                ),
-              ],
-            )),
+                );
+              } else {
+                return const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.purple,
+                    ),
+                  ),
+                );
+              }
+            }),
       ),
     );
   }

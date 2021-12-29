@@ -8,7 +8,8 @@ import '../../utilities/functions.dart' as cmplr_fn;
 
 class HashtagPostsController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  late RxBool hashtagFollowed;
+  RxBool hashtagFollowed = false.obs;
+  String? tagAvatar;
   bool dataReloaded = false;
 
   TabController? _tabController;

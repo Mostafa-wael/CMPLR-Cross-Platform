@@ -1451,6 +1451,8 @@ class CMPLRService {
         return getFollowingBlogs(route, params);
       case GetURIs.hashtagPosts:
         return getHashtagPosts(route, params);
+      case GetURIs.tagInfo:
+        return getTagInfo(route, params);
       default:
         throw Exception('Invalid request backendURI');
     }
@@ -1805,6 +1807,19 @@ class CMPLRService {
     } else {
       final uri = Uri.parse(apiIp + backendURI)
           .replace(query: 'post_id=${params['post_id']}');
+
+      return http.get(uri, headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getTagInfo(String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+
+      return http.Response(jsonEncode(notesMockData), requestSuccess);
+    } else {
+      final uri =
+          Uri.parse(apiIp + backendURI).replace(query: 'tag=${params['tag']}');
 
       return http.get(uri, headers: getHeader);
     }
