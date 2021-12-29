@@ -1189,7 +1189,8 @@ class CMPLRService {
         return getTryThesePosts(route);
       case GetURIs.followingBlogs:
         return getFollowingBlogs(route, params);
-
+      case GetURIs.hashtagPosts:
+        return getHashtagPosts(route, params);
       default:
         throw Exception('Invalid request backendURI');
     }
@@ -1423,6 +1424,19 @@ class CMPLRService {
       return http.Response(jsonEncode(res), res['meta']['status_code']);
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getHashtagPosts(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI + '?tag=${params['tag']}');
+
+      return http.get(uri, headers: getHeader);
     }
   }
 
