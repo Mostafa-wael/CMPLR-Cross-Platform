@@ -107,6 +107,7 @@ class _ChatScreenState extends State<ChatScreen> {
             color: Colors.white,
             onPressed: () {
               print(_textController.text);
+              ModelChatModule.sendMessage(_textController.text);
             },
           ),
         ],

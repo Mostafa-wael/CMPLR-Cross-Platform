@@ -104,4 +104,9 @@ class ModelChatModule {
       }
     }
   }
+
+  static Future<void> sendMessage(String message) async {
+    final response = await CMPLRService.sendMessage(
+        PostURIs.sendMessage, {'Content': message});
+  }
 }

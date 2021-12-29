@@ -1137,6 +1137,8 @@ class CMPLRService {
         return uploadImg(backendURI, params);
       case PostURIs.postReply:
         return postReply(backendURI, params);
+      case PostURIs.sendMessage:
+        return sendMessage(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1457,6 +1459,21 @@ class CMPLRService {
           Uri.parse(
               apiIp + backendURI + '/' + params['me'] + '/' + params['to']),
           headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> sendMessage(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      return http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'Content': params['Content'],
+          }));
     }
   }
 
