@@ -1,4 +1,4 @@
-import 'package:cmplr/flags.dart';
+import '../../flags.dart';
 
 import '../../backend_uris.dart';
 import '../../models/cmplr_service.dart';
