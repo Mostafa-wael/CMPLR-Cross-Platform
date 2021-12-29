@@ -8,7 +8,7 @@ import '../../../flags.dart';
 import '../../cmplr_service.dart';
 
 class ExploreModel {
-  static Future<List<Map>> getTagsYouFollow() async {
+  static Future<List<dynamic>> getTagsYouFollow() async {
     if (Flags.mock) {
       return Future.delayed(
           const Duration(seconds: 1), () => tagsYouFollowMockData);
@@ -16,7 +16,7 @@ class ExploreModel {
       final rawResponse = await CMPLRService.get(GetURIs.tagsYouFollow, {});
       if (rawResponse.statusCode == CMPLRService.requestSuccess) {
         final bodyMap = jsonDecode(rawResponse.body) as Map;
-        return bodyMap['response']['tags'];
+        return bodyMap['response'];
       } else
         return [];
     }
