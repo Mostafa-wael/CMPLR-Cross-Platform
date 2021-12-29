@@ -1098,8 +1098,8 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/';
-  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
   // static const String apiIp = 'https://75fe-41-34-251-247.ngrok.io/api';`
