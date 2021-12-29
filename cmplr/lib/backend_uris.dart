@@ -54,6 +54,7 @@ class GetURIs {
   static const String trendingPosts = '/trending/posts';
   static const String postStuff = '/user/dashboard';
   static const String hashtagPosts = '/post/tagged';
+  static const String tagInfo = '/tag/info';
   static const String notes = '/post/notes';
 
   static const String tagsYouFollow = '/following/tags';
