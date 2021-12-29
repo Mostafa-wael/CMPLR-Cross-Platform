@@ -1001,6 +1001,12 @@ class CMPLRService {
         return getUserTheme(route, params);
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
+      case GetURIs.tagsYouFollow:
+        return getTagsYouFollow(route);
+      case GetURIs.checkOutTheseTags:
+        return getCheckoutTheseTags(route);
+      case GetURIs.checkOutTheseBlogs:
+        return getCheckoutTheseBlogs(route);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1284,5 +1290,17 @@ class CMPLRService {
         headers: getHeader,
       );
     }
+  }
+
+  static Future<http.Response> getTagsYouFollow(String backendURI) {
+    return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+  }
+
+  static Future<http.Response> getCheckoutTheseTags(String backendURI) {
+    return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+  }
+
+  static Future<http.Response> getCheckoutTheseBlogs(String backendURI) {
+    return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
   }
 }

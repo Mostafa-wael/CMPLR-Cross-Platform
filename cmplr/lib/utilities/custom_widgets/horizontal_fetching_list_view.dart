@@ -22,7 +22,7 @@ class HorizontalFetchingListView extends StatelessWidget {
               controller: controller.scrollController,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              children: controller.getCheckOutTheseBlogs(),
+              children: controller.checkOutTheseBlogs,
             )));
   }
 }

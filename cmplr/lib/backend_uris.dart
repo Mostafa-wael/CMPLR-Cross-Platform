@@ -39,6 +39,7 @@ class GetURIs {
   static const String getSuggestedTags = '/tags';
 
   static const String activityNotifications = '/notifications';
+
   static String getActivityNotifications(String blogName) =>
       '/blog/' + blogName + '/notifications';
 
@@ -53,7 +54,9 @@ class GetURIs {
   static const String hashtagPosts = '/post/tagged';
   static const String notes = '/notes';
 
-  static const String followedTags = '/following/tags';
+  static const String tagsYouFollow = '/following/tags';
+  static const String checkOutTheseTags = '/recommended/tags';
+  static const String checkOutTheseBlogs = '/recommended/blogs';
 
   static const String recommendedSearchQueries = '/search_bar';
   static const String blogInfo = 'blog/info';

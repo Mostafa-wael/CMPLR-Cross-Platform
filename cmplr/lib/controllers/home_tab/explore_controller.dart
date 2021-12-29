@@ -33,6 +33,14 @@ class ExploreController extends GetxController {
   final blogNameCenterHeightFactor = 0.6;
 
   var tagsYouFollow = <Widget>[];
+  var checkOutTheseTags = <Widget>[];
+  var checkOutTheseBlogs = <Widget>[];
+
+  ExploreController() {
+    getTagsYouFollow();
+    getCheckOutTheseBlogs();
+    getCheckOutTheseTags();
+  }
 
   Widget? getAppBarBackground() {
     if (Flags.mock) {
@@ -51,16 +59,18 @@ class ExploreController extends GetxController {
 
   void getTagsYouFollow() async {
     // There should be a list of posts in the response entry of the map
-    // Each tag should have the keys: tag_id, tag_name, tag_slug post_views
+    // Each tag should have the keys: tag_id, tag_name, tag_slug posts_views
     //                                int,    string,   string,  string arr
-    final tagsYouFollow = await ExploreModel.getFollowedTags();
+    final tagsYouFollow = await ExploreModel.getTagsYouFollow();
     final tyfWidgets = <Widget>[];
     for (final tag in tagsYouFollow) {
       final otherData = Map.from(tag);
-      final List postViews = tag['post_views'];
+      final List postViews = tag['posts_views'];
+      final testId = tag.containsKey('test_id') ? tag['test_id'] : -1;
 
       tyfWidgets.add(TextOnImage(
         otherData: otherData,
+        gestureDetectorKey: ValueKey('TagsYouFollow${testId}'),
         width: Sizing.blockSize * elementWidthPercentage,
         height: tagsYouFollowHeight,
         backgroundURL: postViews[Random().nextInt(postViews.length)],
@@ -75,56 +85,70 @@ class ExploreController extends GetxController {
     update();
   }
 
-  List<Widget> getCheckOutTheseTags() {
-    if (Flags.mock) {
-      const widthPercentage = 30, borderRadiusFactor = 1;
-      final checkOutTheseTagsList = <Widget>[];
+  void getCheckOutTheseTags() async {
+    const widthPercentage = 30, borderRadiusFactor = 1;
+    final checkOutTheseTags = await ExploreModel.getCheckOutTheseTags();
+    final cottWidgets = <Widget>[];
 
-      var colorIndex = 0;
-      for (var i = 0; i < checkOutTheseTagsMockData.length; i++) {
-        final cott = checkOutTheseTagsMockData[i];
-        checkOutTheseTagsList.add(CheckOutTheseTagsElement(
-            gestureDetectorKey: ValueKey('CheckOutTheseTags$i'),
-            width: Sizing.blockSize * widthPercentage,
-            height: checkOutTheseTagsHeight,
-            borderRadius: Sizing.blockSize * borderRadiusFactor,
-            imgOneURL: cott['img_one_url'],
-            imgTwoURL: cott['img_two_url'],
-            tagName: cott['tag_name'],
-            tagURL: cott['tag_url'],
-            followed: cott['followed'],
-            widgetColor: clrs[(colorIndex++ % clrs.length)]));
+    var colorIndex = 0;
+    for (final cott in checkOutTheseTags) {
+      final otherData = Map.from(cott);
+      final List postViews = cott['posts_views'];
+      final testId =
+          cott.containsKey('test_id') ? cott['test_id'] : Random().nextInt(16);
+      var imgOneUrl, imgTwoUrl;
+
+      if (postViews.length > 0) {
+        imgOneUrl = postViews[Random().nextInt(postViews.length)];
+        imgTwoUrl = postViews[Random().nextInt(postViews.length)];
+      } else {
+        imgOneUrl = placeHolderImgUrl;
+        imgTwoUrl = placeHolderImgUrl;
       }
-      return checkOutTheseTagsList;
-    } else
-      return [];
+
+      cottWidgets.add(CheckOutTheseTagsElement(
+          otherData: otherData,
+          gestureDetectorKey: ValueKey('CheckOutTheseTags${testId}'),
+          width: Sizing.blockSize * widthPercentage,
+          height: checkOutTheseTagsHeight,
+          borderRadius: Sizing.blockSize * borderRadiusFactor,
+          imgOneURL: imgOneUrl,
+          imgTwoURL: imgTwoUrl,
+          tagName: cott['tag_name'],
+          followed: false,
+          widgetColor: clrs[(colorIndex++ % clrs.length)]));
+    }
+    this.checkOutTheseTags = cottWidgets;
+    update();
   }
 
-  List<Widget> getCheckOutTheseBlogs() {
-    if (Flags.mock) {
-      final cotbList = <Widget>[];
-      var colorIndex = 0;
+  void getCheckOutTheseBlogs() async {
+    final checkOutTheseBlogs = await ExploreModel.getCheckOutTheseBlogs();
+    final cotbWidgets = <Widget>[];
+    var colorIndex = 0;
 
-      for (var i = 0; i < checkOutTheseBlogsMockData.length; i++) {
-        final cotb = checkOutTheseBlogsMockData[i];
-        cotbList.add(CheckOutTheseBlogsElement(
-          gestureDetectorKey: ValueKey('CheckOutTheseBlogs$i'),
-          width: Sizing.blockSize * 30,
-          height: checkOutTheseBlogsHeight,
-          borderRadius: Sizing.blockSize * 2,
-          blogName: cotb['blog_name'],
-          blogImgURL: cotb['blog_img_url'],
-          blogBgURL: cotb['blog_bg_url'],
-          blogURL: cotb['blog_url'],
-          blogImgRadius: blogImgRadius,
-          blogImgCenterHeightFactor: blogNameCenterHeightFactor,
-          widgetColor: clrs.reversed.toList()[colorIndex++ % clrs.length],
-        ));
-      }
-      return cotbList;
-    } else
-      // TODO: API Integration
-      return [];
+    for (final cotb in checkOutTheseBlogs) {
+      final testId =
+          cotb.containsKey('test_id') ? cotb['test_id'] : Random().nextInt(16);
+
+      cotbWidgets.add(CheckOutTheseBlogsElement(
+        otherData: Map.from(cotb),
+        gestureDetectorKey: ValueKey('CheckOutTheseBlogs$testId'),
+        width: Sizing.blockSize * 30,
+        height: checkOutTheseBlogsHeight,
+        borderRadius: Sizing.blockSize * 2,
+        blogName: cotb['blog_name'],
+        blogImgURL: cotb['avatar'],
+        blogBgURL: cotb['header_image'],
+        blogImgRadius: blogImgRadius,
+        blogImgCenterHeightFactor: blogNameCenterHeightFactor,
+        // FIXME: Figure out how the backend returns background_color and
+        // convert it to flutter colors
+        widgetColor: clrs.reversed.toList()[colorIndex++ % clrs.length],
+      ));
+    }
+    this.checkOutTheseBlogs = cotbWidgets;
+    update();
   }
 
   List<Widget> getTrending() {
@@ -390,80 +414,6 @@ class ExploreController extends GetxController {
         },
       ]
     }
-  ];
-
-  final checkOutTheseTagsMockData = [
-    {
-      'img_one_url':
-          'https://64.media.tumblr.com/c3165ebd9c1fbbfcb9ee2282debae9de/b14f71f1c6109186-93/s540x810/b8d7676377233009b10428fc9546487fc0c14126.jpg',
-      'img_two_url':
-          'https://64.media.tumblr.com/7ad94a0f1f2e1c0c9cb00d6fed72edf9/b14f71f1c6109186-83/s540x810/3de33fae7a449390f856d243236d8c910ecd402b.png',
-      'tag_name': 'Test tag',
-      'tag_url': 'https://www.tumblr.com',
-      'followed': 'true',
-    },
-    {
-      'img_one_url':
-          'https://64.media.tumblr.com/2e2813ef0edfe7c0a9c8478b4b25ece5/b14f71f1c6109186-aa/s540x810/7ca399aa9a3e3b78d49a512bb338d12ff93009c3.jpg',
-      'img_two_url':
-          'https://64.media.tumblr.com/9410f22a29285fbdc65d884bc5054d56/b14f71f1c6109186-5e/s540x810/56c69ed615e2cb5afebdfa1cce95aacd0ed0d1ae.jpg',
-      'tag_name': 'Test tag',
-      'tag_url': 'https://www.tumblr.com',
-      'followed': 'false',
-    },
-    {
-      'img_one_url':
-          'https://64.media.tumblr.com/5d9e0997337264f1f0d99a6c30dc41dc/b14f71f1c6109186-a6/s540x810/c5ff288763620cb4331dcdcca9e5059309ef4e43.png',
-      'img_two_url':
-          'https://64.media.tumblr.com/a18c8063bf9d095d99f12b51d3dd1eda/57803298a6ae7123-0a/s540x810/35b1580573afd7e8d52a33546e021c3df27778b3.gif',
-      'tag_name': 'Test tag',
-      'tag_url': 'https://www.tumblr.com',
-      'followed': 'false',
-    },
-    {
-      'img_one_url':
-          'https://64.media.tumblr.com/fd654c32f041cb02c757b5646c1cf9e1/a4c5782524284f82-d5/s540x810/dc9b214a0dd3612a3e1154c725ec175ad9921fe9.jpg',
-      'img_two_url':
-          'https://64.media.tumblr.com/439b77661f74cea5af5559a392dfe505/573d1660335efd03-4e/s540x810/46e78fb5a9f5e7d91352cf6c1ef016977aada3dc.jpg',
-      'tag_name': 'Test tag',
-      'tag_url': 'https://www.tumblr.com',
-      'followed': 'false',
-    },
-  ];
-
-  final checkOutTheseBlogsMockData = [
-    {
-      'blog_name': 'AAAAA',
-      'blog_img_url':
-          'https://64.media.tumblr.com/7c639466082be78cf3fc2f36c91c4d6e/c3101cc497330567-18/s128x128u_c1/1ccf730b27f200ada0f180c9831c85edaa9b1b98.jpg',
-      'blog_bg_url':
-          'https://64.media.tumblr.com/910534a51d1a0aaac19118a4070b15c9/c3101cc497330567-c3/s2048x3072/ad5469f6d5f1d88447c2872fafd19ad3906b0bdb.jpg',
-      'blog_url': 'youtube.com',
-    },
-    {
-      'blog_name': 'KAK',
-      'blog_img_url':
-          'https://64.media.tumblr.com/3ac39cb04388f6cbd92c62340f10763d/507eb9043a64a789-8a/s96x96u_c1/f8f4dc4fe57c63836a00360ac5c4171bc09b71af.pnj',
-      'blog_bg_url':
-          'https://64.media.tumblr.com/31d08c312828053eda871ef6ce6158cb/507eb9043a64a789-8d/s2048x3072_c7800,48200,67600,81867/999fb2a528e600514669ca6ec402cb125b6935f4.jpg',
-      'blog_url': 'youtube.com',
-    },
-    {
-      'blog_name': 'Storm',
-      'blog_img_url':
-          'https://64.media.tumblr.com/a48f0eda406e341451619fe9f04c33f8/d3bf61f3bf912169-dc/s96x96u_c1/27ec1dd59dfac2ff7a040e734e2c240a433ce83f.jpg',
-      'blog_bg_url':
-          'https://64.media.tumblr.com/83f27684eeb6831a76f8a8c1e6d5d9f4/d3bf61f3bf912169-ed/s2048x3072_c6780,8114,93179,91815/6cf1fdb16c5b5409a1b2f402e1db7edf80968140.jpg',
-      'blog_url': 'youtube.com',
-    },
-    {
-      'blog_name': 'Bruh why is my name so long',
-      'blog_img_url':
-          'https://64.media.tumblr.com/07b377bffb90d3226d18be619383dfa5/fdced055d48f80f2-3a/s96x96u_c1/1df25d1bfd780ccef2686dd793a6e6f5722236c0.jpg',
-      'blog_bg_url':
-          'https://64.media.tumblr.com/8ed48312e7af1551b5750278439cbd3d/fdced055d48f80f2-ed/s2048x3072_c0,7692,100000,88064/46ed7e90fcea44eaae57e3e550e31791f262fd5e.jpg',
-      'blog_url': 'youtube.com',
-    },
   ];
 
   final tryThesePostsMockData = [
