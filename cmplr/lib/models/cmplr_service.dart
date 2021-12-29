@@ -926,16 +926,18 @@ class CMPLRService {
       }
     },
     GetURIs.followingBlogs: {
-      'blogs': [
-        {
-          'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
-          'avatar':
-              'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
-          'avatar_shape': 'circle',
-          'blog_name': 'Mostafa',
-          'title': 'Mohamed'
-        },
-      ],
+      'response': {
+        'blogs': [
+          {
+            'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
+            'avatar':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'title': 'Mohamed'
+          },
+        ],
+      }
     },
     GetURIs.conversationMessages: {
       "messages": [
@@ -1442,7 +1444,7 @@ class CMPLRService {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       final res = await _mockData[backendURI];
-      return http.Response(jsonEncode(res), res['meta']['status_code']);
+      return http.Response(jsonEncode(res), requestSuccess);
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
@@ -1504,7 +1506,7 @@ class CMPLRService {
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1000));
-      final res = await _mockData['/blog/info'];
+      final res = await _mockData[GetURIs.blogInfo];
       return http.Response(jsonEncode(res), 200);
     } else {
       // ignore: prefer_final_locals
