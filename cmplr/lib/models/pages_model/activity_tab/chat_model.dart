@@ -65,10 +65,11 @@ class Message {
 }
 
 class ModelChatModule {
-  static final conversationsList = <Message>[];
-  static final conversationMessages = <Message>[];
+  static List<Message> conversationsList = <Message>[];
+  static List<Message> conversationMessages = <Message>[];
 
   static Future<void> getConversationsList() async {
+    conversationsList = <Message>[];
     // the chat menu from outside -> URI: messaging
     final response = await CMPLRService.get(GetURIs.conversationsList,
         {'me': User.userMap['primary_blog_id'].toString()});
@@ -86,6 +87,7 @@ class ModelChatModule {
   }
 
   static Future<void> getConversationMessages(int other_blog_id) async {
+    conversationMessages = <Message>[];
     // inside the chat itself -> URI: conversation
     final response = await CMPLRService.get(GetURIs.conversationMessages, {
       'me': User.userMap['primary_blog_id'].toString(),
@@ -105,8 +107,11 @@ class ModelChatModule {
     }
   }
 
-  static Future<void> sendMessage(String message) async {
-    final response = await CMPLRService.sendMessage(
-        PostURIs.sendMessage, {'Content': message});
+  static Future<void> sendMessage(int other_blog_id, String message) async {
+    final response = await CMPLRService.sendMessage(PostURIs.sendMessage, {
+      'me': User.userMap['primary_blog_id'].toString(),
+      'to': other_blog_id.toString(),
+      'Content': message
+    });
   }
 }

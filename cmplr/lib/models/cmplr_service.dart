@@ -1469,7 +1469,8 @@ class CMPLRService {
     if (Flags.mock) {
       return Future.value(http.Response(jsonEncode({}), insertSuccess));
     } else {
-      final uri = Uri.parse(apiIp + backendURI);
+      final uri = Uri.parse(
+          apiIp + backendURI + '/' + params['me'] + '/' + params['to']);
 
       return http.post(uri,
           headers: getHeader,
