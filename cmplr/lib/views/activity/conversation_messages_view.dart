@@ -50,9 +50,9 @@ class _ChatScreenState extends State<ChatScreen> {
         widget.user.blog_id);
     final second = max(int.parse(User.userMap['primary_blog_id'].toString()),
         widget.user.blog_id);
-    print('chat-' + first.toString() + '-' + second.toString());
-
-    bindEvent('chat-' + first.toString() + '-' + second.toString());
+    final channel = 'chat-' + first.toString() + '-' + second.toString();
+    print(channel);
+    bindEvent(channel);
     super.initState();
     ModelChatModule.getConversationMessages(widget.user.blog_id)
         .then((dummy) => {
