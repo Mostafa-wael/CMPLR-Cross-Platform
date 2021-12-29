@@ -28,16 +28,18 @@ class _ChatScreenState extends State<ChatScreen> {
       final encodedRes = jsonDecode(data);
       print('Pusher is Called');
 
-      ModelChatModule.conversationMessages.add(Message(
-        sender: ChatUser(
-          blog_id: int.parse(encodedRes['sender_id']),
-          blog_url: '',
-          blog_name: '',
-          avatar: '',
-        ),
-        text: encodedRes['message']['content'],
-        isRead: encodedRes['message']['is_read'],
-      ));
+      ModelChatModule.conversationMessages.insert(
+          0,
+          Message(
+            sender: ChatUser(
+              blog_id: int.parse(encodedRes['sender_id']),
+              blog_url: '',
+              blog_name: '',
+              avatar: '',
+            ),
+            text: encodedRes['message']['content'],
+            isRead: encodedRes['message']['is_read'],
+          ));
       setState(() {});
     });
   }
@@ -50,9 +52,9 @@ class _ChatScreenState extends State<ChatScreen> {
         widget.user.blog_id);
     final second = max(int.parse(User.userMap['primary_blog_id'].toString()),
         widget.user.blog_id);
-    print('chat-' + first.toString() + '-' + second.toString());
-
-    bindEvent('chat-' + first.toString() + '-' + second.toString());
+    final channel = 'chat-' + first.toString() + '-' + second.toString();
+    print(channel);
+    bindEvent(channel);
     super.initState();
     ModelChatModule.getConversationMessages(widget.user.blog_id)
         .then((dummy) => {
