@@ -150,6 +150,17 @@ class NotesController extends GetxController
     // commentTextFieldFocusNode.requestFocus();
   }
 
+  void followBlog(int index) async {
+    if (notes?[3] != null) {
+      if (notes![3][index].followed.value) {
+        await _notesModel.unfollowBlog(notes![3][index].blogName);
+      } else {
+        await _notesModel.followBlog(notes![3][index].blogName);
+      }
+      notes![3][index].followed.value = !notes![3][index].followed.value;
+    }
+  }
+
   Future<void> timelessRefreshScreen() async {
     dataReloaded = true;
     update();

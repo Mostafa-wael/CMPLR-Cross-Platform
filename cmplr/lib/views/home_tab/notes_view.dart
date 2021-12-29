@@ -703,10 +703,7 @@ class Notes extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      // TODO: send a post request to follow the user
-                      print('Follow button pressed');
-                      controller.notes?[3][index].followed.value =
-                          !controller.notes![3][index].followed.value;
+                      controller.followBlog(index);
                     },
                     child: Container(
                         height: Sizing.blockSizeVertical * 6.75,
