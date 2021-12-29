@@ -255,7 +255,7 @@ class PostItem extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               text,
-              style: TextStyle(fontSize: Sizing.blockSize * 3.89),
+              style: TextStyle(fontSize: Sizing.fontSize * 3.89),
             )),
       ),
     );

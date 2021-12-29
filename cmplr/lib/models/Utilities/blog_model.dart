@@ -24,7 +24,7 @@ class Blog {
         avatarShape: json['avatar_shape'],
         blogName: json['blog_name'],
         profileTitle: json['title'],
-        blogURL: json['blog_url'],
+        blogURL: json['url'],
         following: followingValue);
   }
 }

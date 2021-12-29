@@ -1191,7 +1191,7 @@ class CMPLRService {
       'response': {
         'blogs': [
           {
-            'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
+            'url': 'http:\/\/localhost:8000\/api\/blog\/ut',
             'avatar':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
