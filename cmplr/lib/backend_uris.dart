@@ -69,7 +69,7 @@ class GetURIs {
   static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
   static const String userTheme = '/user_theme';
   static const String followingBlogs = '/user/followings';
-  static const String postByName = '/posts/view/';
+  static const String postByName = '/posts/view';
   static const String userLikes = '/user/likes';
   static const String conversationsList = '/blog/messaging';
   static const String conversationMessages = '/messaging/conversation';

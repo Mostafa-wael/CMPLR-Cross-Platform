@@ -1,8 +1,6 @@
 import '../../controllers/activity/activity_activity_controller.dart';
 import 'package:get/get.dart';
 
-import '../../utilities/custom_widgets/activity_filter_row.dart';
-
 import 'package:flutter_html/shims/dart_ui_real.dart';
 
 import '../../utilities/sizing/sizing.dart';

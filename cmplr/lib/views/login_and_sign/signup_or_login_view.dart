@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';

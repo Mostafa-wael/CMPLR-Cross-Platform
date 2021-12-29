@@ -59,7 +59,10 @@ Widget buildMainView(PostFeedController controller) {
           physics: const ClampingScrollPhysics(),
           itemCount: controller.posts.length,
           itemBuilder: (context, index) {
-            return controller.posts[index];
+            if (index >= controller.posts.length) {
+              return controller.posts[0];
+            } else
+              return controller.posts[index];
           }),
     ),
   );
