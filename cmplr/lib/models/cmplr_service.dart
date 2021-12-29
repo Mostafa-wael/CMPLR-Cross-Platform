@@ -5,8 +5,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import '../utilities/user.dart';
-import 'package:get/get_connect.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:get_storage/get_storage.dart';
 
@@ -91,6 +89,270 @@ class CMPLRService {
         'Comics',
         'Fashion'
       ]
+    },
+    GetURIs.postByName: {
+      "meta": {"status_code": 200, "msg": "Success"},
+      "response": {
+        "post": [
+          {
+            "post": {
+              "post_id": 1,
+              "type": "quotes",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "private",
+              "content":
+                  "<img src='https://avatars.githubusercontent.com/u/56788883?v=4'><h1>Alice called after it; and while she was peering.<\/h1><p>In ut sed voluptatum aut vitae eum. Iste ut quo consequatur dolorem ratione quae. Ipsum ut velit esse voluptatem voluptas ipsum non deleniti.<\/p><p>Error sunt veritatis optio ut tenetur. Sunt accusamus tenetur voluptatem totam omnis aut eum.<\/p><p>Praesentium itaque autem dolorem reiciendis. Quasi qui illum cum asperiores dolorum ex similique dolor. Hic aut odio alias quibusdam optio. Expedita eligendi dolorem dolore dolorem.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "BCAkeGl4zX",
+              "tags": ["summer", "winter"],
+              "is_liked": true,
+              "is_mine": true,
+            },
+            "blog": {
+              "blog_id": 11,
+              "blog_name": "quis",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 11,
+              "type": "videos",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "draft",
+              "content":
+                  "<h1>Alice, very loudly and decidedly, and he checked.<\/h1><p>Nihil quia aspernatur qui voluptatem architecto dicta debitis. Quas qui modi error molestiae autem debitis. Quia doloribus error et tempore libero voluptatibus.<\/p><p>Sunt autem amet voluptatum doloribus. Facilis quis non voluptas voluptatum. Tempora dolores praesentium officia eum aut nam et.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "HqQeXGEuJp",
+              "tags": ["summer", "winter"],
+              "is_liked": false,
+              "is_mine": true,
+            },
+            "blog": {
+              "blog_id": 11,
+              "blog_name": "quis",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 8,
+              "type": "chats",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "publish",
+              "content":
+                  "<h1>While the Panther were sharing a pie--' [later.<\/h1><p>Dolore facilis ut voluptate omnis consequatur. Eius iusto quam dolores sint. Est laboriosam nam numquam voluptas sunt blanditiis quia. Non mollitia et ipsa veritatis.<\/p><p>Minima aut laboriosam ut omnis accusantium dolores alias. Rerum in cupiditate doloribus libero eum. Atque velit dolorem ea deleniti voluptas ut corrupti.<\/p><p>Officia provident impedit hic saepe. Sapiente occaecati maiores iste. Fugiat quia tenetur fugit. Rem dolores officiis libero facilis magni ut veniam.<\/p><p>Quaerat nihil a sunt inventore dolores. Aperiam laborum facilis ipsum consectetur sunt. Excepturi autem consequatur ut sed. Iste fugit iure molestias. Sequi exercitationem ea voluptatibus corrupti unde recusandae pariatur.<\/p><p>Nihil laboriosam non eaque sequi. Iusto veniam minus eum commodi consequatur. Quam eos doloremque optio nisi eum similique. At in qui ea officia a vel provident.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "xlfsmD2x3H",
+              "tags": ["summer", "winter"],
+              "is_liked": false,
+              "is_mine": true,
+            },
+            "blog": {
+              "blog_id": 11,
+              "blog_name": "placeat",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 12,
+              "type": "text",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "draft",
+              "content":
+                  "<h1>Alice, 'a great girl like you,' (she might well.<\/h1><p>Quis velit veniam explicabo ducimus repellendus quia vel. Eveniet dicta velit nesciunt sit officiis. Aliquid soluta necessitatibus reiciendis aut. Commodi et sunt nesciunt rerum.<\/p><p>Sed voluptas assumenda est. Est quos est quas fugit. Consectetur qui sapiente dicta neque mollitia vero.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "LFyeAIKqW8",
+              "tags": ["summer", "winter"],
+              "is_liked": false,
+              "is_mine": true,
+            },
+            "blog": {
+              "blog_id": 11,
+              "blog_name": "quis",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 13,
+              "type": "photos",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "private",
+              "content":
+                  "<h1>Dormouse went on, half to itself, half to.<\/h1><p>Aut eveniet dolorem error qui possimus. Accusantium quasi aperiam at sunt aspernatur provident. Culpa sunt harum et eum quia quae rerum quod. Et facilis nisi voluptas architecto.<\/p><p>Ut at aut eaque voluptas. Ut rerum iure eaque aut itaque ut non. Vel qui fugiat quisquam. Tempora asperiores magnam similique dolorum illo vero. Explicabo excepturi repellendus occaecati sit repudiandae provident.<\/p><p>Aut libero ex sit odit accusantium magnam. Possimus exercitationem recusandae animi doloribus. Et dignissimos labore id dolores nihil recusandae ea. Labore odio reiciendis consectetur nihil consequuntur cupiditate doloremque.<\/p><p>Facilis nulla quos nihil ullam eius animi quisquam. Et quaerat enim quia culpa aut. Ipsa qui facere blanditiis dolores perspiciatis nemo debitis harum. Voluptas saepe eum et qui. Soluta non autem dignissimos atque non perferendis vitae.<\/p><p>Omnis est et qui eum vel dolores. Similique nihil laborum incidunt corporis ea sit. Voluptatem deserunt quo consequuntur ipsum. Voluptatem omnis et provident nam commodi voluptate culpa.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "RmM28BSiHQ",
+              "tags": ["summer", "winter"],
+              "is_liked": false,
+              "is_mine": true,
+            },
+            "blog": {
+              "blog_id": 11,
+              "blog_name": "placeat",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+        ]
+      }
+    },
+    GetURIs.userLikes: {
+      "meta": {"status_code": 200, "msg": "Success"},
+      "response": {
+        "post": [
+          {
+            "post": {
+              "post_id": 1,
+              "type": "quotes",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "private",
+              "content":
+                  "<img src='https://avatars.githubusercontent.com/u/56788883?v=4'><h1>Alice called after it; and while she was peering.<\/h1><p>In ut sed voluptatum aut vitae eum. Iste ut quo consequatur dolorem ratione quae. Ipsum ut velit esse voluptatem voluptas ipsum non deleniti.<\/p><p>Error sunt veritatis optio ut tenetur. Sunt accusamus tenetur voluptatem totam omnis aut eum.<\/p><p>Praesentium itaque autem dolorem reiciendis. Quasi qui illum cum asperiores dolorum ex similique dolor. Hic aut odio alias quibusdam optio. Expedita eligendi dolorem dolore dolorem.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "BCAkeGl4zX",
+              "tags": ["summer", "winter"],
+              "is_liked": true,
+              "is_mine": false,
+            },
+            "blog": {
+              "blog_id": 13,
+              "blog_name": "quis",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 11,
+              "type": "videos",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "draft",
+              "content":
+                  "<h1>Alice, very loudly and decidedly, and he checked.<\/h1><p>Nihil quia aspernatur qui voluptatem architecto dicta debitis. Quas qui modi error molestiae autem debitis. Quia doloribus error et tempore libero voluptatibus.<\/p><p>Sunt autem amet voluptatum doloribus. Facilis quis non voluptas voluptatum. Tempora dolores praesentium officia eum aut nam et.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "HqQeXGEuJp",
+              "tags": ["summer", "winter"],
+              "is_liked": true,
+              "is_mine": false,
+            },
+            "blog": {
+              "blog_id": 16,
+              "blog_name": "quis",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 8,
+              "type": "chats",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "publish",
+              "content":
+                  "<h1>While the Panther were sharing a pie--' [later.<\/h1><p>Dolore facilis ut voluptate omnis consequatur. Eius iusto quam dolores sint. Est laboriosam nam numquam voluptas sunt blanditiis quia. Non mollitia et ipsa veritatis.<\/p><p>Minima aut laboriosam ut omnis accusantium dolores alias. Rerum in cupiditate doloribus libero eum. Atque velit dolorem ea deleniti voluptas ut corrupti.<\/p><p>Officia provident impedit hic saepe. Sapiente occaecati maiores iste. Fugiat quia tenetur fugit. Rem dolores officiis libero facilis magni ut veniam.<\/p><p>Quaerat nihil a sunt inventore dolores. Aperiam laborum facilis ipsum consectetur sunt. Excepturi autem consequatur ut sed. Iste fugit iure molestias. Sequi exercitationem ea voluptatibus corrupti unde recusandae pariatur.<\/p><p>Nihil laboriosam non eaque sequi. Iusto veniam minus eum commodi consequatur. Quam eos doloremque optio nisi eum similique. At in qui ea officia a vel provident.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "xlfsmD2x3H",
+              "tags": ["summer", "winter"],
+              "is_liked": true,
+              "is_mine": false,
+            },
+            "blog": {
+              "blog_id": 18,
+              "blog_name": "placeat",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 12,
+              "type": "text",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "draft",
+              "content":
+                  "<h1>Alice, 'a great girl like you,' (she might well.<\/h1><p>Quis velit veniam explicabo ducimus repellendus quia vel. Eveniet dicta velit nesciunt sit officiis. Aliquid soluta necessitatibus reiciendis aut. Commodi et sunt nesciunt rerum.<\/p><p>Sed voluptas assumenda est. Est quos est quas fugit. Consectetur qui sapiente dicta neque mollitia vero.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "LFyeAIKqW8",
+              "tags": ["summer", "winter"],
+              "is_liked": true,
+              "is_mine": true,
+            },
+            "blog": {
+              "blog_id": 21,
+              "blog_name": "quis",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+          {
+            "post": {
+              "post_id": 13,
+              "type": "photos",
+              "notes_count": 200,
+              "reblogKey": "sDFSDFSDfWefWEfwefwefbhFGhGkFlyFU",
+              "state": "private",
+              "content":
+                  "<h1>Dormouse went on, half to itself, half to.<\/h1><p>Aut eveniet dolorem error qui possimus. Accusantium quasi aperiam at sunt aspernatur provident. Culpa sunt harum et eum quia quae rerum quod. Et facilis nisi voluptas architecto.<\/p><p>Ut at aut eaque voluptas. Ut rerum iure eaque aut itaque ut non. Vel qui fugiat quisquam. Tempora asperiores magnam similique dolorum illo vero. Explicabo excepturi repellendus occaecati sit repudiandae provident.<\/p><p>Aut libero ex sit odit accusantium magnam. Possimus exercitationem recusandae animi doloribus. Et dignissimos labore id dolores nihil recusandae ea. Labore odio reiciendis consectetur nihil consequuntur cupiditate doloremque.<\/p><p>Facilis nulla quos nihil ullam eius animi quisquam. Et quaerat enim quia culpa aut. Ipsa qui facere blanditiis dolores perspiciatis nemo debitis harum. Voluptas saepe eum et qui. Soluta non autem dignissimos atque non perferendis vitae.<\/p><p>Omnis est et qui eum vel dolores. Similique nihil laborum incidunt corporis ea sit. Voluptatem deserunt quo consequuntur ipsum. Voluptatem omnis et provident nam commodi voluptate culpa.<\/p>",
+              "date": "Monday, 20-Dec-21 19:39:59 UTC",
+              "source_content": "RmM28BSiHQ",
+              "tags": ["summer", "winter"],
+              "is_liked": true,
+              "is_mine": false,
+            },
+            "blog": {
+              "blog_id": 24,
+              "blog_name": "placeat",
+              "avatar":
+                  "https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png",
+              "avatar_shape": "circle",
+              "replies": "everyone",
+              "follower": false
+            }
+          },
+        ]
+      }
     },
     GetURIs.postFollowing: {
       "meta": {"status_code": 200, "msg": "Success"},
@@ -918,24 +1180,26 @@ class CMPLRService {
             "https://assets.tumblr.com/images/default_avatar/cone_closed_128.png",
         "avatar_shape": "circle",
         "header image":
-            "https://assets.tumblr.com/images/default_header/optica_pattern_02_640.png?_v=b976ee00195b1b7806c94ae285ca46a7",
+            "https://assets.tumblr.com/images/default_header/optica_pattern_11_focused_v3.png?_v=4275fa0865b78225d79970023dde05a1",
         "description": "Test",
-        "background_color": "white",
-        "url": "http://cmplr/1/info", // TODO: Check this
+        "background_color": "black",
+        "url": "http://cmplr/1/info",
         "last_update": "2021-12-27T13:50:56.980364Z",
       }
     },
     GetURIs.followingBlogs: {
-      'blogs': [
-        {
-          'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
-          'avatar':
-              'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
-          'avatar_shape': 'circle',
-          'blog_name': 'Mostafa',
-          'title': 'Mohamed'
-        },
-      ],
+      'response': {
+        'blogs': [
+          {
+            'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
+            'avatar':
+                'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
+            'avatar_shape': 'circle',
+            'blog_name': 'Mostafa',
+            'title': 'Mohamed'
+          },
+        ],
+      }
     },
     GetURIs.conversationMessages: {
       "messages": [
@@ -1097,10 +1361,10 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   // static const String apiIp = 'https://www.cmplr.tech/api';
-  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
-  static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
+  // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1139,6 +1403,10 @@ class CMPLRService {
         return postReply(backendURI, params);
       case PostURIs.resetPassword:
         return forgotPassword(backendURI, params);
+      case PostURIs.sendMessage:
+        return sendMessage(backendURI, params);
+      case PostURIs.followBlog:
+        return followBlog(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1170,7 +1438,7 @@ class CMPLRService {
         return getActivityNotifications(route, params);
       case GetURIs.postByName:
         return getPostByName(
-            route + GetStorage().read('user')['blog_name'], params);
+            route + '/' + GetStorage().read('user')['blog_name'], params);
       case GetURIs.userLikes:
         return getUserLikes(route, params);
       case GetURIs.tagsYouFollow:
@@ -1185,7 +1453,12 @@ class CMPLRService {
         return getConversationMessages(route, params);
       case GetURIs.tryThesePosts:
         return getTryThesePosts(route);
-
+      case GetURIs.followingBlogs:
+        return getFollowingBlogs(route, params);
+      case GetURIs.hashtagPosts:
+        return getHashtagPosts(route, params);
+      case GetURIs.tagInfo:
+        return getTagInfo(route, params);
       default:
         throw Exception('Invalid request backendURI');
     }
@@ -1435,6 +1708,19 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> getHashtagPosts(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[backendURI];
+      return http.Response(jsonEncode(res), requestSuccess);
+    } else {
+      final uri = Uri.parse(apiIp + backendURI + '?tag=${params['tag']}');
+
+      return http.get(uri, headers: getHeader);
+    }
+  }
+
   static Future<http.Response> getConversationsList(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1452,8 +1738,8 @@ class CMPLRService {
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
-      final res = await _mockData[backendURI];
-      return http.Response(jsonEncode(res), res['meta']['status_code']);
+      final res = await _mockData[GetURIs.postByName];
+      return http.Response(jsonEncode(res), requestSuccess);
     } else {
       return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
     }
@@ -1468,15 +1754,33 @@ class CMPLRService {
     } else {
       return http.get(
           Uri.parse(
-              apiIp + backendURI + '/' + params['me'] + '/' + params['me']),
+              apiIp + backendURI + '/' + params['me'] + '/' + params['to']),
           headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> sendMessage(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(
+          apiIp + backendURI + '/' + params['me'] + '/' + params['to']);
+
+      return http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'Content': params['Content'],
+          }));
     }
   }
 
   static Future<http.Response> getUserLikes(
       String backendURI, Map params) async {
     if (Flags.mock) {
-      return http.Response(jsonEncode({}), 200);
+      await Future.delayed(const Duration(milliseconds: 1500));
+      final res = await _mockData[GetURIs.userLikes];
+      return http.Response(jsonEncode(res), requestSuccess);
     } else {
       final tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
@@ -1488,7 +1792,7 @@ class CMPLRService {
   static Future<http.Response> uploadImg(String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1000));
-      return http.Response(jsonEncode({}), 200);
+      return http.Response(jsonEncode({}), 400);
     } else {
       // ignore: prefer_final_locals
       return http.post(Uri.parse(apiIp + backendURI),
@@ -1500,14 +1804,16 @@ class CMPLRService {
       String backendURI, Map params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1000));
-      final res = await _mockData['/blog/info'];
+      final res = await _mockData[GetURIs.blogInfo];
       return http.Response(jsonEncode(res), 200);
     } else {
       // ignore: prefer_final_locals
       var tempHeader = getHeader;
       if (tempHeader['Authorization'] == 'Bearer null')
         tempHeader['Authorization'] = 'Bearer ${GetStorage().read('token')}';
-      return http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      final ret =
+          await http.get(Uri.parse(apiIp + backendURI), headers: tempHeader);
+      return ret;
     }
   }
 
@@ -1518,10 +1824,21 @@ class CMPLRService {
 
       return http.Response(jsonEncode(notesMockData), requestSuccess);
     } else {
-      //${params['post_id']}
-      // TODO: change the 11
       final uri = Uri.parse(apiIp + backendURI)
           .replace(query: 'post_id=${params['post_id']}');
+
+      return http.get(uri, headers: getHeader);
+    }
+  }
+
+  static Future<http.Response> getTagInfo(String backendURI, Map params) async {
+    if (Flags.mock) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+
+      return http.Response(jsonEncode(notesMockData), requestSuccess);
+    } else {
+      final uri =
+          Uri.parse(apiIp + backendURI).replace(query: 'tag=${params['tag']}');
 
       return http.get(uri, headers: getHeader);
     }
@@ -1570,7 +1887,11 @@ class CMPLRService {
 
       return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
     } else {
-      return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.get(uri, headers: getHeader);
+      print(req.statusCode);
+      return req;
     }
   }
 

@@ -3,9 +3,7 @@ import '../../routes.dart';
 import '../../utilities/custom_widgets/trending_now.dart';
 
 import '../../utilities/custom_widgets/horizontal_fetching_list_view.dart';
-import '../../utilities/custom_widgets/text_on_image.dart';
 import '../../controllers/home_tab/explore_controller.dart';
-import '../../utilities/custom_widgets/explore_appbar.dart';
 import 'package:flutter/rendering.dart';
 import '../../utilities/sizing/sizing.dart';
 

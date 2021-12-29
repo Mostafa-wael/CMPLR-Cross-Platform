@@ -1,4 +1,3 @@
-import 'package:get_storage/get_storage.dart';
 import '../home_tab/write_post_controller.dart';
 import '../../views/home_tab/write_post_view.dart';
 
@@ -9,18 +8,18 @@ import '../../utilities/functions.dart' as cmplr_fn;
 
 class HashtagPostsController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  late RxBool hashtagFollowed;
+  RxBool hashtagFollowed = false.obs;
+  String? tagAvatar;
   bool dataReloaded = false;
 
   TabController? _tabController;
   TabController? get tabController => _tabController;
 
-  String tagName;
-
-  HashtagPostsController(this.tagName) {}
+  late String tagName;
 
   @override
   void onInit() {
+    tagName = Get.arguments;
     hashtagFollowed = false.obs;
     _tabController = TabController(length: 2, vsync: this);
     super.onInit();

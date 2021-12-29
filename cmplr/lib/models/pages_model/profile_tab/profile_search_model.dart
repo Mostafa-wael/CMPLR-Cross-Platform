@@ -9,9 +9,18 @@ class ProfileSearchModel {
     final response =
         await CMPLRService.getFollowingBlogs(GetURIs.followingBlogs, {});
     final responseBody = jsonDecode(response.body);
-    for (var i = 0; i < responseBody['blogs'].length; i++) {
-      blogs.add(Blog.fromJson(responseBody['blogs'][i]));
+    for (var i = 0; i < responseBody['response']['blogs'].length; i++) {
+      blogs.add(Blog.fromJson(responseBody['response']['blogs'][i]));
     }
     return blogs;
+  }
+
+  Future<void> followBlog(String blogName) async {
+    await CMPLRService.followBlog(PostURIs.followBlog, {'blogName': blogName});
+  }
+
+  Future<void> unfollowBlog(String blogName) async {
+    await CMPLRService.unfollowBlog(
+        DeleteURIs.unfollowBlog, {'blogName': blogName});
   }
 }

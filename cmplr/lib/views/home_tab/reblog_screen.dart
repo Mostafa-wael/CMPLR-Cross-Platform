@@ -3,8 +3,6 @@ import '../../utilities/custom_widgets/write_post_or_reblog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
-import '../../utilities/external/external.dart';
-import '../../utilities/sizing/sizing.dart';
 
 // TODO: DRAFTS
 class ReblogView extends StatelessWidget {

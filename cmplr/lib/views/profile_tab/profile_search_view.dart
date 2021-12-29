@@ -17,156 +17,167 @@ class ProfileSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<ProfileSearchController>(
+      init: ProfileSearchController(),
+      builder: (controller) => Scaffold(
         body: SafeArea(
-            child: Column(children: [
-      Row(
-        children: [
-          IconButton(
-              onPressed: () {
-                controller.closeSearchPage();
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Theme.of(context).primaryColor,
-              )),
-          SizedBox(
-            width: Sizing.blockSize * 2.5,
-          ),
-          SizedBox(
-            width: Sizing.blockSize * 74,
-            child: TextField(
-              onChanged: (query) {
-                controller.searchQueryChanged();
-              },
-              controller: controller.searchBarController,
-              textInputAction: TextInputAction.search,
-              onSubmitted: (searchQuery) {},
-              cursorColor: Colors.blue,
-              style: TextStyle(
-                  fontSize: Sizing.fontSize * 5,
-                  color: Theme.of(context).primaryColor),
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  prefixIconConstraints: BoxConstraints(
-                      minHeight: Sizing.blockSizeVertical * 6,
-                      minWidth: Sizing.blockSize * 8.65),
-                  contentPadding: EdgeInsets.fromLTRB(
-                      Sizing.blockSize,
-                      Sizing.blockSize * 1.2,
-                      Sizing.blockSize,
-                      Sizing.blockSize * 1.2),
-                  isDense: true,
-                  filled: true,
-                  hintStyle: TextStyle(color: Colors.grey[500]),
-                  hintText: 'Search ${User.blogName}',
-                  fillColor: Theme.of(context).scaffoldBackgroundColor),
-            ),
-          ),
-          Obx(() => Visibility(
-              visible: controller.showClearSearchBarIcon.value,
-              child: IconButton(
-                splashRadius: 24,
-                onPressed: () {
-                  controller.searchBarController.text = '';
-                  controller.searchQueryChanged();
-                },
-                icon: Icon(Icons.close, color: Theme.of(context).primaryColor),
-              )))
-        ],
-      ),
-      Container(
-        color: Colors.white,
-        child: Material(
-          child: InkWell(
-              onTap: () {},
-              child: TabBar(
-                controller: controller.tabController,
-                indicatorColor: Colors.orange,
-                tabs: <Widget>[
-                  Tab(
-                      height: Sizing.blockSizeVertical * 7.5,
-                      child: Text(
-                        'Posts',
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      )),
-                  Tab(
-                      height: Sizing.blockSizeVertical * 7.5,
-                      child: Text(
-                        'Following',
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      )),
-                ],
-              )),
-        ),
-      ),
-      Expanded(
-          child: TabBarView(
-              controller: controller.tabController,
-              children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(children: [
+            Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.all(Sizing.blockSize * 4.5),
-                  child: Text(
-                    'Posts a lot about',
-                    style: TextStyle(fontSize: Sizing.blockSize * 4.5),
+                IconButton(
+                    onPressed: () {
+                      controller.closeSearchPage();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Theme.of(context).primaryColor,
+                    )),
+                SizedBox(
+                  width: Sizing.blockSize * 2.5,
+                ),
+                SizedBox(
+                  width: Sizing.blockSize * 74,
+                  child: TextField(
+                    onChanged: (query) {
+                      controller.searchQueryChanged();
+                    },
+                    controller: controller.searchBarController,
+                    textInputAction: TextInputAction.search,
+                    onSubmitted: (searchQuery) {
+                      controller.submitSearchQuery();
+                    },
+                    cursorColor: Colors.blue,
+                    style: TextStyle(
+                        fontSize: Sizing.fontSize * 5,
+                        color: Theme.of(context).primaryColor),
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        prefixIconConstraints: BoxConstraints(
+                            minHeight: Sizing.blockSizeVertical * 6,
+                            minWidth: Sizing.blockSize * 8.65),
+                        contentPadding: EdgeInsets.fromLTRB(
+                            Sizing.blockSize,
+                            Sizing.blockSize * 1.2,
+                            Sizing.blockSize,
+                            Sizing.blockSize * 1.2),
+                        isDense: true,
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[500]),
+                        hintText: 'Search ${User.blogName}',
+                        fillColor: Theme.of(context).scaffoldBackgroundColor),
                   ),
                 ),
-                Obx(() => Padding(
-                      padding: EdgeInsets.all(Sizing.blockSize * 4.5),
-                      child: Visibility(
-                        visible: controller.showClearSearchBarIcon.value,
-                        child: Row(
-                          children: [
-                            const Icon(Icons.search),
-                            SizedBox(
-                              width: Sizing.blockSize * 7,
-                            ),
-                            SizedBox(
-                              width: Sizing.blockSize * 70,
-                              child: Text(
-                                '${controller.searchQuery}',
-                                style:
-                                    TextStyle(fontSize: Sizing.blockSize * 4.5),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ))
+                Obx(() => Visibility(
+                    visible: controller.showClearSearchBarIcon.value,
+                    child: IconButton(
+                      splashRadius: 24,
+                      onPressed: () {
+                        controller.searchBarController.text = '';
+                        controller.searchQueryChanged();
+                      },
+                      icon: Icon(Icons.close,
+                          color: Theme.of(context).primaryColor),
+                    )))
               ],
             ),
-            FutureBuilder(
-                future: controller.profileSearchModel.getFollowingBlogs(),
-                builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    controller.followingBlogs = snapshot.data ?? [];
-                    controller.showProfiles = List<RxBool>.filled(
-                        controller.followingBlogs!.length, true.obs);
-                    return ListView.builder(
-                        itemCount: controller.followingBlogs!.length,
-                        itemBuilder: (context, index) {
-                          return buildBlogsListTile(
-                              controller.followingBlogs![index],
-                              index,
-                              context);
-                        });
-                  } else {
-                    return const Expanded(
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.purple,
-                        ),
+            Container(
+              color: Colors.white,
+              child: Material(
+                child: InkWell(
+                    onTap: () {},
+                    child: TabBar(
+                      controller: controller.tabController,
+                      indicatorColor: Colors.orange,
+                      tabs: <Widget>[
+                        Tab(
+                            height: Sizing.blockSizeVertical * 7.5,
+                            child: Text(
+                              'Posts',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            )),
+                        Tab(
+                            height: Sizing.blockSizeVertical * 7.5,
+                            child: Text(
+                              'Following',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            )),
+                      ],
+                    )),
+              ),
+            ),
+            Expanded(
+              child:
+                  TabBarView(controller: controller.tabController, children: <
+                      Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(Sizing.blockSize * 4.5),
+                      child: Text(
+                        'Posts a lot about',
+                        style: TextStyle(fontSize: Sizing.blockSize * 4.5),
                       ),
-                    );
-                  }
-                }),
-          ]))
-    ])));
+                    ),
+                    Obx(() => Padding(
+                          padding: EdgeInsets.all(Sizing.blockSize * 4.5),
+                          child: Visibility(
+                            visible: controller.showClearSearchBarIcon.value,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.search),
+                                SizedBox(
+                                  width: Sizing.blockSize * 7,
+                                ),
+                                SizedBox(
+                                  width: Sizing.blockSize * 70,
+                                  child: Text(
+                                    '${controller.searchQuery}',
+                                    style: TextStyle(
+                                        fontSize: Sizing.blockSize * 4.5),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+                FutureBuilder(
+                    future: controller.profileSearchModel.getFollowingBlogs(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        controller.followingBlogs = snapshot.data ?? [];
+                        controller.showProfiles = List<RxBool>.filled(
+                            controller.followingBlogs!.length, true.obs);
+                        return ListView.builder(
+                            itemCount: controller.followingBlogs!.length,
+                            itemBuilder: (context, index) {
+                              return buildBlogsListTile(
+                                  controller.followingBlogs![index],
+                                  index,
+                                  context);
+                            });
+                      } else {
+                        return const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.purple,
+                            ),
+                          ),
+                        );
+                      }
+                    }),
+              ]),
+            )
+          ]),
+        ),
+      ),
+    );
   }
 
   Widget buildBlogsListTile(Blog blog, int index, BuildContext context) {
@@ -254,9 +265,11 @@ class ProfileSearch extends StatelessWidget {
                               color: Colors.transparent,
                               child: InkWell(
                                   onTap: () {
-                                    print('Follow button pressed');
                                     controller.followingBlogs![index].following
                                         .value = true;
+                                    controller.profileSearchModel.followBlog(
+                                        controller
+                                            .followingBlogs![index].blogName);
                                   },
                                   child: Container(
                                     height: Sizing.blockSizeVertical * 6.75,
@@ -306,6 +319,8 @@ class ProfileSearch extends StatelessWidget {
         {
           print(index);
           controller.followingBlogs![index].following.value = false;
+          controller.profileSearchModel
+              .unfollowBlog(controller.followingBlogs![index].blogName);
           break;
         }
     }

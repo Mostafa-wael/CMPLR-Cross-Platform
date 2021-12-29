@@ -1,4 +1,3 @@
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'dart:convert';
 import '../../../backend_uris.dart';
 
@@ -10,8 +9,11 @@ class ModelProfile {
 
   Future<dynamic> getBlogInfo() async {
     final response = await CMPLRService.get(GetURIs.blogInfo, {});
-    final responseBody = jsonDecode(response.body);
-    return responseBody['response'];
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      final responseBody = jsonDecode(response.body);
+      return responseBody?['response'];
+    } else
+      return {};
   }
 
   Future<dynamic> getTheme() async {

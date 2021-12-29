@@ -9,10 +9,13 @@ class PostFeed extends StatelessWidget {
   var physics;
   var controller;
   var postType = '';
-  PostFeed({Key? key, postFeedTypePage}) : super(key: key) {
+  var tag;
+  PostFeed({Key? key, postFeedTypePage, tag}) : super(key: key) {
     postType = postFeedTypePage ?? '';
+    this.tag = tag;
     print('in the view, Post Type is $postType');
-    controller = Get.put(PostFeedController(postFeedTypeFeed: postType));
+    controller =
+        Get.put(PostFeedController(postFeedTypeFeed: postType, tag: tag));
   }
 
   @override
@@ -56,7 +59,10 @@ Widget buildMainView(PostFeedController controller) {
           physics: const ClampingScrollPhysics(),
           itemCount: controller.posts.length,
           itemBuilder: (context, index) {
-            return controller.posts[index];
+            if (index >= controller.posts.length) {
+              return controller.posts[0];
+            } else
+              return controller.posts[index];
           }),
     ),
   );

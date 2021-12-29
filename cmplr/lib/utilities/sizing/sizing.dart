@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Sizing {
   static var width;
   static var height;
@@ -10,7 +8,7 @@ class Sizing {
   // default scaling values
 
   static const _defaultWidth = 410;
-  static const _defaultHeight = 730;
+  //static const _defaultHeight = 730;
 
   static void setFontSize() {
     final difference =

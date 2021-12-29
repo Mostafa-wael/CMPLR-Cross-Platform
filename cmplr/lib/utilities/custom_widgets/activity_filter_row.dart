@@ -1,6 +1,5 @@
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
-import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 class ActivityFilterRow extends StatelessWidget {

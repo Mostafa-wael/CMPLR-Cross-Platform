@@ -31,7 +31,9 @@ class TryThesePosts extends StatelessWidget {
               fontWeight: FontWeight.bold),
         ),
       ),
-      body: PostFeed(),
+      body: PostFeed(
+        postFeedTypePage: '/recommended/posts',
+      ),
     );
   }
 }

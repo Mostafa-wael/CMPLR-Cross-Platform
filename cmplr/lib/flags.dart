@@ -6,4 +6,5 @@ class Flags {
   static bool cleanState = true;
 }
 
+String placeHolderImgPath = 'lib/utilities/assets/logo/logo_icon.png';
 String placeHolderImgUrl = 'https://via.placeholder.com/150';

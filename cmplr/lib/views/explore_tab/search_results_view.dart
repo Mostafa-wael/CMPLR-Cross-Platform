@@ -1,5 +1,4 @@
 import '../../utilities/custom_widgets/custom_widgets.dart';
-import 'package:flutter/gestures.dart';
 
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
@@ -195,10 +194,9 @@ class SearchResultsView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // TODO: Fix this
                     Container(
                       child: PostFeed(
-                        postFeedTypePage: 'dashboard',
+                        postFeedTypePage: '/user/dashboard',
                       ),
                       constraints: BoxConstraints(
                           maxHeight: Sizing.blockSizeVertical * 200),
@@ -207,10 +205,10 @@ class SearchResultsView extends StatelessWidget {
                 ),
               ),
               PostFeed(
-                postFeedTypePage: 'dashboard',
+                postFeedTypePage: '/user/dashboard',
               ),
               PostFeed(
-                postFeedTypePage: 'dashboard',
+                postFeedTypePage: '/user/dashboard',
               ),
               SizedBox(
                 height: Sizing.blockSizeVertical * 50,

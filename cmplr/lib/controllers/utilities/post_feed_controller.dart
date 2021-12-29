@@ -11,10 +11,10 @@ class PostFeedController extends GetxController
   bool _dataReloaded = false;
   RxBool isLoading = true.obs;
 
-  PostFeedController({required String postFeedTypeFeed}) {
+  PostFeedController({required String postFeedTypeFeed, String? tag}) {
     postFeedType = postFeedTypeFeed;
     print('in the controller, postFeedType is $postFeedType');
-    model = ModelPostsFeed(postFeedTypeContoller: postFeedTypeFeed);
+    model = ModelPostsFeed(postFeedTypeContoller: postFeedTypeFeed, tag: tag);
   }
 
   bool get dataReloaded => _dataReloaded;

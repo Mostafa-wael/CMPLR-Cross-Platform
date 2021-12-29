@@ -17,6 +17,7 @@ class PostURIs {
   static const String postReply = '/user/post/reply';
   static const String followBlog = '/user/follow';
   static const String resetPassword = '/forgot_password';
+  static const String sendMessage = '/messaging/conversation';
 
   // URIs just for the switch case.
   // To get the real URI, use the help functions below.
@@ -57,6 +58,7 @@ class GetURIs {
   static const String postStuff =
       '/user/dashboard'; // TODO: add the correct route
   static const String hashtagPosts = '/post/tagged';
+  static const String tagInfo = '/tag/info';
   static const String notes = '/post/notes';
 
   static const String tagsYouFollow = '/following/tags';
@@ -68,8 +70,8 @@ class GetURIs {
   static const String blogInfo = 'blog/info';
   static String getBlogInfo(String blogId) => '/blog/' + blogId + '/info';
   static const String userTheme = '/user_theme';
-  static const String followingBlogs = '/user/following';
-  static const String postByName = '/posts/view/';
+  static const String followingBlogs = '/user/followings';
+  static const String postByName = '/posts/view';
   static const String userLikes = '/user/likes';
   static const String conversationsList = '/blog/messaging';
   static const String conversationMessages = '/messaging/conversation';
