@@ -1183,6 +1183,8 @@ class CMPLRService {
         return getConversationMessages(route, params);
       case GetURIs.tryThesePosts:
         return getTryThesePosts(route);
+      case GetURIs.followingBlogs:
+        return getFollowingBlogs(route, params);
 
       default:
         throw Exception('Invalid request backendURI');
@@ -1503,8 +1505,6 @@ class CMPLRService {
 
       return http.Response(jsonEncode(notesMockData), requestSuccess);
     } else {
-      //${params['post_id']}
-      // TODO: change the 11
       final uri = Uri.parse(apiIp + backendURI)
           .replace(query: 'post_id=${params['post_id']}');
 
@@ -1555,7 +1555,11 @@ class CMPLRService {
 
       return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
     } else {
-      return http.Response(jsonEncode(_mockData[backendURI]), requestSuccess);
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.get(uri, headers: getHeader);
+      print(req.statusCode);
+      return req;
     }
   }
 
