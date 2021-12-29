@@ -396,39 +396,36 @@ class ProfileView extends StatelessWidget {
                           forceElevated: innerBoxIsScrolled,
                           bottom: TabBar(
                             indicatorColor:
-                                (controller.backgroundColor == Colors.blue)
-                                    ? Colors.black
-                                    : Colors.blue,
+                                (controller.backgroundColor == Colors.black)
+                                    ? Colors.white
+                                    : Colors.black,
                             tabs: <Tab>[
                               Tab(
-                                child: Text(
-                                  'Posts',
-                                  style: TextStyle(
+                                child: Text('Posts',
+                                    style: TextStyle(
                                       color: (controller.backgroundColor ==
-                                              Colors.blue)
+                                              Colors.black)
                                           ? Colors.white
-                                          : Colors.blue),
-                                ),
+                                          : Colors.black,
+                                    )),
                               ),
                               Tab(
-                                child: Text(
-                                  'Likes',
-                                  style: TextStyle(
+                                child: Text('Likes',
+                                    style: TextStyle(
                                       color: (controller.backgroundColor ==
-                                              Colors.blue)
+                                              Colors.black)
                                           ? Colors.white
-                                          : Colors.blue),
-                                ),
+                                          : Colors.black,
+                                    )),
                               ),
                               Tab(
-                                child: Text(
-                                  'Following',
-                                  style: TextStyle(
+                                child: Text('Following',
+                                    style: TextStyle(
                                       color: (controller.backgroundColor ==
-                                              Colors.blue)
+                                              Colors.black)
                                           ? Colors.white
-                                          : Colors.blue),
-                                ),
+                                          : Colors.black,
+                                    )),
                               ),
                             ],
                           ),
@@ -528,7 +525,7 @@ class ProfileView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: Sizing.blockSize * 4.2,
                             fontWeight: FontWeight.w500,
-                            color: Theme.of(context).primaryColor),
+                            color: Get.theme.primaryColor),
                       ),
                       Text(
                         blog.profileTitle,
@@ -537,7 +534,7 @@ class ProfileView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: Sizing.blockSize * 4.2,
                             fontWeight: FontWeight.w400,
-                            color: Theme.of(context).primaryColor),
+                            color: Get.theme.primaryColor),
                       ),
                     ],
                   ),

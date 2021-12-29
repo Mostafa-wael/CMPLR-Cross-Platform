@@ -316,11 +316,11 @@ class EditProfileView extends StatelessWidget {
                     },
                     body: TabBarView(
                       children: <Widget>[
-                        Container(
-                          color: Colors.red,
+                        PostFeed(
+                          postFeedTypePage: GetURIs.postByName,
                         ),
-                        Container(
-                          color: Colors.green,
+                        PostFeed(
+                          postFeedTypePage: GetURIs.userLikes,
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),

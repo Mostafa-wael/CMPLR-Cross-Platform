@@ -1097,10 +1097,10 @@ class CMPLRService {
   static const insertSuccess = 201;
 
   // static const String apiIp = 'https://www.cmplr.tech/api';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
+  // static const String apiIp = 'https://www.beta.cmplr.tech/api';
   //static const String apiIp = 'http://5717-197-46-249-92.ngrok.io/api';
   // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
-  // static const String apiIp = 'https://75fe-41-34-251-247.ngrok.io/api';`
+  static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -1137,6 +1137,8 @@ class CMPLRService {
         return uploadImg(backendURI, params);
       case PostURIs.postReply:
         return postReply(backendURI, params);
+      case PostURIs.resetPassword:
+        return forgotPassword(backendURI, params);
       default:
         throw Exception('Invalid request route');
     }
@@ -1223,6 +1225,19 @@ class CMPLRService {
   }
 
   static Future<http.Response> signupWithGoogle(
+      String backendURI, Map params) async {
+    if (Flags.mock) {
+      return http.Response(jsonEncode({}), 200);
+    } else {
+      return http.post(
+        Uri.parse(apiIp + backendURI),
+        headers: postHeader,
+        body: jsonEncode(params),
+      );
+    }
+  }
+
+  static Future<http.Response> forgotPassword(
       String backendURI, Map params) async {
     if (Flags.mock) {
       return http.Response(jsonEncode({}), 200);

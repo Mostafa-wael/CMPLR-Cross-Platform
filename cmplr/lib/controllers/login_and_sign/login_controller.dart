@@ -175,6 +175,10 @@ class LoginController extends GetxController {
     update();
   }
 
+  Future<dynamic> resetPassword() async {
+    final response = _model.resetPassword(emailController.text);
+  }
+
   /// This method navigates to post forgot password screen where
   /// the user is informed that an email was sent to them
   Future<void> sendResetEmail() async {
@@ -186,7 +190,7 @@ class LoginController extends GetxController {
         // "That email doesn't have a Tumblr account. Sign up now?"
       }
     } else {
-      // TODO: Send email
+      resetPassword();
       Get.off(
         const PostForgotPassword(),
         transition: Transition.noTransition,

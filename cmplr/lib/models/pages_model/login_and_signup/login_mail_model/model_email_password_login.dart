@@ -49,6 +49,15 @@ class ModelEmailPasswordLogin {
     }
   }
 
+  Future<dynamic> resetPassword(email) async {
+    final response = await CMPLRService.forgotPassword(PostURIs.resetPassword, {
+      'email': email,
+    });
+    final Map responseMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    return responseMap;
+  }
+
   Future<List> loginGoogle(token) async {
     final response =
         await CMPLRService.post(PostURIs.loginGoogle, {'token': token});
