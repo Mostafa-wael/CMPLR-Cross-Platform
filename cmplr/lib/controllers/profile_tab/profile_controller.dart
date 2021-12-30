@@ -324,6 +324,8 @@ class ProfileController extends GetxController
     }
   }
 
+  /// Updates all controllers holding a widget that uses the theme
+  /// If your widget / page uses the global [Get.theme], please add it here.
   void rebuildViews() {
     try {
       Get.find<MasterPageController>().update();
