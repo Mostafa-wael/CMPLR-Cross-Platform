@@ -1,6 +1,6 @@
 /// Holds global flags used for mocking and erasing persisent storage.
 class Flags {
-  static bool mock = true;
+  static bool mock = false;
 
   // Clears persistent data on app launch.
   // WARNING: MAKE SURE YOU UNDERSTAND WHAT'S GOING TO BE ERASED
