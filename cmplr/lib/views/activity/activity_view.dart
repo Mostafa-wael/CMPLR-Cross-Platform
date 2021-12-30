@@ -74,6 +74,7 @@ class ActivityView extends StatelessWidget {
     return DefaultTabController(
       length: _tabs.length,
       child: Scaffold(
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
         appBar: AppBar(
           actions: [
             Padding(

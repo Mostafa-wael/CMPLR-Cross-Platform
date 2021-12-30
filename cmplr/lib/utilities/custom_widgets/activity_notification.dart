@@ -1,3 +1,5 @@
+import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
+
 import '../../views/profile_tab/profile_view.dart';
 import '../../flags.dart';
 import '../sizing/sizing.dart';
@@ -48,7 +50,12 @@ class ActivityNotification extends StatelessWidget {
                   horizontal: Sizing.blockSize * 2,
                   vertical: Sizing.blockSizeVertical * 2),
               child: Expanded(
-                child: Text([notif.fromBlogName, notif.type].join(' ')),
+                child: Text(
+                  [notif.fromBlogName, notif.type].join(' '),
+                  style: TextStyle(
+                    color: Get.theme.textTheme.bodyText1?.color,
+                  ),
+                ),
               ),
             ),
             onTap: goToYourOwnProfile,

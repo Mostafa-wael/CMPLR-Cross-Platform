@@ -58,9 +58,18 @@ class CMPLRTheme {
     ),
   );
 
+  static IconThemeData lightIconTheme = const IconThemeData(
+    color: Colors.grey,
+  );
+
+  static IconThemeData darkIconTheme = const IconThemeData(
+    color: Colors.white,
+  );
+
   static ThemeData trueBlue() {
     return ThemeData(
-        primaryColor: Colors.black,
+        iconTheme: lightIconTheme,
+        primaryColor: Colors.white,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(color: Colors.black),
@@ -77,14 +86,15 @@ class CMPLRTheme {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           selectedItemColor: Colors.white,
         ),
-        textTheme: darkTextTheme,
+        textTheme: lightTextTheme,
         scaffoldBackgroundColor: Colors.white,
         secondaryHeaderColor: Colors.blue[700]);
   }
 
   static ThemeData darkTheme() {
     return ThemeData(
-        primaryColor: Colors.white,
+        iconTheme: darkIconTheme,
+        primaryColor: Colors.black,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(color: Colors.white),

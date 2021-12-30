@@ -52,7 +52,10 @@ class Message {
           )
         : Message(
             sender: ChatUser(
-              blog_id: json['messages'][index]['from_blog_id'],
+              blog_id:
+                  json['messages'][index]['from_blog_id'].runtimeType == int
+                      ? json['messages'][index]['from_blog_id']
+                      : int.tryParse(json['messages'][index]['from_blog_id']),
               blog_url: json['blog_data']['url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],

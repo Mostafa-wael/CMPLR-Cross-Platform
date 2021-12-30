@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:get/get.dart';
+
 import '../sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +58,9 @@ class TrendingRow extends StatelessWidget {
                       Text(
                         trendName,
                         textScaleFactor: 1.2,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Get.theme.textTheme.bodyText1?.color,
+                            fontWeight: FontWeight.bold),
                       ),
                       TextButton(
                         onPressed: () {

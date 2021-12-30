@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 import 'dart:math';
 import 'package:html/parser.dart' as parser;
+import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import '../../models/pages_model/explore_tab/explore_model.dart';
 import '../../views/views.dart';
@@ -20,7 +21,7 @@ import 'dart:math' as math;
 /// Manages the fetching and holding of data for the explore tab.
 class ExploreController extends GetxController {
   // Helper parameters for easy tuning of widgets
-  static const elementWidthPercentage = 30.0;
+  static double elementWidthPercentage = 32.0;
   final tagsYouFollowHeight = Sizing.blockSizeVertical * 10.0;
   final checkOutTheseTagsHeight = Sizing.blockSizeVertical * 21;
   final checkOutTheseBlogsHeight = Sizing.blockSizeVertical * 20;
@@ -241,7 +242,12 @@ class ExploreController extends GetxController {
       for (final trendTag in item['trend_tags']) {
         trendingTags.add(Padding(
           padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-          child: Text(trendTag),
+          child: Text(
+            trendTag,
+            style: TextStyle(
+              color: Get.theme.textTheme.bodyText1?.color,
+            ),
+          ),
         ));
       }
 

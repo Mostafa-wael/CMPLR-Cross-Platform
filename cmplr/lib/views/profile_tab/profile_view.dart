@@ -27,6 +27,7 @@ class ProfileView extends StatelessWidget {
               return DefaultTabController(
                 length: 3,
                 child: Scaffold(
+                  backgroundColor: Get.theme.scaffoldBackgroundColor,
                   body: NestedScrollView(
                     headerSliverBuilder:
                         (BuildContext context, bool innerBoxIsScrolled) {

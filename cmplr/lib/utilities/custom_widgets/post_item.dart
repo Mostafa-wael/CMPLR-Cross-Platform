@@ -86,7 +86,7 @@ class PostItem extends StatelessWidget {
           '${name}',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
+            color: Get.theme.textTheme.bodyText1?.color,
           ),
         ),
       ),
@@ -106,6 +106,9 @@ class PostItem extends StatelessWidget {
       child: SingleChildScrollView(
         child: Html(
           data: '${postData}',
+          style: {
+            '*': Style(color: Get.theme.textTheme.bodyText1?.color),
+          },
         ),
       ),
       fit: BoxFit.fill,
@@ -167,15 +170,14 @@ class PostItem extends StatelessWidget {
           children: [
             IconButton(
               key: ValueKey('${prefix}_postShare_${index.toString()}'),
-              icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.share, color: Get.theme.iconTheme.color),
               onPressed: () {
                 shareMenu(null, controller, context, profilePhoto, name);
               },
             ),
             IconButton(
               key: ValueKey('${prefix}_postComments_${index.toString()}'),
-              icon: Icon(CustomIcons.comment,
-                  color: Theme.of(context).primaryColor),
+              icon: Icon(CustomIcons.comment, color: Get.theme.iconTheme.color),
               onPressed: () {
                 controller.openNotes(this);
                 print('Notes clicked');
@@ -183,8 +185,7 @@ class PostItem extends StatelessWidget {
             ),
             IconButton(
               key: ValueKey('${prefix}_postLike_${index.toString()}'),
-              icon: Icon(CustomIcons.reblog,
-                  color: Theme.of(context).primaryColor),
+              icon: Icon(CustomIcons.reblog, color: Get.theme.iconTheme.color),
               onPressed: () {
                 controller.reblog(this);
                 print('reblog clicked');
@@ -193,7 +194,7 @@ class PostItem extends StatelessWidget {
             Obx(() => IconButton(
                   icon: Icon(
                       isLiked.value ? Icons.favorite : CupertinoIcons.heart,
-                      color: Theme.of(context).primaryColor),
+                      color: Get.theme.iconTheme.color),
                   onPressed: () {
                     isLiked.value = !isLiked.value;
                     controller.loveClicked(
