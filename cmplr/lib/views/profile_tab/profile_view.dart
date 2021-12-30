@@ -476,9 +476,11 @@ class ProfileView extends StatelessWidget {
                       children: <Widget>[
                         PostFeed(
                           postFeedTypePage: GetURIs.postByName,
+                          prefix: 'ProfileViewPosts',
                         ),
                         PostFeed(
                           postFeedTypePage: GetURIs.userLikes,
+                          prefix: 'ProfileViewLikesRecent',
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),

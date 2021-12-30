@@ -10,11 +10,15 @@ class PostFeedController extends GetxController
   var postFeedType;
   bool _dataReloaded = false;
   RxBool isLoading = true.obs;
+  var prefix;
 
-  PostFeedController({required String postFeedTypeFeed, String? tag}) {
+  PostFeedController(
+      {required String postFeedTypeFeed, String? tag, required prefix}) {
     postFeedType = postFeedTypeFeed;
+    this.prefix = prefix;
     print('in the controller, postFeedType is $postFeedType');
-    model = ModelPostsFeed(postFeedTypeContoller: postFeedTypeFeed, tag: tag);
+    model = ModelPostsFeed(
+        postFeedTypeContoller: postFeedTypeFeed, tag: tag, prefix: prefix);
   }
 
   bool get dataReloaded => _dataReloaded;

@@ -29,8 +29,8 @@ class VisitorBlog extends StatelessWidget {
     Sizing.blockSizeVertical = Sizing.height / 100;
     Sizing.setFontSize();
 
-    final postController =
-        Get.put(PostFeedController(postFeedTypeFeed: Routes.homeTab));
+    final postController = Get.put(PostFeedController(
+        postFeedTypeFeed: Routes.homeTab, prefix: 'VisitorBlog'));
     postController.updatePosts();
 
     blogController.fetchBlogInfo(blogId);

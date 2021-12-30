@@ -6,9 +6,15 @@ import 'dart:convert';
 class ModelPostsFeed {
   var postFeedType = '';
   String? tag;
-  ModelPostsFeed({required String postFeedTypeContoller, String? tag}) {
+  var prefix;
+  ModelPostsFeed({
+    required String postFeedTypeContoller,
+    String? tag,
+    required prefix,
+  }) {
     postFeedType = postFeedTypeContoller;
     this.tag = tag;
+    this.prefix = prefix;
     print('in the model, postFeedType is $postFeedType');
   }
   Future<List<PostItem>> getNewPosts(
@@ -23,11 +29,12 @@ class ModelPostsFeed {
       // print(responseBody['posts_per_page']);
       if (tag == null && postFeedTypeContoller != GetURIs.hashtagPosts) {
         for (var i = 0; i < responseBody['response']['post'].length; i++) {
-          posts.add(PostItem.fromJson(responseBody['response']['post'][i]));
+          posts.add(PostItem.fromJson(
+              responseBody['response']['post'][i], prefix, i));
         }
       } else {
         for (var i = 0; i < responseBody['post'].length; i++) {
-          posts.add(PostItem.fromJson(responseBody['post'][i]));
+          posts.add(PostItem.fromJson(responseBody['post'][i], prefix, i));
         }
       }
 

@@ -30,6 +30,8 @@ class PostItem extends StatelessWidget {
   final bool showBottomBar;
   final bool isMine;
   RxBool isLiked = false.obs;
+  final prefix;
+  final index;
 
   PostItem(
       {Key? key,
@@ -42,7 +44,9 @@ class PostItem extends StatelessWidget {
       required this.profilePhoto,
       required this.showBottomBar,
       required this.isMine,
-      required this.isLiked})
+      required this.isLiked,
+      required this.prefix,
+      required this.index})
       : super(key: key);
   final controller = Get.put(PostItemController());
   @override
@@ -50,6 +54,7 @@ class PostItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: InkWell(
+        key: ValueKey('${prefix}_post_${index.toString()}'),
         child: Column(
           children: <Widget>[
             getUpperBar(context),
@@ -93,6 +98,7 @@ class PostItem extends StatelessWidget {
 
   Widget getPostData(BuildContext context) {
     return FittedBox(
+      key: ValueKey('${prefix}_postData_${index.toString()}'),
       child: SingleChildScrollView(
         child: Html(
           data: '${postData}',
@@ -142,6 +148,7 @@ class PostItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextButton(
+          key: ValueKey('${prefix}_postNotes_${index.toString()}'),
           style: TextButton.styleFrom(
             textStyle: TextStyle(fontSize: Sizing.fontSize * 3.8),
           ),
@@ -155,12 +162,14 @@ class PostItem extends StatelessWidget {
         Row(
           children: [
             IconButton(
+              key: ValueKey('${prefix}_postShare_${index.toString()}'),
               icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
               onPressed: () {
                 shareMenu(null, controller, context, profilePhoto, name);
               },
             ),
             IconButton(
+              key: ValueKey('${prefix}_postComments_${index.toString()}'),
               icon: Icon(CustomIcons.comment,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
@@ -169,6 +178,7 @@ class PostItem extends StatelessWidget {
               },
             ),
             IconButton(
+              key: ValueKey('${prefix}_postLike_${index.toString()}'),
               icon: Icon(CustomIcons.reblog,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
@@ -262,7 +272,7 @@ class PostItem extends StatelessWidget {
     );
   }
 
-  factory PostItem.fromJson(Map<String, dynamic> json) {
+  factory PostItem.fromJson(Map<String, dynamic> json, prefix, index) {
     final isLikedValue =
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
     return PostItem(
@@ -276,6 +286,8 @@ class PostItem extends StatelessWidget {
       profilePhoto: json['blog']['avatar'],
       showBottomBar: true,
       isLiked: isLikedValue,
+      prefix: prefix,
+      index: index,
     );
   }
 }

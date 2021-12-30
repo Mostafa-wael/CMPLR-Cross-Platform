@@ -196,6 +196,7 @@ class SearchResultsView extends StatelessWidget {
                     ),
                     Container(
                       child: PostFeed(
+                        prefix: 'SearchResults1',
                         postFeedTypePage: '/user/dashboard',
                       ),
                       constraints: BoxConstraints(
@@ -206,9 +207,11 @@ class SearchResultsView extends StatelessWidget {
               ),
               PostFeed(
                 postFeedTypePage: '/user/dashboard',
+                prefix: 'SearchResults2',
               ),
               PostFeed(
                 postFeedTypePage: '/user/dashboard',
+                prefix: 'SearchResults3',
               ),
               SizedBox(
                 height: Sizing.blockSizeVertical * 50,
