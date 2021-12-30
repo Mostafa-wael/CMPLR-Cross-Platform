@@ -307,12 +307,12 @@ class EditProfileView extends StatelessWidget {
                           getTag: 'EditProfilePost',
                           blogName: GetStorage().read('user')['blog_name'],
                           postFeedTypePage: GetURIs.postByName,
-                          prefix: 'EditProfile',
+                          prefix: 'EditProfilePosts',
                         ),
                         PostFeed(
                           getTag: 'EditProfileLike',
                           postFeedTypePage: GetURIs.userLikes,
-                          prefix: 'EditProfile',
+                          prefix: 'EditProfileLikesRecent',
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),

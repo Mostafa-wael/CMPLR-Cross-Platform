@@ -61,6 +61,7 @@ class ConversationsListState extends State<ConversationsList> {
                     final Message chat =
                         ModelChatModule.conversationsList[index];
                     return GestureDetector(
+                      key: ValueKey('chat_${index}'),
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(

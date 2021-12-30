@@ -82,10 +82,13 @@ Widget buildMainView(PostFeedController controller) {
           physics: const ClampingScrollPhysics(),
           itemCount: controller.posts.length,
           itemBuilder: (context, index) {
-            // if (index >= controller.posts.length) {
-            //   return controller.posts[0];
-            // } else
-            return controller.posts[index];
+            if (index >= controller.posts.length) {
+              //   return controller.posts[0];
+              return const SizedBox(
+                height: 0,
+              );
+            } else
+              return controller.posts[index];
           }),
     ),
   );
