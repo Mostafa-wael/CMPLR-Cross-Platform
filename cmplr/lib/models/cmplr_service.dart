@@ -1366,6 +1366,7 @@ class CMPLRService {
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*', // Flutter web breaks without this
 
     // TODO: Change this to the logged user's token
     'Authorization':
@@ -1456,6 +1457,7 @@ class CMPLRService {
         return getHashtagPosts(route, params);
       case GetURIs.tagInfo:
         return getTagInfo(route, params);
+
       default:
         throw Exception('Invalid request backendURI');
     }

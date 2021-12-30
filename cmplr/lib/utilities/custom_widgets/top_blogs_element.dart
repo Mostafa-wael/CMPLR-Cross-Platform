@@ -69,7 +69,7 @@ class TopBlogsElement extends StatelessWidget {
                                 ),
                                 child: FadeInImage.assetNetwork(
                                   placeholder:
-                                      'lib/utilities/assets/logo/logo_icon.png',
+                                      'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                   image: coverImgURL,
                                   fit: BoxFit.cover,
                                 )),
@@ -161,7 +161,7 @@ class TopBlogsElement extends StatelessWidget {
                                 radius: height * 4 / 60,
                                 child: FadeInImage.assetNetwork(
                                   placeholder:
-                                      'lib/utilities/assets/logo/logo_icon.png',
+                                      'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                   image: blogPicURL,
                                   fit: BoxFit.cover,
                                 ),
@@ -175,7 +175,7 @@ class TopBlogsElement extends StatelessWidget {
                                 radius: height * 4 / 60,
                                 child: FadeInImage.assetNetwork(
                                   placeholder:
-                                      'lib/utilities/assets/logo/logo_icon.png',
+                                      'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                   image: blogPicURL,
                                   fit: BoxFit.cover,
                                 ),
@@ -249,7 +249,7 @@ class TopBlogsElement extends StatelessWidget {
                                           width: width * 19 / 60,
                                           child: FadeInImage.assetNetwork(
                                             placeholder:
-                                                'lib/utilities/assets/logo/logo_icon.png',
+                                                'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                             image: imgOneURL,
                                             fit: BoxFit.fitWidth,
                                           ),
@@ -258,7 +258,7 @@ class TopBlogsElement extends StatelessWidget {
                                           width: width * 19 / 60,
                                           child: FadeInImage.assetNetwork(
                                             placeholder:
-                                                'lib/utilities/assets/logo/logo_icon.png',
+                                                'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                             image: imgTwoURL,
                                             fit: BoxFit.fitWidth,
                                           ),
@@ -267,7 +267,7 @@ class TopBlogsElement extends StatelessWidget {
                                           width: width * 19 / 60,
                                           child: FadeInImage.assetNetwork(
                                             placeholder:
-                                                'lib/utilities/assets/logo/logo_icon.png',
+                                                'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                             image: imgThreeURL,
                                             fit: BoxFit.fitWidth,
                                           ),
@@ -285,7 +285,7 @@ class TopBlogsElement extends StatelessWidget {
                                           width: width * 19 / 60,
                                           child: FadeInImage.assetNetwork(
                                             placeholder:
-                                                'lib/utilities/assets/logo/logo_icon.png',
+                                                'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                             image: imgOneURL,
                                             fit: BoxFit.fitWidth,
                                           ),
@@ -294,7 +294,7 @@ class TopBlogsElement extends StatelessWidget {
                                           width: width * 19 / 60,
                                           child: FadeInImage.assetNetwork(
                                             placeholder:
-                                                'lib/utilities/assets/logo/logo_icon.png',
+                                                'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                             image: imgTwoURL,
                                             fit: BoxFit.fitWidth,
                                           ),
@@ -303,7 +303,7 @@ class TopBlogsElement extends StatelessWidget {
                                           width: width * 19 / 60,
                                           child: FadeInImage.assetNetwork(
                                             placeholder:
-                                                'lib/utilities/assets/logo/logo_icon.png',
+                                                'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                             image: imgThreeURL,
                                             fit: BoxFit.fitWidth,
                                           ),

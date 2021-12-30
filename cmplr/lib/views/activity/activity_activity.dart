@@ -6,6 +6,7 @@ import 'package:flutter_html/shims/dart_ui_real.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// Sub-view for the main activity tab. Shows notifications.
 class ActivityActivity extends StatelessWidget {
   const ActivityActivity({Key? key}) : super(key: key);
 
@@ -28,6 +29,7 @@ class ActivityActivity extends StatelessWidget {
         shrinkWrap: true,
         children: [
           GestureDetector(
+              key: const ValueKey('AllActivityButton'),
               child: Material(
                 elevation: 5,
                 child: SizedBox(

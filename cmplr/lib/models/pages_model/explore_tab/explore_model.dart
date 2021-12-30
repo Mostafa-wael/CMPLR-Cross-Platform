@@ -7,6 +7,9 @@ import '../../../backend_uris.dart';
 import '../../../flags.dart';
 import '../../cmplr_service.dart';
 
+/// Holds mock data and interfaces with the backend.
+///
+/// Responsible for fetching of the explore screen's data.
 class ExploreModel {
   static Future<List<dynamic>> getTagsYouFollow() async {
     if (Flags.mock) {
@@ -73,7 +76,10 @@ class ExploreModel {
       'name': 'Test Tag 1',
       'slug': 'Test Tag 1',
       'posts_views': [
-        'https://64.media.tumblr.com/ffbb3a853b2e35ba0cf9a4ceea35f084/011c36db4adfbc03-f7/s640x960/2904c0ed277b4a94b417a3cb57d8fc571e7d10a1.jpg'
+        {
+          'link':
+              'https://64.media.tumblr.com/ffbb3a853b2e35ba0cf9a4ceea35f084/011c36db4adfbc03-f7/s640x960/2904c0ed277b4a94b417a3cb57d8fc571e7d10a1.jpg'
+        }
       ],
     },
     {
@@ -82,7 +88,10 @@ class ExploreModel {
       'name': 'Test Tag 2',
       'slug': 'Test Tag 2',
       'posts_views': [
-        'https://64.media.tumblr.com/ec1771be19d696cfdd02876076351d32/011c36db4adfbc03-66/s400x600/c903540d69f06fb1fed4a53ce7d41c83327b986b.png'
+        {
+          'link':
+              'https://64.media.tumblr.com/ec1771be19d696cfdd02876076351d32/011c36db4adfbc03-66/s400x600/c903540d69f06fb1fed4a53ce7d41c83327b986b.png'
+        }
       ],
     },
     {
@@ -91,7 +100,10 @@ class ExploreModel {
       'name': 'Test Tag 3',
       'slug': 'Test Tag 3',
       'posts_views': [
-        'https://64.media.tumblr.com/e26147f7d725be1bdf271833465c6b02/de62e5ead274760f-13/s400x600/a4e13ca012f2360235f1d3c8822daa838d6d6eff.jpg'
+        {
+          'link':
+              'https://64.media.tumblr.com/e26147f7d725be1bdf271833465c6b02/de62e5ead274760f-13/s400x600/a4e13ca012f2360235f1d3c8822daa838d6d6eff.jpg'
+        }
       ],
     },
     {
@@ -100,7 +112,10 @@ class ExploreModel {
       'name': 'Test Tag 4',
       'slug': 'Test Tag 4',
       'posts_views': [
-        'https://64.media.tumblr.com/a9ff82d660b038a98c2f995889d92450/65cec8f252625e24-ed/s400x600/0d3aafd1ecb3cc3e696c899a7a2f331bef40bb21.png'
+        {
+          'link':
+              'https://64.media.tumblr.com/a9ff82d660b038a98c2f995889d92450/65cec8f252625e24-ed/s400x600/0d3aafd1ecb3cc3e696c899a7a2f331bef40bb21.png'
+        }
       ],
     },
   ];
@@ -110,8 +125,14 @@ class ExploreModel {
       'test_id': 0,
       'tag_id': 23,
       'posts_views': [
-        'https://64.media.tumblr.com/c3165ebd9c1fbbfcb9ee2282debae9de/b14f71f1c6109186-93/s540x810/b8d7676377233009b10428fc9546487fc0c14126.jpg',
-        'https://64.media.tumblr.com/7ad94a0f1f2e1c0c9cb00d6fed72edf9/b14f71f1c6109186-83/s540x810/3de33fae7a449390f856d243236d8c910ecd402b.png'
+        {
+          'link':
+              'https://64.media.tumblr.com/c3165ebd9c1fbbfcb9ee2282debae9de/b14f71f1c6109186-93/s540x810/b8d7676377233009b10428fc9546487fc0c14126.jpg'
+        },
+        {
+          'link':
+              'https://64.media.tumblr.com/7ad94a0f1f2e1c0c9cb00d6fed72edf9/b14f71f1c6109186-83/s540x810/3de33fae7a449390f856d243236d8c910ecd402b.png'
+        }
       ],
       'tag_name': 'Test tag',
       'tag_slug': 'Test tag',
@@ -120,8 +141,14 @@ class ExploreModel {
       'test_id': 1,
       'tag_id': 43,
       'posts_views': [
-        'https://64.media.tumblr.com/2e2813ef0edfe7c0a9c8478b4b25ece5/b14f71f1c6109186-aa/s540x810/7ca399aa9a3e3b78d49a512bb338d12ff93009c3.jpg',
-        'https://64.media.tumblr.com/9410f22a29285fbdc65d884bc5054d56/b14f71f1c6109186-5e/s540x810/56c69ed615e2cb5afebdfa1cce95aacd0ed0d1ae.jpg'
+        {
+          'link':
+              'https://64.media.tumblr.com/2e2813ef0edfe7c0a9c8478b4b25ece5/b14f71f1c6109186-aa/s540x810/7ca399aa9a3e3b78d49a512bb338d12ff93009c3.jpg'
+        },
+        {
+          'link':
+              'https://64.media.tumblr.com/9410f22a29285fbdc65d884bc5054d56/b14f71f1c6109186-5e/s540x810/56c69ed615e2cb5afebdfa1cce95aacd0ed0d1ae.jpg'
+        }
       ],
       'tag_name': 'Test tag',
       'tag_slug': 'Test tag',
@@ -130,8 +157,14 @@ class ExploreModel {
       'test_id': 2,
       'tag_id': 66,
       'posts_views': [
-        'https://64.media.tumblr.com/5d9e0997337264f1f0d99a6c30dc41dc/b14f71f1c6109186-a6/s540x810/c5ff288763620cb4331dcdcca9e5059309ef4e43.png',
-        'https://64.media.tumblr.com/a18c8063bf9d095d99f12b51d3dd1eda/57803298a6ae7123-0a/s540x810/35b1580573afd7e8d52a33546e021c3df27778b3.gif'
+        {
+          'link':
+              'https://64.media.tumblr.com/5d9e0997337264f1f0d99a6c30dc41dc/b14f71f1c6109186-a6/s540x810/c5ff288763620cb4331dcdcca9e5059309ef4e43.png'
+        },
+        {
+          'link':
+              'https://64.media.tumblr.com/a18c8063bf9d095d99f12b51d3dd1eda/57803298a6ae7123-0a/s540x810/35b1580573afd7e8d52a33546e021c3df27778b3.gif'
+        }
       ],
       'tag_name': 'Test tag',
       'tag_slug': 'Test tag',
@@ -140,8 +173,14 @@ class ExploreModel {
       'test_id': 3,
       'tag_id': 43241,
       'posts_views': [
-        'https://64.media.tumblr.com/fd654c32f041cb02c757b5646c1cf9e1/a4c5782524284f82-d5/s540x810/dc9b214a0dd3612a3e1154c725ec175ad9921fe9.jpg',
-        'https://64.media.tumblr.com/439b77661f74cea5af5559a392dfe505/573d1660335efd03-4e/s540x810/46e78fb5a9f5e7d91352cf6c1ef016977aada3dc.jpg'
+        {
+          'link':
+              'https://64.media.tumblr.com/fd654c32f041cb02c757b5646c1cf9e1/a4c5782524284f82-d5/s540x810/dc9b214a0dd3612a3e1154c725ec175ad9921fe9.jpg'
+        },
+        {
+          'link':
+              'https://64.media.tumblr.com/439b77661f74cea5af5559a392dfe505/573d1660335efd03-4e/s540x810/46e78fb5a9f5e7d91352cf6c1ef016977aada3dc.jpg'
+        }
       ],
       'tag_name': 'Test tag',
       'tag_slug': 'Test tag',

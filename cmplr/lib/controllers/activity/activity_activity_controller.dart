@@ -1,15 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
 
+import '../../utilities/sizing/sizing.dart';
 import '../../utilities/custom_widgets/activity_notification.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
-
 import '../../utilities/custom_widgets/activity_filter_row.dart';
-
 import '../../models/pages_model/activity_tab/activity_activity_model.dart'
     as am;
 
-import '../../utilities/sizing/sizing.dart';
+import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +49,7 @@ class ActivityActivityController extends GetxController {
   }
 
   // FIXME: Update the modalsheet in place
+  // Requires conversion to a statefulwidget
   void filterChosen(context, int newFilterIndex) {
     activityFilters[currChosenFilter]['color'] = Colors.white;
     currChosenFilter = newFilterIndex;
@@ -212,12 +211,15 @@ class ActivityActivityController extends GetxController {
     return filters;
   }
 
+  /// Fetches notifications from the backend and puts them into [notifications]
+  /// and [notificationWidgets].
   void fetchNotifications() async {
     notifications =
         await am.ActivityActivityModel.getActivityNotifications(filterTypes);
     updateNotifications();
   }
 
+  /// Parses the fetched information into widgets.
   void updateNotifications() {
     notificationWidgets.clear();
 
@@ -244,9 +246,13 @@ class ActivityActivityController extends GetxController {
         ],
       ));
 
+      var testIndex = 0;
       notif[date]?.forEach((am.Notification notification) {
-        notification.type = typeToText[notification.type];
-        notificationWidgets.add(ActivityNotification(notification));
+        notification.type = typeToText.containsKey(notification.type)
+            ? typeToText[notification.type]
+            : notification.type;
+        notificationWidgets
+            .add(ActivityNotification(notification, testIndex++));
       });
     });
 
@@ -337,14 +343,7 @@ class ActivityActivityController extends GetxController {
     'reply': 'replied to your post!',
     'like': 'liked your post!',
     'follow': 'followed you!',
+    'ask': 'asked you a question!',
+    'answer': 'asnwered your question!'
   };
-}
-
-class CustomFilters extends StatelessWidget {
-  const CustomFilters({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }

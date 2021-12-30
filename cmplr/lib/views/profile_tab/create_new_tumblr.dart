@@ -53,7 +53,7 @@ class CreateNewTumblr extends StatelessWidget {
                         height: Sizing.blockSizeVertical * 5,
                         width: Sizing.blockSizeVertical * 5,
                         image: const AssetImage(
-                            'lib/utilities/assets/logo/logo_icon.png')),
+                            'lib/utilities/assets/logo/cmplr_logo_icon.png')),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(

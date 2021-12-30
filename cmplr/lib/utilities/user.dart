@@ -12,7 +12,8 @@ class User {
   static Map get userMap => GetStorage().read('user');
 
   static var avatarImage = FadeInImage.assetNetwork(
-      placeholder: 'lib/utilities/assets/logo/logo_icon.png', image: avatarURL);
+      placeholder: 'lib/utilities/assets/logo/cmplr_logo_icon.png',
+      image: avatarURL);
 
   static void storeUserData(String blogName, String token, Map userMap) async {
     await GetStorage().write('blog_name', blogName);

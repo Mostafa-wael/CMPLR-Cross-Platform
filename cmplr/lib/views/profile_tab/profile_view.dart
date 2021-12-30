@@ -87,7 +87,7 @@ class ProfileView extends StatelessWidget {
                                                     Get.to(FadeInImage
                                                         .assetNetwork(
                                                       placeholder:
-                                                          'lib/utilities/assets/logo/logo_icon.png',
+                                                          'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                                       image: controller
                                                           .headerImage,
                                                       fit: BoxFit.fitWidth,
@@ -112,7 +112,7 @@ class ProfileView extends StatelessWidget {
                                   },
                                   child: FadeInImage.assetNetwork(
                                     placeholder:
-                                        'lib/utilities/assets/logo/logo_icon.png',
+                                        'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                     image: controller.headerImage,
                                     fit: BoxFit.cover,
                                   ),
@@ -181,7 +181,7 @@ class ProfileView extends StatelessWidget {
                                                             Get.to(FadeInImage
                                                                 .assetNetwork(
                                                               placeholder:
-                                                                  'lib/utilities/assets/logo/logo_icon.png',
+                                                                  'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                                               image: controller
                                                                   .blogAvatar,
                                                               fit: BoxFit
@@ -210,7 +210,7 @@ class ProfileView extends StatelessWidget {
                                           child: ClipOval(
                                             child: FadeInImage.assetNetwork(
                                               placeholder:
-                                                  'lib/utilities/assets/logo/logo_icon.png',
+                                                  'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                               image: controller.blogAvatar,
                                               height: Sizing.blockSize * 20,
                                               width: Sizing.blockSize * 20,
@@ -290,7 +290,7 @@ class ProfileView extends StatelessWidget {
                                           child: ClipRect(
                                             child: FadeInImage.assetNetwork(
                                               placeholder:
-                                                  'lib/utilities/assets/logo/logo_icon.png',
+                                                  'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                               image: controller.blogAvatar ??
                                                   placeHolderImgUrl,
                                               fit: BoxFit.cover,

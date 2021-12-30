@@ -1,16 +1,23 @@
-import '../../views/blog/screens/visitor_blog.dart';
-import 'package:get/get.dart';
-
+import '../../views/profile_tab/profile_view.dart';
 import '../../flags.dart';
+import '../sizing/sizing.dart';
+import '../../views/blog/screens/visitor_blog.dart';
 import '../../models/pages_model/activity_tab/activity_activity_model.dart'
     as am;
-import '../../routes.dart';
-import '../sizing/sizing.dart';
+
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+/// The main widget used to show notifications in [ActivityActivityView]
 class ActivityNotification extends StatelessWidget {
+  /// Notification data used to construct the widget.
+  /// Obtained from mock data or the backend
   final am.Notification notif;
-  const ActivityNotification(this.notif, {Key? key}) : super(key: key);
+
+  final testIndex;
+
+  const ActivityNotification(this.notif, this.testIndex, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +28,7 @@ class ActivityNotification extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
+            key: ValueKey('ActivityNotificationsFromBlog$testIndex'),
             child: Padding(
               padding: EdgeInsets.all(Sizing.blockSize),
               child: SizedBox(
@@ -34,6 +42,7 @@ class ActivityNotification extends StatelessWidget {
             onTap: goToBlog,
           ),
           GestureDetector(
+            key: ValueKey('ActivityNotificationsMessage$testIndex'),
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Sizing.blockSize * 2,
@@ -49,11 +58,15 @@ class ActivityNotification extends StatelessWidget {
     );
   }
 
+  // Helper functions
   void goToBlog() {
-    Get.to(VisitorBlog(blogId: notif.fromBlogId));
+    Get.to(VisitorBlog(
+        blogId: notif.fromBlogId.runtimeType == int
+            ? notif.fromBlogId.toString()
+            : notif.fromBlogId));
   }
 
   void goToYourOwnProfile() {
-    Get.toNamed(Routes.profile);
+    Get.to(const ProfileView());
   }
 }

@@ -1,11 +1,12 @@
 import '../../../backend_uris.dart';
 import '../../cmplr_service.dart';
+import 'package:http/http.dart' as http;
 
 class ReblogModel {
   const ReblogModel();
 
   // Note that all the parameters mentioned in the API are required
-  Future<bool> reblogPost(
+  Future<http.Response> reblogPost(
     String parentPostID,
     String reblogKey,
     String comment,
@@ -18,6 +19,6 @@ class ReblogModel {
 
     // TODO: What to do with the other responses?
     // AKA: bad request & authenticated
-    return response.statusCode == CMPLRService.insertSuccess;
+    return response;
   }
 }

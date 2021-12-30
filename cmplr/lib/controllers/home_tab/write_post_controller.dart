@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import '../../views/views.dart';
+
 import '../../backend_uris.dart';
+import '../../routes.dart';
 import '../../utilities/custom_widgets/post_sched_menu.dart';
 
 import '../../models/cmplr_service.dart';
@@ -223,25 +226,41 @@ class WritePostController extends GetxController {
     // TODO: get the real blog name
     final blogName = GetStorage().read('blog_name') ?? 'tarek';
 
-    final http.Response response;
-    if (_model is WritePostModel)
-      response = await _model.createPost(
+    var success = false;
+    if (_model is WritePostModel) {
+      final writePostModel = _model as WritePostModel;
+      writePostModel
+          .createPost(
         postText,
         blogName,
         postType,
         _currentPostOption,
         tags,
-      );
-    else if (_model is ReblogModel)
-      response = await _model.reblogPost(
-        post?.postID,
-        post?.reblogKey,
+      )
+          .then((http.Response response) {
+        if (response.statusCode == CMPLRService.insertSuccess) {
+          success = true;
+          Get.back();
+        }
+      });
+    } else if (_model is ReblogModel) {
+      final reblogModel = _model as ReblogModel;
+      reblogModel
+          .reblogPost(
+        post!.postID,
+        post!.reblogKey,
         postText,
-      );
-    else
+      )
+          .then((http.Response response) {
+        if (response.statusCode == CMPLRService.insertSuccess) {
+          success = true;
+          Get.back();
+        }
+      });
+    } else
       throw Exception('Unsupported model');
 
-    return response.statusCode == CMPLRService.insertSuccess;
+    return success;
   }
 
   // wrap text in needed tags and return it
@@ -287,7 +306,8 @@ class WritePostController extends GetxController {
     await CMPLRService.get(GetURIs.getSuggestedTags, {})
         .then((http.Response value) {
       if (value.statusCode == CMPLRService.requestSuccess) {
-        suggestedTags = jsonDecode(value.body)['response']['tags'];
+        final List tagsList = jsonDecode(value.body)['response']['tags'];
+        suggestedTags = tagsList.map((e) => e = e['tag_name']).toList();
         update();
       } else
         _showToast('Error occured while fetching suggested tags :(');

@@ -56,7 +56,8 @@ class TextOnImage extends StatelessWidget {
                   children: [
                     if (backgroundURL != null)
                       FadeInImage.assetNetwork(
-                        placeholder: 'lib/utilities/assets/logo/logo_icon.png',
+                        placeholder:
+                            'lib/utilities/assets/logo/cmplr_logo_icon.png',
                         image: backgroundURL ?? placeHolderImgUrl,
                         fit: BoxFit.cover,
                       ),

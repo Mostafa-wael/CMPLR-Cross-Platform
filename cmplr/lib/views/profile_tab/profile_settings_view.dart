@@ -28,7 +28,7 @@ class ProfileSettingsView extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           flexibleSpace: FadeInImage.assetNetwork(
-            placeholder: 'lib/utilities/assets/logo/logo_icon.png',
+            placeholder: 'lib/utilities/assets/logo/cmplr_logo_icon.png',
             image: controller.headerImage,
             fit: BoxFit.cover,
           ),

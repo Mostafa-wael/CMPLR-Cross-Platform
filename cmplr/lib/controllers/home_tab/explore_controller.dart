@@ -1,3 +1,4 @@
+import 'dart:developer' as dev;
 import 'dart:math';
 import 'package:html/parser.dart' as parser;
 
@@ -16,21 +17,42 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 
+/// Manages the fetching and holding of data for the explore tab.
 class ExploreController extends GetxController {
+  // Helper parameters for easy tuning of widgets
   static const elementWidthPercentage = 30.0;
-  final scrollController = ScrollController();
   final tagsYouFollowHeight = Sizing.blockSizeVertical * 10.0;
   final checkOutTheseTagsHeight = Sizing.blockSizeVertical * 21;
   final checkOutTheseBlogsHeight = Sizing.blockSizeVertical * 20;
   final blogImgRadius = Sizing.blockSize * 5;
   final blogNameCenterHeightFactor = 0.6;
 
+  /// Invokes a function if the end of a list is reached.
+  final scrollController = ScrollController();
+
+  // Main widget data
   var tagsYouFollow = <Widget>[];
   var checkOutTheseTags = <Widget>[];
   var checkOutTheseBlogs = <Widget>[];
   Widget tryThesePosts = Container();
   var thingsWeCareAbout = <Widget>[];
 
+  /// Called when a list reaches its end.
+  ///
+  /// Should be useful if we want infinite fetching lists. Not currently used
+  /// to lighten the load on the backend.
+  bool handleScrollNotification(ScrollNotification notification) {
+    if (notification is ScrollEndNotification) {
+      if (scrollController.position.extentAfter == 0) {
+        print('Should load more');
+
+        update();
+      }
+    }
+    return false;
+  }
+
+  /// Fetches the data from the backend or mock data.
   void initLists() async {
     getTagsYouFollow();
     getCheckOutTheseBlogs();
@@ -44,6 +66,18 @@ class ExploreController extends GetxController {
     initLists();
   }
 
+  /// Placeholder images used for the header when we're mocking.
+  final placeHolders = [
+    'lib/utilities/assets/intro_screen/intro_1.gif',
+    'lib/utilities/assets/intro_screen/intro_2.gif',
+    'lib/utilities/assets/intro_screen/intro_3.jpg',
+    'lib/utilities/assets/intro_screen/intro_4.jpg',
+    'lib/utilities/assets/intro_screen/intro_5.gif',
+  ];
+
+  /// Returns a random background from a list of placeholders if we're mocking.
+  /// Doesn't return anything if we're using the API since we don't have an
+  /// endpoint for that. (I think?)
   Widget? getAppBarBackground() {
     if (Flags.mock) {
       return FadeInImage.assetNetwork(
@@ -51,14 +85,16 @@ class ExploreController extends GetxController {
           image:
               'https://64.media.tumblr.com/86aed1e9b1106498e4d4d1fe8a54b239/85e04bde816e1285-b2/s500x750/bac8027b6d5a996cb402bad8b351b18735042740.gifv');
     } else
-      // TODO: API Integration
       return null;
   }
 
+  ///  Goes to [SearchResultsView]
   Future<void> search() async {
     Get.to(const SearchResultsView());
   }
 
+  /// Fetches tags the current logged in user follows and parses them into
+  /// a list format.
   void getTagsYouFollow() async {
     // There should be a list of posts in the response entry of the map
     // Each tag should have the keys: tag_id, tag_name, tag_slug posts_views
@@ -88,6 +124,11 @@ class ExploreController extends GetxController {
     update();
   }
 
+  /// Fetches recommended tags from the backend and parses them into
+  /// a list format.
+  ///
+  /// Used for both [Check out these tags] and [Things we care about].
+  /// Note that both use a different widget.
   Future<List<Widget>> getCheckOutTheseTags(String type) async {
     const widthPercentage = 30, borderRadiusFactor = 1;
     final checkOutTheseTags = await ExploreModel.getCheckOutTheseTags();
@@ -125,7 +166,6 @@ class ExploreController extends GetxController {
             imgOneURL: imgOneUrl,
             imgTwoURL: imgTwoUrl,
             tagName: cott['tag_name'],
-            followed: false,
             widgetColor: clrs[(colorIndex++ % clrs.length)]));
       }
     } else if (type == 'twca') {
@@ -149,6 +189,8 @@ class ExploreController extends GetxController {
     return cottWidgets;
   }
 
+  /// Fetches recommended blogs from the backend and parses them into
+  /// a list format.
   void getCheckOutTheseBlogs() async {
     final checkOutTheseBlogs = await ExploreModel.getCheckOutTheseBlogs();
     final cotbWidgets = <Widget>[];
@@ -178,6 +220,11 @@ class ExploreController extends GetxController {
     update();
   }
 
+  /// Returns trending mock data as a list of widgets.
+  ///
+  /// The backend's implementation of trending is not similar to tumblr's and
+  /// there was no time to get a proper implementation. So, I just use the mock
+  /// data.
   List<Widget> getTrending() {
     final trendingRows = <TrendingRow>[];
 
@@ -226,18 +273,6 @@ class ExploreController extends GetxController {
     return trendingRows;
   }
 
-  bool handleScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification) {
-      if (scrollController.position.extentAfter == 0) {
-        print('Should load more');
-        // final cont = Get.find<ExploreController>();
-
-        update();
-      }
-    }
-    return false;
-  }
-
   void getTryThesePostsGrid() async {
     final tryThesePosts = await ExploreModel.getTryThesePosts();
     final ttpWidgets = <Widget>[];
@@ -262,7 +297,8 @@ class ExploreController extends GetxController {
         final validURL = Uri.parse(maybeUrl.attributes['src'] ?? '').isAbsolute;
         if (validURL) {
           img = maybeUrl.attributes['src'];
-        }
+        } else
+          dev.log('Invalid URL encountered in getTryThesePostsGrid');
       }
       if (img != null) {
         ttpWidgets.add(
@@ -303,32 +339,12 @@ class ExploreController extends GetxController {
     update();
   }
 
-  // List<Widget> getThingsWeCareAbout() {
-  //   // if (Flags.mock) {
-  //   //   final twcaList = <Widget>[];
-  //   //   for (var i = 0; i < thingsWeCareAboutMockData.length; i++) {
-  //   //     final twca = thingsWeCareAboutMockData[i];
-  //   //     twcaList.add(
-  //   //       TextOnImage(
-  //   //         gestureDetectorKey: ValueKey('ThingsWeCareAbout$i'),
-  //   //         backgroundURL: twca['background_url'],
-  //   //         text: twca['tag_name'],
-  //   //         width: Sizing.blockSize * 30,
-  //   //         height: tagsYouFollowHeight,
-  //   //         borderRadius: BorderRadius.circular(Sizing.blockSize),
-  //   //         onTap: () {
-  //   //           Get.to(const HashtagPosts(), arguments: twca['tag_name']);
-  //   //         },
-  //   //       ),
-  //   //     );
-  //   //   }
-  //   //   return twcaList;
-  //   // } else
-  //   //   // TODO: API Integration
-  //   //   return [];
-  //   // return [];
-  // }
+  void goToTryThesePosts() {
+    Get.to(TryThesePosts());
+  }
 
+  /// Flutter's default colors, used for
+  /// [Check out these blogs] and [Check out these tags].
   final clrs = [
     Colors.red,
     Colors.green,
@@ -347,14 +363,10 @@ class ExploreController extends GetxController {
     Colors.yellow,
   ];
 
-  final placeHolders = [
-    'lib/utilities/assets/intro_screen/intro_1.gif',
-    'lib/utilities/assets/intro_screen/intro_2.gif',
-    'lib/utilities/assets/intro_screen/intro_3.jpg',
-    'lib/utilities/assets/intro_screen/intro_4.jpg',
-    'lib/utilities/assets/intro_screen/intro_5.gif',
-  ];
-
+  /// Random mock data used for trending.
+  ///
+  /// Not moved to the model since we don't really have a
+  /// backend implementation.
   final trendingNowMockData = [
     {
       'trend_number': '1',
@@ -469,8 +481,4 @@ class ExploreController extends GetxController {
       ]
     }
   ];
-
-  void goToTryThesePosts() {
-    Get.to(TryThesePosts());
-  }
 }

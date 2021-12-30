@@ -84,7 +84,6 @@ class SearchController extends GetxController {
             imgOneURL: cott['img_one_url'],
             imgTwoURL: cott['img_two_url'],
             tagName: cott['tag_name'],
-            followed: cott['followed'],
             widgetColor: clrs[(colorIndex++ % clrs.length)]));
       }
       return checkOutTheseTagsList;

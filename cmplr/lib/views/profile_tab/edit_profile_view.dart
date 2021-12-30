@@ -52,7 +52,7 @@ class EditProfileView extends StatelessWidget {
                               children: [
                                 FadeInImage.assetNetwork(
                                   placeholder:
-                                      'lib/utilities/assets/logo/logo_icon.png',
+                                      'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                   image: controller.headerImage,
                                   fit: BoxFit.cover,
                                 ),
@@ -64,7 +64,7 @@ class EditProfileView extends StatelessWidget {
                                           ? ClipOval(
                                               child: FadeInImage.assetNetwork(
                                                 placeholder:
-                                                    'lib/utilities/assets/logo/logo_icon.png',
+                                                    'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                                 image: controller.blogAvatar,
                                                 height: Sizing.blockSize * 20,
                                                 fit: BoxFit.cover,
@@ -73,7 +73,7 @@ class EditProfileView extends StatelessWidget {
                                           : ClipRect(
                                               child: FadeInImage.assetNetwork(
                                                 placeholder:
-                                                    'lib/utilities/assets/logo/logo_icon.png',
+                                                    'lib/utilities/assets/logo/cmplr_logo_icon.png',
                                                 image: controller.blogAvatar,
                                                 fit: BoxFit.cover,
                                               ),
