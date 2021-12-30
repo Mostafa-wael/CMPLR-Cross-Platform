@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../models/pages_model/activity_tab/chat_model.dart';
 import 'conversation_messages_view.dart';
 
@@ -33,9 +34,9 @@ class _ConversationsListState extends State<ConversationsList> {
           )
         : Expanded(
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Get.theme.scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),
                 ),
@@ -67,8 +68,8 @@ class _ConversationsListState extends State<ConversationsList> {
                             horizontal: 20.0, vertical: 10.0),
                         decoration: BoxDecoration(
                           color: chat.isRead
-                              ? const Color(0xFFFFEFEE)
-                              : Colors.white,
+                              ? Colors.blue //
+                              : Get.theme.scaffoldBackgroundColor,
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(20.0),
                             bottomRight: Radius.circular(20.0),
@@ -86,8 +87,9 @@ class _ConversationsListState extends State<ConversationsList> {
                                   children: <Widget>[
                                     Text(
                                       chat.sender.blog_name,
-                                      style: const TextStyle(
-                                        color: Colors.grey,
+                                      style: TextStyle(
+                                        color: Get
+                                            .theme.textTheme.bodyText1?.color,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -98,8 +100,9 @@ class _ConversationsListState extends State<ConversationsList> {
                                           0.45,
                                       child: Text(
                                         chat.text,
-                                        style: const TextStyle(
-                                          color: Colors.blueGrey,
+                                        style: TextStyle(
+                                          color: Get
+                                              .theme.textTheme.bodyText1?.color,
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.w600,
                                         ),

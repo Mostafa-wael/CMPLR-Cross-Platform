@@ -24,11 +24,11 @@ class MasterPage extends StatelessWidget {
         init: MasterPageController(),
         builder: (MasterPageController controller) {
           return Scaffold(
+            backgroundColor: Get.theme.scaffoldBackgroundColor,
             body: IndexedStack(
                 index: controller.currPage, children: controller.pages),
             bottomNavigationBar: BottomNavigationBar(
-              selectedItemColor:
-                  Theme.of(context).textSelectionTheme.selectionColor,
+              selectedItemColor: Get.theme.textSelectionTheme.selectionColor,
               currentIndex: controller.currPage,
               onTap: (index) {
                 controller.changePage(index);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../views/utilities/hashtag_posts_view.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -17,6 +19,8 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
 
 import 'package:flutter_html/flutter_html.dart';
+
+import 'package:html/parser.dart' as parser;
 
 /// This widget represents the post item with all its data
 class PostItem extends StatelessWidget {
@@ -82,7 +86,7 @@ class PostItem extends StatelessWidget {
           '${name}',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
+            color: Get.theme.textTheme.bodyText1?.color,
           ),
         ),
       ),
@@ -102,6 +106,9 @@ class PostItem extends StatelessWidget {
       child: SingleChildScrollView(
         child: Html(
           data: '${postData}',
+          style: {
+            '*': Style(color: Get.theme.textTheme.bodyText1?.color),
+          },
         ),
       ),
       fit: BoxFit.fill,
@@ -163,23 +170,22 @@ class PostItem extends StatelessWidget {
           children: [
             IconButton(
               key: ValueKey('${prefix}_postShare_${index.toString()}'),
-              icon: Icon(Icons.share, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.share, color: Get.theme.iconTheme.color),
               onPressed: () {
                 shareMenu(null, controller, context, profilePhoto, name);
               },
             ),
             IconButton(
               key: ValueKey('${prefix}_postComments_${index.toString()}'),
-              icon: Icon(CustomIcons.comment,
-                  color: Theme.of(context).primaryColor),
+              icon: Icon(CustomIcons.comment, color: Get.theme.iconTheme.color),
               onPressed: () {
                 controller.openNotes(this);
                 print('Notes clicked');
               },
             ),
             IconButton(
-              icon: Icon(CustomIcons.reblog,
-                  color: Theme.of(context).primaryColor),
+              key: ValueKey('${prefix}_postLike_${index.toString()}'),
+              icon: Icon(CustomIcons.reblog, color: Get.theme.iconTheme.color),
               onPressed: () {
                 controller.reblog(this);
                 print('reblog clicked');
@@ -189,7 +195,7 @@ class PostItem extends StatelessWidget {
                   key: ValueKey('${prefix}_postLike_${index.toString()}'),
                   icon: Icon(
                       isLiked.value ? Icons.favorite : CupertinoIcons.heart,
-                      color: Theme.of(context).primaryColor),
+                      color: Get.theme.iconTheme.color),
                   onPressed: () {
                     isLiked.value = !isLiked.value;
                     controller.loveClicked(
@@ -275,9 +281,14 @@ class PostItem extends StatelessWidget {
   factory PostItem.fromJson(Map<String, dynamic> json, prefix, index) {
     final isLikedValue =
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
+
+    // Remove raw base64 posts to avoid crashing
+    final content = json['post']['content']
+        .replaceAll(RegExp(r'^data:image\/[a-z]+;base64,'), '');
+
     return PostItem(
       isMine: json['post']['is_mine'],
-      postData: json['post']['content'],
+      postData: content,
       postID: json['post']['post_id'].toString(),
       reblogKey: "$json['post']['post_id']",
       numNotes: json['post']['notes_count'],

@@ -24,6 +24,8 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
   Map? otherData;
   var gestureDetectorKey;
 
+  var index;
+
   CheckOutTheseBlogsElement({
     required this.width,
     required this.height,
@@ -36,13 +38,18 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
     required this.widgetColor,
     this.gestureDetectorKey,
     this.otherData,
+    this.index,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CheckOutTheseBlogsElementController>(
-      init: CheckOutTheseBlogsElementController(),
+    final controllerTag = 'CheckOutTheseBlogsController$index';
+    final controller =
+        Get.put(CheckOutTheseBlogsElementController(), tag: controllerTag);
+    return GetBuilder(
+      init: controller,
+      tag: controllerTag,
       builder: (CheckOutTheseBlogsElementController controller) => Padding(
           padding: const EdgeInsets.only(left: 4, right: 4),
           child: GestureDetector(
@@ -134,14 +141,18 @@ class CheckOutTheseBlogsElementController extends GetxController {
     if (!followed)
       CMPLRService.post(PostURIs.followBlog, {'blogName': blogName})
           .then((http.Response response) {
-        if (response.statusCode == CMPLRService.requestSuccess) followed = true;
+        if (response.statusCode == CMPLRService.requestSuccess) {
+          followed = true;
+          update();
+        }
       });
     else
       CMPLRService.delete(DeleteURIs.unfollowBlog, {'blogName': blogName})
           .then((http.Response response) {
-        if (response.statusCode == CMPLRService.requestSuccess)
+        if (response.statusCode == CMPLRService.requestSuccess) {
           followed = false;
+          update();
+        }
       });
-    update();
   }
 }

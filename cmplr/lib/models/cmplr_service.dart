@@ -1366,7 +1366,6 @@ class CMPLRService {
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*', // Flutter web breaks without this
 
     // TODO: Change this to the logged user's token
     'Authorization':
@@ -1988,5 +1987,17 @@ class CMPLRService {
 
   static Future<http.Response> getTryThesePosts(String backendURI) {
     return http.get(Uri.parse(apiIp + backendURI), headers: getHeader);
+  }
+
+  static Future<http.Response> unfollowTag(
+      String backendURI, Map<String, String> params) {
+    return http.delete(Uri.parse(apiIp + backendURI),
+        body: jsonEncode(params), headers: postHeader);
+  }
+
+  static Future<http.Response> followTag(
+      String backendURI, Map<String, String> params) {
+    return http.post(Uri.parse(apiIp + backendURI),
+        body: jsonEncode(params), headers: postHeader);
   }
 }

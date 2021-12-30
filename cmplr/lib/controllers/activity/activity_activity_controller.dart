@@ -232,7 +232,10 @@ class ActivityActivityController extends GetxController {
           Padding(
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(date),
+              child: Text(date,
+                  style: TextStyle(
+                      color: Get.theme.textTheme.bodyText1?.color,
+                      fontWeight: FontWeight.bold)),
             ),
             padding: EdgeInsets.symmetric(
                 horizontal: Sizing.blockSize * 2,

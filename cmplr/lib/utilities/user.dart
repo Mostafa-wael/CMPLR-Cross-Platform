@@ -63,7 +63,11 @@ class User {
     GetStorage().remove('tokens');
     GetStorage().remove('user');
 
-    final activityActivityController = Get.find<ActivityActivityController>();
-    activityActivityController.fetchTimer?.cancel();
+    try {
+      final activityActivityController = Get.find<ActivityActivityController>();
+      activityActivityController.fetchTimer?.cancel();
+    } catch (e) {
+      e.printError();
+    }
   }
 }

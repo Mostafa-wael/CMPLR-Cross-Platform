@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 import 'dart:math';
 import 'package:html/parser.dart' as parser;
+import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import '../../models/pages_model/explore_tab/explore_model.dart';
 import '../../views/views.dart';
@@ -20,7 +21,7 @@ import 'dart:math' as math;
 /// Manages the fetching and holding of data for the explore tab.
 class ExploreController extends GetxController {
   // Helper parameters for easy tuning of widgets
-  static const elementWidthPercentage = 30.0;
+  static double elementWidthPercentage = 32.0;
   final tagsYouFollowHeight = Sizing.blockSizeVertical * 10.0;
   final checkOutTheseTagsHeight = Sizing.blockSizeVertical * 21;
   final checkOutTheseBlogsHeight = Sizing.blockSizeVertical * 20;
@@ -136,7 +137,9 @@ class ExploreController extends GetxController {
 
     if (type == 'cott') {
       var colorIndex = 0;
-      for (final cott in checkOutTheseTags) {
+      for (var i = 0; i < checkOutTheseTags.length; i++) {
+        final cott = checkOutTheseTags[i];
+
         final otherData = Map.from(cott);
         List postViews = (cott['posts_views'] as List).map((element) {
           element = element['link'];
@@ -166,6 +169,7 @@ class ExploreController extends GetxController {
             imgOneURL: imgOneUrl,
             imgTwoURL: imgTwoUrl,
             tagName: cott['tag_name'],
+            index: i,
             widgetColor: clrs[(colorIndex++ % clrs.length)]));
       }
     } else if (type == 'twca') {
@@ -196,7 +200,9 @@ class ExploreController extends GetxController {
     final cotbWidgets = <Widget>[];
     var colorIndex = 0;
 
-    for (final cotb in checkOutTheseBlogs) {
+    for (var i = 0; i < checkOutTheseBlogs.length; i++) {
+      final cotb = checkOutTheseBlogs[i];
+
       final testId =
           cotb.containsKey('test_id') ? cotb['test_id'] : Random().nextInt(16);
 
@@ -211,6 +217,7 @@ class ExploreController extends GetxController {
         blogBgURL: cotb['header_image'],
         blogImgRadius: blogImgRadius,
         blogImgCenterHeightFactor: blogNameCenterHeightFactor,
+        index: i,
         // FIXME: Figure out how the backend returns background_color and
         // convert it to flutter colors
         widgetColor: clrs.reversed.toList()[colorIndex++ % clrs.length],
@@ -235,7 +242,12 @@ class ExploreController extends GetxController {
       for (final trendTag in item['trend_tags']) {
         trendingTags.add(Padding(
           padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-          child: Text(trendTag),
+          child: Text(
+            trendTag,
+            style: TextStyle(
+              color: Get.theme.textTheme.bodyText1?.color,
+            ),
+          ),
         ));
       }
 

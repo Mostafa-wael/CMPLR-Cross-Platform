@@ -21,7 +21,7 @@ class SignupOrLoginScreen extends StatelessWidget {
     return GetBuilder<SignupLoginController>(
       init: SignupLoginController(),
       builder: (controller) => Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Get.theme.primaryColor,
         body: Stack(
           children: [
             Center(

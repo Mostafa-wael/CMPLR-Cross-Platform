@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../controllers.dart';
+
 import '../../cmplr_theme.dart';
 
 import '../../views/profile_tab/change_name_view.dart';
@@ -269,6 +271,9 @@ class ProfileController extends GetxController
       trueBlue = true;
       darkMode = false;
       update();
+
+      Get.find<MasterPageController>().update();
+      Get.find<PostFeedController>().update();
     }
   }
 
@@ -280,7 +285,10 @@ class ProfileController extends GetxController
       trueBlue = false;
       darkMode = true;
       Get.changeThemeMode(ThemeMode.dark);
+
       update();
+      Get.find<MasterPageController>().update();
+      Get.find<PostFeedController>().update();
     }
   }
 

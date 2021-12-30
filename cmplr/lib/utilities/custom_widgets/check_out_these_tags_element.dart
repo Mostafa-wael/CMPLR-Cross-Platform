@@ -23,6 +23,8 @@ class CheckOutTheseTagsElement extends StatelessWidget {
   var gestureDetectorKey;
   final Map? otherData;
 
+  var index;
+
   CheckOutTheseTagsElement(
       {required this.width,
       required this.height,
@@ -33,13 +35,19 @@ class CheckOutTheseTagsElement extends StatelessWidget {
       required this.widgetColor,
       this.gestureDetectorKey,
       this.otherData,
+      this.index,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controllerTag = 'CheckOutTheseTagsController$index';
+    final controller =
+        Get.put(CheckOutTheseTagsElementController(), tag: controllerTag);
+
     return GetBuilder<CheckOutTheseTagsElementController>(
-      init: CheckOutTheseTagsElementController(),
+      tag: controllerTag,
+      init: controller,
       builder: (controller) => Padding(
           padding: const EdgeInsets.only(left: 4, right: 4),
           child: GestureDetector(
@@ -104,7 +112,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                               width: Sizing.blockSize * 28,
                               child: TextButton(
                                 onPressed: () {
-                                  // FIXME: follow/unfollow this tag
+                                  controller.followUnfollow(tagName);
                                 },
                                 child: Text(
                                     controller.followed ? 'Unfollow' : 'Follow',
@@ -125,20 +133,22 @@ class CheckOutTheseTagsElement extends StatelessWidget {
 class CheckOutTheseTagsElementController extends GetxController {
   var followed = false;
 
-  void followUnfollow(String blogName) {
+  void followUnfollow(String tagName) {
     if (followed)
-      CMPLRService.unfollowBlog(DeleteURIs.unfollowBlog, {'blogName': blogName})
+      CMPLRService.unfollowTag(DeleteURIs.unfollowTag, {'tag_name': tagName})
           .then((http.Response response) {
-        if (response.statusCode == CMPLRService.requestSuccess)
+        if (response.statusCode == CMPLRService.requestSuccess) {
           followed = false;
-        update();
+          update();
+        }
       });
     else
-      CMPLRService.followBlog(PostURIs.followBlog, {'blogName': blogName})
+      CMPLRService.followTag(PostURIs.followTag, {'tag_name': tagName})
           .then((http.Response response) {
-        if (response.statusCode == CMPLRService.requestSuccess)
-          followed = false;
-        update();
+        if (response.statusCode == CMPLRService.requestSuccess) {
+          followed = true;
+          update();
+        }
       });
   }
 }

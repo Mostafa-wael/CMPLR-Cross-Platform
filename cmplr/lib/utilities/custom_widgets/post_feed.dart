@@ -25,7 +25,9 @@ class PostFeed extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PostFeedController>(
         init: PostFeedController(postFeedTypeFeed: postType, prefix: prefix),
-        builder: (controller) => getBody(context));
+        builder: (controller) => Scaffold(
+              body: getBody(context),
+            ));
   }
 
   Widget getBody(BuildContext context) {

@@ -19,10 +19,12 @@ class TrendingNow extends StatelessWidget {
             padding: EdgeInsets.only(left: Sizing.blockSize * 2),
             child: SizedBox(
               height: Sizing.blockSizeVertical * 5,
-              child: const Align(
+              child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text('Trending now',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                        color: Get.theme.textTheme.bodyText1?.color,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
           ),

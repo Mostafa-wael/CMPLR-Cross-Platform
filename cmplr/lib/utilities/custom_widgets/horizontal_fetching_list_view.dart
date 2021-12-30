@@ -15,14 +15,13 @@ class HorizontalFetchingListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: NotificationListener<ScrollNotification>(
-            onNotification: controller.handleScrollNotification,
-            child: ListView(
-              controller: controller.scrollController,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: controller.checkOutTheseBlogs,
-            )));
+    return NotificationListener<ScrollNotification>(
+        onNotification: controller.handleScrollNotification,
+        child: ListView(
+          controller: controller.scrollController,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          children: controller.checkOutTheseBlogs,
+        ));
   }
 }
