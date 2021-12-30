@@ -5,17 +5,20 @@ import '../../models/models.dart';
 
 class ProfileSearchController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  // Model that gets the blogs that the user currently follows
   ProfileSearchModel profileSearchModel = ProfileSearchModel();
 
-  // controller for the search text field
+  /// Controller for the search text field
   final _searchBarController = TextEditingController();
 
+  /// Whether to show the clear icon or not
   RxBool showClearSearchBarIcon = false.obs;
 
   late TabController _tabController;
 
   int _tabIndex = 0;
 
+  /// Holds the search query
   final RxString searchQuery = ''.obs;
 
   final List<String> popupMenuChoices = [
@@ -35,6 +38,8 @@ class ProfileSearchController extends GetxController
 
   TabController get tabController => _tabController;
 
+  /// Called when the widget is initialized, listens to changes in the tab bar
+  /// to change the index
   @override
   void onInit() {
     _tabController = TabController(length: 2, vsync: this);
@@ -61,6 +66,7 @@ class ProfileSearchController extends GetxController
     }
   }
 
+  /// Retrieves the blogs from the query
   void submitSearchQuery() {
     if (_tabIndex == 1) {
       if (followingBlogs != null) {

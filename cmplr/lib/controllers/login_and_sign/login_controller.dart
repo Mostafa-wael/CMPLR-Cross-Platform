@@ -5,7 +5,6 @@ import '../../utilities/authentication/authentication.dart';
 import '../../models/persistent_storage_api.dart';
 
 import '../../utilities/functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
