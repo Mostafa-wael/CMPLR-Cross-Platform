@@ -288,9 +288,11 @@ class EditProfileView extends StatelessWidget {
                       children: <Widget>[
                         PostFeed(
                           postFeedTypePage: GetURIs.postByName,
+                          prefix: 'EditProfile',
                         ),
                         PostFeed(
                           postFeedTypePage: GetURIs.userLikes,
+                          prefix: 'EditProfile',
                         ),
                         FutureBuilder(
                             future: controller.getFollowingBlogs(),

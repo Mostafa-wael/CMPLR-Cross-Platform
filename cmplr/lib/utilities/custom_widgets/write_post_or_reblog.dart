@@ -179,6 +179,8 @@ class WritePostOrReblog extends StatelessWidget {
                             showBottomBar: false,
                             isLiked: controller.post!.isLiked,
                             isMine: controller.post!.isMine,
+                            prefix: 'reblog',
+                            index: 0,
                           ),
                         ),
                       ),

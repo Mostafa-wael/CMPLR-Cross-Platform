@@ -11,6 +11,7 @@ class HomeFollowing extends StatelessWidget {
     print('Following');
     return PostFeed(
       postFeedTypePage: GetURIs.postFollowing,
+      prefix: 'HomeFollowing',
     );
   }
 }

@@ -33,8 +33,9 @@ class CustomAppBar extends PreferredSize {
 }
 
 class HashtagPosts extends StatelessWidget {
-  const HashtagPosts({Key? key}) : super(key: key);
-
+  const HashtagPosts({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
@@ -172,11 +173,15 @@ class HashtagPosts extends StatelessWidget {
                           controller: controller.tabController,
                           children: <Widget>[
                             PostFeed(
-                                postFeedTypePage: GetURIs.hashtagPosts,
-                                tag: controller.tagName),
+                              postFeedTypePage: GetURIs.hashtagPosts,
+                              tag: controller.tagName,
+                              prefix: 'Recent' + controller.tagName,
+                            ),
                             PostFeed(
-                                postFeedTypePage: GetURIs.hashtagPosts,
-                                tag: controller.tagName),
+                              postFeedTypePage: GetURIs.hashtagPosts,
+                              tag: controller.tagName,
+                              prefix: 'Top' + controller.tagName,
+                            ),
                           ],
                         ),
                       ),

@@ -33,6 +33,7 @@ class TryThesePosts extends StatelessWidget {
       ),
       body: PostFeed(
         postFeedTypePage: '/recommended/posts',
+        prefix: 'TryThesePosts',
       ),
     );
   }

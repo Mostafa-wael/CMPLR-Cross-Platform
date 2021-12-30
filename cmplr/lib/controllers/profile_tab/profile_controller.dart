@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../../cmplr_theme.dart';
+
 import '../../views/profile_tab/change_name_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -262,6 +264,7 @@ class ProfileController extends GetxController
     final response = await _model.putTheme('trueBlue');
     if (response.statusCode == CMPLRService.requestSuccess) {
       Get.changeThemeMode(ThemeMode.light);
+      Get.changeTheme(CMPLRTheme.trueBlue());
       User.userMap['theme'] = 'trueBlue';
       trueBlue = true;
       darkMode = false;
@@ -273,6 +276,7 @@ class ProfileController extends GetxController
     final response = await _model.putTheme('darkMode');
     if (response.statusCode == CMPLRService.requestSuccess) {
       User.userMap['theme'] = 'darkMode';
+      Get.changeTheme(CMPLRTheme.darkTheme());
       trueBlue = false;
       darkMode = true;
       Get.changeThemeMode(ThemeMode.dark);
