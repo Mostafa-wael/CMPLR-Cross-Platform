@@ -36,6 +36,8 @@ class PostURIs {
   static String getAddTagsToPost(String blogID) =>
       '/' + blogID + '/add_tags_to_posts';
   static const String imgUpload = '/base64image_upload';
+
+  static const String followTag = '/user/tags/add';
 }
 
 class GetURIs {
@@ -82,4 +84,5 @@ class PutURIs {
 class DeleteURIs {
   static const String unfollowBlog = '/user/follow';
   static const String unlikePost = '/user/unlike';
+  static const String unfollowTag = '/user/tags/remove';
 }

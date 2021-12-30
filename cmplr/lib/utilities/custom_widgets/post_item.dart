@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../views/utilities/hashtag_posts_view.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -17,6 +19,8 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import '../../controllers/controllers.dart';
 
 import 'package:flutter_html/flutter_html.dart';
+
+import 'package:html/parser.dart' as parser;
 
 /// This widget represents the post item with all its data
 class PostItem extends StatelessWidget {
@@ -265,9 +269,14 @@ class PostItem extends StatelessWidget {
   factory PostItem.fromJson(Map<String, dynamic> json) {
     final isLikedValue =
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
+
+    // Remove raw base64 posts to avoid crashing
+    final content = json['post']['content']
+        .replaceAll(RegExp(r'^data:image\/[a-z]+;base64,'), '');
+
     return PostItem(
       isMine: json['post']['is_mine'],
-      postData: json['post']['content'],
+      postData: content,
       postID: json['post']['post_id'].toString(),
       reblogKey: "$json['post']['post_id']",
       numNotes: json['post']['notes_count'],

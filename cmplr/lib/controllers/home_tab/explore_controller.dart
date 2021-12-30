@@ -136,7 +136,9 @@ class ExploreController extends GetxController {
 
     if (type == 'cott') {
       var colorIndex = 0;
-      for (final cott in checkOutTheseTags) {
+      for (var i = 0; i < checkOutTheseTags.length; i++) {
+        final cott = checkOutTheseTags[i];
+
         final otherData = Map.from(cott);
         List postViews = (cott['posts_views'] as List).map((element) {
           element = element['link'];
@@ -166,6 +168,7 @@ class ExploreController extends GetxController {
             imgOneURL: imgOneUrl,
             imgTwoURL: imgTwoUrl,
             tagName: cott['tag_name'],
+            index: i,
             widgetColor: clrs[(colorIndex++ % clrs.length)]));
       }
     } else if (type == 'twca') {
@@ -196,7 +199,9 @@ class ExploreController extends GetxController {
     final cotbWidgets = <Widget>[];
     var colorIndex = 0;
 
-    for (final cotb in checkOutTheseBlogs) {
+    for (var i = 0; i < checkOutTheseBlogs.length; i++) {
+      final cotb = checkOutTheseBlogs[i];
+
       final testId =
           cotb.containsKey('test_id') ? cotb['test_id'] : Random().nextInt(16);
 
@@ -211,6 +216,7 @@ class ExploreController extends GetxController {
         blogBgURL: cotb['header_image'],
         blogImgRadius: blogImgRadius,
         blogImgCenterHeightFactor: blogNameCenterHeightFactor,
+        index: i,
         // FIXME: Figure out how the backend returns background_color and
         // convert it to flutter colors
         widgetColor: clrs.reversed.toList()[colorIndex++ % clrs.length],
