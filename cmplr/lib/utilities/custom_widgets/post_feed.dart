@@ -11,29 +11,47 @@ class PostFeed extends StatelessWidget {
   var postType = '';
   var tag;
   var prefix;
-  PostFeed({Key? key, postFeedTypePage, tag, required prefix})
+  var blogName;
+  var getTag;
+
+  PostFeed(
+      {Key? key,
+      postFeedTypePage,
+      tag,
+      blogName,
+      required getTag,
+      required prefix})
       : super(key: key) {
     postType = postFeedTypePage ?? '';
     this.tag = tag;
+    this.blogName = blogName;
     this.prefix = prefix;
+    this.getTag = getTag;
+
     print('in the view, Post Type is $postType');
     controller = Get.put(PostFeedController(
-        postFeedTypeFeed: postType, tag: tag, prefix: prefix));
+        postFeedTypeFeed: postType,
+        tag: tag,
+        prefix: prefix,
+        blogName: blogName));
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PostFeedController>(
-        init: PostFeedController(postFeedTypeFeed: postType, prefix: prefix),
+        tag: getTag,
+        init: PostFeedController(
+            postFeedTypeFeed: postType, prefix: prefix, blogName: blogName),
         builder: (controller) => Scaffold(
-              body: getBody(context),
+              body: getBody(context, blogName),
             ));
   }
 
-  Widget getBody(BuildContext context) {
+  Widget getBody(BuildContext context, String? blogName) {
     if (!controller.dataReloaded) {
       return FutureBuilder(
-          future: controller.model.getNewPosts(postFeedTypeContoller: postType),
+          future: controller.model
+              .getNewPosts(postFeedTypeContoller: postType, blogName: blogName),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               controller.posts = snapshot.data ?? <PostItem>[];

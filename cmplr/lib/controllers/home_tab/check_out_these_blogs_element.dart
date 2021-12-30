@@ -127,8 +127,9 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
                   ),
                 )),
             onTap: () {
-              Get.to(
-                  VisitorBlog(blogId: otherData?['blog_id']?.toString() ?? ''));
+              Get.to(VisitorBlog(
+                  blogId: otherData?['blog_id']?.toString() ?? '',
+                  blogName: otherData?['blog_name']));
             },
           )),
     );

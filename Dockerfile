@@ -9,19 +9,21 @@ RUN apt-get update  -y && \
     apt-get clean
 
 # Clone the flutter repo -latest version-
-RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
+RUN git clone -b flutter-2.5-candidate.3 https://github.com/flutter/flutter.git /usr/local/flutter
+
+
 
 # Set flutter path
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
 
+RUN flutter --version
 
 # Enable flutter web
 RUN flutter channel master  && flutter upgrade  && flutter config --enable-web 
 
 # Copy files to container
-RUN mkdir /app/
-COPY . /app/
-WORKDIR /app/
+WORKDIR /app
+COPY ./cmplr .
 # Build the web app
 RUN flutter build web
 
@@ -29,9 +31,7 @@ RUN flutter build web
 #----------------------------------------------------------------
 # Configure the server
 FROM nginx:1.21.1-alpine
-COPY --from=build-env /app/build/web /usr/share/nginx/html
 
-# to build the image
-# docker build flutter_web .
-# to run the image
-# docker run -d -p 5170:80 flutter_web
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build-env /app/build/web /usr/share/nginx/html

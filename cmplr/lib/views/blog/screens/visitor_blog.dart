@@ -1,18 +1,19 @@
-import '../../../routes.dart';
+import '../../../utilities/custom_widgets/custom_widgets.dart';
 
+import '../../../backend_uris.dart';
 import '../../../utilities/sizing/sizing.dart';
-
 import '../../../controllers/utilities/post_feed_controller.dart';
-
 import '../../../controllers/blog/blog_controller.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 
 class VisitorBlog extends StatelessWidget {
-  VisitorBlog({Key? key, required this.blogId}) : super(key: key);
+  VisitorBlog({Key? key, required this.blogId, required this.blogName})
+      : super(key: key);
 
   final String blogId;
+  final String blogName;
   final double coverHight = 280.0;
   final double profileHeight = 144.0;
 
@@ -29,8 +30,13 @@ class VisitorBlog extends StatelessWidget {
     Sizing.blockSizeVertical = Sizing.height / 100;
     Sizing.setFontSize();
 
-    final postController = Get.put(PostFeedController(
-        postFeedTypeFeed: Routes.homeTab, prefix: 'VisitorBlog'));
+    final postController = Get.put(
+        PostFeedController(
+            prefix: 'VisitorBlog',
+            postFeedTypeFeed: GetURIs.postByName,
+            blogName: blogName),
+        tag: 'OtherBlogs');
+
     postController.updatePosts();
 
     blogController.fetchBlogInfo(blogId);
@@ -62,7 +68,7 @@ class VisitorBlog extends StatelessWidget {
                 Text(
                   blogController.isBlogInfoLoading.value
                       ? ''
-                      : blogController.blogInfo!.value.name!,
+                      : blogController.blogInfo!.value.title!,
                   style: const TextStyle(fontSize: 20),
                 ),
 

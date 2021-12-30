@@ -212,7 +212,9 @@ class ExploreScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   children: controller.thingsWeCareAbout),
                             ),
-                            const TrendingNow()
+
+                            // ignore: prefer_const_constructors
+                            TrendingNow()
                           ],
                         )
                       ]),

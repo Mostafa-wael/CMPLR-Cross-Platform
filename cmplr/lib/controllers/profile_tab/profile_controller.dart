@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../home_tab/explore_controller.dart';
+
 import '../controllers.dart';
 
 import '../../cmplr_theme.dart';
@@ -270,10 +272,25 @@ class ProfileController extends GetxController
       User.userMap['theme'] = 'trueBlue';
       trueBlue = true;
       darkMode = false;
-      update();
 
       Get.find<MasterPageController>().update();
-      Get.find<PostFeedController>().update();
+
+      Get.find<PostFeedController>(tag: 'OtherBlogs').update();
+      Get.find<PostFeedController>(tag: 'HomeFollowing').update();
+      Get.find<PostFeedController>(tag: 'StuffForYou').update();
+      Get.find<PostFeedController>(tag: 'EditProfilePost').update();
+      Get.find<PostFeedController>(tag: 'EditProfileLike').update();
+      Get.find<PostFeedController>(tag: 'ProfileViewPosts').update();
+      Get.find<PostFeedController>(tag: 'ProfileViewLikesRecent').update();
+      Get.find<PostFeedController>(tag: 'HashTagPostsRecent').update();
+      Get.find<PostFeedController>(tag: 'HashTagPostsTop').update();
+      Get.find<PostFeedController>(tag: 'SearchResults1').update();
+      Get.find<PostFeedController>(tag: 'SearchResults2').update();
+      Get.find<PostFeedController>(tag: 'SearchResults3').update();
+      Get.find<PostFeedController>(tag: 'TryThesePosts').update();
+
+      Get.find<ExploreController>().update();
+      update();
     }
   }
 
@@ -286,9 +303,24 @@ class ProfileController extends GetxController
       darkMode = true;
       Get.changeThemeMode(ThemeMode.dark);
 
-      update();
       Get.find<MasterPageController>().update();
-      Get.find<PostFeedController>().update();
+
+      Get.find<PostFeedController>(tag: 'OtherBlogs').update();
+      Get.find<PostFeedController>(tag: 'HomeFollowing').update();
+      Get.find<PostFeedController>(tag: 'StuffForYou').update();
+      Get.find<PostFeedController>(tag: 'EditProfilePost').update();
+      Get.find<PostFeedController>(tag: 'EditProfileLike').update();
+      Get.find<PostFeedController>(tag: 'ProfileViewPosts').update();
+      Get.find<PostFeedController>(tag: 'ProfileViewLikesRecent').update();
+      Get.find<PostFeedController>(tag: 'HashTagPostsRecent').update();
+      Get.find<PostFeedController>(tag: 'HashTagPostsTop').update();
+      Get.find<PostFeedController>(tag: 'SearchResults1').update();
+      Get.find<PostFeedController>(tag: 'SearchResults2').update();
+      Get.find<PostFeedController>(tag: 'SearchResults3').update();
+      Get.find<PostFeedController>(tag: 'TryThesePosts').update();
+
+      Get.find<ExploreController>().update();
+      update();
     }
   }
 

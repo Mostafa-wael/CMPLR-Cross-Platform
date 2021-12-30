@@ -6,23 +6,31 @@ import 'dart:convert';
 class ModelPostsFeed {
   var postFeedType = '';
   String? tag;
+  String? blogName;
   var prefix;
+
   ModelPostsFeed({
     required String postFeedTypeContoller,
     String? tag,
+    String? blogName,
     required prefix,
   }) {
     postFeedType = postFeedTypeContoller;
     this.tag = tag;
     this.prefix = prefix;
+    this.blogName = blogName;
     print('in the model, postFeedType is $postFeedType');
   }
+
   Future<List<PostItem>> getNewPosts(
-      {String postFeedTypeContoller = ''}) async {
+      {String postFeedTypeContoller = '', String? blogName}) async {
     postFeedType =
         postFeedTypeContoller != '' ? postFeedTypeContoller : postFeedType;
     final posts = <PostItem>[];
-    final response = await CMPLRService.get(postFeedType, {'tag': tag});
+
+    final response = await CMPLRService.get(
+        postFeedType, {'tag': tag, 'blogName': blogName});
+
     if (response.statusCode == CMPLRService.requestSuccess) {
       final responseBody = jsonDecode(response.body);
       // print('model, $postFeedType posts from json');

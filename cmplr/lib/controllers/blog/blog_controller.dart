@@ -94,7 +94,7 @@ class BlogController extends GetxController {
       final response =
           await CMPLRService.getBlogInfo(GetURIs.getBlogInfo(blogId), {});
 
-      blogInfo = BlogInfo.fromJson(json.decode(response.body)).obs;
+      blogInfo = BlogInfo.fromJson(json.decode(response.body)['response']).obs;
     } catch (e) {
       e.printError();
       isBlogInfoLoading(true);

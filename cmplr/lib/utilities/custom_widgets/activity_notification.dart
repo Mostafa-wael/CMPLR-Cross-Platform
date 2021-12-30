@@ -68,9 +68,11 @@ class ActivityNotification extends StatelessWidget {
   // Helper functions
   void goToBlog() {
     Get.to(VisitorBlog(
-        blogId: notif.fromBlogId.runtimeType == int
-            ? notif.fromBlogId.toString()
-            : notif.fromBlogId));
+      blogId: notif.fromBlogId.runtimeType == int
+          ? notif.fromBlogId.toString()
+          : notif.fromBlogId,
+      blogName: notif.fromBlogName,
+    ));
   }
 
   void goToYourOwnProfile() {

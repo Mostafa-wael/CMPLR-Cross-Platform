@@ -1,8 +1,8 @@
-import '../../flags.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../flags.dart';
 import '../../backend_uris.dart';
 import 'package:getwidget/getwidget.dart';
-
 import '../../models/models.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import '../../utilities/sizing/sizing.dart';
@@ -472,10 +472,13 @@ class ProfileView extends StatelessWidget {
                     body: TabBarView(
                       children: <Widget>[
                         PostFeed(
+                          getTag: 'ProfileViewPosts',
+                          blogName: GetStorage().read('user')['blog_name'],
                           postFeedTypePage: GetURIs.postByName,
                           prefix: 'ProfileViewPosts',
                         ),
                         PostFeed(
+                          getTag: 'ProfileViewLikesRecent',
                           postFeedTypePage: GetURIs.userLikes,
                           prefix: 'ProfileViewLikesRecent',
                         ),
@@ -564,7 +567,7 @@ class ProfileView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: Sizing.fontSize * 4.2,
                             fontWeight: FontWeight.w500,
-                            color: Theme.of(context).primaryColor),
+                            color: Get.theme.textTheme.bodyText1?.color),
                       ),
                       Text(
                         blog.profileTitle,
@@ -573,7 +576,7 @@ class ProfileView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: Sizing.fontSize * 4.2,
                             fontWeight: FontWeight.w400,
-                            color: Theme.of(context).primaryColor),
+                            color: Get.theme.textTheme.bodyText1?.color),
                       ),
                     ],
                   ),
