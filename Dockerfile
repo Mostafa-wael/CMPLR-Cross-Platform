@@ -9,7 +9,7 @@ RUN apt-get update  -y && \
     apt-get clean
 
 # Clone the flutter repo -latest version-
-RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
+RUN git clone -b flutter-2.5-candidate.3 https://github.com/flutter/flutter.git /usr/local/flutter
 
 # Set flutter path
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
