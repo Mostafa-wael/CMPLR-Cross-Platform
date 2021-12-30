@@ -97,7 +97,12 @@ class ExploreController extends GetxController {
       var colorIndex = 0;
       for (final cott in checkOutTheseTags) {
         final otherData = Map.from(cott);
-        final List postViews = cott['posts_views'];
+        List postViews = (cott['posts_views'] as List).map((element) {
+          element = element['link'];
+        }).toList();
+
+        postViews = postViews.whereType<String>().toList();
+
         final testId = cott.containsKey('test_id')
             ? cott['test_id']
             : Random().nextInt(16);
@@ -246,18 +251,20 @@ class ExploreController extends GetxController {
       final imageElements = document.getElementsByTagName('img');
 
       /* 
-         ttpWidgets.add(
-          FadeInImage.assetNetwork(
-            placeholder:
-                placeHolders[math.Random().nextInt(placeHolders.length)],
-            image: ttp,
-            fit: BoxFit.cover,
-          ),
+        if (imageElements.length > 0 &&
+          Uri.parse(imageElements[0].attributes['src']).isAbsolute) {
+        final img = imageElements[0].attributes['src'];
         );*/
 
-      if (imageElements.length > 0) {
-        final img = imageElements[0].attributes['src'];
-
+      var img = null;
+      for (var j = 0; j < imageElements.length; j++) {
+        final maybeUrl = imageElements[j];
+        final validURL = Uri.parse(maybeUrl.attributes['src'] ?? '').isAbsolute;
+        if (validURL) {
+          img = maybeUrl.attributes['src'];
+        }
+      }
+      if (img != null) {
         ttpWidgets.add(
           TextOnImage(
             width: Sizing.blockSize * elementWidthPercentage,

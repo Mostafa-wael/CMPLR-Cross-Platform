@@ -1408,7 +1408,8 @@ class CMPLRService {
     }
   }
 
-  static Future<http.Response> get(String route, Map params) async {
+  static Future<http.Response> get(
+      String route, Map<String, dynamic> params) async {
     // Switch case since we might need to send requests with different
     // content types
 
@@ -1879,13 +1880,17 @@ class CMPLRService {
   }
 
   static Future<http.Response> getActivityNotifications(
-      String backendURI, Map params) async {
+      String backendURI, Map<String, dynamic> params) async {
     if (Flags.mock) {
       await Future.delayed(const Duration(milliseconds: 1500));
       return Future.value(http.Response(jsonEncode({}), invalidData));
     } else {
-      return http.post(Uri.parse(apiIp + backendURI),
-          headers: postHeader, body: jsonEncode(params));
+      final uri = apiIp + GetURIs.getActivityNotifications(User.blogName);
+
+      return http.get(
+        Uri.parse(uri),
+        headers: getHeader,
+      );
     }
   }
 

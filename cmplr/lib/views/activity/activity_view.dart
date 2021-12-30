@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../profile_tab/account_settings_view.dart';
 
 import '../../controllers/activity/activity_activity_controller.dart';
@@ -16,11 +18,14 @@ List<DropdownMenuItem<String>> moreItems = <DropdownMenuItem<String>>[
   DropdownMenuItem(
     child: TextButton(
       onPressed: () {
+        log('Refreshing activity screen');
         final activityActivityController =
             Get.find<ActivityActivityController>();
         activityActivityController.fetchNotifications();
 
         // TODO: refresh messages
+
+        Get.back();
       },
       child: const Text('Refresh'),
     ),

@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import '../../../flags.dart';
 import '../../../utilities/user.dart';
 import '../../../backend_uris.dart';
 import '../../cmplr_service.dart';
 
+// notification types: ask, answer, follow
 class Notification {
   var id,
       fromBlogId,
@@ -39,8 +41,8 @@ class Notification {
     id = json['notification_id'];
     fromBlogId = json['from_blog_id'];
     fromBlogName = json['from_blog_name'];
-    fromBlogAvatar = json['from_blog_avatar'];
-    fromBlogAvatarShape = json['from_blog_avatar_shape'];
+    fromBlogAvatar = json['from_blog_avatar'] ?? placeHolderImgUrl;
+    fromBlogAvatarShape = json['from_blog_avatar_shape'] ?? 'circle';
     toBlogId = json['to_blog_id'];
     toBlogName = json['to_blog_name'];
     type = json['type'];
@@ -66,28 +68,35 @@ class ActivityActivityModel {
         notifications.forEach((notification) {
           dateNotifs.add(Notification.fromJson(notification));
         });
-        notifs.add({'date': dateNotifs});
+        notifs.add({date: dateNotifs});
       });
     } else {
-      final response = await CMPLRService.get(
-        GetURIs.activityNotifications,
-        {'blog-identifier': User.userMap['id'].toString(), 'type': filterTypes},
-      );
-      if (response.statusCode == CMPLRService.requestSuccess) {
-        // Should return a list of notifications
-        final responseBody = jsonDecode(response.body);
-        final Map responseMap = responseBody['response'];
+      try {
+        final response = await CMPLRService.get(
+          GetURIs.activityNotifications,
+          {
+            'blog-identifier': User.userMap['id'].toString(),
+            'type': filterTypes
+          },
+        );
+        if (response.statusCode == CMPLRService.requestSuccess) {
+          // Should return a list of notifications
+          final responseBody = jsonDecode(response.body);
+          final Map responseMap = responseBody['response'];
 
-        responseMap.forEach((key, value) {
-          final date = key as String;
-          final dateNotifs = <Notification>[];
-          final notifications = value as List;
+          responseMap.forEach((key, value) {
+            final date = key as String;
+            final dateNotifs = <Notification>[];
+            final notifications = value as List;
 
-          notifications.forEach((notification) {
-            dateNotifs.add(Notification.fromJson(notification));
+            notifications.forEach((notification) {
+              dateNotifs.add(Notification.fromJson(notification));
+            });
+            notifs.add({date: dateNotifs});
           });
-          notifs.add({'date': dateNotifs});
-        });
+        }
+      } catch (e) {
+        log(e.toString());
       }
     }
 

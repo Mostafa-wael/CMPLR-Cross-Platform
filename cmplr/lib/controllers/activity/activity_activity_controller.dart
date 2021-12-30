@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:developer';
 
+import '../../utilities/custom_widgets/activity_notification.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import '../../utilities/custom_widgets/activity_filter_row.dart';
 
-import '../../models/pages_model/activity_tab/activity_activity_model.dart';
+import '../../models/pages_model/activity_tab/activity_activity_model.dart'
+    as am;
 
 import '../../utilities/sizing/sizing.dart';
 import 'package:get/get.dart';
@@ -16,8 +19,8 @@ import 'package:flutter/material.dart';
 class ActivityActivityController extends GetxController {
   // Small variables
   int currChosenFilter = 0;
-  List notifications = [];
-  List notificationWidgets = [];
+  List<Map<String, List<am.Notification>>> notifications = [];
+  List<Widget> notificationWidgets = [];
 
   // TODO: Convert all rows to CheckboxListTile and SwitchListTile
   // and remove these
@@ -31,10 +34,20 @@ class ActivityActivityController extends GetxController {
 
   var modalSheet;
   var context;
+  Timer? fetchTimer;
 
   /// Fetch some notifications on page creation
   ActivityActivityController() {
+    // Fetch the first time we open
     fetchNotifications();
+
+    // Fetch each 10 seconds
+    Timer.periodic(const Duration(seconds: 10), (timer) async {
+      log('Checking for activity notifications...');
+      notifications =
+          await am.ActivityActivityModel.getActivityNotifications(filterTypes);
+      updateNotifications();
+    });
   }
 
   // FIXME: Update the modalsheet in place
@@ -199,6 +212,47 @@ class ActivityActivityController extends GetxController {
     return filters;
   }
 
+  void fetchNotifications() async {
+    notifications =
+        await am.ActivityActivityModel.getActivityNotifications(filterTypes);
+    updateNotifications();
+  }
+
+  void updateNotifications() {
+    notificationWidgets.clear();
+
+    notifications.forEach((Map<String, List<am.Notification>> notif) {
+      final date = notif.keys.first;
+
+      // Add date widget
+      notificationWidgets.add(Column(
+        children: [
+          Padding(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(date),
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: Sizing.blockSize * 2,
+                vertical: Sizing.blockSizeVertical * 2),
+          ),
+          Container(
+            height: Sizing.blockSize * 0.2,
+            //TODO: Link this to theme
+            color: Colors.grey[800],
+          ),
+        ],
+      ));
+
+      notif[date]?.forEach((am.Notification notification) {
+        notification.type = typeToText[notification.type];
+        notificationWidgets.add(ActivityNotification(notification));
+      });
+    });
+
+    update();
+  }
+
   // Long variables
   /// Holds the various filter options, their back end filter types,
   /// Their current color, their icon, and whether they're the custom
@@ -278,20 +332,12 @@ class ActivityActivityController extends GetxController {
     'New group blog members': true
   };
 
-  void fetchNotifications() async {
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
-      notifications =
-          await ActivityActivityModel.getActivityNotifications(filterTypes);
-      updateNotifications();
-    });
-  }
-
-  void updateNotifications() {
-    print(notifications);
-    notifications.forEach((notif) {
-      print(notif);
-    });
-  }
+  /// Translates backend notification types to a more meaningful representation.
+  final typeToText = {
+    'reply': 'replied to your post!',
+    'like': 'liked your post!',
+    'follow': 'followed you!',
+  };
 }
 
 class CustomFilters extends StatelessWidget {

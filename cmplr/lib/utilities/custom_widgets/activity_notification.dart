@@ -16,7 +16,8 @@ class ActivityNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: Sizing.blockSize, vertical: Sizing.blockSizeVertical),
+          horizontal: Sizing.blockSize * 2,
+          vertical: Sizing.blockSizeVertical * 2),
       child: Row(
         children: [
           GestureDetector(
@@ -26,15 +27,20 @@ class ActivityNotification extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                     placeholder: placeHolderImgPath,
                     image: notif.fromBlogAvatar),
-                width: Sizing.blockSize * 5,
-                height: Sizing.blockSize,
+                width: Sizing.blockSize * 10,
+                height: Sizing.blockSize * 10,
               ),
             ),
             onTap: goToBlog,
           ),
           GestureDetector(
-            child: Expanded(
-              child: Text(notif.fromBlogName + notif.type + notif),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Sizing.blockSize * 2,
+                  vertical: Sizing.blockSizeVertical * 2),
+              child: Expanded(
+                child: Text([notif.fromBlogName, notif.type].join(' ')),
+              ),
             ),
             onTap: goToYourOwnProfile,
           ),

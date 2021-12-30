@@ -1,4 +1,8 @@
+import '../models/persistent_storage_api.dart';
+
+import '../controllers/activity/activity_activity_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class User {
@@ -50,5 +54,15 @@ class User {
         'avatar_shape': 'circle'
       },
     );
+  }
+
+  static void logOut() {
+    PersistentStorage.changeLoggedIn(false);
+    GetStorage().remove('blog_name');
+    GetStorage().remove('tokens');
+    GetStorage().remove('user');
+
+    final activityActivityController = Get.find<ActivityActivityController>();
+    activityActivityController.fetchTimer?.cancel();
   }
 }

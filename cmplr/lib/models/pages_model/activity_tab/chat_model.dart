@@ -38,10 +38,11 @@ class Message {
       {required Map<String, dynamic> json,
       required bool outOrIn,
       int index: 0}) {
+    final blogId = json['blog_data']['blog_id'];
     return outOrIn // out -> outside the chat, in -> inside the chat
         ? Message(
             sender: ChatUser(
-              blog_id: json['blog_data']['blog_id'],
+              blog_id: blogId.runtimeType != int ? int.parse(blogId) : blogId,
               blog_url: json['blog_data']['blog_url'],
               blog_name: json['blog_data']['blog_name'],
               avatar: json['blog_data']['avatar'],

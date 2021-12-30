@@ -1,3 +1,5 @@
+import '../../flags.dart';
+
 import '../../views/utilities/hashtag_posts_view.dart';
 import 'package:get/get.dart';
 
@@ -75,8 +77,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(
                                         Sizing.blockSize * 2),
                                     child: FadeInImage.assetNetwork(
-                                      placeholder:
-                                          'lib/utilities/assets/logo/logo_icon.png',
+                                      placeholder: placeHolderImgPath,
                                       image: imgOneURL,
                                       fit: BoxFit.cover,
                                     )),
@@ -88,8 +89,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(
                                         Sizing.blockSize * 2),
                                     child: FadeInImage.assetNetwork(
-                                        placeholder:
-                                            'lib/utilities/assets/logo/logo_icon.png',
+                                        placeholder: placeHolderImgPath,
                                         image: imgTwoURL,
                                         fit: BoxFit.cover)),
                               )

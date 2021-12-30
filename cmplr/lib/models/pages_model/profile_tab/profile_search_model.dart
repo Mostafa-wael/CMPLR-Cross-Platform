@@ -8,11 +8,14 @@ class ProfileSearchModel {
     final blogs = <Blog>[];
     final response =
         await CMPLRService.getFollowingBlogs(GetURIs.followingBlogs, {});
-    final responseBody = jsonDecode(response.body);
-    for (var i = 0; i < responseBody['response']['blogs'].length; i++) {
-      blogs.add(Blog.fromJson(responseBody['response']['blogs'][i]));
-    }
-    return blogs;
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      final responseBody = jsonDecode(response.body);
+      for (var i = 0; i < responseBody['response']['blogs'].length; i++) {
+        blogs.add(Blog.fromJson(responseBody['response']['blogs'][i]));
+      }
+      return blogs;
+    } else
+      return [];
   }
 
   Future<void> followBlog(String blogName) async {

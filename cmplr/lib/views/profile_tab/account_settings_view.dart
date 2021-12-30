@@ -1,3 +1,5 @@
+import '../../utilities/user.dart';
+import '../login_and_sign/signup_or_login_view.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -133,7 +135,10 @@ class AccountSettingsView extends StatelessWidget {
                 SettingsTile(
                   title: 'Logout',
                   leading: const Icon(Icons.logout),
-                  onPressed: (BuildContext context) {},
+                  onPressed: (BuildContext context) {
+                    User.logOut();
+                    Get.offAll(const SignupOrLoginScreen());
+                  },
                 ),
               ],
             ),
