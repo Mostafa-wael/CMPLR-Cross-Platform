@@ -31,11 +31,12 @@ class VisitorBlog extends StatelessWidget {
     Sizing.setFontSize();
 
     final postController = Get.put(
-        PostFeedController(
-            prefix: 'VisitorBlog',
-            postFeedTypeFeed: GetURIs.postByName,
-            blogName: blogName),
-        tag: 'OtherBlogs');
+      PostFeedController(
+          prefix: 'VisitorBlog',
+          postFeedTypeFeed: GetURIs.postByName,
+          blogName: blogName),
+      tag: 'OtherBlogs',
+    );
 
     postController.updatePosts();
 

@@ -4,23 +4,30 @@ import 'package:get/get.dart';
 import '../../models/pages_model/activity_tab/chat_model.dart';
 import 'conversation_messages_view.dart';
 
+final messagesState = GlobalKey<ConversationsListState>();
+
 class ConversationsList extends StatefulWidget {
   const ConversationsList({Key? key}) : super(key: key);
 
   @override
-  State<ConversationsList> createState() => _ConversationsListState();
+  State<ConversationsList> createState() => ConversationsListState();
 }
 
-class _ConversationsListState extends State<ConversationsList> {
+class ConversationsListState extends State<ConversationsList> {
   bool _isLoading = true;
-  @override
-  void initState() {
-    super.initState();
+
+  void fetchData() {
     ModelChatModule.getConversationsList().then((dummy) => {
           setState(() {
             _isLoading = false;
           })
         });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
   }
 
   @override

@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'conversations_list_view.dart';
+
 import '../profile_tab/account_settings_view.dart';
 
 import '../../controllers/activity/activity_activity_controller.dart';
@@ -24,11 +26,15 @@ List<DropdownMenuItem<String>> moreItems = <DropdownMenuItem<String>>[
       key: const ValueKey('ActivityRefresh-Refresh'),
       onPressed: () {
         log('Refreshing activity screen');
-        final activityActivityController =
-            Get.find<ActivityActivityController>();
-        activityActivityController.fetchNotifications();
+        try {
+          final activityActivityController =
+              Get.find<ActivityActivityController>();
+          activityActivityController.fetchNotifications();
+        } catch (e) {
+          e.printError();
+        }
 
-        // TODO: refresh messages
+        messagesState.currentState?.fetchData();
 
         Get.back();
       },

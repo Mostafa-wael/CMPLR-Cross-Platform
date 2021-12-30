@@ -273,23 +273,8 @@ class ProfileController extends GetxController
       trueBlue = true;
       darkMode = false;
 
-      Get.find<MasterPageController>().update();
+      rebuildViews();
 
-      Get.find<PostFeedController>(tag: 'OtherBlogs').update();
-      Get.find<PostFeedController>(tag: 'HomeFollowing').update();
-      Get.find<PostFeedController>(tag: 'StuffForYou').update();
-      Get.find<PostFeedController>(tag: 'EditProfilePost').update();
-      Get.find<PostFeedController>(tag: 'EditProfileLike').update();
-      Get.find<PostFeedController>(tag: 'ProfileViewPosts').update();
-      Get.find<PostFeedController>(tag: 'ProfileViewLikesRecent').update();
-      Get.find<PostFeedController>(tag: 'HashTagPostsRecent').update();
-      Get.find<PostFeedController>(tag: 'HashTagPostsTop').update();
-      Get.find<PostFeedController>(tag: 'SearchResults1').update();
-      Get.find<PostFeedController>(tag: 'SearchResults2').update();
-      Get.find<PostFeedController>(tag: 'SearchResults3').update();
-      Get.find<PostFeedController>(tag: 'TryThesePosts').update();
-
-      Get.find<ExploreController>().update();
       update();
     }
   }
@@ -303,6 +288,14 @@ class ProfileController extends GetxController
       darkMode = true;
       Get.changeThemeMode(ThemeMode.dark);
 
+      rebuildViews();
+
+      update();
+    }
+  }
+
+  void rebuildViews() {
+    try {
       Get.find<MasterPageController>().update();
 
       Get.find<PostFeedController>(tag: 'OtherBlogs').update();
@@ -320,7 +313,8 @@ class ProfileController extends GetxController
       Get.find<PostFeedController>(tag: 'TryThesePosts').update();
 
       Get.find<ExploreController>().update();
-      update();
+    } catch (e) {
+      e.printError();
     }
   }
 
