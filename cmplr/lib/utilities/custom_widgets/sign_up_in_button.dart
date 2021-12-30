@@ -16,6 +16,7 @@ class SignUpInButton extends StatelessWidget {
     return Container(
       child: Material(
         child: InkWell(
+          key: key,
           child: Center(
             child: Text(
               text,
