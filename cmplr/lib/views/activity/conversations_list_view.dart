@@ -1,3 +1,4 @@
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/pages_model/activity_tab/chat_model.dart';
@@ -80,7 +81,14 @@ class _ConversationsListState extends State<ConversationsList> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Image.network(chat.sender.avatar, scale: 3),
+                                SizedBox(
+                                    width: Sizing.blockSizeVertical * 6,
+                                    height: Sizing.blockSizeVertical * 6,
+                                    child: Image.network(
+                                      chat.sender.avatar,
+                                      scale: 3,
+                                      fit: BoxFit.fill,
+                                    )),
                                 const SizedBox(width: 10.0),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

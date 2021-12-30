@@ -125,7 +125,9 @@ class VisitorBlog extends StatelessWidget {
         style: const TextStyle(color: Colors.white),
       ),
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.back();
+        },
         icon: const Icon(Icons.arrow_back),
         color: Colors.white,
       ),
@@ -149,10 +151,12 @@ class VisitorBlog extends StatelessWidget {
               color: Colors.white,
             )),
         TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Follow',
-              style: TextStyle(color: Colors.white),
+            onPressed: () {
+              blogController.followUnfollowBlog(blogName);
+            },
+            child: Text(
+              blogController.followed ? 'Unfollow' : 'Follow',
+              style: const TextStyle(color: Colors.white),
             ))
       ],
     );
