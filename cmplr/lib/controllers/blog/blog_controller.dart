@@ -6,6 +6,8 @@ import '../../models/cmplr_service.dart';
 import '../../models/pages_model/blog/blog_info_model.dart';
 import 'package:get/get.dart';
 
+import 'package:http/http.dart' as http;
+
 /// [BlogController] class is inherited from [GetxController]
 /// The class is used to handle and conrol the logic of Visitor Blog,
 /// and to handle the state
@@ -32,6 +34,7 @@ class BlogController extends GetxController {
   RxBool scrolledDown = false.obs;
   Rx<BlogInfo>? blogInfo;
   RxBool isBlogInfoLoading = true.obs;
+  bool followed = false;
 
   /// ToDo: Change this into Navigation instead of inside InitState
 
@@ -100,6 +103,26 @@ class BlogController extends GetxController {
       isBlogInfoLoading(true);
     } finally {
       isBlogInfoLoading(false);
+    }
+  }
+
+  void followUnfollowBlog(String blogName) {
+    if (followed) {
+      CMPLRService.followBlog(PostURIs.followBlog, {'blogName': blogName})
+          .then((http.Response response) {
+        if (response.statusCode == CMPLRService.requestSuccess) {
+          followed = true;
+          update();
+        }
+      });
+    } else {
+      CMPLRService.unfollowBlog(DeleteURIs.unfollowBlog, {'blogName': blogName})
+          .then((http.Response response) {
+        if (response.statusCode == CMPLRService.requestSuccess) {
+          followed = false;
+          update();
+        }
+      });
     }
   }
 }

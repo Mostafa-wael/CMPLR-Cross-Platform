@@ -1,23 +1,19 @@
-import 'dart:developer';
-
+import '../../controllers/controllers.dart';
+import '../sizing/sizing.dart';
+import '../../views/blog/screens/visitor_blog.dart';
 import '../../views/utilities/hashtag_posts_view.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-
 import '../custom_icons/custom_icons.dart';
 
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
-import '../sizing/sizing.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import '../../controllers/controllers.dart';
-
 import 'package:flutter_html/flutter_html.dart';
 
 /// This widget represents the post item with all its data
@@ -34,9 +30,11 @@ class PostItem extends StatelessWidget {
   RxBool isLiked = false.obs;
   final prefix;
   final index;
+  var blogId;
 
   PostItem(
       {Key? key,
+      required this.blogId,
       required this.postData,
       required this.postID,
       required this.reblogKey,
@@ -79,6 +77,7 @@ class PostItem extends StatelessWidget {
       title: InkWell(
         onTap: () {
           print('Profile clicked');
+          Get.to(VisitorBlog(blogId: blogId, blogName: name));
         },
         child: Text(
           '${name}',
@@ -280,11 +279,15 @@ class PostItem extends StatelessWidget {
     final isLikedValue =
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
 
+    var content = json['post']['content'];
+
     // Remove raw base64 posts to avoid crashing
-    final content = json['post']['content']
-        .replaceAll(RegExp(r'<.*(data:image\/)*;base64,.*>'), '');
+    if (RegExp(r'<.*(data:image\/)*;base64,.*>').allMatches(content).length > 0)
+      content = json['post']['content']
+          .replaceAll(RegExp(r'<.*(data:image\/)*;base64,.*>'), '');
 
     return PostItem(
+      blogId: json['blog']['blog_id'].toString(),
       isMine: json['post']['is_mine'],
       postData: content,
       postID: json['post']['post_id'].toString(),

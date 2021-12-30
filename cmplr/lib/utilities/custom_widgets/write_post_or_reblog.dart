@@ -169,6 +169,7 @@ class WritePostOrReblog extends StatelessWidget {
                                   color: Colors.grey,
                                   width: Sizing.blockSize / 20)),
                           child: PostItem(
+                            blogId: controller.post?.blogId,
                             postData: controller.post!.postData,
                             postID: controller.post!.postID,
                             reblogKey: controller.post!.reblogKey,
