@@ -10,6 +10,7 @@ class HomeStuffForYou extends StatelessWidget {
   Widget build(BuildContext context) {
     print('Stuff for you');
     return PostFeed(
+      getTag: 'StuffForYou',
       postFeedTypePage: GetURIs.postStuff,
       prefix: 'StuffForYou',
     );

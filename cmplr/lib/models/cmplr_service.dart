@@ -1434,8 +1434,8 @@ class CMPLRService {
       case GetURIs.activityNotifications:
         return getActivityNotifications(route, params);
       case GetURIs.postByName:
-        return getPostByName(
-            route + '/' + GetStorage().read('user')['blog_name'], params);
+        return getPostByName(route + '/' + params['blogName'], params);
+
       case GetURIs.userLikes:
         return getUserLikes(route, params);
       case GetURIs.tagsYouFollow:

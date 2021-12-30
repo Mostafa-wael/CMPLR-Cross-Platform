@@ -173,11 +173,13 @@ class HashtagPosts extends StatelessWidget {
                           controller: controller.tabController,
                           children: <Widget>[
                             PostFeed(
+                              getTag: 'HashTagPostsRecent',
                               postFeedTypePage: GetURIs.hashtagPosts,
                               tag: controller.tagName,
                               prefix: 'Recent' + controller.tagName,
                             ),
                             PostFeed(
+                              getTag: 'HashTagPostsTop',
                               postFeedTypePage: GetURIs.hashtagPosts,
                               tag: controller.tagName,
                               prefix: 'Top' + controller.tagName,

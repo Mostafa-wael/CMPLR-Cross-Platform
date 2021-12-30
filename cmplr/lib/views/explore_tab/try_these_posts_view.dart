@@ -32,6 +32,7 @@ class TryThesePosts extends StatelessWidget {
         ),
       ),
       body: PostFeed(
+        getTag: 'TryThesePosts',
         postFeedTypePage: '/recommended/posts',
         prefix: 'TryThesePosts',
       ),

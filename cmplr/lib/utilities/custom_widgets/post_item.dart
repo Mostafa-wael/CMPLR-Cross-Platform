@@ -20,8 +20,6 @@ import '../../controllers/controllers.dart';
 
 import 'package:flutter_html/flutter_html.dart';
 
-import 'package:html/parser.dart' as parser;
-
 /// This widget represents the post item with all its data
 class PostItem extends StatelessWidget {
   final String postData;
@@ -284,7 +282,7 @@ class PostItem extends StatelessWidget {
 
     // Remove raw base64 posts to avoid crashing
     final content = json['post']['content']
-        .replaceAll(RegExp(r'^data:image\/[a-z]+;base64,'), '');
+        .replaceAll(RegExp(r'<.*(data:image\/)*;base64,.*>'), '');
 
     return PostItem(
       isMine: json['post']['is_mine'],

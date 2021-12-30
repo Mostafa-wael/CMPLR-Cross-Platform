@@ -196,6 +196,7 @@ class SearchResultsView extends StatelessWidget {
                     ),
                     Container(
                       child: PostFeed(
+                        getTag: 'SearchResults1',
                         prefix: 'SearchResults1',
                         postFeedTypePage: '/user/dashboard',
                       ),
@@ -206,10 +207,12 @@ class SearchResultsView extends StatelessWidget {
                 ),
               ),
               PostFeed(
+                getTag: 'SearchResults2',
                 postFeedTypePage: '/user/dashboard',
                 prefix: 'SearchResults2',
               ),
               PostFeed(
+                getTag: 'SearchResults3',
                 postFeedTypePage: '/user/dashboard',
                 prefix: 'SearchResults3',
               ),

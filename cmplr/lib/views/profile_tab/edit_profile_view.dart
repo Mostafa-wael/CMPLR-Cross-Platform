@@ -1,3 +1,5 @@
+import 'package:get_storage/get_storage.dart';
+
 import '../../models/models.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
@@ -302,10 +304,13 @@ class EditProfileView extends StatelessWidget {
                     body: TabBarView(
                       children: <Widget>[
                         PostFeed(
+                          getTag: 'EditProfilePost',
+                          blogName: GetStorage().read('user')['blog_name'],
                           postFeedTypePage: GetURIs.postByName,
                           prefix: 'EditProfile',
                         ),
                         PostFeed(
+                          getTag: 'EditProfileLike',
                           postFeedTypePage: GetURIs.userLikes,
                           prefix: 'EditProfile',
                         ),
@@ -395,7 +400,7 @@ class EditProfileView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: Sizing.blockSize * 4.2,
                             fontWeight: FontWeight.w500,
-                            color: Theme.of(context).primaryColor),
+                            color: Get.theme.textTheme.bodyText1?.color),
                       ),
                       Text(
                         blog.profileTitle,
@@ -404,7 +409,7 @@ class EditProfileView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: Sizing.blockSize * 4.2,
                             fontWeight: FontWeight.w400,
-                            color: Theme.of(context).primaryColor),
+                            color: Get.theme.textTheme.bodyText1?.color),
                       ),
                     ],
                   ),
