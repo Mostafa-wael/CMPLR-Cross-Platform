@@ -178,7 +178,6 @@ class PostItem extends StatelessWidget {
               },
             ),
             IconButton(
-              key: ValueKey('${prefix}_postLike_${index.toString()}'),
               icon: Icon(CustomIcons.reblog,
                   color: Theme.of(context).primaryColor),
               onPressed: () {
@@ -187,6 +186,7 @@ class PostItem extends StatelessWidget {
               },
             ),
             Obx(() => IconButton(
+                  key: ValueKey('${prefix}_postLike_${index.toString()}'),
                   icon: Icon(
                       isLiked.value ? Icons.favorite : CupertinoIcons.heart,
                       color: Theme.of(context).primaryColor),

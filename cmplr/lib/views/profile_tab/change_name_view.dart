@@ -19,6 +19,7 @@ class ChangeNameView extends StatelessWidget {
           leading: Padding(
             padding: EdgeInsets.only(left: Sizing.blockSize * 3),
             child: GestureDetector(
+              key: const ValueKey('ChangeName_cancel'),
               child: const Text('cancel'),
               onTap: () {
                 controller.goBack();
@@ -29,6 +30,7 @@ class ChangeNameView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: Sizing.blockSize * 4),
               child: GestureDetector(
+                key: const ValueKey('ChangeName_save'),
                 child: const Text(
                   'Save',
                 ),
@@ -54,6 +56,7 @@ class ChangeNameView extends StatelessWidget {
               SizedBox(
                 width: Sizing.blockSize * 70,
                 child: TextField(
+                  key: const ValueKey('ChangeName_newName'),
                   decoration: const InputDecoration(
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,

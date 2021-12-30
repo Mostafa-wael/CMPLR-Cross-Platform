@@ -31,6 +31,7 @@ class EditProfileView extends StatelessWidget {
                       return <Widget>[
                         SliverAppBar(
                           leading: IconButton(
+                            key: const ValueKey('EditProfile_back'),
                             icon: const Icon(Icons.arrow_back,
                                 color: Colors.white),
                             onPressed: () {
@@ -91,6 +92,8 @@ class EditProfileView extends StatelessWidget {
                                       Material(
                                         color: Colors.transparent,
                                         child: InkWell(
+                                          key: const ValueKey(
+                                              'EditProfile_save'),
                                           onTap: () {
                                             controller
                                                 .saveEdits(visibleKeyboard);
@@ -114,6 +117,8 @@ class EditProfileView extends StatelessWidget {
                                     child: ListView(
                                       children: [
                                         TextField(
+                                          key: const ValueKey(
+                                              'EditProfile_title'),
                                           decoration: const InputDecoration(
                                             focusedBorder: InputBorder.none,
                                             enabledBorder: InputBorder.none,
@@ -132,6 +137,8 @@ class EditProfileView extends StatelessWidget {
                                           ),
                                         ),
                                         TextField(
+                                          key: const ValueKey(
+                                              'EditProfile_desc'),
                                           decoration: const InputDecoration(
                                             focusedBorder: InputBorder.none,
                                             enabledBorder: InputBorder.none,
@@ -154,7 +161,7 @@ class EditProfileView extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned.fill(
-                                  top: Sizing.blockSizeVertical * 42,
+                                  top: Sizing.blockSizeVertical * 45,
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Row(
@@ -175,6 +182,8 @@ class EditProfileView extends StatelessWidget {
                                                     Radius.circular(
                                                         Sizing.blockSize * 2))),
                                             child: InkWell(
+                                              key: const ValueKey(
+                                                  'EditProfile_background'),
                                               onTap: () {
                                                 showModalBottomSheet(
                                                   barrierColor:
@@ -196,6 +205,9 @@ class EditProfileView extends StatelessWidget {
                                                               in ProfileController
                                                                   .clrs.keys)
                                                             InkWell(
+                                                              key: ValueKey(
+                                                                  'background_'
+                                                                  '${i}'),
                                                               child:
                                                                   // ignore: lines_longer_than_80_chars
                                                                   TwoNestedCircles(
@@ -252,6 +264,7 @@ class EditProfileView extends StatelessWidget {
                               Tab(
                                 child: Text(
                                   'Posts',
+                                  key: const ValueKey('EditProfile_Posts'),
                                   style: TextStyle(
                                       color: (controller.backgroundColor ==
                                               Colors.blue)
@@ -262,6 +275,7 @@ class EditProfileView extends StatelessWidget {
                               Tab(
                                 child: Text(
                                   'Likes',
+                                  key: const ValueKey('EditProfile_Likes'),
                                   style: TextStyle(
                                       color: (controller.backgroundColor ==
                                               Colors.blue)
@@ -272,6 +286,7 @@ class EditProfileView extends StatelessWidget {
                               Tab(
                                 child: Text(
                                   'Following',
+                                  key: const ValueKey('EditProfile_Following'),
                                   style: TextStyle(
                                       color: (controller.backgroundColor ==
                                               Colors.blue)

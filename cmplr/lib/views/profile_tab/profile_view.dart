@@ -40,7 +40,7 @@ class ProfileView extends StatelessWidget {
                             background: Stack(
                               children: [
                                 GestureDetector(
-                                  key: const ValueKey('ProfileView_Header'),
+                                  key: const ValueKey('Profile_Header'),
                                   onTap: () {
                                     showModalBottomSheet(
                                         isScrollControlled: true,
@@ -67,8 +67,7 @@ class ProfileView extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 InkWell(
-                                                  key: const ValueKey(
-                                                      'ProfileView_'
+                                                  key: const ValueKey('Profile_'
                                                       'ChangeHeader'),
                                                   onTap: () async {
                                                     await controller
@@ -87,8 +86,7 @@ class ProfileView extends StatelessWidget {
                                                   ),
                                                 ),
                                                 InkWell(
-                                                  key: const ValueKey(
-                                                      'ProfileView_'
+                                                  key: const ValueKey('Profile_'
                                                       'ViewHeader'),
                                                   onTap: () {
                                                     Get.to(FadeInImage
@@ -130,8 +128,7 @@ class ProfileView extends StatelessWidget {
                                   child: (controller.blogAvatarShape ==
                                           'circle')
                                       ? InkWell(
-                                          key: const ValueKey(
-                                              'ProfileView_Avatar'),
+                                          key: const ValueKey('Profile_Avatar'),
                                           onTap: () {
                                             showModalBottomSheet(
                                                 isScrollControlled: true,
@@ -166,7 +163,7 @@ class ProfileView extends StatelessWidget {
                                                       children: [
                                                         InkWell(
                                                           key: const ValueKey(
-                                                              'ProfileView_'
+                                                              'Profile_'
                                                               'ChangeAvatar'),
                                                           onTap: () async {
                                                             await controller
@@ -190,7 +187,7 @@ class ProfileView extends StatelessWidget {
                                                         ),
                                                         InkWell(
                                                           key: const ValueKey(
-                                                              'ProfileView_'
+                                                              'Profile_'
                                                               'ViewAvatar'),
                                                           onTap: () {
                                                             Get.to(FadeInImage
@@ -234,8 +231,7 @@ class ProfileView extends StatelessWidget {
                                           ),
                                         )
                                       : InkWell(
-                                          key: const ValueKey(
-                                              'ProfileView_Avatar'),
+                                          key: const ValueKey('Profile_Avatar'),
                                           onTap: () {
                                             showModalBottomSheet(
                                                 isScrollControlled: true,
@@ -270,7 +266,7 @@ class ProfileView extends StatelessWidget {
                                                       children: [
                                                         InkWell(
                                                           key: const ValueKey(
-                                                              'ProfileView_'
+                                                              'Profile_'
                                                               'ChangeAvatar'),
                                                           onTap: () {},
                                                           child: SizedBox(
@@ -288,7 +284,7 @@ class ProfileView extends StatelessWidget {
                                                         ),
                                                         InkWell(
                                                           key: const ValueKey(
-                                                              'ProfileView_'
+                                                              'Profile_'
                                                               'ViewAvatar'),
                                                           onTap: () {},
                                                           child: SizedBox(
@@ -347,7 +343,7 @@ class ProfileView extends StatelessWidget {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             IconButton(
-                                              key: const ValueKey('ProfileView_'
+                                              key: const ValueKey('Profile_'
                                                   'Search'),
                                               icon: const Icon(Icons.search),
                                               onPressed: () {
@@ -355,7 +351,7 @@ class ProfileView extends StatelessWidget {
                                               },
                                             ),
                                             IconButton(
-                                              key: const ValueKey('ProfileView_'
+                                              key: const ValueKey('Profile_'
                                                   'EditProfile'),
                                               icon:
                                                   const Icon(Icons.color_lens),
@@ -364,7 +360,7 @@ class ProfileView extends StatelessWidget {
                                               },
                                             ),
                                             IconButton(
-                                              key: const ValueKey('ProfileView_'
+                                              key: const ValueKey('Profile_'
                                                   'Share'),
                                               icon: const Icon(Icons.share),
                                               onPressed: () {
@@ -372,7 +368,7 @@ class ProfileView extends StatelessWidget {
                                               },
                                             ),
                                             IconButton(
-                                              key: const ValueKey('ProfileView_'
+                                              key: const ValueKey('Profile_'
                                                   'Settings'),
                                               icon: const Icon(Icons.settings),
                                               onPressed: () {
@@ -435,7 +431,7 @@ class ProfileView extends StatelessWidget {
                                     : Colors.blue,
                             tabs: <Tab>[
                               Tab(
-                                key: const ValueKey('ProfileView_PostsTab'),
+                                key: const ValueKey('Profile_PostsTab'),
                                 child: Text(
                                   'Posts',
                                   style: TextStyle(
@@ -446,7 +442,7 @@ class ProfileView extends StatelessWidget {
                                 ),
                               ),
                               Tab(
-                                key: const ValueKey('ProfileView_LikesTab'),
+                                key: const ValueKey('Profile_LikesTab'),
                                 child: Text(
                                   'Likes',
                                   style: TextStyle(
@@ -457,7 +453,7 @@ class ProfileView extends StatelessWidget {
                                 ),
                               ),
                               Tab(
-                                key: const ValueKey('ProfileView_FollowingTab'),
+                                key: const ValueKey('Profile_FollowingTab'),
                                 child: Text(
                                   'Following',
                                   style: TextStyle(
@@ -589,6 +585,7 @@ class ProfileView extends StatelessWidget {
                 () => Center(
                   child: controller.followingBlogs![index].following.value
                       ? PopupMenuButton(
+                          key: ValueKey('Profile_following_${index}'),
                           icon: const Icon(Icons.person),
                           onSelected: (choice) {
                             print(choice);
@@ -598,6 +595,8 @@ class ProfileView extends StatelessWidget {
                           itemBuilder: (context) {
                             return controller.popupMenuChoices.map((choice) {
                               return PopupMenuItem<String>(
+                                key: ValueKey('Profile_following_'
+                                    '${index}_${choice}'),
                                 value: choice,
                                 child: Text(choice),
                               );
@@ -607,6 +606,7 @@ class ProfileView extends StatelessWidget {
                       : Material(
                           color: Colors.transparent,
                           child: InkWell(
+                            key: ValueKey('Profile_following_${index}_follow'),
                             onTap: () {
                               controller.followingBlogs![index].following
                                   .value = true;

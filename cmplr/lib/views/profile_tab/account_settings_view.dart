@@ -15,7 +15,7 @@ class AccountSettingsView extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            // TODO, let this depend on theme
+            key: const ValueKey('AccountSettings_back'),
             icon: const Icon(
               Icons.arrow_back,
             ),
@@ -69,6 +69,7 @@ class AccountSettingsView extends StatelessWidget {
                   onPressed: (BuildContext context) {},
                 ),
                 SettingsTile(
+                  key: const ValueKey('AccountSettings_ColorPalette'),
                   title: 'Color palette',
                   onPressed: (BuildContext context) {
                     controller.goToColorPalette();
@@ -133,6 +134,7 @@ class AccountSettingsView extends StatelessWidget {
                   onPressed: (BuildContext context) {},
                 ),
                 SettingsTile(
+                  key: const ValueKey('AccountSettings_Logout'),
                   title: 'Logout',
                   leading: const Icon(Icons.logout),
                   onPressed: (BuildContext context) {

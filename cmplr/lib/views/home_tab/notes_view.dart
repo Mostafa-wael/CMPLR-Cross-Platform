@@ -29,6 +29,7 @@ class Notes extends StatelessWidget {
               shadowColor: Colors.transparent,
               backgroundColor: const Color(0xFF001A35),
               leading: IconButton(
+                key: const ValueKey('notes_close'),
                 icon: const Icon(Icons.arrow_back, color: Color(0xFFFEFEFE)),
                 onPressed: () {
                   controller.closeNotesScreen();
@@ -89,6 +90,7 @@ class Notes extends StatelessWidget {
                   indicatorColor: Colors.lightBlue,
                   tabs: <Widget>[
                     Tab(
+                      key: const ValueKey('notes_comments'),
                       height: Sizing.blockSizeVertical * 7.5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,6 +109,7 @@ class Notes extends StatelessWidget {
                       ),
                     ),
                     Tab(
+                      key: const ValueKey('notes_reblogs'),
                       height: Sizing.blockSizeVertical * 7.5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -126,6 +129,7 @@ class Notes extends StatelessWidget {
                       ),
                     ),
                     Tab(
+                      key: const ValueKey('notes_likes'),
                       height: Sizing.blockSizeVertical * 7.5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -227,6 +231,7 @@ class Notes extends StatelessWidget {
                                       .commentTextFieldFocusChanged(hasFocus);
                                 },
                                 child: TextField(
+                                  key: const ValueKey('notes_textfield'),
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                   focusNode:
@@ -252,6 +257,7 @@ class Notes extends StatelessWidget {
                                 child: Obx(
                                   () => controller.emptyCommentTextField.value
                                       ? InkWell(
+                                          key: const ValueKey('notes_reply'),
                                           child: SizedBox(
                                               width: Sizing.blockSize * 14.59,
                                               child: Center(
@@ -702,6 +708,7 @@ class Notes extends StatelessWidget {
               child: Material(
                   color: Colors.transparent,
                   child: InkWell(
+                    key: const ValueKey('notes_follow'),
                     onTap: () {
                       controller.followBlog(index);
                     },

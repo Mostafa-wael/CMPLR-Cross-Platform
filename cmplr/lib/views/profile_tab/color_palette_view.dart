@@ -12,7 +12,7 @@ class ColorPaletteView extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            // TODO, let this depend on theme
+            key: const ValueKey('ColorPalette_back'),
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
@@ -31,6 +31,7 @@ class ColorPaletteView extends StatelessWidget {
             SettingsSection(
               tiles: [
                 SettingsTile.switchTile(
+                  key: const ValueKey('ColorPalette_trueBlue'),
                   title: 'True Blue',
                   subtitle: 'Tried and true default cmplr blue.',
                   switchValue: controller.trueBlue,
@@ -39,6 +40,7 @@ class ColorPaletteView extends StatelessWidget {
                   },
                 ),
                 SettingsTile.switchTile(
+                  key: const ValueKey('ColorPalette_darkMode'),
                   title: 'Dark Mode',
                   subtitle: 'Turn down the lights.',
                   switchValue: controller.darkMode,

@@ -14,6 +14,7 @@ class ProfileSettingsView extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
+            key: const ValueKey('Settings_back'),
             // TODO, let this depend on theme
             icon: const Icon(
               Icons.arrow_back,
@@ -38,6 +39,7 @@ class ProfileSettingsView extends StatelessWidget {
             SettingsSection(
               tiles: [
                 SettingsTile(
+                  key: const ValueKey('Settings_AccountSettings'),
                   title: 'Account Settings',
                   subtitle: 'Notifications, subscriptions, replies, all that',
                   onPressed: (BuildContext context) {
@@ -55,6 +57,7 @@ class ProfileSettingsView extends StatelessWidget {
             SettingsSection(
               tiles: [
                 SettingsTile(
+                  key: const ValueKey('Settings_ChangeName'),
                   title: 'Change Name',
                   onPressed: (BuildContext context) {
                     controller.goToChangeName(visibleKeyboard);

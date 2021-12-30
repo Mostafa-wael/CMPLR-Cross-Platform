@@ -53,6 +53,7 @@ Future<dynamic> shareMenu(user, controller, context, profilePhoto, name) {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkResponse(
+                  key: const ValueKey('share_copy'),
                   child: Column(
                     children: [
                       const Icon(Icons.copy),
@@ -68,6 +69,7 @@ Future<dynamic> shareMenu(user, controller, context, profilePhoto, name) {
                   },
                 ),
                 InkResponse(
+                  key: const ValueKey('share_other'),
                   child: Column(
                     children: [
                       const Icon(Icons.share),

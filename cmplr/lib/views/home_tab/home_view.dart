@@ -39,7 +39,10 @@ TabBar getTabBar(context) {
   );
 }
 
-const List<Tab> _tabs = [Tab(text: 'Following'), Tab(text: 'Stuff for you')];
+const List<Tab> _tabs = [
+  Tab(text: 'Following', key: ValueKey('HomeFollowing')),
+  Tab(text: 'Stuff for you', key: ValueKey('HomeStuffForYou'))
+];
 List<Widget> _views = [
   const HomeFollowing(),
   const HomeStuffForYou(),
