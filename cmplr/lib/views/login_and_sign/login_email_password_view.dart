@@ -13,6 +13,7 @@ class LoginEmailPassword extends StatelessWidget {
     final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
+        backgroundColor: Get.theme.canvasColor,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           foregroundColor: Colors.white,

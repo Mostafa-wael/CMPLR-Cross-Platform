@@ -14,28 +14,26 @@ class PostFeed extends StatelessWidget {
   var blogName;
   var getTag;
 
-  PostFeed(
-      {Key? key,
-      postFeedTypePage,
-      tag,
-      blogName,
-      required getTag,
-      required prefix})
-      : super(key: key) {
+  PostFeed({
+    Key? key,
+    postFeedTypePage,
+    this.tag,
+    this.blogName,
+    required this.prefix,
+    required getTag,
+  }) : super(key: key) {
     postType = postFeedTypePage ?? '';
-    this.tag = tag;
-    this.blogName = blogName;
-    this.prefix = prefix;
-    this.getTag = getTag;
 
     print('in the view, Post Type is $postType');
-    controller = Get.put(PostFeedController(
-        postFeedTypeFeed: postType,
-        tag: tag,
-        prefix: prefix,
-        blogName: blogName));
+    controller = Get.put(
+      PostFeedController(
+          postFeedTypeFeed: postType,
+          tag: tag,
+          prefix: prefix,
+          blogName: blogName),
+      tag: getTag,
+    );
   }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PostFeedController>(

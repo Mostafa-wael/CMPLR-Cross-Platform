@@ -1,5 +1,6 @@
 import 'dart:developer' as dev;
 import 'dart:math';
+import '../utilities/post_feed_controller.dart';
 import 'package:html/parser.dart' as parser;
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 

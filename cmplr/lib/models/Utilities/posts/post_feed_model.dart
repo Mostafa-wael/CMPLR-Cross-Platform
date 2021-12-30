@@ -11,14 +11,12 @@ class ModelPostsFeed {
 
   ModelPostsFeed({
     required String postFeedTypeContoller,
-    String? tag,
-    String? blogName,
+    this.tag,
+    this.blogName,
     required prefix,
   }) {
     postFeedType = postFeedTypeContoller;
-    this.tag = tag;
     this.prefix = prefix;
-    this.blogName = blogName;
     print('in the model, postFeedType is $postFeedType');
   }
 

@@ -289,7 +289,7 @@ class PostItem extends StatelessWidget {
 
     return PostItem(
       blogId: json['blog']['blog_id'].toString(),
-      isMine: json['post']['is_mine'],
+      isMine: json['post']['is_mine'] ?? false,
       postData: content,
       postID: json['post']['post_id'].toString(),
       reblogKey: "$json['post']['post_id']",

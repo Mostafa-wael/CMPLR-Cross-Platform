@@ -240,6 +240,8 @@ class WritePostController extends GetxController {
           .then((http.Response response) {
         if (response.statusCode == CMPLRService.insertSuccess) {
           success = true;
+          tags.clear();
+
           Get.back();
         }
       });
@@ -254,6 +256,7 @@ class WritePostController extends GetxController {
           .then((http.Response response) {
         if (response.statusCode == CMPLRService.insertSuccess) {
           success = true;
+          tags.clear();
           Get.back();
         }
       });
@@ -315,6 +318,7 @@ class WritePostController extends GetxController {
   }
 
   void onTagEnter(String tag) {
+    tag.replaceAll('#', '');
     tags.add(tag);
     update();
   }
@@ -326,6 +330,7 @@ class WritePostController extends GetxController {
 
   void onSuggestionChoosen(String suggestion) {
     suggestedTags.remove(suggestion);
+    suggestion.replaceAll('#', '');
     tags.add(suggestion);
     update();
   }

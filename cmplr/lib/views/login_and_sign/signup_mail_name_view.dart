@@ -35,6 +35,7 @@ class SignupMailName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Get.theme.canvasColor,
         appBar: _getAppBar(context),
         body: GetBuilder<MasterPageController>(
           builder: (MasterPageController controller) {
@@ -50,6 +51,7 @@ class SignupMailName extends StatelessWidget {
   /// When the user fills their data properly and presses 'done', this should
   /// route them to the page they intended on originally. (activity/profile)/
   static AppBar _getAppBar(context) => AppBar(
+        iconTheme: Get.theme.iconTheme,
         actions: [
           GetBuilder<EmailPasswordNameAfterSignupController>(
               builder: (controller) {
@@ -74,13 +76,19 @@ class SignupMailName extends StatelessWidget {
         children: [
           Text(
             _title,
-            style: Theme.of(context).textTheme.headline4,
+            style: TextStyle(
+                fontSize: Theme.of(context).textTheme.headline4?.fontSize,
+                fontWeight: Theme.of(context).textTheme.headline4?.fontWeight,
+                color: Colors.white),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: Sizing.blockSizeVertical * 2.4),
           Text(
             _subtitle,
-            style: Theme.of(context).textTheme.headline3,
+            style: TextStyle(
+                fontSize: Theme.of(context).textTheme.headline3?.fontSize,
+                fontWeight: Theme.of(context).textTheme.headline3?.fontWeight,
+                color: Colors.white),
             textAlign: TextAlign.center,
           ),
           Padding(

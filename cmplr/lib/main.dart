@@ -21,7 +21,7 @@ import 'package:get/get.dart';
 import 'views/views.dart';
 import './routes.dart';
 
-// import 'package:flutter_driver/driver_extension.dart';
+import 'package:flutter_driver/driver_extension.dart';
 
 class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
   @override
@@ -41,8 +41,6 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
-  // enableFlutterDriverExtension();
-
   HttpOverrides.global = MyHttpOverrides();
 
   await PersistentStorage.initStorage();

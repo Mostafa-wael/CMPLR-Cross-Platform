@@ -41,7 +41,9 @@ class PostFeedController extends GetxController
   Future<void> updatePosts({bool clearPosts = true}) async {
     print('in the controller, updatePosts, postFeedType is $postFeedType');
     var newPosts = await model.getNewPosts(
-        postFeedTypeContoller: postFeedType, blogName: blogName);
+      postFeedTypeContoller: postFeedType,
+      blogName: blogName,
+    );
 
     if (clearPosts) posts.clear();
 

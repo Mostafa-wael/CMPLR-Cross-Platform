@@ -14,6 +14,7 @@ class LoginEmailContinue extends StatelessWidget {
 
     return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
+        backgroundColor: Get.theme.canvasColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [

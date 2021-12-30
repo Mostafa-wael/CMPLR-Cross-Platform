@@ -14,6 +14,7 @@ class SignupEmailOrGoogle extends StatelessWidget {
     return GetBuilder<LoginController>(
       init: LoginController(),
       builder: (controller) => Scaffold(
+        backgroundColor: Get.theme.canvasColor,
         body: Stack(
           children: [
             Center(
