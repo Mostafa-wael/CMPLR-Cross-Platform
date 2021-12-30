@@ -75,6 +75,7 @@ class PostItem extends StatelessWidget {
       contentPadding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
       leading: Image.network('${profilePhoto}'),
       title: InkWell(
+        key: ValueKey('${prefix}_postName_${index.toString()}'),
         onTap: () {
           print('Profile clicked');
           Get.to(VisitorBlog(blogId: blogId, blogName: name));

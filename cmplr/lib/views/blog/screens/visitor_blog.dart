@@ -1,5 +1,3 @@
-import '../../../utilities/custom_widgets/custom_widgets.dart';
-
 import '../../../backend_uris.dart';
 import '../../../utilities/sizing/sizing.dart';
 import '../../../controllers/utilities/post_feed_controller.dart';
@@ -151,6 +149,7 @@ class VisitorBlog extends StatelessWidget {
               color: Colors.white,
             )),
         TextButton(
+            key: const ValueKey('VisitorBlog_follow'),
             onPressed: () {
               blogController.followUnfollowBlog(blogName);
             },

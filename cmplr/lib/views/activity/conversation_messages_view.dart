@@ -129,6 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           Expanded(
             child: TextField(
+              key: const ValueKey('chat_textField'),
               controller: _textController,
               textCapitalization: TextCapitalization.sentences,
               onChanged: (value) {},
@@ -138,6 +139,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           IconButton(
+            key: const ValueKey('chatSend'),
             icon: const Icon(Icons.send),
             iconSize: 25.0,
             color: Colors.white,
