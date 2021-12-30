@@ -1191,7 +1191,7 @@ class CMPLRService {
       'response': {
         'blogs': [
           {
-            'blog_url': 'http:\/\/localhost:8000\/api\/blog\/ut',
+            'url': 'http:\/\/localhost:8000\/api\/blog\/ut',
             'avatar':
                 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/270px-Chelsea_FC.svg.png',
             'avatar_shape': 'circle',
@@ -1908,6 +1908,20 @@ class CMPLRService {
     }
   }
 
+  static Future<http.Response> likePost(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      return http.post(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'id': params['id'],
+          }));
+    }
+  }
+
   static Future<http.Response> unfollowBlog(
       String backendURI, Map params) async {
     if (Flags.mock) {
@@ -1920,7 +1934,21 @@ class CMPLRService {
           body: jsonEncode(<String, String>{
             'blogName': params['blogName'],
           }));
-      final x = req.statusCode;
+      return req;
+    }
+  }
+
+  static Future<http.Response> unlikePost(String backendURI, Map params) async {
+    if (Flags.mock) {
+      return Future.value(http.Response(jsonEncode({}), insertSuccess));
+    } else {
+      final uri = Uri.parse(apiIp + backendURI);
+
+      final req = await http.delete(uri,
+          headers: getHeader,
+          body: jsonEncode(<String, String>{
+            'id': params['id'],
+          }));
       return req;
     }
   }

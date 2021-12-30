@@ -182,7 +182,8 @@ class PostItem extends StatelessWidget {
                       color: Theme.of(context).primaryColor),
                   onPressed: () {
                     isLiked.value = !isLiked.value;
-                    controller.loveClicked();
+                    controller.loveClicked(
+                        isLiked.value, postID); // keep it after the toggling
                     print('Love state: ${isLiked.value}');
                   },
                 )),
@@ -255,7 +256,7 @@ class PostItem extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               text,
-              style: TextStyle(fontSize: Sizing.blockSize * 3.89),
+              style: TextStyle(fontSize: Sizing.fontSize * 3.89),
             )),
       ),
     );

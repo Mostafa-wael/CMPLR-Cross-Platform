@@ -72,7 +72,7 @@ flutter_native_splash: # flutter clean && flutter pub get && flutter pub run flu
 flutter_icons: # flutter clean && flutter pub get && flutter pub run flutter_launcher_icons:main
   android: "launcher_icon"
   ios: true
-  image_path: lib/utilities/assets/logo/logo_icon.png
+  image_path: lib/utilities/assets/logo/cmplr_logo_icon.png
   adaptive_icon_background: "#000000"
 
 

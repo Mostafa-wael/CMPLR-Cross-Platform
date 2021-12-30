@@ -63,6 +63,8 @@ class CMPLRTheme {
         primaryColor: Colors.black,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.black),
+          toolbarTextStyle: TextStyle(color: Colors.black),
           foregroundColor: Colors.white,
           backgroundColor: Color.fromARGB(0xFF, 0, 26, 53),
         ),
@@ -85,6 +87,8 @@ class CMPLRTheme {
         primaryColor: Colors.white,
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.white),
+          toolbarTextStyle: TextStyle(color: Colors.white),
           foregroundColor: Colors.black,
           backgroundColor: Colors.black,
         ),

@@ -77,8 +77,8 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                  top: Sizing.blockSizeVertical,
-                                  bottom: Sizing.blockSizeVertical),
+                                  top: Sizing.blockSizeVertical * 0.5,
+                                  bottom: Sizing.blockSizeVertical * 0.5),
                               child: Text(
                                 blogName,
                                 overflow: TextOverflow.ellipsis,

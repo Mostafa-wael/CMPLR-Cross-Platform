@@ -71,8 +71,8 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: Sizing.blockSize * 13,
-                                height: Sizing.blockSizeVertical * 8,
+                                width: Sizing.blockSize * 10,
+                                height: Sizing.blockSizeVertical * 6,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(
                                         Sizing.blockSize * 2),
@@ -83,8 +83,8 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                                     )),
                               ),
                               SizedBox(
-                                width: Sizing.blockSize * 13,
-                                height: Sizing.blockSizeVertical * 8,
+                                width: Sizing.blockSize * 10,
+                                height: Sizing.blockSizeVertical * 6,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(
                                         Sizing.blockSize * 2),
@@ -95,7 +95,7 @@ class CheckOutTheseTagsElement extends StatelessWidget {
                               )
                             ]),
                         SizedBox(
-                          height: Sizing.blockSizeVertical * 5,
+                          height: Sizing.blockSizeVertical * 3,
                           width: Sizing.blockSize * 28,
                           child: (followed == 'true')
                               ? TextButton(

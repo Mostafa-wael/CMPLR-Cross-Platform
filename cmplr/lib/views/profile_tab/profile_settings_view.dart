@@ -9,6 +9,7 @@ class ProfileSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return GetBuilder<ProfileController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
@@ -55,7 +56,9 @@ class ProfileSettingsView extends StatelessWidget {
               tiles: [
                 SettingsTile(
                   title: 'Change Name',
-                  onPressed: (BuildContext context) {},
+                  onPressed: (BuildContext context) {
+                    controller.goToChangeName(visibleKeyboard);
+                  },
                 ),
                 SettingsTile(
                   title: 'Pages',
