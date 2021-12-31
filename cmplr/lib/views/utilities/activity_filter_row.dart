@@ -2,6 +2,7 @@ import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import 'package:flutter/material.dart';
 
+/// To filter the activity
 class ActivityFilterRow extends StatelessWidget {
   final icon;
   final rowText;

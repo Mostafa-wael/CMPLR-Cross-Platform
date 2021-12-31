@@ -1,9 +1,10 @@
 import '../../controllers/home_tab/explore_controller.dart';
 import 'package:get/get.dart';
 
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// the trernding now item
 class TrendingNow extends StatelessWidget {
   const TrendingNow({Key? key}) : super(key: key);
 

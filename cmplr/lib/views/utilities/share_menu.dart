@@ -2,11 +2,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'user_name_avatar.dart';
 
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 
+/// the share menu
 Future<dynamic> shareMenu(user, controller, context, profilePhoto, name) {
   return showModalBottomSheet(
     isScrollControlled: true,

@@ -3,6 +3,7 @@ import '../../../backend_uris.dart';
 
 import '../../cmplr_service.dart';
 
+/// the model that holds the profile data
 class ModelProfile {
   var blogId;
   ModelProfile({required this.blogId}) {}

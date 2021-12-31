@@ -25,6 +25,7 @@ class ActivityActivity extends StatelessWidget {
     );
   }
 
+  /// the utility widget to list the activites
   Widget getAllActivity(context, controller) => ListView(
         shrinkWrap: true,
         children: [

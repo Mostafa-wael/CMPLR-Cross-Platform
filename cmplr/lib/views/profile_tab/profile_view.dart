@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/controllers.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import '../../views/views.dart';
 
 class ProfileView extends StatelessWidget {

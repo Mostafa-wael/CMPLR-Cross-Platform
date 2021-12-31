@@ -1,6 +1,5 @@
 import '../../utilities/user.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,8 +12,9 @@ import '../../models/models.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 
+/// notes view
 class Notes extends StatelessWidget {
   Notes({Key? key}) : super(key: key);
 

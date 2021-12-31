@@ -3,7 +3,7 @@ import 'dart:ui';
 import '../../controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import '../../utilities/sizing/sizing.dart';
 
 class SignupEmailOrGoogle extends StatelessWidget {

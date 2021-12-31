@@ -14,9 +14,10 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import 'utility_views.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 
+/// A custom app bar to insure the size limits
 class CustomAppBar extends PreferredSize {
   @override
   final Widget child;
@@ -32,6 +33,7 @@ class CustomAppBar extends PreferredSize {
   Widget build(BuildContext context) => child;
 }
 
+/// the post feed of the hashtags
 class HashtagPosts extends StatelessWidget {
   const HashtagPosts({
     Key? key,

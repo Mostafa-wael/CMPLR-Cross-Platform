@@ -6,6 +6,7 @@ import '../../../../backend_uris.dart';
 import '../../../cmplr_service.dart';
 import 'user_note.dart';
 
+/// reponsible for holding the notes data
 class NotesModel {
   Future<List<List<UserNote>>> getNotes(String postID) async {
     final notes = <UserNote>[];

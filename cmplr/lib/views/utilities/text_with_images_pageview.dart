@@ -1,7 +1,7 @@
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
-// This widget is used to generate page view with images and text on it
+/// This widget is used to generate page view with images and text on it
 // ignore: must_be_immutable
 class TextWithImagesPageView extends StatelessWidget {
   List<String> texts; // text to show

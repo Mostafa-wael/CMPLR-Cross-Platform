@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import '../../backend_uris.dart';
 
 /// The home screen, it has 2 tabs: Following and stuff for you

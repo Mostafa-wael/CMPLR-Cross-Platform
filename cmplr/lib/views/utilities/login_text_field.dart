@@ -1,7 +1,7 @@
-import '../sizing/sizing.dart';
-import 'package:flutter/cupertino.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// the text field for the login
 class LoginTextField extends StatelessWidget {
   final double underlineDistance, underlineWidth;
   final controller;

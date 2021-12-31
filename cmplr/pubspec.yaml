@@ -30,7 +30,8 @@ dependencies:
   html_editor_enhanced: ^2.4.0+1  
   file_picker:
   flutter_html:
-  settings_ui:
+  #settings_ui:
+  flutter_settings_ui:
   html:
   image_picker: 
   pusher_client: ^2.0.0
