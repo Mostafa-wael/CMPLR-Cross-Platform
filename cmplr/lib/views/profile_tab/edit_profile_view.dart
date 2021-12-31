@@ -8,7 +8,7 @@ import '../../utilities/sizing/sizing.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/controllers.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({Key? key}) : super(key: key);

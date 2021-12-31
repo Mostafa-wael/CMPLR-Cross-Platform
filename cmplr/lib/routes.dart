@@ -1,4 +1,5 @@
 // https://app.swaggerhub.com/apis-docs/abdullahalshawafi/cmplr-api_documentation/1.0.0#/Users/UserLike
+/// holding all the routes
 class Routes {
   // Main pages
   static const String profile = '/blog';

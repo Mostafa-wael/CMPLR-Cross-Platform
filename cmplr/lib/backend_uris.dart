@@ -1,10 +1,10 @@
 class PostURIs {
-  // Blog requests
-  // Split into 2 halfs, the first half is used to call the proper function
-  // which contains mock/api logic. This has to be constant since we use a switch
-  // case.
-  // The second half are helper functions that help construct the real URI we
-  // will send the request to.
+  /// Blog requests
+  /// Split into 2 halfs, the first half is used to call the proper function
+  /// which contains mock/api logic. This has to be constant since we use a switch
+  /// case.
+  /// The second half are helper functions that help construct the real URI we
+  /// will send the request to.
 
   // Real URIs you can use
   static const String createBlog = '/blog';

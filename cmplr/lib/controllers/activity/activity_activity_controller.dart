@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import '../../utilities/sizing/sizing.dart';
-import '../../utilities/custom_widgets/activity_notification.dart';
-import '../../utilities/custom_widgets/activity_filter_row.dart';
+import '../../views/utilities/activity_notification.dart';
+import '../../views/utilities/activity_filter_row.dart';
 import '../../models/pages_model/activity_tab/activity_activity_model.dart'
     as am;
 

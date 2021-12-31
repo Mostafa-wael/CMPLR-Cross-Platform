@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// the refresh Widget
 class RefreshWidget extends StatefulWidget {
   final Widget child;
   final Future Function() onRefresh;

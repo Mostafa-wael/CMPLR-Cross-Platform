@@ -1,9 +1,9 @@
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
-import '../../views/profile_tab/profile_view.dart';
+import '../profile_tab/profile_view.dart';
 import '../../flags.dart';
-import '../sizing/sizing.dart';
-import '../../views/blog/screens/visitor_blog.dart';
+import '../../utilities/sizing/sizing.dart';
+import '../blog/screens/visitor_blog.dart';
 import '../../models/pages_model/activity_tab/activity_activity_model.dart'
     as am;
 

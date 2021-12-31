@@ -1,10 +1,11 @@
 import 'package:get_storage/get_storage.dart';
 
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
-import '../user.dart';
+import '../../utilities/user.dart';
 
+/// show user name avatar
 class UserNameAvatar extends StatelessWidget {
   var textStyle;
   UserNameAvatar({Key? key, this.textStyle}) : super(key: key);

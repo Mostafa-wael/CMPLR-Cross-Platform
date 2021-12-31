@@ -1,10 +1,11 @@
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
 
+/// the search results page view
 class SearchResultsView extends StatelessWidget {
   const SearchResultsView({Key? key}) : super(key: key);
 

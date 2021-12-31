@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class ReblogModel {
   const ReblogModel();
 
-  // Note that all the parameters mentioned in the API are required
+  /// Note that all the parameters mentioned in the API are required
   Future<http.Response> reblogPost(
     String parentPostID,
     String reblogKey,

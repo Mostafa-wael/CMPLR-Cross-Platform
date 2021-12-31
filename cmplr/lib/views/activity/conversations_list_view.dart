@@ -44,10 +44,6 @@ class ConversationsListState extends State<ConversationsList> {
             child: Container(
               decoration: BoxDecoration(
                 color: Get.theme.scaffoldBackgroundColor,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
               ),
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(

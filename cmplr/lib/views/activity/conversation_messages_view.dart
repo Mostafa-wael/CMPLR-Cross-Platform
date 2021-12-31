@@ -9,6 +9,7 @@ import '../../utilities/user.dart';
 import 'package:flutter/material.dart';
 import '../../models/pages_model/activity_tab/chat_model.dart';
 
+/// the main chat scrren for any specific blog
 class ChatScreen extends StatefulWidget {
   final ChatUser user;
 
@@ -20,6 +21,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  /// the pusher event listner
   void bindEvent(String channelName) async {
     await initPusher();
     pusher.connect();
@@ -30,6 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
       final encodedRes = jsonDecode(data);
       print('Pusher is Called');
 
+      // insert at the beginning of the list
       ModelChatModule.conversationMessages.insert(
           0,
           Message(
@@ -66,6 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
             });
   }
 
+  /// building and showing messages
   Widget _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       margin: isMe
@@ -116,6 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  /// responsible for composing the messages
   Widget _buildMessageComposer() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -123,6 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
       color: Get.theme.appBarTheme.backgroundColor,
       child: Row(
         children: <Widget>[
+          /// not functionality working as the backend doesn't accept photos
           IconButton(
             icon: const Icon(Icons.photo),
             iconSize: 25.0,
@@ -157,18 +163,19 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  /// tha main chat screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan,
+      backgroundColor: Get.theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.white,
+        iconTheme: IconThemeData(
+          color: Get.theme.textTheme.bodyText1?.color,
         ),
         title: Text(
-          widget.user.blog_name,
-          style: const TextStyle(
-            color: Colors.white,
+          User.userMap['blog_name'] + ' + ' + widget.user.blog_name,
+          style: TextStyle(
+            color: Get.theme.textTheme.bodyText1?.color,
             fontSize: 28.0,
             fontWeight: FontWeight.bold,
           ),
@@ -178,7 +185,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const Icon(Icons.more_horiz),
             iconSize: 30.0,
-            color: Colors.white,
+            color: Get.theme.textTheme.bodyText1?.color,
             onPressed: () {},
           ),
         ],
@@ -197,12 +204,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   )
                 : Expanded(
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.cyan,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30.0),
-                          topRight: Radius.circular(30.0),
-                        ),
+                      decoration: BoxDecoration(
+                        color: Get.theme.scaffoldBackgroundColor,
                       ),
                       child: ClipRRect(
                         borderRadius: const BorderRadius.only(

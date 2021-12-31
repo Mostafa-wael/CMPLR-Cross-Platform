@@ -1,5 +1,6 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
+/// reponsible for handling user's notes
 class UserNote {
   final noteType;
   final avatarURL;

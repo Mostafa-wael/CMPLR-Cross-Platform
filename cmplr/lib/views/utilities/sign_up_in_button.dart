@@ -1,6 +1,7 @@
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// the sign up button
 class SignUpInButton extends StatelessWidget {
   final text;
   final onTap;

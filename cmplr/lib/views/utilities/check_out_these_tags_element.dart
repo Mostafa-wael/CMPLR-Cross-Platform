@@ -3,8 +3,8 @@ import '../../controllers/controllers.dart';
 import '../../backend_uris.dart';
 import '../../models/cmplr_service.dart';
 import '../../flags.dart';
-import '../../views/utilities/hashtag_posts_view.dart';
-import '../sizing/sizing.dart';
+import 'hashtag_posts_view.dart';
+import '../../utilities/sizing/sizing.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';

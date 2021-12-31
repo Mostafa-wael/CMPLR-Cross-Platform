@@ -2,9 +2,9 @@ import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import '../../routes.dart';
 
-import '../../utilities/custom_widgets/trending_now.dart';
+import '../utilities/trending_now.dart';
 
-import '../../utilities/custom_widgets/horizontal_fetching_list_view.dart';
+import '../utilities/horizontal_fetching_list_view.dart';
 import '../../controllers/home_tab/explore_controller.dart';
 import 'package:flutter/rendering.dart';
 import '../../utilities/sizing/sizing.dart';
@@ -14,9 +14,11 @@ import 'package:get/get.dart';
 
 import '../views.dart';
 
+/// the expolre tab screen
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({Key? key}) : super(key: key);
 
+  /// build the expolre widget
   @override
   Widget build(BuildContext context) {
     return GetBuilder(

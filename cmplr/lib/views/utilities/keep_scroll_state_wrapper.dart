@@ -1,4 +1,4 @@
-// This preserves the scroll state of the list view,
+/// This preserves the scroll state of the list view,
 // It is used due to this issue in Getx: https://github.com/jonataslaw/getx/issues/822
 import 'package:flutter/material.dart';
 

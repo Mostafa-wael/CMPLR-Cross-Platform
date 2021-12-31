@@ -4,9 +4,10 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../controllers/controllers.dart';
 
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import 'package:flutter/material.dart';
 
+/// Try these posts view on the expolre
 class TryThesePosts extends StatelessWidget {
   TryThesePosts({Key? key}) : super(key: key);
 

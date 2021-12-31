@@ -4,12 +4,12 @@ import '../../views/views.dart';
 
 import '../../backend_uris.dart';
 import '../../routes.dart';
-import '../../utilities/custom_widgets/post_sched_menu.dart';
+import '../../views/utilities/post_sched_menu.dart';
 
 import '../../models/cmplr_service.dart';
 import '../../utilities/sizing/sizing.dart';
 import '../../models/models.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../views/utilities/utility_views.dart';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -22,6 +22,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 
+/// managijg writing and creating a post
 class WritePostController extends GetxController {
   HtmlEditorController editorController = HtmlEditorController();
   String _currentPostOption = PostOptions.postNow;

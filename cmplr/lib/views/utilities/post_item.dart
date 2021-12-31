@@ -1,15 +1,14 @@
 import '../../controllers/controllers.dart';
-import '../sizing/sizing.dart';
-import '../../views/blog/screens/visitor_blog.dart';
-import '../../views/utilities/hashtag_posts_view.dart';
-import '../custom_icons/custom_icons.dart';
+import '../../utilities/sizing/sizing.dart';
+import '../blog/screens/visitor_blog.dart';
+import 'hashtag_posts_view.dart';
+import '../../utilities/custom_icons/custom_icons.dart';
 
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'custom_widgets.dart';
-import 'package:flutter/cupertino.dart';
+import '../utilities/utility_views.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -192,7 +191,7 @@ class PostItem extends StatelessWidget {
             Obx(() => IconButton(
                   key: ValueKey('${prefix}_postLike_${index.toString()}'),
                   icon: Icon(
-                      isLiked.value ? Icons.favorite : CupertinoIcons.heart,
+                      isLiked.value ? Icons.favorite : Icons.favorite_border,
                       color: Get.theme.iconTheme.color),
                   onPressed: () {
                     isLiked.value = !isLiked.value;

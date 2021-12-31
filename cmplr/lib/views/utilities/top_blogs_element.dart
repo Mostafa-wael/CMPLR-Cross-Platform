@@ -1,6 +1,7 @@
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// show the top blogs item
 class TopBlogsElement extends StatelessWidget {
   var width;
   var height;
