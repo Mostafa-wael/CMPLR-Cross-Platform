@@ -41,6 +41,8 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
+  enableFlutterDriverExtension();
+
   HttpOverrides.global = MyHttpOverrides();
 
   await PersistentStorage.initStorage();
