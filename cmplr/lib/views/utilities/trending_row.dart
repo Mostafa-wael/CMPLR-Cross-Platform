@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// the trending now raw
 class TrendingRow extends StatelessWidget {
   final rowNum;
   var trendName;

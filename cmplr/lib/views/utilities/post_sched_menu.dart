@@ -18,6 +18,7 @@ class PostOptions {
       'THIS SHOULDN\'T BE HERE, IT\'S NOT THE BACKEND\'S RESPONSIBILITY';
 }
 
+/// show the option of the post
 Widget postOption(String optionText, IconData icon, bool activated, onTap,
     {String? subtext}) {
   return Material(
