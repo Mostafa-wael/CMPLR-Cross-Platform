@@ -1,6 +1,6 @@
 import '../../flags.dart';
 
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 class TextOnImage extends StatelessWidget {

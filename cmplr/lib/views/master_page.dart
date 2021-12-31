@@ -1,4 +1,4 @@
-import '../utilities/custom_widgets/draggable_floating_action_button.dart';
+import 'utilities/draggable_floating_action_button.dart';
 
 import '../views/views.dart';
 

@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '../controllers.dart';
 import '../../views/home_tab/reblog_screen.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../views/utilities/utility_views.dart';
 import '../../models/models.dart';
 
 import 'package:flutter/material.dart';

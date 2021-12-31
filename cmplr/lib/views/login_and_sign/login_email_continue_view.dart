@@ -1,7 +1,7 @@
 import '../../controllers/login_and_sign/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import '../../utilities/sizing/sizing.dart';
 
 // ToDo: Need serious refactoring

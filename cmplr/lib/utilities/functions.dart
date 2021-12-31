@@ -2,7 +2,7 @@ import 'sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
-import 'custom_widgets/user_name_avatar.dart';
+import '../views/utilities/user_name_avatar.dart';
 
 bool validateEmail(String email) {
   // return !email.isEmpty &&

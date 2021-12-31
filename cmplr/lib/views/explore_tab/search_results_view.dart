@@ -1,4 +1,4 @@
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';

@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 import '../controllers.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../views/utilities/utility_views.dart';
 import '../../routes.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';

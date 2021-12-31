@@ -3,7 +3,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 
 import '../../controllers/controllers.dart';
 
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import 'package:flutter/material.dart';
 
 /// Try these posts view on the expolre

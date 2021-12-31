@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'custom_widgets.dart';
+import 'utility_views.dart';
 import '../../controllers/controllers.dart';
 
 /// This widget represents the post feed with all its data

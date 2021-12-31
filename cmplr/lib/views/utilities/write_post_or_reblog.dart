@@ -2,10 +2,10 @@
 
 import 'dart:convert';
 
-import 'custom_widgets.dart';
+import 'utility_views.dart';
 import '../../controllers/controllers.dart';
 import 'post_sched_menu.dart';
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:file_picker/file_picker.dart';

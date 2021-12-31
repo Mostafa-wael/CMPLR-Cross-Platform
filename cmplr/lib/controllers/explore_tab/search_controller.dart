@@ -1,6 +1,6 @@
 import '../../views/views.dart';
-import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
-import '../../utilities/custom_widgets/top_blogs_element.dart';
+import '../../views/utilities/check_out_these_tags_element.dart';
+import '../../views/utilities/top_blogs_element.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

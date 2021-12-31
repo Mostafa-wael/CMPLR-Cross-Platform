@@ -1,4 +1,4 @@
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
 // This widget is used to generate page view with images and text on it

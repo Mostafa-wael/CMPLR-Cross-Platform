@@ -1,4 +1,4 @@
-import '../sizing/sizing.dart';
+import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/controllers.dart';
 

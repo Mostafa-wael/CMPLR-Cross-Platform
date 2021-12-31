@@ -2,9 +2,9 @@ import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 
 import '../../routes.dart';
 
-import '../../utilities/custom_widgets/trending_now.dart';
+import '../utilities/trending_now.dart';
 
-import '../../utilities/custom_widgets/horizontal_fetching_list_view.dart';
+import '../utilities/horizontal_fetching_list_view.dart';
 import '../../controllers/home_tab/explore_controller.dart';
 import 'package:flutter/rendering.dart';
 import '../../utilities/sizing/sizing.dart';

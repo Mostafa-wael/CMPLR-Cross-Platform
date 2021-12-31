@@ -13,7 +13,7 @@ import '../../models/models.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 
 /// notes view
 class Notes extends StatelessWidget {

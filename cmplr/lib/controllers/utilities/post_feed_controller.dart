@@ -1,6 +1,6 @@
 import '../../models/Utilities/posts/post_feed_model.dart';
 
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../../views/utilities/utility_views.dart';
 
 import 'package:get/get.dart';
 

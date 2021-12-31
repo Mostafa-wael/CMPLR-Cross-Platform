@@ -4,7 +4,7 @@ import '../../utilities/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import '../../utilities/custom_widgets/custom_widgets.dart';
+import '../utilities/utility_views.dart';
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
 

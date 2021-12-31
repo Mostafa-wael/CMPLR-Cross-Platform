@@ -8,9 +8,9 @@ import '../../models/pages_model/explore_tab/explore_model.dart';
 import '../../views/views.dart';
 import '../../views/explore_tab/search_results_view.dart';
 import '../../views/utilities/hashtag_posts_view.dart';
-import '../../utilities/custom_widgets/trending_row.dart';
-import '../../utilities/custom_widgets/check_out_these_tags_element.dart';
-import '../../utilities/custom_widgets/text_on_image.dart';
+import '../../views/utilities/trending_row.dart';
+import '../../views/utilities/check_out_these_tags_element.dart';
+import '../../views/utilities/text_on_image.dart';
 import '../../utilities/sizing/sizing.dart';
 import '../../flags.dart';
 
