@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../flags.dart';
 import '../../models/models.dart';
 
+/// logic controller for the serach
 class SearchController extends GetxController {
   // data model for search preferences
   SearchModel searchModel = SearchModel();

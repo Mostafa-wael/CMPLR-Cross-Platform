@@ -14,9 +14,11 @@ import 'package:get/get.dart';
 
 import '../views.dart';
 
+/// the expolre tab screen
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({Key? key}) : super(key: key);
 
+  /// build the expolre widget
   @override
   Widget build(BuildContext context) {
     return GetBuilder(

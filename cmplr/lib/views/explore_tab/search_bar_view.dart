@@ -4,6 +4,7 @@ import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// the search bar of the expolre table
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key}) : super(key: key);
 

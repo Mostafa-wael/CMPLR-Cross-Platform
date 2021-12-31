@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+/// TryThesePostsController
 class TryThesePostsController extends GetxController {
   @override
   void onInit() {

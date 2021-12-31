@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
 
+/// the search results page view
 class SearchResultsView extends StatelessWidget {
   const SearchResultsView({Key? key}) : super(key: key);
 
