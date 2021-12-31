@@ -20,7 +20,6 @@ import 'package:get/get.dart';
 // Since flutter web doesn't allow shift+scroll for horizontal scrolling
 import 'views/views.dart';
 import './routes.dart';
-
 import 'package:flutter_driver/driver_extension.dart';
 
 class MouseAndTourchScrollBehaviour extends MaterialScrollBehavior {
@@ -40,6 +39,8 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+// Figma board for testing keys.
+// https://www.figma.com/file/dwzgYWR1WrU6HW8t5ZZBgI/CMPLR.CrossPlatform-team-library?node-id=551%3A32
 Future<void> main() async {
   enableFlutterDriverExtension();
 
