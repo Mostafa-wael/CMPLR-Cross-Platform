@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
 
-// TODO: DRAFTS
+/// the view of the rebolg
 class ReblogView extends StatelessWidget {
   const ReblogView({Key? key}) : super(key: key);
 

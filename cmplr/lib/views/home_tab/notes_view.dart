@@ -15,6 +15,7 @@ import '../../utilities/custom_icons/custom_icons.dart';
 import '../../utilities/sizing/sizing.dart';
 import '../../utilities/custom_widgets/custom_widgets.dart';
 
+/// notes view
 class Notes extends StatelessWidget {
   Notes({Key? key}) : super(key: key);
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/controllers.dart';
 
-// TODO: DRAFTS
+/// write post view
 class WritePost extends StatelessWidget {
   const WritePost({Key? key}) : super(key: key);
 
