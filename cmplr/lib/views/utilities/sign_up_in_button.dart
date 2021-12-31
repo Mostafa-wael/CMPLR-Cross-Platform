@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 class SignUpInButton extends StatelessWidget {
   final text;
   final onTap;
+  final widgetKey;
 
   const SignUpInButton({
     Key? key,
+    required this.widgetKey,
     required this.text,
     required this.onTap,
   }) : super(key: key);
@@ -17,7 +19,7 @@ class SignUpInButton extends StatelessWidget {
     return Container(
       child: Material(
         child: InkWell(
-          key: key,
+          key: widgetKey,
           child: Center(
             child: Text(
               text,
