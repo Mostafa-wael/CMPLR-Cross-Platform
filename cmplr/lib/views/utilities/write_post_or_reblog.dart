@@ -198,10 +198,12 @@ class WritePostOrReblog extends StatelessWidget {
                   key: const ValueKey('WritePostHtmlEditor'),
                   otherOptions: OtherOptions(height: controller.editorHeight),
                   htmlEditorOptions: const HtmlEditorOptions(
+                      initialText: 'KAK',
                       shouldEnsureVisible: true,
                       adjustHeightForKeyboard: true,
-                      hint: 'Add something, if you\'d line'),
+                      hint: 'Add something, if you\'d like'),
                   htmlToolbarOptions: HtmlToolbarOptions(
+                      buttonColor: Get.theme.iconTheme.color,
                       mediaUploadInterceptor:
                           (PlatformFile file, InsertFileType type) async {
                         if (type == InsertFileType.image) {

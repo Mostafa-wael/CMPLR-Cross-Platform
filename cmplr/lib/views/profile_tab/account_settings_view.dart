@@ -2,7 +2,7 @@ import '../../utilities/user.dart';
 import '../login_and_sign/signup_or_login_view.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/controllers.dart';
 
