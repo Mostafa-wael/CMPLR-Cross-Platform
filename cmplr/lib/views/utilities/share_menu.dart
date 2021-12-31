@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 
+/// the share menu
 Future<dynamic> shareMenu(user, controller, context, profilePhoto, name) {
   return showModalBottomSheet(
     isScrollControlled: true,

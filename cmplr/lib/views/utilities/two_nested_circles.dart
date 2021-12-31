@@ -2,6 +2,7 @@ import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// show two nested circles
 class TwoNestedCircles extends StatelessWidget {
   final outerSize, innerSize, outerColor, innerColor;
 

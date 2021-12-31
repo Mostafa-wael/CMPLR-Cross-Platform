@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+/// the app bar for the expolre tab
 class ExploreAppBar implements SliverPersistentHeaderDelegate {
   @override
   final maxExtent, minExtent;

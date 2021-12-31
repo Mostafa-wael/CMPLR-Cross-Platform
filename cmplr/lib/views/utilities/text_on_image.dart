@@ -3,6 +3,7 @@ import '../../flags.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// show text on image
 class TextOnImage extends StatelessWidget {
   String? backgroundURL;
   String? text;

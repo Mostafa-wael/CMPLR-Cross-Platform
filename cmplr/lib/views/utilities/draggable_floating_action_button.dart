@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// draggable floating action button
 class DraggableFloatingActionButton extends StatefulWidget {
   final List<Widget> children; // the widget that will be animated
   final Offset initialOffset;

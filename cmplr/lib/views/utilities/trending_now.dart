@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// the trernding now item
 class TrendingNow extends StatelessWidget {
   const TrendingNow({Key? key}) : super(key: key);
 
