@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
+/// controller for manging the notes
 class NotesController extends GetxController
     with GetSingleTickerProviderStateMixin {
   KeyboardVisibilityController keyboardController =
@@ -88,7 +89,7 @@ class NotesController extends GetxController
       Get.back();
     }
 
-    // Show error SnackBar
+    /// Show error SnackBar
     Get.rawSnackbar(
       backgroundColor: Colors.green,
       messageText: Text(
@@ -166,7 +167,7 @@ class NotesController extends GetxController
     update();
   }
 
-  // This fetches the data once again
+  /// Fetches the data once again
   Future<void> refreshScreen() async {
     notes = await notesModel.getNotes(postItem!.postID);
     dataReloaded = true;

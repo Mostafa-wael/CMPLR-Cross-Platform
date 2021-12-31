@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../utilities/sizing/sizing.dart';
 import 'package:flutter/material.dart';
 
+/// responsible for viewing other blogs
 class CheckOutTheseBlogsElement extends StatelessWidget {
   final width;
   final height;
@@ -136,6 +137,7 @@ class CheckOutTheseBlogsElement extends StatelessWidget {
   }
 }
 
+/// CheckOutTheseBlogsElement controller
 class CheckOutTheseBlogsElementController extends GetxController {
   var followed = false;
   void followUnfollowBlog(String blogName) {

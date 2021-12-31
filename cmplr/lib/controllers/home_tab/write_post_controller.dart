@@ -22,6 +22,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 
+/// managijg writing and creating a post
 class WritePostController extends GetxController {
   HtmlEditorController editorController = HtmlEditorController();
   String _currentPostOption = PostOptions.postNow;
