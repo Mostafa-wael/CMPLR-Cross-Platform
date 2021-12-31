@@ -318,9 +318,12 @@ class WritePostController extends GetxController {
   }
 
   void onTagEnter(String tag) {
-    tag.replaceAll('#', '');
-    tags.add(tag);
-    update();
+    tag = tag.removeAllWhitespace;
+    if (tag.length != 0) {
+      tag.replaceAll('#', '');
+      tags.add(tag);
+      update();
+    }
   }
 
   void onTagDeleted(String tag) {

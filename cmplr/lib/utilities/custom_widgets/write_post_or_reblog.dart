@@ -23,6 +23,7 @@ class WritePostOrReblog extends StatelessWidget {
     return GetBuilder<WritePostController>(
       builder: (WritePostController controller) => SafeArea(
         child: Scaffold(
+          backgroundColor: Get.theme.canvasColor,
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             toolbarHeight: Sizing.blockSizeVertical * 9,
@@ -36,6 +37,7 @@ class WritePostOrReblog extends StatelessWidget {
             ),
             actions: [
               ActionChip(
+                key: const ValueKey('WritePostSend'),
                 label: controller.getPostOrReblog(),
                 onPressed: () {
                   // If the post was created/reblogged successfully
@@ -192,6 +194,7 @@ class WritePostOrReblog extends StatelessWidget {
               ),
               Expanded(
                 child: HtmlEditor(
+                  key: const ValueKey('WritePostHtmlEditor'),
                   otherOptions: OtherOptions(height: controller.editorHeight),
                   htmlEditorOptions: const HtmlEditorOptions(
                       shouldEnsureVisible: true,
@@ -234,6 +237,7 @@ class WritePostOrReblog extends StatelessWidget {
                       ],
                       customToolbarButtons: [
                         IconButton(
+                            key: const ValueKey('WritePostAddTags'),
                             icon: const Icon(Icons.tag),
                             onPressed: () {
                               controller.onTagsSheetOpen();
@@ -304,6 +308,8 @@ class WritePostOrReblog extends StatelessWidget {
                                                                 4,
                                                       ),
                                                       child: InkWell(
+                                                        key: const ValueKey(
+                                                            'WritePostAddTagsDone'),
                                                         child: Text(
                                                           'Done',
                                                           style: TextStyle(
@@ -340,6 +346,8 @@ class WritePostOrReblog extends StatelessWidget {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   TextField(
+                                                    key: const ValueKey(
+                                                        'WritePostAddTagsTextField'),
                                                     controller: controller
                                                         .tagsEditingController,
                                                     decoration:
@@ -437,7 +445,6 @@ class WritePostOrReblog extends StatelessWidget {
           ),
           // TODO: Swap this out to the text editing bottom bar when text
           // is highlighted
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
       ),
     );
