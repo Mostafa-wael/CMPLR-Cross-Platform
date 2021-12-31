@@ -1,5 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
+/// To deal with the Persistent Storage
 class PersistentStorage {
   static void changeLoggedIn(bool newVal) =>
       GetStorage().write('logged_in', newVal);

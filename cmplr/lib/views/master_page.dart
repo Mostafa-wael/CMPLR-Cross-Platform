@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utilities/sizing/sizing.dart';
 
-// Please push
-
+/// Reporesents the whole application after the signup_or_login_view
+/// It holds all the four tabs of the application
 class MasterPage extends StatelessWidget {
   const MasterPage({Key? key}) : super(key: key);
 
