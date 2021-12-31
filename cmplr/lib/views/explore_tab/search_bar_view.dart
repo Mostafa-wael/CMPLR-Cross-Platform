@@ -22,7 +22,7 @@ class SearchBar extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.arrow_back,
-                        color: Theme.of(context).primaryColor,
+                        color: Get.theme.iconTheme.color,
                       )),
                   SizedBox(
                     width: Sizing.blockSize * 2.5,
@@ -41,7 +41,7 @@ class SearchBar extends StatelessWidget {
                       cursorColor: Colors.blue,
                       style: TextStyle(
                           fontSize: Sizing.fontSize * 5,
-                          color: Theme.of(context).primaryColor),
+                          color: Get.theme.textTheme.bodyText1!.color),
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           prefixIconConstraints: BoxConstraints(
@@ -67,8 +67,8 @@ class SearchBar extends StatelessWidget {
                           controller.searchBarController.text = '';
                           controller.searchQueryChanged();
                         },
-                        icon: Icon(Icons.close,
-                            color: Theme.of(context).primaryColor),
+                        icon:
+                            Icon(Icons.close, color: Get.theme.iconTheme.color),
                       )))
                 ],
               ),
@@ -96,8 +96,8 @@ class SearchBar extends StatelessWidget {
                                         child: Text(
                                           'Recommended',
                                           style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
+                                              color: Get.theme.textTheme
+                                                  .bodyText1!.color,
                                               fontSize: Sizing.fontSize * 4.2),
                                         ),
                                       );
@@ -141,7 +141,7 @@ class SearchBar extends StatelessWidget {
             children: [
               Icon(
                 Icons.search,
-                color: Theme.of(context).primaryColor,
+                color: Get.theme.iconTheme.color,
               ),
               SizedBox(
                 width: Sizing.blockSize * 5.5,
@@ -149,7 +149,7 @@ class SearchBar extends StatelessWidget {
               Text(
                 controller.recommendedQueries[index],
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: Get.theme.textTheme.bodyText1!.color,
                     fontSize: Sizing.fontSize * 4.2),
               )
             ],

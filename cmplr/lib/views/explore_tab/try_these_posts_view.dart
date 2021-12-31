@@ -1,5 +1,6 @@
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../controllers/controllers.dart';
 
@@ -13,22 +14,22 @@ class TryThesePosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Get.theme.scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor: Get.theme.appBarTheme.backgroundColor,
         leading: IconButton(
           onPressed: () {
             controller.closeTryThesePosts();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
-            color: Theme.of(context).primaryColor,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Recommended for you',
-          style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: PostFeed(

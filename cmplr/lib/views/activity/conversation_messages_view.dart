@@ -1,6 +1,8 @@
 // ignore_for_file: omit_local_variable_types
 import 'dart:convert';
 import 'dart:math';
+import 'package:get/get.dart';
+
 import '../../models/pages_model/activity_tab/pusher.dart';
 
 import '../../utilities/user.dart';
@@ -118,7 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 70.0,
-      color: Colors.cyan,
+      color: Get.theme.appBarTheme.backgroundColor,
       child: Row(
         children: <Widget>[
           IconButton(

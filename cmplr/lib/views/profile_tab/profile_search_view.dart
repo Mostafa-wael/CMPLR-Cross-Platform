@@ -20,6 +20,7 @@ class ProfileSearch extends StatelessWidget {
     return GetBuilder<ProfileSearchController>(
       init: ProfileSearchController(),
       builder: (controller) => Scaffold(
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
         body: SafeArea(
           child: Column(children: [
             Row(
@@ -30,7 +31,7 @@ class ProfileSearch extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.arrow_back,
-                      color: Theme.of(context).primaryColor,
+                      color: Get.theme.iconTheme.color,
                     )),
                 SizedBox(
                   width: Sizing.blockSize * 2.5,
@@ -49,7 +50,7 @@ class ProfileSearch extends StatelessWidget {
                     cursorColor: Colors.blue,
                     style: TextStyle(
                         fontSize: Sizing.fontSize * 5,
-                        color: Theme.of(context).primaryColor),
+                        color: Get.theme.textTheme.bodyText1?.color),
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIconConstraints: BoxConstraints(
@@ -75,14 +76,14 @@ class ProfileSearch extends StatelessWidget {
                         controller.searchBarController.text = '';
                         controller.searchQueryChanged();
                       },
-                      icon: Icon(Icons.close,
-                          color: Theme.of(context).primaryColor),
+                      icon: Icon(Icons.close, color: Get.theme.iconTheme.color),
                     )))
               ],
             ),
             Container(
               color: Colors.white,
               child: Material(
+                color: Get.theme.scaffoldBackgroundColor,
                 child: InkWell(
                     onTap: () {},
                     child: TabBar(
@@ -94,14 +95,14 @@ class ProfileSearch extends StatelessWidget {
                             child: Text(
                               'Posts',
                               style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
+                                  color: Get.theme.textTheme.bodyText1?.color),
                             )),
                         Tab(
                             height: Sizing.blockSizeVertical * 7.5,
                             child: Text(
                               'Following',
                               style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
+                                  color: Get.theme.textTheme.bodyText1?.color),
                             )),
                       ],
                     )),
@@ -224,7 +225,7 @@ class ProfileSearch extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: Sizing.blockSize * 4.2,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).primaryColor),
+                                color: Get.theme.textTheme.bodyText1?.color),
                           ),
                           Text(
                             blog.profileTitle,
@@ -233,7 +234,7 @@ class ProfileSearch extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: Sizing.blockSize * 4.2,
                                 fontWeight: FontWeight.w400,
-                                color: Theme.of(context).primaryColor),
+                                color: Get.theme.textTheme.bodyText1?.color),
                           ),
                         ],
                       ),

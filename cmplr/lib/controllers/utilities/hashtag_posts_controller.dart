@@ -1,3 +1,5 @@
+import '../../models/cmplr_service.dart';
+import '../../backend_uris.dart';
 import '../home_tab/write_post_controller.dart';
 import '../../views/home_tab/write_post_view.dart';
 
@@ -25,8 +27,13 @@ class HashtagPostsController extends GetxController
     super.onInit();
   }
 
-  void followHashtagButtonPressed() {
+  void followHashtagButtonPressed() async {
     hashtagFollowed.value = !hashtagFollowed.value;
+    if (hashtagFollowed.value)
+      await CMPLRService.followTag(PostURIs.followTag, {'tag_name': tagName});
+    else
+      await CMPLRService.unfollowTag(
+          DeleteURIs.unfollowTag, {'tag_name': tagName});
   }
 
   // This fetches the data once again

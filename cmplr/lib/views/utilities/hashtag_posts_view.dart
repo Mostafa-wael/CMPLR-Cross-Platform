@@ -103,7 +103,9 @@ class HashtagPosts extends StatelessWidget {
                           expandedHeight: Sizing.blockSizeVertical * 32.7,
                           title: Text(
                             '#' + controller.tagName,
-                            style: Theme.of(context).textTheme.headline2,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                           flexibleSpace: FlexibleSpaceBar(
                               background: Stack(children: [
