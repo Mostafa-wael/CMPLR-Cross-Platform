@@ -32,6 +32,6 @@ RUN flutter build web
 # Configure the server
 FROM nginx:1.21.1-alpine
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./cmplr/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build-env /app/build/web /usr/share/nginx/html
