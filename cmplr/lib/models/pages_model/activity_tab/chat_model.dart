@@ -8,6 +8,7 @@ import '../../cmplr_service.dart';
 import '../../../backend_uris.dart';
 import 'dart:convert';
 
+/// The chat user class used to hold user's info
 class ChatUser {
   final int blog_id;
   final String blog_name;
@@ -23,6 +24,7 @@ class ChatUser {
 }
 
 //----------------------------------------------------------------
+/// the message class that holds its info and Content
 class Message {
   final ChatUser sender;
   final String text;
@@ -34,6 +36,7 @@ class Message {
     required this.isRead,
   });
 
+  /// create messaeg object from JSON
   factory Message.fromJson(
       {required Map<String, dynamic> json,
       required bool outOrIn,
@@ -66,6 +69,8 @@ class Message {
   }
 }
 
+/// the chat module model
+/// reponsible for generating the messages and chat lists and send messages
 class ModelChatModule {
   static List<Message> conversationsList = <Message>[];
   static List<Message> conversationMessages = <Message>[];
