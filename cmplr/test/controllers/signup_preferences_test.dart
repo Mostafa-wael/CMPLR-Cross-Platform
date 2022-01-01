@@ -3,7 +3,7 @@ import 'package:cmplr/flags.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('signup age', (tester) async {
+  testWidgets('signup preferences', (tester) async {
     Flags.mock = true;
 
     final controller = SignupPreferencesController();
