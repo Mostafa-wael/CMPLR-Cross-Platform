@@ -20,6 +20,9 @@ import 'mock_data.dart';
 class CMPLRService {
   /// Maps a route to the mock data it's supposed to receive
 
+  static String userBlogName = (Flags.mock == true)
+      ? '1'
+      : GetStorage().read('user')['primary_blog_id'].toString();
   static const requestSuccess = 200;
   static const invalidData = 422;
   static const unauthenticated = 401;
@@ -89,11 +92,7 @@ class CMPLRService {
       case GetURIs.notes:
         return getNotes(route, params);
       case GetURIs.blogInfo:
-        return getBlogInfo(
-            '/blog/' +
-                GetStorage().read('user')['primary_blog_id'].toString() +
-                '/info',
-            params);
+        return getBlogInfo('/blog/' + userBlogName + '/info', params);
       case GetURIs.userTheme:
         return getUserTheme(route, params);
       case GetURIs.activityNotifications:

@@ -10,6 +10,30 @@ class User {
   static String get blogName => GetStorage().read('blog_name');
   static String get token => GetStorage().read('token');
   static Map get userMap => GetStorage().read('user');
+  static const mockUser = {
+    'id': 11,
+    'email': 'tarek@cmplr.com',
+    'email_verified_at': null,
+    'age': 21,
+    'default_post_format': null,
+    'login_options': false,
+    'TFA': false,
+    'filtered_tags': null,
+    'endless_scrolling': true,
+    'show_badge': true,
+    'text_editor': 'rich',
+    'msg_sound': true,
+    'best_stuff_first': true,
+    'include_followed_tags': true,
+    'conversational_notification': true,
+    'filtered_content': null,
+    'theme': 'trueBlue',
+    'primary_blog_id': 11,
+    'blog_name': 'yousif',
+    'avatar':
+        r'https:\/\/assets.tumblr.com\/images\/default_avatar\/cone_closed_128.png',
+    'avatar_shape': 'circle'
+  };
 
   static var avatarImage = FadeInImage.assetNetwork(
       placeholder: 'lib/utilities/assets/logo/cmplr_logo_icon.png',
@@ -21,7 +45,7 @@ class User {
     await GetStorage().write('user', userMap);
   }
 
-  static void prepareMockData() async {
+  static Future<void> prepareMockData() async {
     await GetStorage().write('blog_name', 'mock-name');
     await GetStorage().write(
         'token',

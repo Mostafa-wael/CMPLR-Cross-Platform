@@ -60,7 +60,6 @@ class WritePostController extends GetxController {
     'pink',
   ];
 
-  // TODO: Change default color according to theme
   int _currentColor = 0;
 
   TextEditingController textController = TextEditingController();
@@ -161,6 +160,8 @@ class WritePostController extends GetxController {
     update();
   }
 
+  /// Changes for the flutter date time format to the date time format
+  /// that's used by cmplr for the month & day
   Future<void> setDateTime(BuildContext context) async {
     final picked = await showDatePicker(
         context: context,
@@ -175,6 +176,8 @@ class WritePostController extends GetxController {
     }
   }
 
+  /// Changes for the flutter date time format to the date time format
+  /// that's used by cmplr for the time of day (hours & minutes)
   Future<void> setTimeOfDay(BuildContext context) async {
     final picked = await showTimePicker(
       context: context,

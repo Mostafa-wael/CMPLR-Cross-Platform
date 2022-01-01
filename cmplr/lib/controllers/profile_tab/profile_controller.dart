@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import '../../flags.dart';
 import '../home_tab/explore_controller.dart';
 import '../controllers.dart';
 import '../../cmplr_theme.dart';
@@ -17,9 +18,12 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  static String userBlogName = (Flags.mock == true)
+      ? '1'
+      : GetStorage().read('user')['primary_blog_id'].toString();
+
   /// The model used to fetch the profile data
-  final _model =
-      ModelProfile(blogId: GetStorage().read('user')['primary_blog_id']);
+  final _model = ModelProfile(blogId: userBlogName);
 
   /// The model used to fetch the user following
   final searchModel = ProfileSearchModel();

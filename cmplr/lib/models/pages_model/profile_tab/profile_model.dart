@@ -1,6 +1,7 @@
 import 'dart:convert';
 import '../../../backend_uris.dart';
 
+import '../../../flags.dart';
 import '../../cmplr_service.dart';
 
 /// the model that holds the profile data
