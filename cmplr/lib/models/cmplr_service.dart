@@ -180,9 +180,9 @@ class CMPLRService {
       final Set emails = mockData[backendURI]['emails'];
       final Set names = mockData[backendURI]['names'];
 
-      final response = {};
+      final response = {'response': {}};
       final errors = {};
-      response['error'] = errors;
+      response['response']?['error'] = errors;
 
       final registeredEmail = emails.contains(params['email']);
       final registeredName = names.contains(params['blog_name']);

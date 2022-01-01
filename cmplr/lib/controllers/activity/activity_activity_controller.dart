@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import '../../flags.dart';
 import '../../utilities/sizing/sizing.dart';
 import '../../views/utilities/activity_notification.dart';
 import '../../views/utilities/activity_filter_row.dart';
@@ -39,13 +40,15 @@ class ActivityActivityController extends GetxController {
     // Fetch the first time we open
     fetchNotifications();
 
-    // Fetch each 10 seconds
-    Timer.periodic(const Duration(seconds: 10), (timer) async {
-      log('Checking for activity notifications...');
-      notifications =
-          await am.ActivityActivityModel.getActivityNotifications(filterTypes);
-      updateNotifications();
-    });
+    if (!Flags.mock) {
+      // Fetch each 10 seconds
+      Timer.periodic(const Duration(seconds: 10), (timer) async {
+        log('Checking for activity notifications...');
+        notifications = await am.ActivityActivityModel.getActivityNotifications(
+            filterTypes);
+        updateNotifications();
+      });
+    }
   }
 
   // FIXME: Update the modalsheet in place

@@ -11,6 +11,7 @@ void main() async {
   const emailTaken = 'The email has already been taken';
   const blogNameTaken = 'The blog name has already been taken';
 
+  // Fixes GetStorage() for tests
   TestWidgetsFlutterBinding.ensureInitialized();
   const channel = MethodChannel('plugins.flutter.io/path_provider');
   void setUpMockChannels(MethodChannel channel) {
@@ -28,13 +29,12 @@ void main() async {
   setUp(() async {
     await GetStorage.init();
     await GetStorage().erase();
+
+    Get.testMode = true;
   });
 
   testWidgets('email password name after signup controller ...',
       (tester) async {
-    Get.testMode = true;
-
-    Flags.mock = true;
     PersistentStorage.changeLoggedIn(false);
 
     // passwordHidden = true, validInfo = true

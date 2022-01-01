@@ -45,8 +45,7 @@ void main() {
     expect(controller.activateLoginButton, false);
     // (Tarek) TODO: Make sure this is tested somewhere?
     expect(controller.validLoginEmail, false);
-    expect(await controller.tryLogin(), false);
-    expect(controller.errors, [emptyPassword, invalidEmail]);
+    expect(await controller.tryLogin(), [emptyPassword, invalidEmail]);
 
     // email is 'aaaa@aaaa.org' (invalid email, not registered),
     // password field empty
@@ -57,8 +56,7 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, false);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), false);
-    expect(controller.errors, [emptyPassword]);
+    expect(await controller.tryLogin(), [emptyPassword]);
 
     // email is 'tarek@cmplr.org' (valid email, registered)
     // password field empty
@@ -69,8 +67,7 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, false);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), false);
-    expect(controller.errors, [emptyPassword]);
+    expect(await controller.tryLogin(), [emptyPassword]);
 
     // email field empty, password is '1234'
     controller.passwordController.text = '1234';
@@ -81,8 +78,7 @@ void main() {
     expect(controller.activateSubmitButton, false);
     expect(controller.activateLoginButton, false);
     expect(controller.validLoginEmail, false);
-    expect(await controller.tryLogin(), false);
-    expect(controller.errors, [invalidEmail]);
+    expect(await controller.tryLogin(), [invalidEmail]);
 
     // email is 'tarek@cmplr.org', password is '1234'
     // (valid email, invalid password)
@@ -94,8 +90,7 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, true);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), false);
-    expect(controller.errors, ['UnAuthorized']);
+    expect(await controller.tryLogin(), ['UnAuthorized']);
 
     // email is 'tarek@cmplr.org', password is'12345678'
     // (valid email & password)
@@ -107,7 +102,6 @@ void main() {
     expect(controller.activateSubmitButton, true);
     expect(controller.activateLoginButton, true);
     expect(controller.validLoginEmail, true);
-    expect(await controller.tryLogin(), true);
-    expect(controller.errors, []);
+    expect(await controller.tryLogin(), []);
   });
 }
