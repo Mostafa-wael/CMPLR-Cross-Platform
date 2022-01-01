@@ -1,11 +1,11 @@
 pipeline {
     agent {
-        label "beta"
+        label "azure"
     
     }
     environment{
-        LOGIN_SERVER = "beta"
-        WEBHOOK_URL = credentials('Beta_Discord')
+        LOGIN_SERVER = "cmplr.azurecr.io"
+        WEBHOOK_URL = credentials('Master_Discord')
 
     }
     stages {
