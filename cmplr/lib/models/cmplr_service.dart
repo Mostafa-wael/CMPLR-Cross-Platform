@@ -28,9 +28,7 @@ class CMPLRService {
   static const unauthenticated = 401;
   static const insertSuccess = 201;
 
-  // static const String apiIp = 'http://c089-156-215-8-141.ngrok.io/';
-  static const String apiIp = 'https://www.beta.cmplr.tech/api';
-  // static const String apiIp = 'http://d5dc-156-223-170-167.ngrok.io/api';
+  static const String apiIp = 'https://www.cmplr.tech/api';
   static final Map<String, String> postHeader = {
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
