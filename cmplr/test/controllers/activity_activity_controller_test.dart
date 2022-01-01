@@ -13,7 +13,7 @@ import 'package:flutter/material.dart'
 // ac.n[1] -> notif_group_date : [Notification, Notification, etc...]
 
 void main() {
-  testWidgets('Explore controller test', (tester) async {
+  testWidgets('ActivityActivity controller test', (tester) async {
     final mq = MediaQuery(
       child: Container(),
       data: const MediaQueryData(),
