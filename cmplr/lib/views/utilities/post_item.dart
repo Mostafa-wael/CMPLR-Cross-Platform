@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
+
 import '../../controllers/controllers.dart';
 import '../../utilities/sizing/sizing.dart';
 import '../blog/screens/visitor_blog.dart';
@@ -115,6 +119,7 @@ class PostItem extends StatelessWidget {
   List<TextSpan> getHashtags(List<dynamic> hashtags) {
     final hashtagsWidget = <TextSpan>[];
     for (final hashtag in hashtags) {
+      if (hashtag == null) continue;
       hashtagsWidget.add(
         TextSpan(
             text: '#' + hashtag,
@@ -279,12 +284,7 @@ class PostItem extends StatelessWidget {
     final isLikedValue =
         json['post']['is_liked'] == 'true' ? true.obs : false.obs;
 
-    var content = json['post']['content'];
-
-    // Remove raw base64 posts to avoid crashing
-    if (RegExp(r'<.*(data:image\/)*;base64,.*>').allMatches(content).length > 0)
-      content = json['post']['content']
-          .replaceAll(RegExp(r'<.*(data:image\/)*;base64,.*>'), '');
+    final content = json['post']['content'];
 
     return PostItem(
       blogId: json['blog']['blog_id'].toString(),

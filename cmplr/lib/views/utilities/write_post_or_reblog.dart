@@ -209,9 +209,15 @@ class WritePostOrReblog extends StatelessWidget {
                         if (type == InsertFileType.image) {
                           final base64Data =
                               base64.encode(file.bytes!).toString();
-                          final base64Image =
-                              '''<img src="data:image/${file.extension};base64,$base64Data" data-filename="${file.name}" width="${Sizing.blockSize * 80}"/>''';
-                          controller.editorController.insertHtml(base64Image);
+
+                          final imgURL =
+                              await controller.uploadImage(base64Data);
+
+                          final imgHtml =
+                              '''<img src="${imgURL}" data-filename="${file.name}" width="${Sizing.blockSize * 80}"/>''';
+
+                          controller.editorController
+                              .insertNetworkImage(imgURL);
                           controller.postType = 'photos';
                         } else if ({InsertFileType.video, InsertFileType.audio}
                             .contains(type)) {

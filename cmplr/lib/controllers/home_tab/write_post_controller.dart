@@ -1,9 +1,7 @@
 import 'dart:convert';
-
-import '../../views/views.dart';
+import 'dart:io';
 
 import '../../backend_uris.dart';
-import '../../routes.dart';
 import '../../views/utilities/post_sched_menu.dart';
 
 import '../../models/cmplr_service.dart';
@@ -20,7 +18,6 @@ import 'package:intl/intl.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
 
 /// managijg writing and creating a post
 class WritePostController extends GetxController {
@@ -340,6 +337,18 @@ class WritePostController extends GetxController {
     suggestion.replaceAll('#', '');
     tags.add(suggestion);
     update();
+  }
+
+  Future<String> uploadImage(String base64) async {
+    final response = await http.post(
+        Uri.parse(CMPLRService.apiIp + '/base64image_upload'),
+        headers: CMPLRService.postHeader,
+        body: jsonEncode({'image': 'data:image/jpeg;base64,' + base64}));
+    if (response.statusCode == CMPLRService.requestSuccess) {
+      final responseMap = jsonDecode(response.body);
+      return responseMap['response']['url'];
+    } else
+      return '';
   }
 }
 
