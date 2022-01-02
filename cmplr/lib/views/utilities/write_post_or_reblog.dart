@@ -214,7 +214,7 @@ class WritePostOrReblog extends StatelessWidget {
                               await controller.uploadImage(base64Data);
 
                           final imgHtml =
-                              '''<img src="${imgURL}" data-filename="${file.name}" width="${Sizing.blockSize * 80}"/>''';
+                              '''<img src="${imgURL}" data-filename="${file.name}"/>''';
 
                           controller.editorController
                               .insertNetworkImage(imgURL);
