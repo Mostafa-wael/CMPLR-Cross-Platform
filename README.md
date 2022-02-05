@@ -1,23 +1,30 @@
-# cmplr
+<div align="center">
+  <img src="cmplr\lib\utilities\assets\logo\logo.png">
+</div>
 
-CMP's own version of [Tumblr](https://tumblr.com/). Made for our Swoftware Engineering course.
+# Cmplr 
+
+CMP's own version of [Tumblr](https://tumblr.com/).
+<div align="center">
+  <img src="cmplr\lib\utilities\assets\logo\trans_logo.png">
+</div>
 
 # Main Screens
 
-- Home screen complete with recommended and following post feeds.
+- Home screen with recommended and following post feeds.
 - Explore screen with blogs, tags, and more.
 - Activity screen where you can see your notifications and messages.
 - Profile screen where you can see your posts and people you follow.
 
-# Features
+# Main Features
 
 - Create account, login, forgot password
 
 - Multiple post feeds from multiple sources (recommended, following, specific tags)
 
-- Post interactions (like, etc..)
+- Post interactions (like, rebolg, etc..)
 
-- Can visit other profiles
+- Visit other profiles
 
 - Notifications
 
