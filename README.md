@@ -22,7 +22,7 @@ CMP's own version of [Tumblr](https://tumblr.com/).
 
 - Multiple post feeds from multiple sources (recommended, following, specific tags)
 
-- Post interactions (like, rebolg, etc..)
+- Post interactions (like, reblog, etc..)
 
 - Visit other profiles
 
@@ -38,41 +38,40 @@ CMP's own version of [Tumblr](https://tumblr.com/).
 
 1. Signup
 <div align="center">
-  <img src="https://media2.giphy.com/media/wrBPqyWnyXKehGGmKY/giphy.gif?cid=790b7611e1c3476be7b611204fac664a821fb94e24cdefce&rid=giphy.gif&ct=g">
+  <img src="gifs/signup-spedup.gif">
 </div>
 
-1. Home and create post
+2. Home and create post
 <div align="center">
-   <img src="https://media4.giphy.com/media/Uk0BWI9E45PrdMS9BJ/giphy.gif?cid=790b7611a7502d5f64081368a8d4bf53e6b5f1be6b90c47c&rid=giphy.gif&ct=g">
+  <img src="gifs/home-and-create-post-spedup.gif">
 </div>
 
-3. Notes and reblog
+1. Notes, reblog, and share
 <div align="center">
-   <img src="https://media2.giphy.com/media/0vqnfDhHN4cakg4t7W/giphy.gif?cid=790b761185bb052643278e7c2aa3b2e9855ab18680aef24e&rid=giphy.gif&ct=g">
+  <img src="gifs/notes-and-reblog-spedup.gif">
 </div>
 
 4. Explore 
 <div align="center">
-   <img src="https://media3.giphy.com/media/7xp8xRdmLo4nZTynyB/giphy.gif?cid=790b7611e1d89b9db4f906d8c4e89a7c9e78ed84c80b02be&rid=giphy.gif&ct=g">
+  <img src="gifs/explore-spedup.mp4.gif">
 </div>
-
 
 5. Search
 <div align="center">
-   <img src="https://media3.giphy.com/media/J7ayhZysfIe43W8To7/giphy.gif?cid=790b761141da71ba3b72b30ce0052667041119417c2b58e6&rid=giphy.gif&ct=g">
+  <img src="gifs/search-spedup.gif">
 </div>
 
-6. Chat
+6. Login, activity, and chat
 <div align="center">
-   <img src="https://media1.giphy.com/media/T0OcHQ2JUfZX6uxgNr/giphy.gif?cid=790b7611eda507165496dee8eb5bd47556b15757f3e18cf7&rid=giphy.gif&ct=g">
+  <img src="gifs/chat-spedup.gif">
 </div>
 
 7. Profile and logout
 <div align="center">
-    <img src="https://media0.giphy.com/media/KLfuQU0aFD265GWeUY/giphy.gif?cid=790b7611be082e4f4bca519d33d8ff3f4a365bfc945cd762&rid=giphy.gif&ct=g">
+  <img src="gifs/profile-and-logout-spedup.gif">
 </div>
 
 8. Web View
 <div align="center">
-   <img width="70%" src="https://media4.giphy.com/media/crhU0LgtEEOOohR7Ok/giphy.gif">
+  <img src="gifs/web-view-spedup.mp4.gif">
 </div>
